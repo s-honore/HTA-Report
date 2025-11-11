@@ -2,9 +2,7 @@
 
 ## 2.1 Global Prevalence Estimates
 
-### 2.1.1 Current Prevalence (2025)
-
-Based on a validated population modeling framework accounting for healthcare diagnostic capacity and detection bias, the estimated global prevalence of Lowe syndrome is approximately **7,100 individuals as of 2025** (Honoré 2025). This estimate substantially exceeds documented registry counts, reflecting incomplete case ascertainment particularly in regions with limited diagnostic infrastructure (Bökenkamp and Ludwig 2016).
+**Current global burden.** Based on a validated population modeling framework accounting for healthcare diagnostic capacity and detection bias, the estimated global prevalence of Lowe syndrome is approximately 7,100 individuals as of 2025 (Honoré 2025). This estimate substantially exceeds documented registry counts, reflecting incomplete case ascertainment particularly in regions with limited diagnostic infrastructure (Bökenkamp and Ludwig 2016).
 
 **Table 2.1: Global Prevalence by Region (2025)**
 
@@ -17,11 +15,9 @@ Based on a validated population modeling framework accounting for healthcare dia
 | Oceania | 37 | 0.5% | 19.1 | 21 |
 | **Total** | **7,099** | **100%** | **15.8** | **237** |
 
-**Geographic distribution patterns.** Asia accounts for the majority of cases at 58 percent due to large population size despite variable detection capacity across the region, while Africa contributes 20 percent, the Americas 14 percent, Europe 8 percent, and Oceania less than 1 percent. Mean patient age of 15.8 years reflects both recent births and survival through childhood and adolescence. Regional age variation demonstrates higher mean age among European patients at 18.9 years compared to African patients at 13.1 years, potentially reflecting earlier detection and better supportive care enabling longer survival (Bökenkamp and Ludwig 2016). Visualization of geographic distribution appears in Figure 2.1 (world choropleth map showing country-level prevalence) and Figure 2.2 (regional distribution bar chart) available in the model output directory.
+**Geographic distribution patterns.** Asia accounts for the majority of cases at 58 percent due to large population size despite variable detection capacity across the region, while Africa contributes 20 percent, the Americas 14 percent, Europe 8 percent, and Oceania less than 1 percent. Mean patient age of 15.8 years reflects both recent births and survival through childhood and adolescence. Regional age variation demonstrates higher mean age among European patients at 18.9 years compared to African patients at 13.1 years, potentially reflecting earlier detection and better supportive care enabling longer survival (Bökenkamp and Ludwig 2016). Visualization of geographic distribution appears in Figure 2.1 (world choropleth map showing country-level prevalence) and Figure 2.2 (regional distribution bar chart) available in the model output directory. **Country-level prevalence concentration.** The ten countries with highest prevalent case counts collectively account for 53 percent of the global burden, as shown in Table 2.1b below.
 
-### 2.1.2 Country-Level Prevalence
-
-**Top 10 Countries by Prevalent Cases (2025)**
+**Table 2.1b: Top 10 Countries by Prevalent Cases (2025)**
 
 | Rank | Country | ISO3 | Estimated Prevalence | Population (millions) | Cases per Million |
 |------|---------|------|---------------------|----------------------|-------------------|
@@ -36,11 +32,7 @@ Based on a validated population modeling framework accounting for healthcare dia
 | 9 | Russia | RUS | ~123 | 144 | 0.85 |
 | 10 | Japan | JPN | ~98 | 124 | 0.79 |
 
-**Determinants of country-level prevalence.** Country-level prevalence largely reflects population size modulated by healthcare diagnostic capacity measured by Human Development Index. The United States shows higher per-capita prevalence at 1.22 per million compared to China at 0.63 per million, consistent with higher detection rates in high-HDI healthcare systems where specialized genetic testing, clinical geneticists, and rare disease infrastructure enable more complete case ascertainment (Bökenkamp and Ludwig 2016; UNDP 2024). **Model validation against registry data.** Published registry data provide validation for model estimates. The Lowe Syndrome Association documented 190 to 250 patients in the United States circa 2000 to 2010, while the model estimates approximately 412 patients in 2025 (Lowe Syndrome Association 2010). The discrepancy suggests that approximately 40 to 60 percent of prevalent cases are captured in voluntary registries, consistent with known registry completeness rates for rare diseases and supporting the model's approach to adjusting for incomplete detection (Bökenkamp and Ludwig 2016).
-
-### 2.1.3 Temporal Trends in Prevalence
-
-Global prevalence has increased substantially over the past five decades, driven by three factors: (1) population growth increasing birth incidence, (2) improving diagnostic capacity (measured by HDI), and (3) cumulative survival of prevalent cases.
+**Determinants of country-level prevalence.** Country-level prevalence largely reflects population size modulated by healthcare diagnostic capacity measured by Human Development Index. The United States shows higher per-capita prevalence at 1.22 per million compared to China at 0.63 per million, consistent with higher detection rates in high-HDI healthcare systems where specialized genetic testing, clinical geneticists, and rare disease infrastructure enable more complete case ascertainment (Bökenkamp and Ludwig 2016; UNDP 2024). **Model validation against registry data.** Published registry data provide validation for model estimates. The Lowe Syndrome Association documented 190 to 250 patients in the United States circa 2000 to 2010, while the model estimates approximately 412 patients in 2025 (Lowe Syndrome Association 2010). The discrepancy suggests that approximately 40 to 60 percent of prevalent cases are captured in voluntary registries, consistent with known registry completeness rates for rare diseases and supporting the model's approach to adjusting for incomplete detection (Bökenkamp and Ludwig 2016). **Historical trends and future projections.** Global prevalence has increased substantially over the past five decades, driven by three factors: population growth increasing birth incidence, improving diagnostic capacity measured by Human Development Index, and cumulative survival of prevalent cases, as documented in Table 2.2 below.
 
 **Table 2.2: Historical and Projected Prevalence**
 
@@ -59,15 +51,7 @@ The 475% increase in prevalence from 1970 to 2025 reflects both improved case de
 
 ## 2.2 Epidemiological Methodology
 
-The prevalence estimates presented above derive from a methodological framework that explicitly accounts for healthcare system heterogeneity and diagnostic capacity variation across countries and time periods. Understanding this methodology proves essential for assessing the reliability of burden estimates, interpreting regional differences in reported prevalence, and anticipating patient identification challenges following therapy approval. This section presents the statistical and demographic foundations underlying the global prevalence model.
-
-### 2.2.1 Overview of Modeling Framework
-
-Prevalence estimation for Lowe syndrome employs a validated methodological framework that explicitly accounts for variation in diagnostic capacity across healthcare systems (Honoré 2025). The approach addresses a fundamental limitation of traditional prevalence estimation: the implicit assumption of uniform disease detection across countries and time periods.
-
-**Core Innovation:** Integration of healthcare infrastructure quality measured by Human Development Index into disease detection probability, using a Zero-Inflated Poisson statistical framework to distinguish between true disease absence and non-detection due to limited diagnostic capacity (Lambert 1992; Honoré 2025). This methodology represents a generalizable approach to rare disease burden estimation with full methodological details documented in the accompanying manuscript.
-
-### 2.2.2 Zero-Inflated Poisson (ZIP) Model for Incidence
+The prevalence estimates presented above derive from a methodological framework that explicitly accounts for healthcare system heterogeneity and diagnostic capacity variation across countries and time periods. Understanding this methodology proves essential for assessing the reliability of burden estimates, interpreting regional differences in reported prevalence, and anticipating patient identification challenges following therapy approval. This section presents the statistical and demographic foundations underlying the global prevalence model. **Modeling framework overview.** Prevalence estimation for Lowe syndrome employs a validated methodological framework that explicitly accounts for variation in diagnostic capacity across healthcare systems (Honoré 2025). The approach addresses a fundamental limitation of traditional prevalence estimation: the implicit assumption of uniform disease detection across countries and time periods. The core innovation integrates healthcare infrastructure quality measured by Human Development Index into disease detection probability, using a Zero-Inflated Poisson statistical framework to distinguish between true disease absence and non-detection due to limited diagnostic capacity (Lambert 1992; Honoré 2025). This methodology represents a generalizable approach to rare disease burden estimation with full methodological details documented in the accompanying manuscript.
 
 **Motivation for zero-inflated framework.** Standard Poisson models assume that all observed zeros in count data arise from sampling variation, implying that every country possesses some positive probability of detecting cases given sufficient observation time. This assumption fails for rare diseases where diagnostic capacity varies drastically across healthcare systems. A country lacking genetic testing infrastructure, pediatric ophthalmologists, or awareness of Lowe syndrome will report zero cases regardless of true disease occurrence, representing a structural zero rather than a sampling zero. The Zero-Inflated Poisson framework explicitly models this mixture of two processes: countries with zero diagnostic capacity that always report zero cases with probability π, and countries with diagnostic capacity where observed counts follow a Poisson distribution with rate λ (Lambert 1992). This distinction proves critical for rare disease burden estimation because conflating structural zeros (no detection ability) with sampling zeros (stochastic variation in rare events) would severely underestimate true prevalence, particularly in low-resource settings where most global births occur (Honoré 2025).
 
@@ -94,30 +78,13 @@ Where:
 - **h<sub>ct</sub>** = Human Development Index for country *c* at time *t* (UNDP 2024)
 - **(1 + h<sub>ct</sub>)** = Detection multiplier, ranging from 1.0 (HDI=0) to 2.0 (HDI=1)
 
-**Rationale for detection multiplier.** Countries with maximum Human Development Index detect approximately twice as many cases as countries with minimal diagnostic capacity, reflecting differential access to specialized genetic testing for OCRL sequencing, availability of clinical geneticists and rare disease specialists, awareness of Lowe syndrome among pediatricians and ophthalmologists, and comprehensive newborn screening programs (UNDP 2024; Bökenkamp and Ludwig 2016).
-
-**Zero-Inflation Parameter:**
+**Rationale for detection multiplier.** Countries with maximum Human Development Index detect approximately twice as many cases as countries with minimal diagnostic capacity, reflecting differential access to specialized genetic testing for OCRL sequencing, availability of clinical geneticists and rare disease specialists, awareness of Lowe syndrome among pediatricians and ophthalmologists, and comprehensive newborn screening programs (UNDP 2024; Bökenkamp and Ludwig 2016). **Zero-inflation probability specification.** The zero-inflation parameter is modeled as:
 
 π<sub>ct</sub> = 1 - h<sub>ct</sub>
 
-This specification implies that:
-- Countries with HDI = 1.0 have π = 0 (no structural zeros, near-perfect detection)
-- Countries with HDI = 0 have π = 1.0 (certain structural zero, no cases detected)
-- Countries with HDI = 0.5 have π = 0.5 (50% probability of non-detection)
+This specification implies that countries with HDI equal to 1.0 have π equal to zero (no structural zeros, near-perfect detection), countries with HDI equal to zero have π equal to 1.0 (certain structural zero, no cases detected), and countries with HDI equal to 0.5 have π equal to 0.5 (50 percent probability of non-detection). **Human Development Index as diagnostic capacity proxy.** The Human Development Index aggregates three dimensions of human development: health measured by life expectancy at birth, education measured by expected years of schooling, and income measured by Gross National Income per capita at purchasing power parity (UNDP 2024). The index equals the geometric mean of normalized component indices: HDI = (Health Index × Education Index × Income Index)<sup>1/3</sup>. Data derive from the United Nations Development Programme Human Development Report 2023-2024 covering 1990 to 2022 for approximately 190 countries (UNDP 2024). Historical Human Development Index data span 1990 to 2022 with observed data for approximately 190 countries, while pre-1990 values employ linear interpolation from the disease discovery year of 1952 using a floor value of 0.15, and pre-1952 values equal zero reflecting absence of diagnostic knowledge before disease discovery. Post-2022 projections use country-specific exponential growth based on 1990 to 2022 trends (UNDP 2024).
 
-### 2.2.3 Human Development Index as Diagnostic Capacity Proxy
-
-The Human Development Index aggregates three dimensions of human development: health measured by life expectancy at birth, education measured by expected years of schooling, and income measured by Gross National Income per capita at purchasing power parity (UNDP 2024). The index equals the geometric mean of normalized component indices: HDI = (Health Index × Education Index × Income Index)<sup>1/3</sup>. Data derive from the United Nations Development Programme Human Development Report 2023-2024 covering 1990 to 2022 for approximately 190 countries (UNDP 2024).
-
-**Temporal coverage.** Historical Human Development Index data span 1990 to 2022 with observed data for approximately 190 countries, while pre-1990 values employ linear interpolation from the disease discovery year of 1952 using a floor value of 0.15, and pre-1952 values equal zero reflecting absence of diagnostic knowledge before disease discovery. Post-2022 projections use country-specific exponential growth based on 1990 to 2022 trends (UNDP 2024).
-
-**Rationale for Human Development Index as proxy.** The index correlates strongly with healthcare system characteristics relevant to rare disease diagnosis including physician density and specialist availability, laboratory infrastructure for genetic testing, health expenditure per capita, universal health coverage indices, and medical education quality. While more specific diagnostic capacity measures would be preferable, Human Development Index provides comprehensive temporal coverage from 1990 to present, complete geographic coverage across 237 countries, established use in health systems research, and publicly available regularly updated data (UNDP 2024). The index does not capture disease-specific diagnostic infrastructure such as genetic testing availability, and future model refinements could incorporate genetic testing capacity data as these become systematically available.
-
-### 2.2.4 Individual-Based Survival Simulation
-
-**Weibull Distribution for Survival:**
-
-Patient survival is modeled using the Weibull parametric distribution, suitable for capturing increasing hazard with age:
+**Rationale for Human Development Index as proxy.** The index correlates strongly with healthcare system characteristics relevant to rare disease diagnosis including physician density and specialist availability, laboratory infrastructure for genetic testing, health expenditure per capita, universal health coverage indices, and medical education quality. While more specific diagnostic capacity measures would be preferable, Human Development Index provides comprehensive temporal coverage from 1990 to present, complete geographic coverage across 237 countries, established use in health systems research, and publicly available regularly updated data (UNDP 2024). The index does not capture disease-specific diagnostic infrastructure such as genetic testing availability, and future model refinements could incorporate genetic testing capacity data as these become systematically available. **Survival modeling using Weibull distribution.** Patient survival is modeled using the Weibull parametric distribution, suitable for capturing increasing hazard with age:
 
 **T ~ Weibull(k, λ)**
 
@@ -136,30 +103,7 @@ S(t) = exp(-(t/λ)<sup>k</sup>)
 - **Median survival:** λ × (ln 2)<sup>1/k</sup> = 28 × (0.693)<sup>0.5</sup> ≈ **33.3 years**
 - **Mean survival:** λ × Γ(1 + 1/k) = 28 × Γ(1.5) ≈ **24.8 years**
 
-Where Γ denotes the gamma function.
-
-**Calibration to Published Data:**
-
-These parameters were calibrated to match natural history studies reporting median life expectancy of 31 to 35 years, typical survival range in the 20s to early 40s, and longest documented survival of 54 years as a rare outlier within the distribution tail (Bökenkamp and Ludwig 2016; Ando et al. 2024).
-
-**Visualization Reference:**
-- Figure 2.3: `/home/user/HTA-Report/Models/Befolkningsmodel/output_data/survival_curves.png` - Weibull survival curves showing probability of survival by age
-
-**Individual-level simulation approach.** For each incident case generated by the Zero-Inflated Poisson model, the simulation draws survival duration *T<sub>i</sub>* from Weibull(2.0, 28.0), assumes the patient remains alive from birth year *t<sub>birth,i</sub>* until year *t<sub>birth,i</sub>* + ⌊T<sub>i</sub>⌋, and counts the patient as contributing to prevalence at time *t* if *t<sub>birth,i</sub>* ≤ *t* < *t<sub>birth,i</sub>* + *T<sub>i</sub>*. This individual-based approach enables flexible heterogeneity in survival outcomes, direct calculation of age distributions, tracking of cohort dynamics over time, and geographic stratification of patient populations (Honoré 2025).
-
-### 2.2.5 Model Validation and Sensitivity
-
-**Stochastic Uncertainty:**
-
-Monte Carlo simulation with 100 replicates (different random seeds):
-- Mean 2025 prevalence: 7,103 cases
-- Standard deviation: 87 cases
-- Coefficient of variation: 1.2%
-- 95% confidence interval: 6,934 - 7,268 cases
-
-The narrow coefficient of variation at 1.2 percent demonstrates that stochastic sampling variation contributes minimal uncertainty relative to parameter uncertainty from incidence rate and survival parameters, indicating that Monte Carlo simulation with 100 replicates provides adequate precision for policy-relevant estimates (Honoré 2025).
-
-**Parameter Sensitivity Analysis:**
+Where Γ denotes the gamma function. These parameters were calibrated to match natural history studies reporting median life expectancy of 31 to 35 years, typical survival range in the 20s to early 40s, and longest documented survival of 54 years as a rare outlier within the distribution tail (Bökenkamp and Ludwig 2016; Ando et al. 2024). Visualization of survival curves appears in Figure 2.3 (Weibull survival curves showing probability of survival by age, available at `/home/user/HTA-Report/Models/Befolkningsmodel/output_data/survival_curves.png`). **Individual-level simulation approach.** For each incident case generated by the Zero-Inflated Poisson model, the simulation draws survival duration *T<sub>i</sub>* from Weibull(2.0, 28.0), assumes the patient remains alive from birth year *t<sub>birth,i</sub>* until year *t<sub>birth,i</sub>* + ⌊T<sub>i</sub>⌋, and counts the patient as contributing to prevalence at time *t* if *t<sub>birth,i</sub>* ≤ *t* < *t<sub>birth,i</sub>* + *T<sub>i</sub>*. This individual-based approach enables flexible heterogeneity in survival outcomes, direct calculation of age distributions, tracking of cohort dynamics over time, and geographic stratification of patient populations (Honoré 2025). **Model validation and sensitivity analysis.** Stochastic uncertainty was assessed through Monte Carlo simulation with 100 replicates using different random seeds, yielding mean 2025 prevalence of 7,103 cases with standard deviation of 87 cases, coefficient of variation of 1.2 percent, and 95 percent confidence interval of 6,934 to 7,268 cases. The narrow coefficient of variation demonstrates that stochastic sampling variation contributes minimal uncertainty relative to parameter uncertainty from incidence rate and survival parameters, indicating that 100 replicates provides adequate precision for policy-relevant estimates (Honoré 2025). Parameter sensitivity analysis shown in Table 2.9 below examines the impact of varying key model parameters across plausible ranges.
 
 **Table 2.9: Sensitivity of 2025 Prevalence Estimates to Key Parameters**
 
@@ -175,13 +119,7 @@ The narrow coefficient of variation at 1.2 percent demonstrates that stochastic 
 
 **Parameter sensitivity interpretation.** Birth incidence rate dominates uncertainty with 2.5-fold plausible range yielding 150 percent upward or 50 percent downward prevalence variation, reflecting limited epidemiological data for ultra-rare X-linked disorders (Orphanet 2024). Survival scale parameter produces moderate sensitivity with 26 to 29 percent prevalence changes across the plausible 20 to 35 year range calibrated to published natural history studies (Bökenkamp and Ludwig 2016; Ando et al. 2024). Detection model parameters including Human Development Index floor and multiplier yield smaller sensitivity at 8 to 26 percent, though eliminating the detection multiplier entirely reduces prevalence by 26 percent demonstrating the importance of accounting for diagnostic capacity heterogeneity (Honoré 2025).
 
-**Structural validation against external data.** Model estimates demonstrate consistency with published prevalence ranges of 0.5 to 1.5 per million population reported in European registry studies, registry completeness rates of 40 to 60 percent capture documented for rare diseases, and regional prevalence gradients showing higher per-capita prevalence in high-Human Development Index regions with advanced diagnostic infrastructure (Bökenkamp and Ludwig 2016; Orphanet 2024).
-
-### 2.2.6 Detection Rates and Underreporting
-
-**Global Detection Rate:** Approximately 81% of true cases detected as of 2025
-
-The model distinguishes between:
+**Structural validation against external data.** Model estimates demonstrate consistency with published prevalence ranges of 0.5 to 1.5 per million population reported in European registry studies, registry completeness rates of 40 to 60 percent capture documented for rare diseases, and regional prevalence gradients showing higher per-capita prevalence in high-Human Development Index regions with advanced diagnostic infrastructure (Bökenkamp and Ludwig 2016; Orphanet 2024). **Detection rates and underreporting patterns.** The model estimates approximately 81 percent global detection rate as of 2025, distinguishing between:
 - **True cumulative cases (1952-2025):** 163,247 individuals born with Lowe syndrome
 - **Detected cases:** 132,445 individuals (81%)
 - **Undetected cases (structural zeros):** 30,802 individuals (19%)
@@ -221,11 +159,7 @@ Detection improvements over time reflect:
 
 ## 2.3 Target Population for Treatment
 
-Having established the global epidemiological burden of Lowe syndrome at approximately 7,100 prevalent individuals, we now identify the subset of this population eligible for gene therapy intervention. Treatment eligibility depends on age-related disease progression, renal function status, and geographic access to therapy following regulatory approval. Defining this target population enables market sizing, clinical trial planning, and health technology assessment budget impact analysis.
-
-### 2.3.1 Age-Based Eligibility Criteria
-
-Gene therapy for Lowe syndrome is most likely to demonstrate efficacy when administered **before irreversible organ damage occurs**. The target population for treatment is defined by:
+Having established the global epidemiological burden of Lowe syndrome at approximately 7,100 prevalent individuals, we now identify the subset of this population eligible for gene therapy intervention. Treatment eligibility depends on age-related disease progression, renal function status, and geographic access to therapy following regulatory approval. Defining this target population enables market sizing, clinical trial planning, and health technology assessment budget impact analysis. **Age-based eligibility criteria.** Gene therapy for Lowe syndrome is most likely to demonstrate efficacy when administered **before irreversible organ damage occurs**. The target population for treatment is defined by:
 
 **Primary Eligibility Criteria:**
 - **Age:** <21 years at time of treatment
@@ -248,9 +182,7 @@ Gene therapy for Lowe syndrome is most likely to demonstrate efficacy when admin
 | 41+ years | 183 | 3% | 100% |
 | **Total** | **7,099** | **100%** | - |
 
-**Key Finding:** Approximately **72% of prevalent patients (5,106 individuals globally)** fall within the target age range (<21 years) for treatment.
-
-### 2.3.2 Geographic Distribution of Eligible Patients
+Approximately 72 percent of prevalent patients—5,106 individuals globally—fall within the target age range below 21 years for treatment. **Geographic distribution of eligible patients.** Regional patterns in treatment-eligible populations shown in Table 2.3 below reflect both overall disease burden and age structure differences across populations.
 
 **Table 2.3: Treatment-Eligible Population by Region (Age <21, 2025)**
 
@@ -263,11 +195,7 @@ Gene therapy for Lowe syndrome is most likely to demonstrate efficacy when admin
 | Oceania | 37 | 26 | 70% | 19.1 |
 | **Total** | **7,099** | **5,095** | **72%** | **15.8** |
 
-**Observation:** African patients have highest proportion eligible (74%) due to younger mean age, reflecting more recent diagnoses and potentially shorter survival in low-resource settings.
-
-### 2.3.3 Market Access Waves and Launch Strategy
-
-Gene therapy market access follows regulatory approval timelines, with staggered launches across geographic markets based on:
+African patients have highest proportion eligible at 74 percent due to younger mean age, reflecting more recent diagnoses and potentially shorter survival in low-resource settings. **Market access waves and launch strategy.** Gene therapy market access follows regulatory approval timelines, with staggered launches across geographic markets based on:
 - Regulatory pathway completion (FDA, EMA, other agencies)
 - Pricing and reimbursement negotiations
 - Healthcare infrastructure readiness
@@ -299,24 +227,13 @@ Gene therapy market access follows regulatory approval timelines, with staggered
 **Visualization Reference:**
 - Figure 2.4: `/home/user/HTA-Report/Models/Befolkningsmodel/output_data/wave_patients_at_launch.png` - Eligible patients by market access wave
 
-**Key assumptions.** The model assumes treatment of existing eligible patients below age 21 years occurs during the first 2 to 3 years post-approval as a prevalent backlog, followed by steady-state wherein annual new diagnoses enter the treatment pipeline after backlog clearance. Market penetration rates vary by wave based on reimbursement approval speed, healthcare provider education and adoption patterns, patient and family treatment decisions, and competing priorities in healthcare budgets (ICER 2023).
-
-### 2.3.4 Market Penetration Dynamics
-
-**Penetration Rate Assumptions by Wave:**
-
-**Wave 1 penetration assumptions.** United States, European Union, and European Economic Area markets achieve 40 percent penetration in year one driven by early adopters and well-informed families, rising to 50 percent in year two with expanding adoption and reaching 55 percent steady-state from year three onward. Factors supporting higher penetration include strong unmet medical need, absence of alternative disease-modifying therapies, established health technology assessment infrastructure for rare disease gene therapies, and precedent pricing acceptance demonstrated by Zolgensma and Luxturna (FDA 2017; FDA 2019; ICER 2023). Factors limiting penetration include eligibility restrictions based on age and renal function, family preference or treatment decline affecting approximately 10 to 15 percent, medical contraindications related to immune status or comorbidities, and geographic access barriers in large countries.
+The model assumes treatment of existing eligible patients below age 21 years occurs during the first 2 to 3 years post-approval as a prevalent backlog, followed by steady-state wherein annual new diagnoses enter the treatment pipeline after backlog clearance. Market penetration rates vary by wave based on reimbursement approval speed, healthcare provider education and adoption patterns, patient and family treatment decisions, and competing priorities in healthcare budgets (ICER 2023). **Market penetration dynamics across waves.** Penetration rate assumptions differ substantially across market access waves reflecting infrastructure and reimbursement heterogeneity. Wave 1 penetration assumptions posit that United States, European Union, and European Economic Area markets achieve 40 percent penetration in year one driven by early adopters and well-informed families, rising to 50 percent in year two with expanding adoption and reaching 55 percent steady-state from year three onward. Factors supporting higher penetration include strong unmet medical need, absence of alternative disease-modifying therapies, established health technology assessment infrastructure for rare disease gene therapies, and precedent pricing acceptance demonstrated by Zolgensma and Luxturna (FDA 2017; FDA 2019; ICER 2023). Factors limiting penetration include eligibility restrictions based on age and renal function, family preference or treatment decline affecting approximately 10 to 15 percent, medical contraindications related to immune status or comorbidities, and geographic access barriers in large countries.
 
 **Wave 2 penetration assumptions.** Extended markets achieve 25 percent penetration in year one, 35 percent in year two, and 40 to 45 percent from year three onward. Lower penetration reflects delayed reimbursement negotiations, limited rare disease treatment infrastructure, higher out-of-pocket costs for patients, and fewer specialized treatment centers (Sevilla et al. 2023).
 
 **Wave 3 penetration assumptions.** Specialized markets achieve 15 percent penetration in year one, 25 percent in year two, and 25 to 30 percent from year three onward, reflecting additional access barriers in these markets.
 
-**Visualization Reference:**
-- Figure 2.5: `/home/user/HTA-Report/Models/Befolkningsmodel/output_data/penetration_rate.png` - Market penetration curves over time by wave
-
-### 2.3.5 Patient Identification Challenges
-
-**Current diagnostic landscape.** The age at diagnosis distribution shows 67 percent diagnosed at birth when congenital cataracts are detected on newborn examination, 20 percent diagnosed at ages 1 to 2 years after developmental concerns emerge, 8 percent diagnosed at ages 3 to 5 years after renal manifestations appear, and 5 percent receiving late diagnosis at age 6 years or older often after significant workup (Honoré 2025). Genetic confirmation requires OCRL gene sequencing covering all coding exons and splice sites with turnaround time of 2 to 4 weeks for clinical diagnostic laboratories, cost of $500 to $2,000 varying by country and insurance coverage, and wide availability in Wave 1 countries contrasting with limited availability in Wave 2 and 3 markets.
+Visualization of market penetration curves over time by wave appears in Figure 2.5 (available at `/home/user/HTA-Report/Models/Befolkningsmodel/output_data/penetration_rate.png`). **Patient identification challenges for therapy access.** Current diagnostic landscape shows that The age at diagnosis distribution shows 67 percent diagnosed at birth when congenital cataracts are detected on newborn examination, 20 percent diagnosed at ages 1 to 2 years after developmental concerns emerge, 8 percent diagnosed at ages 3 to 5 years after renal manifestations appear, and 5 percent receiving late diagnosis at age 6 years or older often after significant workup (Honoré 2025). Genetic confirmation requires OCRL gene sequencing covering all coding exons and splice sites with turnaround time of 2 to 4 weeks for clinical diagnostic laboratories, cost of $500 to $2,000 varying by country and insurance coverage, and wide availability in Wave 1 countries contrasting with limited availability in Wave 2 and 3 markets.
 
 **Implications for patient identification post-approval.** Existing diagnosed patients remain readily identifiable as approximately 81 percent of prevalent cases already possess diagnosis according to the detection model, while undiagnosed cases require active case-finding through enhanced screening in pediatric ophthalmology clinics targeting all male infants with congenital cataracts, genetic testing protocols for unexplained developmental delay combined with renal dysfunction, and family cascade screening of carrier mothers (Honoré 2025). Regional disparities in identification capacity mean Wave 1 countries possess high baseline detection requiring minimal additional effort, whereas Wave 2 and 3 countries may require diagnostic capacity building as prerequisite to therapy access.
 
@@ -326,13 +243,9 @@ Gene therapy market access follows regulatory approval timelines, with staggered
 
 ## 2.4 Diagnostic Landscape
 
-Identifying the approximately 5,100 treatment-eligible patients globally requires robust diagnostic pathways from initial clinical presentation through genetic confirmation. The diagnostic landscape varies substantially across market access waves, with implications for patient identification timelines, pre-treatment workup protocols, and family cascade screening strategies. This section characterizes the clinical diagnostic journey, genetic testing infrastructure by geography, and considerations for newborn screening expansion.
+Identifying the approximately 5,100 treatment-eligible patients globally requires robust diagnostic pathways from initial clinical presentation through genetic confirmation. The diagnostic landscape varies substantially across market access waves, with implications for patient identification timelines, pre-treatment workup protocols, and family cascade screening strategies. This section characterizes the clinical diagnostic journey, genetic testing infrastructure by geography, and considerations for newborn screening expansion. **Clinical presentation and diagnostic pathway.** Presentation occurs from birth to three months with dense bilateral congenital cataracts as the primary presenting feature demonstrating 100 percent penetrance, accompanied by associated findings of hypotonia and feeding difficulties prompting evaluation by pediatric ophthalmologist and neonatologist (Charnas 2000; Ma et al. 2020). Diagnostic workup proceeds with ophthalmologic examination confirming cataracts and evaluating for glaucoma, neurological assessment documenting hypotonia and developmental status, renal function screening including urinalysis for proteinuria plus serum creatinine and electrolytes, and genetic testing with OCRL gene sequencing when clinical triad raises suspicion (Bökenkamp and Ludwig 2016). Confirmatory testing employs OCRL gene sequencing via Sanger or next-generation sequencing as gold standard with sensitivity exceeding 99 percent for coding region mutations, with deletion or duplication analysis serving as alternate approach when point mutations remain undetected in rare cases. Differential diagnosis considerations include other causes of congenital cataracts whether isolated or syndromic, Fanconi syndrome from alternative etiologies such as cystinosis or galactosemia, and X-linked intellectual disability syndromes (Charnas 2000).
 
-### 2.4.1 Clinical Presentation and Diagnostic Pathway
-
-**Typical diagnostic journey.** Presentation occurs from birth to three months with dense bilateral congenital cataracts as the primary presenting feature demonstrating 100 percent penetrance, accompanied by associated findings of hypotonia and feeding difficulties prompting evaluation by pediatric ophthalmologist and neonatologist (Charnas 2000; Ma et al. 2020). Diagnostic workup proceeds with ophthalmologic examination confirming cataracts and evaluating for glaucoma, neurological assessment documenting hypotonia and developmental status, renal function screening including urinalysis for proteinuria plus serum creatinine and electrolytes, and genetic testing with OCRL gene sequencing when clinical triad raises suspicion (Bökenkamp and Ludwig 2016). Confirmatory testing employs OCRL gene sequencing via Sanger or next-generation sequencing as gold standard with sensitivity exceeding 99 percent for coding region mutations, with deletion or duplication analysis serving as alternate approach when point mutations remain undetected in rare cases. Differential diagnosis considerations include other causes of congenital cataracts whether isolated or syndromic, Fanconi syndrome from alternative etiologies such as cystinosis or galactosemia, and X-linked intellectual disability syndromes (Charnas 2000).
-
-### 2.4.2 Genetic Testing Infrastructure by Market Access Wave
+**Genetic testing infrastructure by market access wave.** Table 2.5 below documents OCRL testing availability, turnaround times, and reimbursement across representative countries in each wave.
 
 **Table 2.5: OCRL Testing Availability by Geographic Wave**
 
@@ -347,15 +260,7 @@ Identifying the approximately 5,100 treatment-eligible patients globally require
 | **Wave 3** | Saudi Arabia | ✓ (specialized centers) | 6-12 weeks | Variable | Case-by-case |
 | | UAE | ✓ (Dubai, Abu Dhabi) | 4-8 weeks | $1,500-3,000 | Private insurance |
 
-**Genetic testing infrastructure varies substantially across market waves.** Wave 1 countries have robust genetic testing infrastructure with established reimbursement, more than 50 accredited laboratories in the United States alone, and turnaround times of 2 to 4 weeks enabling rapid diagnosis. Wave 2 countries have testing available but with longer turnaround times of 4 to 8 weeks and variable coverage policies requiring case-by-case approval. Wave 3 countries may require sample send-out to international reference labs, extending diagnostic timelines to 6 to 12 weeks and increasing costs (Bökenkamp and Ludwig 2016). **Capacity building requirements for therapy access.** Enhancement of genetic counseling services in Wave 2 and 3 markets, training of local physicians in recognizing the Lowe syndrome clinical triad of congenital cataracts, hypotonia, and renal tubular dysfunction, and development of telemedicine genetic consultation networks represent prerequisites for equitable therapy access following regulatory approval (UNDP 2024).
-
-### 2.4.3 Carrier Detection and Family Screening
-
-**X-linked inheritance implications.** Carrier mothers who are heterozygous females face 50 percent risk of affected male offspring and 50 percent risk of carrier daughters, remaining typically asymptomatic though lens opacities appear in 20 to 40 percent (Charnas 2000; Kenworthy et al. 1993). Cascade screening recommendations include maternal OCRL sequencing upon proband diagnosis, extended family screening of maternal aunts and female cousins, preimplantation genetic diagnosis for known carrier mothers, and prenatal testing via chorionic villus sampling or amniocentesis (Bökenkamp and Ludwig 2016). Therapy eligibility implications show prenatal diagnosis enables early treatment planning, neonatal treatment initiation becomes possible when diagnosis occurs prenatally, and therapeutic benefit may be maximized by treating before tubular damage onset (Ando et al. 2024).
-
-### 2.4.4 Newborn Screening Considerations
-
-**Current status.** Lowe syndrome remains excluded from routine newborn screening panels in all jurisdictions, with clinical presentation of congenital cataracts typically identified on newborn physical examination (Charnas 2000).
+**Genetic testing infrastructure varies substantially across market waves.** Wave 1 countries have robust genetic testing infrastructure with established reimbursement, more than 50 accredited laboratories in the United States alone, and turnaround times of 2 to 4 weeks enabling rapid diagnosis. Wave 2 countries have testing available but with longer turnaround times of 4 to 8 weeks and variable coverage policies requiring case-by-case approval. Wave 3 countries may require sample send-out to international reference labs, extending diagnostic timelines to 6 to 12 weeks and increasing costs (Bökenkamp and Ludwig 2016). **Capacity building requirements for therapy access.** Enhancement of genetic counseling services in Wave 2 and 3 markets, training of local physicians in recognizing the Lowe syndrome clinical triad of congenital cataracts, hypotonia, and renal tubular dysfunction, and development of telemedicine genetic consultation networks represent prerequisites for equitable therapy access following regulatory approval (UNDP 2024). **Carrier detection and family screening.** Carrier mothers who are heterozygous females face 50 percent risk of affected male offspring and 50 percent risk of carrier daughters, remaining typically asymptomatic though lens opacities appear in 20 to 40 percent (Charnas 2000; Kenworthy et al. 1993). Cascade screening recommendations include maternal OCRL sequencing upon proband diagnosis, extended family screening of maternal aunts and female cousins, preimplantation genetic diagnosis for known carrier mothers, and prenatal testing via chorionic villus sampling or amniocentesis (Bökenkamp and Ludwig 2016). Therapy eligibility implications show prenatal diagnosis enables early treatment planning, neonatal treatment initiation becomes possible when diagnosis occurs prenatally, and therapeutic benefit may be maximized by treating before tubular damage onset (Ando et al. 2024). **Newborn screening considerations.** Lowe syndrome remains excluded from routine newborn screening panels in all jurisdictions, with clinical presentation of congenital cataracts typically identified on newborn physical examination (Charnas 2000).
 
 **Feasibility of future screening.** Arguments against universal newborn screening include ultra-rare disease status at 1 in 500,000 births, clinical presentation through cataracts identifying most cases early, extremely high cost per case detected, and OCRL sequencing lacking amenability to high-throughput screening platforms. Arguments supporting targeted screening note that all male infants with congenital cataracts should receive OCRL testing, early genetic confirmation enables optimal treatment planning, and cost-effectiveness improves when screening limits to high-risk phenotypes. Post-therapy approval scenarios suggest that if gene therapy demonstrates substantial benefit the case for enhanced screening strengthens, with cost-effectiveness depending on therapy efficacy and cost (Bökenkamp and Ludwig 2016).
 
@@ -363,13 +268,7 @@ Identifying the approximately 5,100 treatment-eligible patients globally require
 
 ## 2.5 Prevalence by Age and Treatment Window
 
-Beyond total eligible population counts, age distribution within the prevalent population determines optimal treatment timing, expected quality-adjusted life year gains, and steady-state market dynamics following initial backlog clearance. Age at treatment represents a critical determinant of therapeutic benefit given the progressive nature of renal decline and importance of preserving nephron mass before irreversible damage occurs. This section analyzes age distribution patterns and defines treatment windows balancing clinical benefit against practical feasibility.
-
-### 2.5.1 Age Distribution of Current Patient Population
-
-**Figure 2.6 Reference:** `/home/user/HTA-Report/Models/Befolkningsmodel/output_data/survival_curves.png`
-
-The age distribution of Lowe syndrome patients exhibits right-skew, with concentration in childhood and adolescence followed by a long tail extending to the fifth decade of life.
+Beyond total eligible population counts, age distribution within the prevalent population determines optimal treatment timing, expected quality-adjusted life year gains, and steady-state market dynamics following initial backlog clearance. Age at treatment represents a critical determinant of therapeutic benefit given the progressive nature of renal decline and importance of preserving nephron mass before irreversible damage occurs. This section analyzes age distribution patterns and defines treatment windows balancing clinical benefit against practical feasibility. **Age distribution of current patient population.** Figure 2.6 (Weibull survival curves, available at `/home/user/HTA-Report/Models/Befolkningsmodel/output_data/survival_curves.png`) shows that the age distribution of Lowe syndrome patients exhibits right-skew, with concentration in childhood and adolescence followed by a long tail extending to the fifth decade of life.
 
 **Age-Specific Prevalence (2025):**
 
@@ -387,27 +286,13 @@ The age distribution of Lowe syndrome patients exhibits right-skew, with concent
 | 41-50 years | 142 | 2.0% | 99.3% | <15 (renal replacement) |
 | 51+ years | 59 | 0.8% | 100.0% | <15 (long-term survivors) |
 
-**Age distribution statistics.** The age distribution exhibits median age of 14.0 years, mean age of 15.8 years, and interquartile range of 7.2 to 22.6 years, with maximum observed age of 58 years representing a patient born in 1967 surviving substantially beyond typical life expectancy (Honoré 2025).
-
-### 2.5.2 Treatment Window Analysis
-
-**Optimal Treatment Age:**
-
-The therapeutic window for gene therapy is defined by the balance between:
-1. **Early enough:** Before irreversible nephron loss (eGFR decline)
-2. **Late enough:** After definitive diagnosis and medical stability
-
-**Proposed Treatment Age Bands:**
-
-**Early intervention (ages 2-5).** Maximum nephron preservation potential provides rationale for treatment in this age band, though challenges include younger age increasing adeno-associated virus vector dosing complexity with higher milligrams per kilogram requirements, limited renal function baseline data in very young children, and longer follow-up required to assess durability. This band represents 9.8 percent of the global population with 694 patients.
+**Age distribution statistics.** The age distribution exhibits median age of 14.0 years, mean age of 15.8 years, and interquartile range of 7.2 to 22.6 years, with maximum observed age of 58 years representing a patient born in 1967 surviving substantially beyond typical life expectancy (Honoré 2025). **Treatment window analysis.** The therapeutic window for gene therapy is defined by the balance between early enough administration before irreversible nephron loss (eGFR decline) and late enough administration after definitive diagnosis and medical stability. Proposed treatment age bands balance these competing considerations. **Early intervention (ages 2-5).** Maximum nephron preservation potential provides rationale for treatment in this age band, though challenges include younger age increasing adeno-associated virus vector dosing complexity with higher milligrams per kilogram requirements, limited renal function baseline data in very young children, and longer follow-up required to assess durability. This band represents 9.8 percent of the global population with 694 patients.
 
 **Standard intervention (ages 6-15).** Established renal baseline and optimal risk-benefit profile provide rationale for this age band, with advantages including clear documentation of estimated glomerular filtration rate decline trajectory, better long-term outcome data feasible within reasonable timeframe, and lower adeno-associated virus dose requirements. This band represents 36.0 percent of the global population with 2,553 patients and constitutes the recommended primary target population for initial market authorization (Ando et al. 2024; Zaniew et al. 2018).
 
 **Late intervention (ages 16-20).** Most patients remain pre-end-stage kidney disease providing rationale for treatment, though considerations include more advanced disease at treatment, reduced quality-adjusted life year gains due to shorter remaining lifespan, and potential to still prevent or delay end-stage kidney disease onset. This band represents 15.0 percent of the global population with 1,064 patients.
 
-**Post-end-stage kidney disease (age 21+, estimated glomerular filtration rate below 15).** Irreversible damage makes benefit uncertain excluding this group from initial eligibility, though future consideration may expand to late-stage disease if early-treated cohorts demonstrate benefit.
-
-### 2.5.3 Regional Age Distribution Differences
+**Post-end-stage kidney disease (age 21+, estimated glomerular filtration rate below 15).** Irreversible damage makes benefit uncertain excluding this group from initial eligibility, though future consideration may expand to late-stage disease if early-treated cohorts demonstrate benefit. **Regional age distribution differences.** Regional variation in mean patient age reflects healthcare infrastructure differences and survival outcomes, as shown in Table 2.6 below.
 
 **Table 2.6: Mean Age of Prevalent Patients by Region**
 
@@ -425,9 +310,7 @@ The therapeutic window for gene therapy is defined by the balance between:
 
 ## 2.6 Regional Market Considerations
 
-Translating global epidemiological burden into actionable market access strategies requires country-level analysis of prevalent cases, healthcare infrastructure capacity, regulatory pathways, and budget impact within specific payer systems. Regional heterogeneity in diagnostic capacity, reimbursement frameworks, and rare disease infrastructure creates distinct market dynamics across Wave 1, 2, and 3 launch geographies. This section provides country-specific prevalence estimates for key markets and assesses infrastructure prerequisites for successful therapy launch.
-
-### 2.6.1 Country-Specific Prevalence in Key Markets
+Translating global epidemiological burden into actionable market access strategies requires country-level analysis of prevalent cases, healthcare infrastructure capacity, regulatory pathways, and budget impact within specific payer systems. Regional heterogeneity in diagnostic capacity, reimbursement frameworks, and rare disease infrastructure creates distinct market dynamics across Wave 1, 2, and 3 launch geographies. This section provides country-specific prevalence estimates for key markets and assesses infrastructure prerequisites for successful therapy launch. **Country-specific prevalence in key Wave 1 markets.** Table 2.7 below provides prevalence estimates, treatment-eligible populations, and health technology assessment timelines for primary launch countries.
 
 **Table 2.7: Prevalence in Wave 1 Launch Markets**
 
@@ -464,7 +347,7 @@ Translating global epidemiological burden into actionable market access strategi
   - Germany: Heidelberg, Munich
   - France: Necker-Enfants Malades (Paris)
 
-### 2.6.2 Healthcare Infrastructure by HDI
+**Healthcare infrastructure by Human Development Index.** Table 2.8 below summarizes healthcare capacity indicators across market waves, demonstrating correlation between Human Development Index and therapy access prerequisites.
 
 **Table 2.8: Healthcare Capacity Indicators by Market Wave**
 
@@ -475,11 +358,7 @@ Translating global epidemiological burden into actionable market access strategi
 | **Wave 3** | 0.88 | $40,000-75,000 | Good | Variable | Moderate (25-40%) |
 | **Non-Launch** | 0.68 | $5,000-25,000 | Limited | Absent | Low (<10%) |
 
-**Healthcare infrastructure prerequisites for gene therapy delivery.** Wave 1 markets have infrastructure prerequisites including specialized rare disease centers with multidisciplinary care teams, genetic counseling services for patient education and informed consent, adeno-associated virus gene therapy administration experience from Luxturna and Zolgensma creating institutional knowledge, and established health technology assessment frameworks for ultra-rare conditions enabling flexible reimbursement pathways (FDA 2017; FDA 2019; NICE 2024). Wave 2 markets require capacity building including training of local physicians in gene therapy administration protocols, cold chain logistics for vector transport maintaining appropriate temperature throughout distribution, and post-treatment monitoring protocols for safety surveillance and efficacy assessment (Sevilla et al. 2023). Non-launch markets representing the majority of global prevalence at 58 percent face substantial barriers with prevalent cases concentrated in China, India, and Indonesia, limited genetic testing availability constraining diagnosis, absence of reimbursement pathways for ultra-expensive therapies, and significant unmet need with limited near-term access solutions absent tiered pricing or technology transfer arrangements (UNDP 2024).
-
-### 2.6.3 Budget Impact Considerations by Market
-
-**Aggregate Budget Impact Analysis:**
+**Healthcare infrastructure prerequisites for gene therapy delivery.** Wave 1 markets have infrastructure prerequisites including specialized rare disease centers with multidisciplinary care teams, genetic counseling services for patient education and informed consent, adeno-associated virus gene therapy administration experience from Luxturna and Zolgensma creating institutional knowledge, and established health technology assessment frameworks for ultra-rare conditions enabling flexible reimbursement pathways (FDA 2017; FDA 2019; NICE 2024). Wave 2 markets require capacity building including training of local physicians in gene therapy administration protocols, cold chain logistics for vector transport maintaining appropriate temperature throughout distribution, and post-treatment monitoring protocols for safety surveillance and efficacy assessment (Sevilla et al. 2023). Non-launch markets representing the majority of global prevalence at 58 percent face substantial barriers with prevalent cases concentrated in China, India, and Indonesia, limited genetic testing availability constraining diagnosis, absence of reimbursement pathways for ultra-expensive therapies, and significant unmet need with limited near-term access solutions absent tiered pricing or technology transfer arrangements (UNDP 2024). Budget impact considerations by market demonstrate that aggregate
 
 **Assumptions:**
 - Treatment cost: $3.0 million per patient (base case)
@@ -521,9 +400,7 @@ Translating global epidemiological burden into actionable market access strategi
 - Steady-state: 4-5 patients/year = **€12-15M annually**
 - **GKV budget context:** Small relative to total statutory health insurance expenditures (€280 billion annually)
 
-### 2.6.4 Equity and Global Access Considerations
-
-**Geographic Inequity:**
+**Equity and global access considerations.** Geographic inequity emerges as a central challenge, with
 
 - **72% of prevalent cases in non-launch markets** (primarily Asia, Africa, Latin America outside Brazil/Mexico/Argentina)
 - **Limited near-term access** for majority of global patient population
@@ -565,11 +442,7 @@ Translating global epidemiological burden into actionable market access strategi
 
 ## 2.7 Implications for Clinical Development and Market Access
 
-The epidemiological landscape characterized above carries direct implications for clinical trial design, regulatory approval strategies, and post-marketing surveillance requirements. Ultra-rare disease development faces distinct challenges including limited patient availability for randomized trials, reliance on natural history comparators, and necessity of long-term registry-based evidence generation. This section translates population estimates into actionable recommendations for clinical development planning and evidence generation strategies supporting regulatory approval and reimbursement decisions.
-
-### 2.7.1 Patient Recruitment Feasibility
-
-**Clinical Trial Considerations:**
+The epidemiological landscape characterized above carries direct implications for clinical trial design, regulatory approval strategies, and post-marketing surveillance requirements. Ultra-rare disease development faces distinct challenges including limited patient availability for randomized trials, reliance on natural history comparators, and necessity of long-term registry-based evidence generation. This section translates population estimates into actionable recommendations for clinical development planning and evidence generation strategies supporting regulatory approval and reimbursement decisions. **Patient recruitment feasibility for clinical trials.** Clinical trial considerations for
 
 **Projected Phase 1/2 Trial (2027-2029):**
 - **Target enrollment:** 12-20 patients
@@ -586,9 +459,7 @@ The epidemiological landscape characterized above carries direct implications fo
 - Physician referral networks at specialized centers
 - Patient advocacy organization engagement critical
 
-### 2.7.2 Natural History Comparator Strategy
-
-**Regulatory Acceptance of External Controls:**
+**Natural history comparator strategy.** Regulatory acceptance of external controls becomes necessary given that
 
 Given rarity of Lowe syndrome, randomized controlled trial may be:
 - Ethically challenging (withholding potentially life-saving therapy)
@@ -607,9 +478,7 @@ Given rarity of Lowe syndrome, randomized controlled trial may be:
 - European rare kidney disease registries
 - Individual patient-level data from academic centers
 
-### 2.7.3 Post-Approval Evidence Generation
-
-**Real-World Evidence (RWE) Requirements:**
+**Post-approval evidence generation requirements.** Real-world evidence collection through mandatory registries becomes essential, with
 
 **Mandatory Patient Registry (All Treated Patients):**
 - Duration: Minimum 10 years post-treatment
@@ -649,9 +518,7 @@ Given rarity of Lowe syndrome, randomized controlled trial may be:
 
 ## 2.8 Summary and Key Findings
 
-### 2.8.1 Prevalence Summary
-
-**Global Burden:**
+**Global burden estimates.**
 - **~7,100 individuals** living with Lowe syndrome worldwide (2025)
 - **Geographic concentration:** Asia (58%), Africa (20%), Americas (14%), Europe (8%)
 - **Detection gaps:** Approximately 19% of cases globally remain undiagnosed, with higher rates in low-HDI regions (38% in Africa)
@@ -660,9 +527,7 @@ Given rarity of Lowe syndrome, randomized controlled trial may be:
 - Model estimates consistent with published registry data (40-60% registry capture rate)
 - Order-of-magnitude agreement with sparse published prevalence estimates (0.5-1.5 per million)
 
-### 2.8.2 Treatment-Eligible Population
-
-**Primary Market (Age <21 years):**
+**Treatment-eligible population.** Primary market for patients under age 21 years comprises:
 - **~5,100 patients globally** (72% of prevalent population)
 - **Wave 1 markets (2030):** ~1,450 eligible patients
 - **Wave 2 markets (2033):** ~780 eligible patients
@@ -673,38 +538,20 @@ Given rarity of Lowe syndrome, randomized controlled trial may be:
 - Steady-state: ~73 new incident cases annually across all launch markets
 - Market penetration: 40-55% (Wave 1), 25-45% (Wave 2), 15-30% (Wave 3)
 
-### 2.8.3 Methodological Strengths
-
-1. **Peer-reviewed framework:** Zero-Inflated Poisson model with HDI-based detection adjustment
-2. **Transparent assumptions:** All parameters documented with literature sources
-3. **Individual-level simulation:** Captures heterogeneity in survival and age distribution
-4. **Sensitivity-tested:** Robust to parameter variations within plausible ranges
-5. **Reproducible:** Open-source implementation enables verification and adaptation
-
-### 2.8.4 Key Uncertainties
-
-1. **Birth incidence rate:** Literature estimates range 1/200,000 to 1/1,000,000 (2.5-fold uncertainty)
-2. **Survival parameters:** Limited longitudinal data, calibrated to published median survival
-3. **Detection model functional form:** Linear relationship between HDI and detection assumed, not empirically validated
-4. **Geographic heterogeneity:** Model assumes uniform incidence across populations (may not hold due to founder effects, consanguinity)
-
-### 2.8.5 Implications for HTA Submission
-
-**Strengths Supporting Reimbursement:**
+**Methodological strengths.** The approach demonstrates several advantages: peer-reviewed framework using Zero-Inflated Poisson model with HDI-based detection adjustment,
+transparent assumptions with all parameters documented with literature sources, individual-level simulation capturing heterogeneity in survival and age distribution, sensitivity testing demonstrating robustness to parameter variations within plausible ranges, and reproducible open-source implementation enabling verification and adaptation. **Key uncertainties.** Principal sources of uncertainty include birth incidence rate with literature estimates ranging 1/200,000 to 1/1,000,000 representing 2.5-fold uncertainty,
+survival parameters with limited longitudinal data calibrated to published median survival, detection model functional form with linear relationship between HDI and detection assumed but not empirically validated, and geographic heterogeneity with model assuming uniform incidence across populations which may not hold due to founder effects or consanguinity. **Implications for health technology assessment submission.** Strengths supporting reimbursement include:
 - Well-defined target population with validated epidemiological model
 - Small patient numbers → manageable budget impact despite high per-patient cost
 - Clear diagnostic pathway (OCRL genetic testing) → low misdiagnosis risk
 - Orphan disease status → eligibility for flexible HTA frameworks
 
-**Challenges to Address:**
-- Global prevalence primarily in non-launch markets → equity concerns
+Challenges to address include global prevalence primarily in non-launch markets raising equity concerns,
 - Detection gaps in low-resource settings → patient identification barriers
 - Long-term durability uncertainty → requires post-approval evidence generation
 - High upfront cost → may necessitate outcomes-based payment models
 
-### 2.8.6 Data Transparency and Reproducibility
-
-**Model Availability:**
+**Data transparency and reproducibility.** Model availability includes:
 - Population model code: `/home/user/HTA-Report/Models/Befolkningsmodel/Population_model.ipynb`
 - Methodology paper: `/home/user/HTA-Report/Litterature/Population model/draft_v1.md`
 - Output visualizations: `/home/user/HTA-Report/Models/Befolkningsmodel/output_data/`
@@ -750,11 +597,11 @@ United Nations, Department of Economic and Social Affairs, Population Division. 
 
 ---
 
-**Document Version:** 4.0 (Enhanced AER-HTA Prose Style)
+**Document Version:** 5.0 (Streamlined AER-HTA Prose Style)
 **Date:** November 11, 2025
 **Section:** II of VIII - Epidemiology & Population Analysis
-**Status:** Complete with Enhanced AER-HTA Style and Mathematical Exposition
-**Changes from v3.0:** Removed all "Interpretation:", "Key findings:", and "Key Observations:" subheaders and integrated into flowing prose with embedded bold sentence headers; added mathematical intuition explaining ZIP framework rationale versus standard Poisson models; converted parameter sensitivity analysis from prose to structured table format (Table 2.9); added motivating transition paragraphs bridging all major sections (2.1→2.2, 2.2→2.3, 2.3→2.4, 2.4→2.5, 2.5→2.6, 2.6→2.7); strengthened analytical depth while maintaining dense AER-style academic prose throughout
+**Status:** Complete with Streamlined Flowing Prose
+**Changes from v4.0:** Removed all excessive ### subsection headers throughout Sections 2.1-2.7 and integrated content into continuous flowing prose with embedded bold sentence headers; eliminated choppy section breaks creating smoother analytical narrative; maintained all technical content (tables, equations, data) while improving readability and reducing structural fragmentation; document now features major ## section markers with dense paragraphs flowing between them, matching AER journal article style more closely
 
 ---
 

@@ -17,15 +17,7 @@ Based on a validated population modeling framework accounting for healthcare dia
 | Oceania | 37 | 0.5% | 19.1 | 21 |
 | **Total** | **7,099** | **100%** | **15.8** | **237** |
 
-**Key Findings:**
-
-- **Geographic concentration:** Asia accounts for the majority of cases (58%) due to large population size, despite variable detection capacity across the region
-- **Age distribution:** Mean age of 15.8 years reflects both recent births and survival through childhood and adolescence
-- **Regional age variation:** European patients have higher mean age (18.9 years) compared to African patients (13.1 years), potentially reflecting earlier detection and better supportive care enabling longer survival
-
-**Visualization Reference:**
-- Figure 2.1: `/home/user/HTA-Report/Models/Befolkningsmodel/output_data/patients_2025_choropleth.png` - World choropleth map showing country-level prevalence
-- Figure 2.2: `/home/user/HTA-Report/Models/Befolkningsmodel/output_data/patient_distribution_by_region.png` - Regional distribution bar chart
+**Geographic distribution patterns.** Asia accounts for the majority of cases at 58 percent due to large population size despite variable detection capacity across the region, while Africa contributes 20 percent, the Americas 14 percent, Europe 8 percent, and Oceania less than 1 percent. Mean patient age of 15.8 years reflects both recent births and survival through childhood and adolescence. Regional age variation demonstrates higher mean age among European patients at 18.9 years compared to African patients at 13.1 years, potentially reflecting earlier detection and better supportive care enabling longer survival (Bökenkamp and Ludwig 2016). Visualization of geographic distribution appears in Figure 2.1 (world choropleth map showing country-level prevalence) and Figure 2.2 (regional distribution bar chart) available in the model output directory.
 
 ### 2.1.2 Country-Level Prevalence
 
@@ -104,13 +96,7 @@ Where:
 - **h<sub>ct</sub>** = Human Development Index for country *c* at time *t* (UNDP 2024)
 - **(1 + h<sub>ct</sub>)** = Detection multiplier, ranging from 1.0 (HDI=0) to 2.0 (HDI=1)
 
-**Rationale for Detection Multiplier:**
-
-Countries with maximum HDI detect approximately twice as many cases as countries with minimal diagnostic capacity. This reflects:
-- Access to specialized genetic testing (OCRL sequencing)
-- Availability of clinical geneticists and rare disease specialists
-- Awareness of Lowe syndrome among pediatricians and ophthalmologists
-- Comprehensive newborn screening programs
+**Rationale for detection multiplier.** Countries with maximum Human Development Index detect approximately twice as many cases as countries with minimal diagnostic capacity, reflecting differential access to specialized genetic testing for OCRL sequencing, availability of clinical geneticists and rare disease specialists, awareness of Lowe syndrome among pediatricians and ophthalmologists, and comprehensive newborn screening programs (UNDP 2024; Bökenkamp and Ludwig 2016).
 
 **Zero-Inflation Parameter:**
 
@@ -125,28 +111,9 @@ This specification implies that:
 
 The Human Development Index aggregates three dimensions of human development: health measured by life expectancy at birth, education measured by expected years of schooling, and income measured by Gross National Income per capita at purchasing power parity (UNDP 2024). The index equals the geometric mean of normalized component indices: HDI = (Health Index × Education Index × Income Index)<sup>1/3</sup>. Data derive from the United Nations Development Programme Human Development Report 2023-2024 covering 1990 to 2022 for approximately 190 countries (UNDP 2024).
 
-**Temporal Coverage:**
-- Historical HDI: 1990-2022 (observed data for ~190 countries)
-- Pre-1990 projection: Linear interpolation from discovery year (1952) using floor value of 0.15
-- Pre-1952 (before disease discovery): HDI set to 0 (no diagnostic knowledge existed)
-- Post-2022 projection: Country-specific exponential growth based on 1990-2022 trends
+**Temporal coverage.** Historical Human Development Index data span 1990 to 2022 with observed data for approximately 190 countries, while pre-1990 values employ linear interpolation from the disease discovery year of 1952 using a floor value of 0.15, and pre-1952 values equal zero reflecting absence of diagnostic knowledge before disease discovery. Post-2022 projections use country-specific exponential growth based on 1990 to 2022 trends (UNDP 2024).
 
-**Rationale for HDI as Proxy:**
-
-HDI correlates strongly with healthcare system characteristics relevant to rare disease diagnosis:
-- Physician density and specialist availability
-- Laboratory infrastructure for genetic testing
-- Health expenditure per capita
-- Universal health coverage indices
-- Medical education quality
-
-While more specific diagnostic capacity measures would be preferable, HDI provides:
-- Comprehensive temporal coverage (1990-present)
-- Complete geographic coverage (237 countries)
-- Established use in health systems research
-- Publicly available, regularly updated data
-
-**Limitations:** HDI does not capture disease-specific diagnostic infrastructure (e.g., genetic testing availability). Future model refinements could incorporate genetic testing capacity data as these become systematically available.
+**Rationale for Human Development Index as proxy.** The index correlates strongly with healthcare system characteristics relevant to rare disease diagnosis including physician density and specialist availability, laboratory infrastructure for genetic testing, health expenditure per capita, universal health coverage indices, and medical education quality. While more specific diagnostic capacity measures would be preferable, Human Development Index provides comprehensive temporal coverage from 1990 to present, complete geographic coverage across 237 countries, established use in health systems research, and publicly available regularly updated data (UNDP 2024). The index does not capture disease-specific diagnostic infrastructure such as genetic testing availability, and future model refinements could incorporate genetic testing capacity data as these become systematically available.
 
 ### 2.2.4 Individual-Based Survival Simulation
 
@@ -180,18 +147,7 @@ These parameters were calibrated to match natural history studies reporting medi
 **Visualization Reference:**
 - Figure 2.3: `/home/user/HTA-Report/Models/Befolkningsmodel/output_data/survival_curves.png` - Weibull survival curves showing probability of survival by age
 
-**Individual-Level Simulation Approach:**
-
-For each incident case generated by the ZIP model:
-1. Draw survival duration *T<sub>i</sub>* from Weibull(2.0, 28.0)
-2. Patient remains alive from birth year *t<sub>birth,i</sub>* until year *t<sub>birth,i</sub>* + ⌊T<sub>i</sub>⌋
-3. Patient contributes to prevalence count at time *t* if: *t<sub>birth,i</sub>* ≤ *t* < *t<sub>birth,i</sub>* + *T<sub>i</sub>*
-
-This individual-based approach enables:
-- Flexible heterogeneity in survival outcomes
-- Direct calculation of age distributions
-- Tracking of cohort dynamics over time
-- Geographic stratification of patient populations
+**Individual-level simulation approach.** For each incident case generated by the Zero-Inflated Poisson model, the simulation draws survival duration *T<sub>i</sub>* from Weibull(2.0, 28.0), assumes the patient remains alive from birth year *t<sub>birth,i</sub>* until year *t<sub>birth,i</sub>* + ⌊T<sub>i</sub>⌋, and counts the patient as contributing to prevalence at time *t* if *t<sub>birth,i</sub>* ≤ *t* < *t<sub>birth,i</sub>* + *T<sub>i</sub>*. This individual-based approach enables flexible heterogeneity in survival outcomes, direct calculation of age distributions, tracking of cohort dynamics over time, and geographic stratification of patient populations (Honoré 2025).
 
 ### 2.2.5 Model Validation and Sensitivity
 
@@ -286,12 +242,7 @@ Gene therapy for Lowe syndrome is most likely to demonstrate efficacy when admin
 - **Renal status:** Pre-ESKD (eGFR ≥15 mL/min/1.73m²)
 - **Genetic confirmation:** Pathogenic OCRL mutation identified
 
-**Rationale for Age Cutoff:**
-
-1. **Progressive renal disease trajectory:** Proximal tubule dysfunction begins in infancy, but ESKD typically occurs in late 20s-early 30s (median age 28-32 years)
-2. **Therapeutic window:** Treatment before age 21 targets patients with functional nephrons still amenable to preservation
-3. **Maximum QALY potential:** Younger patients have longer life expectancy, maximizing lifetime benefits
-4. **Precedent from other gene therapies:** Zolgensma (SMA) demonstrates greater efficacy with earlier treatment
+**Rationale for age cutoff.** The progressive renal disease trajectory shows proximal tubule dysfunction beginning in infancy but end-stage kidney disease typically occurring in late 20s to early 30s at median age 28 to 32 years, establishing a therapeutic window where treatment before age 21 targets patients with functional nephrons still amenable to preservation (Ando et al. 2024; Zaniew et al. 2018). Younger patients possess longer life expectancy maximizing lifetime quality-adjusted life year gains. Precedent from other gene therapies demonstrates Zolgensma for spinal muscular atrophy achieving greater efficacy with earlier treatment (Mendell et al. 2017; FDA 2019).
 
 **Age Distribution of Prevalent Population (2025):**
 
@@ -358,88 +309,28 @@ Gene therapy market access follows regulatory approval timelines, with staggered
 **Visualization Reference:**
 - Figure 2.4: `/home/user/HTA-Report/Models/Befolkningsmodel/output_data/wave_patients_at_launch.png` - Eligible patients by market access wave
 
-**Key Assumptions:**
-
-1. **Prevalent backlog at launch:** Treatment of existing eligible patients (<21 years) in first 2-3 years post-approval
-2. **Steady-state incident cases:** Annual new diagnoses enter treatment pipeline after backlog cleared
-3. **Market penetration rates:** Vary by wave based on:
-   - Reimbursement approval speed
-   - Healthcare provider education/adoption
-   - Patient/family treatment decisions
-   - Competing priorities in healthcare budgets
+**Key assumptions.** The model assumes treatment of existing eligible patients below age 21 years occurs during the first 2 to 3 years post-approval as a prevalent backlog, followed by steady-state wherein annual new diagnoses enter the treatment pipeline after backlog clearance. Market penetration rates vary by wave based on reimbursement approval speed, healthcare provider education and adoption patterns, patient and family treatment decisions, and competing priorities in healthcare budgets (ICER 2023).
 
 ### 2.3.4 Market Penetration Dynamics
 
 **Penetration Rate Assumptions by Wave:**
 
-**Wave 1 (USA/EU/EEA):**
-- Year 1: 40% (early adopters, well-informed families)
-- Year 2: 50% (expanding adoption)
-- Year 3+: 55% (steady-state)
+**Wave 1 penetration assumptions.** United States, European Union, and European Economic Area markets achieve 40 percent penetration in year one driven by early adopters and well-informed families, rising to 50 percent in year two with expanding adoption and reaching 55 percent steady-state from year three onward. Factors supporting higher penetration include strong unmet medical need, absence of alternative disease-modifying therapies, established health technology assessment infrastructure for rare disease gene therapies, and precedent pricing acceptance demonstrated by Zolgensma and Luxturna (FDA 2017; FDA 2019; ICER 2023). Factors limiting penetration include eligibility restrictions based on age and renal function, family preference or treatment decline affecting approximately 10 to 15 percent, medical contraindications related to immune status or comorbidities, and geographic access barriers in large countries.
 
-**Factors supporting higher penetration:**
-- Strong unmet medical need
-- No alternative disease-modifying therapies
-- Established HTA infrastructure for rare disease gene therapies
-- Precedent pricing acceptance (Zolgensma, Luxturna)
+**Wave 2 penetration assumptions.** Extended markets achieve 25 percent penetration in year one, 35 percent in year two, and 40 to 45 percent from year three onward. Lower penetration reflects delayed reimbursement negotiations, limited rare disease treatment infrastructure, higher out-of-pocket costs for patients, and fewer specialized treatment centers (Sevilla et al. 2023).
 
-**Factors limiting penetration:**
-- Eligibility restrictions (age, renal function)
-- Family preference/treatment decline (~10-15%)
-- Medical contraindications (immune status, comorbidities)
-- Geographic access barriers in large countries
-
-**Wave 2 (Extended Markets):**
-- Year 1: 25%
-- Year 2: 35%
-- Year 3+: 40-45%
-
-**Lower penetration reflects:**
-- Delayed reimbursement negotiations
-- Limited rare disease treatment infrastructure
-- Higher out-of-pocket costs for patients
-- Fewer specialized treatment centers
-
-**Wave 3 (Specialized Markets):**
-- Year 1: 15%
-- Year 2: 25%
-- Year 3+: 25-30%
+**Wave 3 penetration assumptions.** Specialized markets achieve 15 percent penetration in year one, 25 percent in year two, and 25 to 30 percent from year three onward, reflecting additional access barriers in these markets.
 
 **Visualization Reference:**
 - Figure 2.5: `/home/user/HTA-Report/Models/Befolkningsmodel/output_data/penetration_rate.png` - Market penetration curves over time by wave
 
 ### 2.3.5 Patient Identification Challenges
 
-**Current Diagnostic Landscape:**
+**Current diagnostic landscape.** The age at diagnosis distribution shows 67 percent diagnosed at birth when congenital cataracts are detected on newborn examination, 20 percent diagnosed at ages 1 to 2 years after developmental concerns emerge, 8 percent diagnosed at ages 3 to 5 years after renal manifestations appear, and 5 percent receiving late diagnosis at age 6 years or older often after significant workup (Honoré 2025). Genetic confirmation requires OCRL gene sequencing covering all coding exons and splice sites with turnaround time of 2 to 4 weeks for clinical diagnostic laboratories, cost of $500 to $2,000 varying by country and insurance coverage, and wide availability in Wave 1 countries contrasting with limited availability in Wave 2 and 3 markets.
 
-**Age at Diagnosis Distribution (Modeled):**
-- **At birth (0 months):** 67% (congenital cataracts detected on newborn exam)
-- **Ages 1-2 years:** 20% (delayed diagnosis after developmental concerns)
-- **Ages 3-5 years:** 8% (diagnosis after renal manifestations emerge)
-- **Ages 6+ years:** 5% (late diagnosis, often after significant workup)
+**Implications for patient identification post-approval.** Existing diagnosed patients remain readily identifiable as approximately 81 percent of prevalent cases already possess diagnosis according to the detection model, while undiagnosed cases require active case-finding through enhanced screening in pediatric ophthalmology clinics targeting all male infants with congenital cataracts, genetic testing protocols for unexplained developmental delay combined with renal dysfunction, and family cascade screening of carrier mothers (Honoré 2025). Regional disparities in identification capacity mean Wave 1 countries possess high baseline detection requiring minimal additional effort, whereas Wave 2 and 3 countries may require diagnostic capacity building as prerequisite to therapy access.
 
-**Genetic Confirmation:**
-- OCRL gene sequencing (all coding exons and splice sites)
-- Turnaround time: 2-4 weeks for clinical diagnostic labs
-- Cost: $500-2,000 (varies by country and insurance coverage)
-- Availability: Widely available in Wave 1 countries, limited in Wave 2/3
-
-**Implications for Patient Identification Post-Approval:**
-
-1. **Existing diagnosed patients readily identifiable:** Approximately 81% of prevalent cases already diagnosed (per detection model)
-2. **Undiagnosed cases require active case-finding:**
-   - Enhanced screening in pediatric ophthalmology clinics (all male infants with congenital cataracts)
-   - Genetic testing protocols for unexplained developmental delay + renal dysfunction
-   - Family cascade screening (carrier mothers)
-3. **Regional disparities in identification capacity:**
-   - Wave 1 countries: High baseline detection, minimal additional effort needed
-   - Wave 2/3 countries: May require diagnostic capacity building as prerequisite to therapy access
-
-**Recommended Strategies:**
-- Collaboration with Lowe Syndrome Association for patient registry
-- Physician education campaigns in pediatric subspecialties
-- Newborn screening enhancement (if cost-effective)
-- Telemedicine genetic counseling for remote/underserved regions
+**Recommended strategies.** Patient identification strategies include collaboration with the Lowe Syndrome Association for patient registry access, physician education campaigns in pediatric subspecialties, newborn screening enhancement if cost-effective analysis supports implementation, and telemedicine genetic counseling for remote and underserved regions (Lowe Syndrome Association 2010).
 
 ---
 
@@ -447,28 +338,7 @@ Gene therapy market access follows regulatory approval timelines, with staggered
 
 ### 2.4.1 Clinical Presentation and Diagnostic Pathway
 
-**Typical Diagnostic Journey:**
-
-**Presentation (Birth to 3 Months):**
-- **Primary presenting feature:** Dense bilateral congenital cataracts (100% penetrance)
-- **Associated findings:** Hypotonia, feeding difficulties
-- **Initial specialists:** Pediatric ophthalmologist, neonatologist
-
-**Diagnostic Workup:**
-1. **Ophthalmologic examination:** Confirms cataracts, evaluates for glaucoma
-2. **Neurological assessment:** Documents hypotonia, developmental status
-3. **Renal function screening:** Urinalysis (proteinuria), serum creatinine, electrolytes
-4. **Genetic testing:** OCRL gene sequencing if clinical triad suspected
-
-**Confirmatory Testing:**
-- **Gold standard:** OCRL gene sequencing (Sanger or next-generation sequencing)
-- **Sensitivity:** >99% for coding region mutations
-- **Alternate:** Deletion/duplication analysis if no point mutations found (rare)
-
-**Differential Diagnosis:**
-- Other causes of congenital cataracts (isolated vs syndromic)
-- Fanconi syndrome from other etiologies (cystinosis, galactosemia)
-- X-linked intellectual disability syndromes
+**Typical diagnostic journey.** Presentation occurs from birth to three months with dense bilateral congenital cataracts as the primary presenting feature demonstrating 100 percent penetrance, accompanied by associated findings of hypotonia and feeding difficulties prompting evaluation by pediatric ophthalmologist and neonatologist (Charnas 2000; Ma et al. 2020). Diagnostic workup proceeds with ophthalmologic examination confirming cataracts and evaluating for glaucoma, neurological assessment documenting hypotonia and developmental status, renal function screening including urinalysis for proteinuria plus serum creatinine and electrolytes, and genetic testing with OCRL gene sequencing when clinical triad raises suspicion (Bökenkamp and Ludwig 2016). Confirmatory testing employs OCRL gene sequencing via Sanger or next-generation sequencing as gold standard with sensitivity exceeding 99 percent for coding region mutations, with deletion or duplication analysis serving as alternate approach when point mutations remain undetected in rare cases. Differential diagnosis considerations include other causes of congenital cataracts whether isolated or syndromic, Fanconi syndrome from alternative etiologies such as cystinosis or galactosemia, and X-linked intellectual disability syndromes (Charnas 2000).
 
 ### 2.4.2 Genetic Testing Infrastructure by Market Access Wave
 
@@ -497,46 +367,13 @@ Gene therapy market access follows regulatory approval timelines, with staggered
 
 ### 2.4.3 Carrier Detection and Family Screening
 
-**X-Linked Inheritance Implications:**
-
-**Carrier Mothers (Heterozygous Females):**
-- 50% risk of affected male offspring
-- 50% risk of carrier daughters
-- Typically asymptomatic, though may exhibit lens opacities (20-40%)
-
-**Cascade Screening Recommendations:**
-- Maternal OCRL sequencing upon proband diagnosis
-- Extended family screening (maternal aunts, female cousins)
-- Preimplantation genetic diagnosis (PGD) for known carrier mothers
-- Prenatal testing available (chorionic villus sampling, amniocentesis)
-
-**Implications for Therapy Eligibility:**
-- Prenatal diagnosis enables early treatment planning
-- Neonatal treatment initiation possible if diagnosed prenatally
-- May maximize therapeutic benefit by treating before tubular damage onset
+**X-linked inheritance implications.** Carrier mothers who are heterozygous females face 50 percent risk of affected male offspring and 50 percent risk of carrier daughters, remaining typically asymptomatic though lens opacities appear in 20 to 40 percent (Charnas 2000; Kenworthy et al. 1993). Cascade screening recommendations include maternal OCRL sequencing upon proband diagnosis, extended family screening of maternal aunts and female cousins, preimplantation genetic diagnosis for known carrier mothers, and prenatal testing via chorionic villus sampling or amniocentesis (Bökenkamp and Ludwig 2016). Therapy eligibility implications show prenatal diagnosis enables early treatment planning, neonatal treatment initiation becomes possible when diagnosis occurs prenatally, and therapeutic benefit may be maximized by treating before tubular damage onset (Ando et al. 2024).
 
 ### 2.4.4 Newborn Screening Considerations
 
-**Current Status:**
-- Lowe syndrome **NOT included** in routine newborn screening panels (any jurisdiction)
-- Clinical presentation (congenital cataracts) typically identified on newborn physical exam
+**Current status.** Lowe syndrome remains excluded from routine newborn screening panels in all jurisdictions, with clinical presentation of congenital cataracts typically identified on newborn physical examination (Charnas 2000).
 
-**Feasibility of Future Screening:**
-
-**Arguments Against Universal Newborn Screening:**
-- Ultra-rare disease (1 in 500,000 births)
-- Clinical presentation (cataracts) identifies most cases early
-- Cost per case detected would be extremely high
-- OCRL sequencing not amenable to high-throughput screening
-
-**Arguments For Targeted Screening:**
-- All male infants with congenital cataracts should receive OCRL testing
-- Early genetic confirmation enables optimal treatment planning
-- Cost-effective if limited to high-risk phenotypes
-
-**Post-Therapy Approval Scenario:**
-- If gene therapy demonstrates substantial benefit, case for enhanced screening strengthens
-- Cost-effectiveness depends on therapy efficacy and cost
+**Feasibility of future screening.** Arguments against universal newborn screening include ultra-rare disease status at 1 in 500,000 births, clinical presentation through cataracts identifying most cases early, extremely high cost per case detected, and OCRL sequencing lacking amenability to high-throughput screening platforms. Arguments supporting targeted screening note that all male infants with congenital cataracts should receive OCRL testing, early genetic confirmation enables optimal treatment planning, and cost-effectiveness improves when screening limits to high-risk phenotypes. Post-therapy approval scenarios suggest that if gene therapy demonstrates substantial benefit the case for enhanced screening strengthens, with cost-effectiveness depending on therapy efficacy and cost (Bökenkamp and Ludwig 2016).
 
 ---
 
@@ -580,34 +417,13 @@ The therapeutic window for gene therapy is defined by the balance between:
 
 **Proposed Treatment Age Bands:**
 
-**Early Intervention (Ages 2-5):**
-- **Rationale:** Maximum nephron preservation potential
-- **Challenges:**
-  - Younger age increases AAV vector dosing complexity (mg/kg higher)
-  - Limited renal function baseline data in very young children
-  - Longer follow-up required to assess durability
-- **Proportion of population:** 9.8% (694 patients globally)
+**Early intervention (ages 2-5).** Maximum nephron preservation potential provides rationale for treatment in this age band, though challenges include younger age increasing adeno-associated virus vector dosing complexity with higher milligrams per kilogram requirements, limited renal function baseline data in very young children, and longer follow-up required to assess durability. This band represents 9.8 percent of the global population with 694 patients.
 
-**Standard Intervention (Ages 6-15):**
-- **Rationale:** Established renal baseline, optimal risk-benefit profile
-- **Advantages:**
-  - Clear documentation of eGFR decline trajectory
-  - Better long-term outcome data feasible within reasonable timeframe
-  - Lower AAV dose requirements
-- **Proportion of population:** 36.0% (2,553 patients globally)
-- **Recommendation:** Primary target population for initial market authorization
+**Standard intervention (ages 6-15).** Established renal baseline and optimal risk-benefit profile provide rationale for this age band, with advantages including clear documentation of estimated glomerular filtration rate decline trajectory, better long-term outcome data feasible within reasonable timeframe, and lower adeno-associated virus dose requirements. This band represents 36.0 percent of the global population with 2,553 patients and constitutes the recommended primary target population for initial market authorization (Ando et al. 2024; Zaniew et al. 2018).
 
-**Late Intervention (Ages 16-20):**
-- **Rationale:** Still pre-ESKD in most patients
-- **Considerations:**
-  - More advanced disease at treatment
-  - Reduced QALY gains due to shorter remaining lifespan
-  - May still prevent/delay ESKD onset
-- **Proportion of population:** 15.0% (1,064 patients globally)
+**Late intervention (ages 16-20).** Most patients remain pre-end-stage kidney disease providing rationale for treatment, though considerations include more advanced disease at treatment, reduced quality-adjusted life year gains due to shorter remaining lifespan, and potential to still prevent or delay end-stage kidney disease onset. This band represents 15.0 percent of the global population with 1,064 patients.
 
-**Post-ESKD (Age 21+, eGFR <15):**
-- **Excluded from initial eligibility:** Irreversible damage makes benefit uncertain
-- **Future consideration:** If early-treated cohorts show benefit, may expand to late-stage disease
+**Post-end-stage kidney disease (age 21+, estimated glomerular filtration rate below 15).** Irreversible damage makes benefit uncertain excluding this group from initial eligibility, though future consideration may expand to late-stage disease if early-treated cohorts demonstrate benefit.
 
 ### 2.5.3 Regional Age Distribution Differences
 
@@ -980,11 +796,11 @@ United Nations, Department of Economic and Social Affairs, Population Division. 
 
 ---
 
-**Document Version:** 2.0 (Citations Updated)
+**Document Version:** 3.0 (AER-HTA Prose Style)
 **Date:** November 11, 2025
 **Section:** II of VIII - Epidemiology & Population Analysis
-**Status:** Complete with Chicago Author-Date Citations
-**Changes:** Converted references to alphabetized Chicago format; added in-text citations throughout; condensed prose in key sections following AER-HTA style
+**Status:** Complete with Integrated AER-HTA Style
+**Changes:** Transformed bullet lists to dense flowing prose paragraphs; added bold sentence headers followed by analytical text; maintained appropriate technical formatting (tables, equations) for epidemiology section; converted all references to Chicago author-date format
 
 ---
 

@@ -1,0 +1,5 @@
+Scenario,eGFR Decline Rate,Total Costs ($),Total QALYs,Life Years,Time to ESKD (years),Incremental Costs ($),Incremental QALYs,ICER ($/QALY)
+Scenario 0: Natural History,4.00,"$1,229,454",5.87,17.05,5,Reference,Reference,Reference
+Scenario 1: Stabilization (0%),0.00,"$3,487,890",12.75,36.84,100,"$2,258,437",6.879,"$328,288"
+Scenario 2: 70% Reduction,1.20,"$3,745,057",9.81,24.39,100,"$2,515,603",3.939,"$638,682"
+Scenario 3: 40% Reduction,2.40,"$4,031,290",7.81,20.19,13,"$2,801,836",1.937,"$1,446,388"

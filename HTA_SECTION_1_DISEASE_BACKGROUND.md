@@ -1,8 +1,8 @@
-# SECTION 1: DISEASE BACKGROUND & UNMET MEDICAL NEED
+# I. DISEASE BACKGROUND AND UNMET MEDICAL NEED
 
-## 1.1 Lowe Syndrome Overview
+## A. Lowe Syndrome Overview
 
-### 1.1.1 Disease Definition and Nomenclature
+### 1. Disease Definition and Nomenclature
 
 Lowe syndrome, also known as oculocerebrorenal syndrome of Lowe (OCRL), is a rare, X-linked recessive multisystem disorder first described in 1952. The condition is characterized by the classic triad of:
 - Congenital ocular abnormalities
@@ -14,11 +14,11 @@ Lowe syndrome, also known as oculocerebrorenal syndrome of Lowe (OCRL), is a rar
 - Orphanet #534
 - ICD-10: E72.03
 
-**Prevalence:** Approximately 1 in 500,000 in the general population, with estimates ranging from 1-10 per 1,000,000 males.
+**Prevalence:** Approximately 1 in 500,000 in the general population, with estimates ranging from 1 to 10 per 1,000,000 males.
 
-### 1.1.2 Genetic Basis and Molecular Pathophysiology
+### 2. Genetic Basis and Molecular Pathophysiology
 
-#### The OCRL Gene
+**The OCRL Gene**
 
 Lowe syndrome is caused by pathogenic mutations in the *OCRL* gene (oculocerebrorenal syndrome of Lowe), located on the X chromosome at position Xq25-26. The gene spans approximately 52 kb and contains 24 exons.
 
@@ -29,7 +29,7 @@ Lowe syndrome is caused by pathogenic mutations in the *OCRL* gene (oculocerebro
 - 30% of cases result from de novo mutations
 - Germline and somatic mosaicism identified in 4.5% of cases
 
-#### OCRL Protein Function
+**OCRL Protein Function**
 
 The *OCRL* gene encodes a phosphatidylinositol (4,5)-bisphosphate 5-phosphatase enzyme (OCRL-1 protein), which catalyzes the hydrolysis of phosphatidylinositol 4,5-bisphosphate [PtdIns(4,5)P2] to phosphatidylinositol 4-phosphate [PtdIns(4)P]. This enzyme plays critical roles in:
 
@@ -47,7 +47,7 @@ The *OCRL* gene encodes a phosphatidylinositol (4,5)-bisphosphate 5-phosphatase 
    - Cofilin activity and F-actin polymerization
    - Lamellipodia formation
 
-#### Pathophysiological Consequences of OCRL Deficiency
+**Pathophysiological Consequences of OCRL Deficiency**
 
 **At the Cellular Level:**
 
@@ -74,9 +74,9 @@ Loss of functional OCRL-1 protein results in:
 
 ---
 
-## 1.2 Clinical Presentation by Organ System
+## B. Clinical Presentation by Organ System
 
-### 1.2.1 Ocular Manifestations
+### 1. Ocular Manifestations
 
 **Cataracts (100% penetrance):**
 - Dense congenital bilateral cataracts present at birth
@@ -104,7 +104,7 @@ Loss of functional OCRL-1 protein results in:
 
 ---
 
-### 1.2.2 Neurological Manifestations
+### 2. Neurological Manifestations
 
 **Hypotonia (100% of patients):**
 - Neonatal generalized hypotonia due to central nervous system dysfunction
@@ -146,9 +146,9 @@ Loss of functional OCRL-1 protein results in:
 
 ---
 
-### 1.2.3 Renal Manifestations (Critical Focus)
+### 3. Renal Manifestations (Critical Focus)
 
-#### Proximal Tubular Dysfunction (Fanconi Syndrome)
+**Proximal Tubular Dysfunction (Fanconi Syndrome)**
 
 **Presentation:**
 - Renal tubular function may be essentially normal at birth
@@ -169,7 +169,7 @@ Loss of functional OCRL-1 protein results in:
 - Elevated urine protein-to-creatinine ratio
 - Generalized aminoaciduria
 
-#### Progressive Glomerular Disease
+**Progressive Glomerular Disease**
 
 **Natural History of eGFR Decline:**
 
@@ -188,7 +188,7 @@ While renal tubular dysfunction begins in infancy, glomerular filtration typical
 - Renal complications tend to worsen with age and become predominant in adolescence
 - Progressive renal failure is the primary driver of mortality in Lowe syndrome
 
-#### Consequences of Renal Disease
+**Consequences of Renal Disease**
 
 **Renal Rickets and Bone Disease:**
 - Phosphate wasting leads to rickets in childhood
@@ -207,7 +207,7 @@ While renal tubular dysfunction begins in infancy, glomerular filtration typical
 
 ---
 
-### 1.2.4 Other Systemic Manifestations
+### 4. Other Systemic Manifestations
 
 **Musculoskeletal:**
 - Joint hypermobility
@@ -232,16 +232,16 @@ While renal tubular dysfunction begins in infancy, glomerular filtration typical
 
 ---
 
-## 1.3 Natural History and Disease Progression
+## C. Natural History and Disease Progression
 
-### 1.3.1 Temporal Timeline of Disease Evolution
+### 1. Temporal Timeline of Disease Evolution
 
-#### **Prenatal and Birth:**
+**Prenatal and Birth**
 - Prenatal diagnosis possible via genetic testing if family history known
 - Cataracts present at birth (detected on newborn examination)
 - Hypotonia evident from birth
 
-#### **Infancy (0-2 years):**
+**Infancy (0-2 years)**
 - **Presentation:**
   - Dense bilateral cataracts (presenting feature)
   - Severe hypotonia with poor head control
@@ -254,7 +254,7 @@ While renal tubular dysfunction begins in infancy, glomerular filtration typical
   - Glaucoma evaluation and management (50% of patients)
 - **Renal Status:** Proximal tubule dysfunction emerges by age 1 year
 
-#### **Early Childhood (2-6 years):**
+**Early Childhood (2-6 years)**
 - **Milestones:**
   - Delayed sitting, standing, and walking (if achieved)
   - Speech delays and limited communication
@@ -266,7 +266,7 @@ While renal tubular dysfunction begins in infancy, glomerular filtration typical
   - Vitamin D therapy for renal rickets
 - **Renal Status:** Stable to mild eGFR decline (CKD Stage 2-3a)
 
-#### **School Age (6-12 years):**
+**School Age (6-12 years)**
 - **Function:**
   - Intellectual disability becomes quantifiable (IQ testing)
   - Most require specialized educational placement
@@ -279,7 +279,7 @@ While renal tubular dysfunction begins in infancy, glomerular filtration typical
   - Behavioral/psychiatric support
 - **Renal Status:** Progressive eGFR decline evident (3-5 mL/min/1.73m²/year)
 
-#### **Adolescence (12-20 years):**
+**Adolescence (12-20 years)**
 - **Progression:**
   - **Renal complications become predominant concern**
   - Accelerated eGFR decline (5-8 mL/min/1.73m²/year)
@@ -292,7 +292,7 @@ While renal tubular dysfunction begins in infancy, glomerular filtration typical
   - Scoliosis bracing or surgery if needed
 - **Renal Status:** Advanced CKD (Stage 3b-4) in many patients
 
-#### **Early Adulthood (20-30 years):**
+**Early Adulthood (20-30 years)**
 - **Outcomes:**
   - Many develop ESKD requiring dialysis or transplant (median age 28-32)
   - Limited independence; most require full-time caregiving
@@ -304,7 +304,7 @@ While renal tubular dysfunction begins in infancy, glomerular filtration typical
   - Frequent hospitalizations for complications
 - **Renal Status:** ESKD (CKD Stage 5, eGFR <15)
 
-#### **Later Adulthood (30-40+ years):**
+**Later Adulthood (30-40+ years)**
 - **Survival:**
   - Median life expectancy: 30-40 years with appropriate medical therapy
   - Longest reported survival: 54 years (rare outlier)
@@ -313,7 +313,7 @@ While renal tubular dysfunction begins in infancy, glomerular filtration typical
   - Transplant complications (rejection, immunosuppression side effects)
   - Progressive decline in all organ systems
 
-### 1.3.2 Causes of Mortality
+### 2. Causes of Mortality
 
 **Primary Causes of Death:**
 1. **Renal Failure (most common):** Progressive ESKD leading to uremia, electrolyte imbalances, and cardiovascular complications
@@ -331,9 +331,9 @@ While renal tubular dysfunction begins in infancy, glomerular filtration typical
 
 ---
 
-## 1.4 Current Standard of Care
+## D. Current Standard of Care
 
-### 1.4.1 Overview of Management Approach
+### 1. Overview of Management Approach
 
 **Critical Point:** There is currently **NO disease-modifying treatment** or cure for Lowe syndrome. All current management is **purely symptomatic and supportive**, aimed at managing complications across multiple organ systems.
 
@@ -352,9 +352,9 @@ While renal tubular dysfunction begins in infancy, glomerular filtration typical
 
 ---
 
-### 1.4.2 Organ System-Specific Management
+### 2. Organ System-Specific Management
 
-#### **Ophthalmologic Management**
+**Ophthalmologic Management**
 
 **Cataract Treatment:**
 - Early surgical removal recommended within first 3 months of life to minimize deprivation amblyopia
@@ -376,7 +376,7 @@ While renal tubular dysfunction begins in infancy, glomerular filtration typical
 - Braille instruction if needed
 - Assistive technology
 
-#### **Renal Management**
+**Renal Management**
 
 **Proximal Tubular Dysfunction Treatment:**
 - **Oral sodium bicarbonate or citrate:** 1-10 mEq/kg/day divided into 3-4 doses to correct metabolic acidosis
@@ -409,7 +409,7 @@ While renal tubular dysfunction begins in infancy, glomerular filtration typical
 - Bone density monitoring
 - More frequent monitoring as CKD progresses (quarterly or monthly)
 
-#### **Neurological and Developmental Management**
+**Neurological and Developmental Management**
 
 **Physical Therapy:**
 - Initiated in infancy
@@ -435,7 +435,7 @@ While renal tubular dysfunction begins in infancy, glomerular filtration typical
 - Speech and language therapy
 - Social skills training
 
-#### **Nutritional and Growth Support**
+**Nutritional and Growth Support**
 
 **Infant Feeding:**
 - Tube feedings (nasogastric or gastrostomy) often needed due to hypotonia and poor oral intake
@@ -448,7 +448,7 @@ While renal tubular dysfunction begins in infancy, glomerular filtration typical
 - **Human growth hormone therapy:** May improve growth velocity in selected patients
 - Monitoring of growth parameters
 
-#### **Orthopedic Management**
+**Orthopedic Management**
 
 **Scoliosis:**
 - Screening at each visit
@@ -467,7 +467,7 @@ While renal tubular dysfunction begins in infancy, glomerular filtration typical
 **Soft Tissue Lesions:**
 - Resection of painful or function-impairing fibromas and cysts
 
-#### **Dental Care**
+**Dental Care**
 
 - Semiannual dental examinations
 - Aggressive preventive care
@@ -475,7 +475,7 @@ While renal tubular dysfunction begins in infancy, glomerular filtration typical
 
 ---
 
-### 1.4.3 Limitations of Current Management
+### 3. Limitations of Current Management
 
 **Does Not Address Underlying Cause:**
 - Current treatments manage symptoms but do not restore OCRL enzyme function
@@ -519,9 +519,9 @@ While renal tubular dysfunction begins in infancy, glomerular filtration typical
 
 ---
 
-## 1.5 Life Expectancy, Mortality, and Disease Burden
+## E. Life Expectancy, Mortality, and Disease Burden
 
-### 1.5.1 Life Expectancy
+### 1. Life Expectancy
 
 **Median Survival:** 30-40 years with appropriate medical therapy
 
@@ -540,7 +540,7 @@ While renal tubular dysfunction begins in infancy, glomerular filtration typical
 - Quality of multidisciplinary care
 - Access to renal replacement therapy
 
-### 1.5.2 Causes of Mortality (Summary)
+### 2. Causes of Mortality (Summary)
 
 1. **Renal failure** (most common, especially in adulthood)
 2. **Respiratory illness** (pneumonia, aspiration)
@@ -548,9 +548,9 @@ While renal tubular dysfunction begins in infancy, glomerular filtration typical
 4. **Infections** (increased susceptibility)
 5. **Sudden death** (often during sleep)
 
-### 1.5.3 Burden of Illness
+### 3. Burden of Illness
 
-#### **Clinical Burden on Patients**
+**Clinical Burden on Patients**
 
 **Multi-Organ Dysfunction:**
 - Severe visual impairment (100%)
@@ -578,7 +578,7 @@ While renal tubular dysfunction begins in infancy, glomerular filtration typical
 - Anxiety and depression
 - Behavioral disturbances affecting social integration
 
-#### **Burden on Caregivers and Families**
+**Burden on Caregivers and Families**
 
 **Caregiver Time Commitment:**
 - 24/7 supervision required for most patients
@@ -613,7 +613,7 @@ While renal tubular dysfunction begins in infancy, glomerular filtration typical
 - Genetic counseling and prenatal/preimplantation diagnosis considerations
 - Ethical and emotional complexity of reproductive decisions
 
-#### **Healthcare System Burden**
+**Healthcare System Burden**
 
 **High Healthcare Utilization:**
 - Frequent emergency department visits for acute complications
@@ -625,15 +625,15 @@ While renal tubular dysfunction begins in infancy, glomerular filtration typical
 - **Early childhood (CKD Stage 2-3a):** $15,000-25,000/year
 - **Adolescence (CKD Stage 3b-4):** $35,000-60,000/year
 - **ESKD on dialysis:** $135,000-195,000/year
-- **Kidney transplant (Year 1):** $190,000-260,000
-- **Post-transplant (subsequent years):** $35,000-60,000/year
+- **Kidney transplant (Year 1):** $190,000 to $260,000
+- **Post-transplant (subsequent years):** $35,000 to $60,000/year
 
 **Lifetime Healthcare Costs (Natural History):**
-- Estimated $2.5-3.5 million per patient over 30-40 year lifespan
+- Estimated $2.5 to $3.5 million per patient over 30-40 year lifespan
 - Heavily back-loaded to ESKD years (ages 25-40)
 - Does not include indirect costs (caregiver productivity loss)
 
-#### **Societal Burden**
+**Societal Burden**
 
 **Lost Productivity:**
 - Patient unable to participate in workforce
@@ -651,9 +651,9 @@ While renal tubular dysfunction begins in infancy, glomerular filtration typical
 
 ---
 
-## 1.6 Patient and Caregiver Perspectives
+## F. Patient and Caregiver Perspectives
 
-### 1.6.1 Patient Advocacy: Lowe Syndrome Association
+### 1. Patient Advocacy: Lowe Syndrome Association
 
 **Organization:** The Lowe Syndrome Association (LSA) is an international non-profit organization founded to support research and provide resources to individuals and families affected by Lowe syndrome.
 
@@ -675,7 +675,7 @@ While renal tubular dysfunction begins in infancy, glomerular filtration typical
 - Current symptomatic management insufficient to prevent progression
 - Families desperately seek therapies to halt renal decline and improve quality of life
 
-### 1.6.2 Reported Quality of Life Impacts
+### 2. Reported Quality of Life Impacts
 
 **From Patient/Family Guides:**
 - Daily life revolves around medical management
@@ -694,9 +694,9 @@ While renal tubular dysfunction begins in infancy, glomerular filtration typical
 
 ---
 
-## 1.7 Unmet Medical Need
+## G. Unmet Medical Need
 
-### 1.7.1 Summary of Unmet Need
+### 1. Summary of Unmet Need
 
 Lowe syndrome represents a condition with **profound unmet medical need** characterized by:
 
@@ -733,7 +733,7 @@ Lowe syndrome represents a condition with **profound unmet medical need** charac
    - Small patient populations excluded from most clinical research
    - Families isolated and underserved
 
-### 1.7.2 Why Renal Disease is the Critical Target
+### 2. Why Renal Disease is the Critical Target
 
 **Renal failure is the primary driver of mortality and morbidity in Lowe syndrome:**
 
@@ -768,11 +768,11 @@ Lowe syndrome represents a condition with **profound unmet medical need** charac
 
 ---
 
-## 1.8 Rationale for Gene Therapy as Treatment Approach
+## H. Rationale for Gene Therapy as Treatment Approach
 
-### 1.8.1 Why Gene Therapy is Logical for Lowe Syndrome
+### 1. Why Gene Therapy is Logical for Lowe Syndrome
 
-#### **1. Monogenic Disorder with Well-Characterized Defect**
+**Monogenic Disorder with Well-Characterized Defect**
 
 **Single Gene Etiology:**
 - Lowe syndrome is caused by mutations in one gene (*OCRL*)
@@ -789,7 +789,7 @@ Lowe syndrome represents a condition with **profound unmet medical need** charac
 - Functional studies confirm loss of phosphatase activity
 - Restoring OCRL expression should address underlying pathophysiology
 
-#### **2. Gene Augmentation is Ideal Therapeutic Strategy**
+**Gene Augmentation is Ideal Therapeutic Strategy**
 
 **Precedent for X-linked and Recessive Disorders:**
 - Gene augmentation targets autosomal recessive or X-linked mutations well
@@ -805,7 +805,7 @@ Lowe syndrome represents a condition with **profound unmet medical need** charac
 - Female carriers (50% OCRL expression due to X-inactivation) are typically asymptomatic
 - Demonstrates that partial enzyme restoration is sufficient to prevent disease manifestations
 
-#### **3. AAV Vector Advantages for Lowe Syndrome**
+**AAV Vector Advantages for Lowe Syndrome**
 
 **AAV Characteristics Ideal for Lowe Syndrome:**
 
@@ -834,7 +834,7 @@ Lowe syndrome represents a condition with **profound unmet medical need** charac
 - *OCRL* coding sequence (~2.7 kb) fits comfortably within AAV packaging capacity (~4.7 kb)
 - Allows inclusion of regulatory elements for optimal expression
 
-#### **4. Window for Early Intervention**
+**Window for Early Intervention**
 
 **Disease Progression Offers Treatment Window:**
 - Cataracts present at birth (too late for prevention)
@@ -848,7 +848,7 @@ Lowe syndrome represents a condition with **profound unmet medical need** charac
 - SMA gene therapy (Zolgensma) most effective when given pre-symptomatically or early
 - Early treatment may prevent rather than reverse damage
 
-#### **5. Potential for Multi-Organ Benefit**
+**Potential for Multi-Organ Benefit**
 
 **Systemic Delivery Could Address Multiple Manifestations:**
 - Kidney: Halt eGFR decline, prevent ESKD
@@ -860,7 +860,7 @@ Lowe syndrome represents a condition with **profound unmet medical need** charac
 - Addressing kidney alone could extend life 10-20+ years
 - Significant improvement in quality of life even without addressing other organs
 
-#### **6. Cellular and Molecular Mechanism Supports Gene Therapy**
+**Cellular and Molecular Mechanism Supports Gene Therapy**
 
 **Correctable Defects at Cellular Level:**
 - OCRL loss causes accumulation of PtdIns(4,5)P2
@@ -877,7 +877,7 @@ Lowe syndrome represents a condition with **profound unmet medical need** charac
     - F-actin network
 - Demonstrates feasibility of genetic correction
 
-#### **7. Alignment with Regulatory Pathways for Rare Disease**
+**Alignment with Regulatory Pathways for Rare Disease**
 
 **Regulatory Advantages:**
 - **Orphan Drug Designation:** 7-year market exclusivity (US), 10-year (EU)
@@ -891,7 +891,7 @@ Lowe syndrome represents a condition with **profound unmet medical need** charac
 - Single-arm trials acceptable with natural history control
 - Faster path to approval reduces development time and cost
 
-### 1.8.2 Precedents from Other Gene Therapies
+### 2. Precedents from Other Gene Therapies
 
 **Luxturna (voretigene neparvovec-rzyl, Spark Therapeutics):**
 - AAV2 gene therapy for RPE65-mediated Leber congenital amaurosis
@@ -921,7 +921,7 @@ Lowe syndrome represents a condition with **profound unmet medical need** charac
 4. AAV platform validated across multiple tissues (retina, CNS, liver)
 5. Single-administration therapies preferred over chronic treatments
 
-### 1.8.3 Why Gene Therapy Addresses Unmet Need
+### 3. Why Gene Therapy Addresses Unmet Need
 
 **Disease-Modifying Mechanism:**
 - Restores deficient OCRL enzyme
@@ -960,7 +960,7 @@ Lowe syndrome represents a condition with **profound unmet medical need** charac
 
 ---
 
-## 1.9 Summary: Disease Background and Unmet Need
+## I. Summary: Disease Background and Unmet Need
 
 ### **Key Takeaways**
 
@@ -1083,12 +1083,12 @@ Lowe syndrome represents a condition with **profound unmet medical need** charac
 
 ---
 
-**Document Version:** 1.0 (Draft for Review)
+**Document Version:** 2.0 (Revised for AER-HTA Unified Style)
 **Date:** November 11, 2025
-**Section:** 1 of 7 - Disease Background & Unmet Medical Need
-**Status:** Ready for HTA Report Integration
-**Next Steps:** Integrate with Section 2 (Epidemiology) and Section 3 (Economic Modeling)
+**Section:** I of VIII - Disease Background and Unmet Medical Need
+**Status:** Ready for Integration
+**Changes:** Updated heading structure to Roman numerals with lettered subsections; refined formatting to align with unified AER-HTA style guide
 
 ---
 
-**END OF SECTION 1**
+**END OF SECTION I**

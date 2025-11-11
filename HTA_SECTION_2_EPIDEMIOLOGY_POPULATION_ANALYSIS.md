@@ -1,5 +1,9 @@
 # SECTION 2: EPIDEMIOLOGY & POPULATION ANALYSIS
 
+Health technology assessment for gene therapies in ultra-rare diseases requires rigorous quantification of the target population to establish clinical development feasibility, market sizing, and budget impact projections. For Lowe syndrome, an X-linked disorder affecting fewer than one in 500,000 births, traditional epidemiological approaches relying on registry counts systematically underestimate true disease burden due to incomplete case ascertainment in regions with limited diagnostic infrastructure. This section presents a comprehensive epidemiological analysis that explicitly models the relationship between healthcare system capacity and disease detection, yielding global prevalence estimates, age-stratified treatment-eligible populations, and market access projections across geographic regions.
+
+The analysis proceeds in seven parts. Section 2.1 establishes global and regional prevalence estimates using a Zero-Inflated Poisson framework that distinguishes true disease absence from non-detection due to limited diagnostic capacity. Section 2.2 details the methodological foundations including the statistical model specification, use of Human Development Index as a proxy for diagnostic capacity, and individual-based survival simulation yielding age distributions. Section 2.3 defines the treatment-eligible population based on age and renal function criteria, quantifying the subset of prevalent patients suitable for gene therapy intervention. Section 2.4 characterizes the diagnostic landscape including clinical presentation patterns, genetic testing infrastructure across market access waves, and carrier screening considerations. Section 2.5 analyzes age distribution patterns and defines optimal treatment windows balancing nephron preservation potential against practical feasibility constraints. Section 2.6 examines regional market considerations including country-specific prevalence in key launch markets, healthcare infrastructure prerequisites, budget impact projections, and global access equity challenges. Section 2.7 translates population estimates into actionable recommendations for clinical trial design, natural history comparator strategies, and post-approval evidence generation requirements.
+
 ## 2.1 Global Prevalence Estimates
 
 Based on a validated population modeling framework accounting for healthcare diagnostic capacity and detection bias, the estimated global prevalence of Lowe syndrome is approximately 7,100 individuals as of 2025 (Honoré 2025). This estimate substantially exceeds documented registry counts, reflecting incomplete case ascertainment particularly in regions with limited diagnostic infrastructure (Bökenkamp and Ludwig 2016).
@@ -611,11 +615,11 @@ United Nations, Department of Economic and Social Affairs, Population Division. 
 
 ---
 
-**Document Version:** 6.0 (True Flowing AER-HTA Prose Style)
+**Document Version:** 7.0 (Complete AER-HTA Prose Style with Section Introduction)
 **Date:** November 11, 2025
 **Section:** II of VIII - Epidemiology & Population Analysis
-**Status:** Complete with Natural Flowing Academic Prose
-**Changes from v5.0:** Converted paragraph-starting bold headers to mid-paragraph embedded headers that advance the argument naturally; eliminated pattern of using bold headers as mini-section titles; introduced proper topic sentences before presenting new concepts; bold headers now function as analytical signposts within flowing prose rather than structural dividers; result matches true AER journal style with seamless narrative flow
+**Status:** Complete with Section Introduction and Natural Flowing Academic Prose
+**Changes from v6.0:** Added comprehensive section introduction before 2.1 establishing context, importance for HTA, and analytical roadmap; introduction uses dense flowing prose explaining why epidemiology matters for ultra-rare disease HTA and previewing the seven-part structure of the analysis; maintains throughout the embedded bold header style within flowing paragraphs rather than paragraph-starting headers
 
 ---
 

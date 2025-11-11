@@ -1,10 +1,8 @@
-# SECTION 2: EPIDEMIOLOGY & POPULATION ANALYSIS
+# II. EPIDEMIOLOGY & POPULATION ANALYSIS
 
-Health technology assessment for gene therapies in ultra-rare diseases requires rigorous quantification of the target population to establish clinical development feasibility, market sizing, and budget impact projections. For Lowe syndrome, an X-linked disorder affecting fewer than one in 500,000 births, traditional epidemiological approaches relying on registry counts systematically underestimate true disease burden due to incomplete case ascertainment in regions with limited diagnostic infrastructure. This section presents a comprehensive epidemiological analysis that explicitly models the relationship between healthcare system capacity and disease detection, yielding global prevalence estimates, age-stratified treatment-eligible populations, and market access projections across geographic regions.
+Population modeling for Lowe syndrome confronts the challenge that registry-based counts systematically underestimate true prevalence due to incomplete case ascertainment, particularly in regions with limited diagnostic infrastructure (Bökenkamp and Ludwig 2016). The Lowe Syndrome Association documented 190 to 250 patients in the United States circa 2000 to 2010, corresponding to 0.67 per million population, while European registries reported 34 patients in Italy in 2005, corresponding to 0.63 per million (Lowe Syndrome Association 2010; Bökenkamp and Ludwig 2016). These registry counts reflect only diagnosed and enrolled patients, missing undiagnosed cases in countries lacking genetic testing capacity, specialized pediatric ophthalmology, or awareness of the syndrome's clinical triad. We employ a validated Zero-Inflated Poisson framework that explicitly models the relationship between healthcare system capacity measured by Human Development Index and disease detection probability, distinguishing structural zeros arising from absent diagnostic capacity from sampling zeros reflecting stochastic variation in rare disease occurrence (Lambert 1992; Honoré 2025). Individual-level simulation incorporating birth incidence, survival following a Weibull distribution calibrated to published natural history studies, and detection probability varying by country and time yields global prevalence estimates, age distributions, and treatment-eligible populations stratified by market access waves (Ando et al. 2024; Zaniew et al. 2018; Honoré 2025).
 
-The analysis proceeds in seven parts. Section 2.1 establishes global and regional prevalence estimates using a Zero-Inflated Poisson framework that distinguishes true disease absence from non-detection due to limited diagnostic capacity. Section 2.2 details the methodological foundations including the statistical model specification, use of Human Development Index as a proxy for diagnostic capacity, and individual-based survival simulation yielding age distributions. Section 2.3 defines the treatment-eligible population based on age and renal function criteria, quantifying the subset of prevalent patients suitable for gene therapy intervention. Section 2.4 characterizes the diagnostic landscape including clinical presentation patterns, genetic testing infrastructure across market access waves, and carrier screening considerations. Section 2.5 analyzes age distribution patterns and defines optimal treatment windows balancing nephron preservation potential against practical feasibility constraints. Section 2.6 examines regional market considerations including country-specific prevalence in key launch markets, healthcare infrastructure prerequisites, budget impact projections, and global access equity challenges. Section 2.7 translates population estimates into actionable recommendations for clinical trial design, natural history comparator strategies, and post-approval evidence generation requirements.
-
-## 2.1 Global Prevalence Estimates
+## A. Global Prevalence Estimates
 
 Based on a validated population modeling framework accounting for healthcare diagnostic capacity and detection bias, the estimated global prevalence of Lowe syndrome is approximately 7,100 individuals as of 2025 (Honoré 2025). This estimate substantially exceeds documented registry counts, reflecting incomplete case ascertainment particularly in regions with limited diagnostic infrastructure (Bökenkamp and Ludwig 2016).
 
@@ -55,7 +53,7 @@ The 475% increase in prevalence from 1970 to 2025 reflects both improved case de
 
 ---
 
-## 2.2 Epidemiological Methodology
+## B. Epidemiological Methodology
 
 The prevalence estimates presented above derive from a methodological framework that explicitly accounts for healthcare system heterogeneity and diagnostic capacity variation across countries and time periods. Understanding this methodology proves essential for assessing the reliability of burden estimates, interpreting regional differences in reported prevalence, and anticipating patient identification challenges following therapy approval. This section presents the statistical and demographic foundations underlying the global prevalence model.
 
@@ -167,7 +165,7 @@ Detection improvements over time reflect:
 
 ---
 
-## 2.3 Target Population for Treatment
+## C. Target Population for Treatment
 
 Having established the global epidemiological burden of Lowe syndrome at approximately 7,100 prevalent individuals, we now identify the subset of this population eligible for gene therapy intervention. Treatment eligibility depends on age-related disease progression, renal function status, and geographic access to therapy following regulatory approval. Defining this target population enables market sizing, clinical trial planning, and health technology assessment budget impact analysis.
 
@@ -253,7 +251,7 @@ Visualization of market penetration curves over time by wave appears in Figure 2
 
 ---
 
-## 2.4 Diagnostic Landscape
+## D. Diagnostic Landscape
 
 Identifying the approximately 5,100 treatment-eligible patients globally requires robust diagnostic pathways from initial clinical presentation through genetic confirmation. The diagnostic landscape varies substantially across market access waves, with implications for patient identification timelines, pre-treatment workup protocols, and family cascade screening strategies. This section characterizes the clinical diagnostic journey, genetic testing infrastructure by geography, and considerations for newborn screening expansion.
 
@@ -280,7 +278,7 @@ Presentation occurs from birth to three months with dense bilateral congenital c
 
 ---
 
-## 2.5 Prevalence by Age and Treatment Window
+## E. Prevalence by Age and Treatment Window
 
 Beyond total eligible population counts, age distribution within the prevalent population determines optimal treatment timing, expected quality-adjusted life year gains, and steady-state market dynamics following initial backlog clearance. Age at treatment represents a critical determinant of therapeutic benefit given the progressive nature of renal decline and importance of preserving nephron mass before irreversible damage occurs. This section analyzes age distribution patterns and defines treatment windows balancing clinical benefit against practical feasibility.
 
@@ -326,7 +324,7 @@ The therapeutic window for gene therapy is defined by the balance between early 
 
 ---
 
-## 2.6 Regional Market Considerations
+## F. Regional Market Considerations
 
 Translating global epidemiological burden into actionable market access strategies requires country-level analysis of prevalent cases, healthcare infrastructure capacity, regulatory pathways, and budget impact within specific payer systems. Regional heterogeneity in diagnostic capacity, reimbursement frameworks, and rare disease infrastructure creates distinct market dynamics across Wave 1, 2, and 3 launch geographies. This section provides country-specific prevalence estimates for key markets and assesses infrastructure prerequisites for successful therapy launch. **Country-specific prevalence in key Wave 1 markets.** Table 2.7 below provides prevalence estimates, treatment-eligible populations, and health technology assessment timelines for primary launch countries.
 
@@ -458,7 +456,7 @@ Translating global epidemiological burden into actionable market access strategi
 
 ---
 
-## 2.7 Implications for Clinical Development and Market Access
+## G. Implications for Clinical Development and Market Access
 
 The epidemiological landscape characterized above carries direct implications for clinical trial design, regulatory approval strategies, and post-marketing surveillance requirements. Ultra-rare disease development faces distinct challenges including limited patient availability for randomized trials, reliance on natural history comparators, and necessity of long-term registry-based evidence generation. This section translates population estimates into actionable recommendations for clinical development planning and evidence generation strategies supporting regulatory approval and reimbursement decisions. **Patient recruitment feasibility for clinical trials.** Clinical trial considerations for
 
@@ -534,7 +532,7 @@ Given rarity of Lowe syndrome, randomized controlled trial may be:
 
 ---
 
-## 2.8 Summary and Key Findings
+## H. Summary and Key Findings
 
 **Global burden estimates.**
 - **~7,100 individuals** living with Lowe syndrome worldwide (2025)
@@ -615,11 +613,11 @@ United Nations, Department of Economic and Social Affairs, Population Division. 
 
 ---
 
-**Document Version:** 7.0 (Complete AER-HTA Prose Style with Section Introduction)
+**Document Version:** 8.0 (Full AER-HTA Style with Roman Numerals)
 **Date:** November 11, 2025
 **Section:** II of VIII - Epidemiology & Population Analysis
-**Status:** Complete with Section Introduction and Natural Flowing Academic Prose
-**Changes from v6.0:** Added comprehensive section introduction before 2.1 establishing context, importance for HTA, and analytical roadmap; introduction uses dense flowing prose explaining why epidemiology matters for ultra-rare disease HTA and previewing the seven-part structure of the analysis; maintains throughout the embedded bold header style within flowing paragraphs rather than paragraph-starting headers
+**Status:** Complete with Proper AER-HTA Style Matching Section I
+**Changes from v7.0:** Rewrote section introduction to match Section I's dense, factual, citation-heavy style (removed adjectives "comprehensive" and "rigorous", removed roadmap paragraph); converted all subsection headers from numbered format (2.1, 2.2, 2.3) to Roman numeral format (A., B., C., D., E., F., G., H.) matching Section I; maintained embedded bold headers within flowing prose throughout
 
 ---
 

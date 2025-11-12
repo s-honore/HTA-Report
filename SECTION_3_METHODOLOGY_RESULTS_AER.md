@@ -200,10 +200,10 @@ For the United States, approximately 50 eligible patients at launch with 45 perc
 |----------------|---------------------|-------------------------|----------------|
 | Gene therapy acquisition | 0 | 3,000,000 | 3,000,000 |
 | Gene therapy monitoring | 0 | 130,000 | 130,000 |
-| CKD management (all stages) | 980,000 | 1,280,000 | 300,000 |
-| ESKD management (dialysis) | 620,000 | 0 | -620,000 |
-| Lowe-specific care | 450,000 | 750,000 | 300,000 |
-| **Total (discounted)** | **1,599,959** | **3,632,810** | **2,032,851** |
+| CKD management (all stages) | 1,150,000 | 1,480,000 | 330,000 |
+| ESKD management (dialysis) | 420,000 | 0 | -420,000 |
+| Lowe-specific care | 445,000 | 720,000 | 275,000 |
+| **Total (discounted)** | **2,014,599** | **3,972,706** | **1,958,107** |
 
 *Notes:* All costs in 2024 USD, discounted at 1.5 percent annually (NICE non-reference case for curative therapies). Cost decomposition represents approximate allocation; detailed component-level tracking available in model source code. Natural history accumulates 37.3 life years versus 58.6 life years in treatment scenario, generating higher CKD and Lowe-specific care costs despite avoiding ESKD. ESKD management costs avoided entirely under carrier-analogy scenario with 100-year time to ESKD. CKD = chronic kidney disease. ESKD = end-stage kidney disease.
 

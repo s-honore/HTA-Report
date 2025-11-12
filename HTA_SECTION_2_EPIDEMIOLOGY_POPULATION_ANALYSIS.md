@@ -307,48 +307,107 @@ Most patients remain pre-ESKD providing rationale for treatment despite more adv
 
 Africa has highest proportion eligible at 74% due to younger mean age of 13.1 years, reflecting more recent diagnoses as HDI rises and detection improves, and potentially shorter survival in low-resource settings with limited access to ESKD care including dialysis and transplantation (UNDP 2024). Europe has lowest proportion eligible at 70% due to older patient population with mean age 18.9 years, reflecting earlier diagnosis and longer survival enabled by comprehensive supportive care (Bökenkamp and Ludwig 2016). However, absolute eligible numbers concentrate in Asia with 2,908 patients representing 57% of global eligible population, though many face access barriers in Wave 2/3 markets (see Section D). Wave 1 markets in Europe and Americas have fewer absolute eligible patients but more accessible diagnosed populations due to 95%+ detection rates versus 62-79% in Africa and Asia (Honoré 2025).
 
-**Projected Market Access Timeline:**
+---
 
-**Wave 1 (Launch Year: 2030) - High-Income Early Adopters**
-- **Geographic scope:** United States, European Union/EEA countries
-- **Regulatory:** FDA approval (Q2 2030), EMA approval (Q3 2030)
-- **Countries included:** USA, Germany, France, UK, Italy, Spain, Netherlands, Belgium, Sweden, Denmark, Norway, Finland, Ireland, Austria, Poland, Czech Republic, Greece, Portugal, Romania, Hungary
+## D. Market Access Waves
 
-**Wave 2 (Launch Year: 2033) - Expanded Markets**
-- **Geographic scope:** Additional high-income and upper-middle-income countries
-- **Countries included:** Australia, Canada, Japan, South Korea, Taiwan, Brazil, Mexico, Argentina, Chile
+### D.1 Launch Timeline & Geography
 
-**Wave 3 (Launch Year: 2032) - Specialized Markets**
-- **Geographic scope:** High-income Middle East and additional European countries
-- **Countries included:** Saudi Arabia, United Arab Emirates, Israel, Switzerland, Iceland
+Gene therapy market access follows staggered regulatory approval and reimbursement timelines. Three launch waves are modeled based on regulatory pathway completion through FDA and EMA, pricing and reimbursement negotiation duration, and healthcare infrastructure readiness for AAV therapy delivery (ICER 2023).
 
-**Table 2.4: Eligible Patients at Market Launch by Wave**
+**┌─ WAVE 1: HIGH-INCOME EARLY ADOPTERS ─────────────────────┐**
+**│ Launch Year: 2030 (Q2 FDA, Q3 EMA)                        │**
+**│                                                            │**
+**│ Countries (19):                                            │**
+**│ • North America: USA                                       │**
+**│ • Western Europe: Germany, France, UK, Italy, Spain,      │**
+**│   Netherlands, Belgium, Sweden, Denmark, Norway,          │**
+**│   Finland, Ireland, Austria                               │**
+**│ • Eastern Europe: Poland, Czech Republic, Romania,        │**
+**│   Hungary                                                  │**
+**│ • Southern Europe: Greece, Portugal                       │**
+**│                                                            │**
+**│ Characteristics:                                           │**
+**│ • HDI: >0.85                                               │**
+**│ • Gene therapy experience: Established (Luxturna,         │**
+**│   Zolgensma)                                               │**
+**│ • HTA frameworks: Mature, flexible for rare diseases      │**
+**│ • Reimbursement timeline: 6-18 months post-approval       │**
+**└────────────────────────────────────────────────────────────┘**
 
-| Wave | Launch Year | Number of Countries | Eligible Patients at Launch | Annual Incident Cases | Market Penetration Assumption |
-|------|-------------|---------------------|---------------------------|---------------------|------------------------------|
-| **Wave 1** | 2030 | 19 | ~1,450 | ~45/year | 40-55% |
-| **Wave 2** | 2033 | 9 | ~780 | ~25/year | 25-45% |
-| **Wave 3** | 2032 | 4 | ~95 | ~3/year | 15-30% |
-| **Total** | 2030-2033 | 32 | **~2,325** | **~73/year** | **Blended 35-50%** |
+**┌─ WAVE 2: EXPANDED MARKETS ────────────────────────────────┐**
+**│ Launch Year: 2033 (+3 years post-Wave 1)                  │**
+**│                                                            │**
+**│ Countries (9):                                             │**
+**│ • Asia-Pacific: Australia, Japan, South Korea, Taiwan     │**
+**│ • North America: Canada                                    │**
+**│ • Latin America: Brazil, Mexico, Argentina, Chile         │**
+**│                                                            │**
+**│ Characteristics:                                           │**
+**│ • HDI: 0.75-0.90                                           │**
+**│ • Gene therapy experience: Emerging                        │**
+**│ • Reimbursement timeline: 18-36 months                     │**
+**│ • Pricing: Expect 20-40% discount vs Wave 1               │**
+**└────────────────────────────────────────────────────────────┘**
 
-**Visualization Reference:**
-- Figure 2.4: `/home/user/HTA-Report/Models/Befolkningsmodel/output_data/wave_patients_at_launch.png` - Eligible patients by market access wave
+**┌─ WAVE 3: SPECIALIZED MARKETS ─────────────────────────────┐**
+**│ Launch Year: 2032 (+2 years, parallel with Wave 2)        │**
+**│                                                            │**
+**│ Countries (4):                                             │**
+**│ • Middle East: Saudi Arabia, UAE, Israel                  │**
+**│ • Europe: Switzerland                                      │**
+**│                                                            │**
+**│ Characteristics:                                           │**
+**│ • High GDP per capita but unique regulatory paths         │**
+**│ • Private-payer dominant (Middle East)                     │**
+**│ • Premium pricing accepted (Switzerland)                   │**
+**│ • Smaller eligible populations (3-30 patients/country)    │**
+**└────────────────────────────────────────────────────────────┘**
 
-The model assumes treatment of existing eligible patients below age 21 years occurs during the first 2 to 3 years post-approval as a prevalent backlog, followed by steady-state wherein annual new diagnoses enter the treatment pipeline after backlog clearance. Market penetration rates vary by wave based on reimbursement approval speed, healthcare provider education and adoption patterns, patient and family treatment decisions, and competing priorities in healthcare budgets (ICER 2023). **Market penetration dynamics across waves.** Penetration rate assumptions differ substantially across market access waves reflecting infrastructure and reimbursement heterogeneity. Wave 1 penetration assumptions posit that United States, European Union, and European Economic Area markets achieve 40 percent penetration in year one driven by early adopters and well-informed families, rising to 50 percent in year two with expanding adoption and reaching 55 percent steady-state from year three onward. Factors supporting higher penetration include strong unmet medical need, absence of alternative disease-modifying therapies, established health technology assessment infrastructure for rare disease gene therapies, and precedent pricing acceptance demonstrated by Zolgensma and Luxturna (FDA 2017; FDA 2019; ICER 2023). Factors limiting penetration include eligibility restrictions based on age and renal function, family preference or treatment decline affecting approximately 10 to 15 percent, medical contraindications related to immune status or comorbidities, and geographic access barriers in large countries.
+### D.2 Eligible Patients by Wave
 
-**Wave 2 penetration assumptions.** Extended markets achieve 25 percent penetration in year one, 35 percent in year two, and 40 to 45 percent from year three onward. Lower penetration reflects delayed reimbursement negotiations, limited rare disease treatment infrastructure, higher out-of-pocket costs for patients, and fewer specialized treatment centers (Sevilla et al. 2023).
+**Table 2.6: Market Access Wave Summary**
 
-**Wave 3 penetration assumptions.** Specialized markets achieve 15 percent penetration in year one, 25 percent in year two, and 25 to 30 percent from year three onward, reflecting additional access barriers in these markets.
+| Wave | Year | Countries | Eligible at Launch | Annual Incident | Market Penetration |
+|------|------|-----------|-------------------|-----------------|-------------------|
+| 1    | 2030 | 19        | ~1,450            | ~45/year        | 40-55%            |
+| 2    | 2033 | 9         | ~780              | ~25/year        | 25-45%            |
+| 3    | 2032 | 4         | ~95               | ~3/year         | 15-30%            |
+| Total| 2030-2033| 32    | ~2,325            | ~73/year        | Blended 35-50%    |
 
-Visualization of market penetration curves over time by wave appears in Figure 2.5 (available at `/home/user/HTA-Report/Models/Befolkningsmodel/output_data/penetration_rate.png`). **Patient identification challenges for therapy access.** Current diagnostic landscape shows that The age at diagnosis distribution shows 67 percent diagnosed at birth when congenital cataracts are detected on newborn examination, 20 percent diagnosed at ages 1 to 2 years after developmental concerns emerge, 8 percent diagnosed at ages 3 to 5 years after renal manifestations appear, and 5 percent receiving late diagnosis at age 6 years or older often after significant workup (Honoré 2025). Genetic confirmation requires OCRL gene sequencing covering all coding exons and splice sites with turnaround time of 2 to 4 weeks for clinical diagnostic laboratories, cost of $500 to $2,000 varying by country and insurance coverage, and wide availability in Wave 1 countries contrasting with limited availability in Wave 2 and 3 markets.
+Approximately 2,325 patients representing 33% of global eligible population reside in launch markets. The remaining 67% concentrated in China, India, Indonesia, and other non-launch countries face significant access barriers absent tiered pricing or technology transfer arrangements (UNDP 2024).
 
-**Implications for patient identification post-approval.** Existing diagnosed patients remain readily identifiable as approximately 81 percent of prevalent cases already possess diagnosis according to the detection model, while undiagnosed cases require active case-finding through enhanced screening in pediatric ophthalmology clinics targeting all male infants with congenital cataracts, genetic testing protocols for unexplained developmental delay combined with renal dysfunction, and family cascade screening of carrier mothers (Honoré 2025). Regional disparities in identification capacity mean Wave 1 countries possess high baseline detection requiring minimal additional effort, whereas Wave 2 and 3 countries may require diagnostic capacity building as prerequisite to therapy access.
+Eligible patients at launch represent a prevalent backlog treated over 2–3 years post-approval as patients are identified and referred, pre-treatment workup completed including eGFR baseline and genetic confirmation, and reimbursement approved (ICER 2023). After backlog clearance in Year 3-4, market transitions to steady-state driven by approximately 73 annual incident cases across all launch markets.
 
-**Recommended strategies.** Patient identification strategies include collaboration with the Lowe Syndrome Association for patient registry access, physician education campaigns in pediatric subspecialties, newborn screening enhancement if cost-effective analysis supports implementation, and telemedicine genetic counseling for remote and underserved regions (Lowe Syndrome Association 2010).
+### D.3 Market Penetration Assumptions
+
+**Wave 1 Penetration:** 40% Year 1 → 50% Year 2 → 55% steady-state
+
+High penetration reflects strong unmet need with no disease-modifying alternatives, established HTA infrastructure for rare gene therapies with precedent pricing accepted for Zolgensma at $2.1M and Hemgenix at $3.5M, patient advocacy organization mobilization through Lowe Syndrome Association, and physician experience with AAV therapies including Luxturna and Zolgensma (FDA 2017; FDA 2019; ICER 2023). Factors limiting penetration include eligibility restrictions based on age less than 21 years and eGFR at least 15, family treatment decline affecting approximately 10–15%, medical contraindications related to immune status or comorbidities, and geographic access barriers in large countries with rural areas (Sevilla et al. 2023).
+
+**Wave 2 Penetration:** 25% Year 1 → 35% Year 2 → 40-45% steady-state
+
+Moderate penetration reflects delayed reimbursement negotiations requiring 18–36 months, less mature rare disease infrastructure, higher out-of-pocket costs with lower coverage rates, and fewer specialized gene therapy administration centers requiring physician training. Regional variation within Wave 2 shows Australia, Japan, and Canada expecting closer to Wave 1 levels at 40%+ while Latin America achieves lower penetration at 25–35% (Sevilla et al. 2023).
+
+**Wave 3 Penetration:** 15% Year 1 → 25% Year 2 → 25-30% steady-state
+
+Low penetration reflects private-payer dominance in Middle East requiring case-by-case approvals, small patient numbers reducing advocacy and awareness, and geographic concentration challenges requiring regional referral centers. Exception: Switzerland likely achieves approximately 40% as premium market with comprehensive coverage (ICER 2023).
+
+Penetration assumptions employ conservative estimates to avoid overstating market size. Actual penetration may exceed projections if outcomes data demonstrate strong benefit or if outcomes-based contracts reduce payer risk through installment payments or performance-based reimbursement (Sevilla et al. 2023).
+
+### D.4 Patient Identification Challenges
+
+Age at diagnosis distribution shows 67% diagnosed at birth when congenital cataracts are detected on newborn examination, 20% diagnosed at ages 1–2 years after developmental concerns emerge, 8% diagnosed at ages 3–5 years after renal manifestations appear, and 5% receiving late diagnosis at age 6 years or older often after extensive workup (Honoré 2025). Most eligible patients in Wave 1 markets are already diagnosed with 97% detection rate enabling rapid identification post-approval (see Section B.3).
+
+Approximately 19% of cases globally remain undiagnosed requiring post-approval patient identification through active case-finding in pediatric ophthalmology targeting all male infants with congenital cataracts, enhanced OCRL testing access in low-HDI countries through telemedicine genetic counseling and subsidized testing programs, genetic testing protocols for unexplained developmental delay combined with renal dysfunction, and family cascade screening of carrier mothers identifying at-risk male relatives (Bökenkamp and Ludwig 2016; Honoré 2025).
+
+Geographic barriers vary substantially: Wave 1 countries require minimal additional effort with high baseline detection, Wave 2/3 countries require diagnostic capacity building including OCRL testing infrastructure expansion with current 6–12 week turnaround versus 2–4 weeks in Wave 1, telemedicine genetic counseling for remote areas, and physician education on Lowe syndrome clinical triad (Ma et al. 2020). Non-launch countries containing 58% of global cases face substantial barriers with 50–70% detection rates versus 95%+ in Wave 1 requiring diagnostic capacity investment as prerequisite for equitable therapy access.
+
+Pre-launch activities recommended 12–18 months before approval include collaboration with Lowe Syndrome Association for registry access, physician education campaigns in pediatric subspecialties including ophthalmology and nephrology, mapping specialized treatment centers capable of AAV administration, and establishing genetic testing referral networks (Lowe Syndrome Association 2010). Post-launch activities include mandatory registry for all treated patients, real-world evidence collection on time-to-identification from diagnosis to treatment, and payer collaboration on preauthorization pathways to reduce administrative burden (ICER 2023).
 
 ---
 
-## D. Diagnostic Landscape
+## E. Diagnostic Landscape
 
 Identifying the approximately 5,100 treatment-eligible patients globally requires robust diagnostic pathways from initial clinical presentation through genetic confirmation. The diagnostic landscape varies substantially across market access waves, with implications for patient identification timelines, pre-treatment workup protocols, and family cascade screening strategies. This section characterizes the clinical diagnostic journey, genetic testing infrastructure by geography, and considerations for newborn screening expansion.
 
@@ -375,7 +434,7 @@ Presentation occurs from birth to three months with dense bilateral congenital c
 
 ---
 
-## E. Prevalence by Age and Treatment Window
+## F. Prevalence by Age and Treatment Window
 
 Beyond total eligible population counts, age distribution within the prevalent population determines optimal treatment timing, expected quality-adjusted life year gains, and steady-state market dynamics following initial backlog clearance. Age at treatment represents a critical determinant of therapeutic benefit given the progressive nature of renal decline and importance of preserving nephron mass before irreversible damage occurs. This section analyzes age distribution patterns and defines treatment windows balancing clinical benefit against practical feasibility.
 
@@ -421,7 +480,7 @@ The therapeutic window for gene therapy is defined by the balance between early 
 
 ---
 
-## F. Regional Market Considerations
+## G. Regional Market Considerations
 
 Translating global epidemiological burden into actionable market access strategies requires country-level analysis of prevalent cases, healthcare infrastructure capacity, regulatory pathways, and budget impact within specific payer systems. Regional heterogeneity in diagnostic capacity, reimbursement frameworks, and rare disease infrastructure creates distinct market dynamics across Wave 1, 2, and 3 launch geographies. This section provides country-specific prevalence estimates for key markets and assesses infrastructure prerequisites for successful therapy launch. **Country-specific prevalence in key Wave 1 markets.** Table 2.7 below provides prevalence estimates, treatment-eligible populations, and health technology assessment timelines for primary launch countries.
 
@@ -553,7 +612,7 @@ Translating global epidemiological burden into actionable market access strategi
 
 ---
 
-## G. Implications for Clinical Development and Market Access
+## H. Implications for Clinical Development and Market Access
 
 The epidemiological landscape characterized above carries direct implications for clinical trial design, regulatory approval strategies, and post-marketing surveillance requirements. Ultra-rare disease development faces distinct challenges including limited patient availability for randomized trials, reliance on natural history comparators, and necessity of long-term registry-based evidence generation. This section translates population estimates into actionable recommendations for clinical development planning and evidence generation strategies supporting regulatory approval and reimbursement decisions. **Patient recruitment feasibility for clinical trials.** Clinical trial considerations for
 
@@ -629,7 +688,7 @@ Given rarity of Lowe syndrome, randomized controlled trial may be:
 
 ---
 
-## H. Summary and Key Findings
+## I. Summary and Key Findings
 
 **Global burden estimates.**
 - **~7,100 individuals** living with Lowe syndrome worldwide (2025)

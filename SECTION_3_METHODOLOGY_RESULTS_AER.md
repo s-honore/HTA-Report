@@ -144,35 +144,71 @@ where θ = 1 represents complete elimination of pathological decline (carrier-eq
 
 The larger absolute benefit during adolescence (2.29 vs 0.59-1.02 ml/min/yr) reflects the greater pathological burden during this phase, suggesting enhanced value from treatment administered before age 10.
 
-### Scenario 1: Carrier-Equivalent Kidney Protection
+### Scenario 1: Optimistic - Carrier-Equivalent Kidney Protection
 
 **Biological Anchor: Carrier Evidence.** Female carriers of OCRL mutations—who express approximately 50% of normal enzyme activity due to random X-chromosome inactivation—typically do not develop progressive chronic kidney disease (Charnas et al. 2000; Röschinger et al. 2000; Bökenkamp & Ludwig 2016). Röschinger et al. (2000) examined 19 obligate carriers across multiple families and found normal renal function in all cases, with no proteinuria or progressive eGFR decline over observation periods extending up to 40 years. While rare cases of severe phenotype occur in carriers (typically due to skewed X-inactivation; Yamamoto et al. 2019), the consensus evidence demonstrates that carrier-equivalent OCRL activity prevents progressive nephropathy. This observation establishes **proof-of-concept** that complete kidney protection is biologically achievable with partial enzyme restoration.
 
-**eGFR Trajectory: Complete Pathological Decline Elimination.** Scenario 1 models the best-case outcome wherein gene therapy achieves carrier-equivalent kidney protection. Treatment effect parameter: θ = 1.0 (100% reduction in pathological decline). Decline rate: D_treated = D_age + (1 - 1.0) × D_path = 0.3 + 0 × 0.80 = **0.30 ml/min/1.73m²/year**. Treated patients experience only normal age-related decline (~0.3 ml/min/year), matching the carrier phenotype. Starting from eGFR_0 = 70 ml/min/1.73m² at age 5, patients decline to approximately 55 ml/min/1.73m² by age 80, remaining in CKD Stage 3a throughout life and avoiding ESKD entirely.
+**Treatment Effect Parameter: θ = 1.0 (100% Pathological Reduction).** Scenario 1 models the optimistic outcome wherein gene therapy achieves carrier-equivalent kidney protection by completely eliminating pathological decline. Gene therapy achieves ≥50% OCRL enzyme activity in kidney proximal tubule cells, matching heterozygous carrier phenotype.
 
-**Clinical Outcomes.** Complete ESKD prevention (0% reach ESKD within lifetime). Life expectancy: 75-80 years (versus 42 years natural history; +33-38 years gained). Quality of life: Maintained in CKD Stage 2-3a with preserved kidney function. eGFR at age 40: ~60 ml/min/1.73m² (vs 30 ml/min/1.73m² natural history).
+**eGFR Trajectory.** Time-averaged decline rate: **0.30 ml/min/1.73m²/year** (only normal aging, no pathological component). Treated patients experience age-varying decline rates of:
+- Ages 1-10: 0.30 ml/min/yr (vs 1.0 natural history)
+- Ages 10-20: 0.30 ml/min/yr (vs 3.0 natural history) - largest benefit during adolescence
+- Ages 20+: 0.30 ml/min/yr (vs 1.5 natural history)
 
-**Uncertainty.** Whether gene therapy will achieve carrier-equivalent kidney protection in treated patients depends on multiple technical factors including vector biodistribution to kidney tissue, transduction efficiency in renal tubular cells, transgene expression levels, and durability of expression. Systemic AAV administration faces kidney-specific challenges including preferential liver capture (60-80% of vector; Nathwani et al. 2014) and modest renal tropism of current capsids (Lisowski et al. 2014). Scenario 1 assumes these technical hurdles are overcome and gene therapy successfully achieves durable carrier-equivalent protection.
+Starting from eGFR₀ = 95 ml/min/1.73m² at age 1, patients maintain excellent kidney function throughout life, avoiding ESKD entirely.
 
-### Scenario 2: Intermediate Kidney Protection
+**Clinical Outcomes (Recalibrated Model).** Complete ESKD prevention (patients never reach ESKD within 100-year horizon). Life expectancy: 62.6 years (versus 37.5 years natural history; **+25.1 years gained**). Median age at death: 62.6 years. Quality-adjusted life years gained: 8.21 QALYs (discounted at 1.5%). Cost-effectiveness: **$309,300/QALY** or **$101,213 per life year gained**.
 
-**eGFR Trajectory: Partial Pathological Decline Reduction.** Scenario 2 models an intermediate outcome wherein gene therapy provides substantial but incomplete kidney protection. Treatment effect parameter: θ = 0.50 (50% reduction in pathological decline). Decline rate: D_treated = D_age + (1 - 0.50) × D_path = 0.3 + 0.50 × 0.80 = **0.70 ml/min/1.73m²/year**. Treated patients experience 0.70 ml/min/year decline (versus 1.10 natural history), representing substantial disease modification that delays but does not prevent ESKD. Starting from eGFR_0 = 70 ml/min/1.73m² at age 5, patients reach ESKD threshold (15 ml/min/1.73m²) at approximately age 84 (versus age 32 untreated), delaying ESKD by 52 years.
+**Assumptions.** This scenario assumes excellent vector biodistribution to kidney tissue, high transduction efficiency in renal proximal tubule cells, sustained transgene expression, and absence of immune-mediated clearance. Systemic AAV administration faces kidney-specific challenges including preferential liver capture (60-80% of vector; Nathwani et al. 2014) and modest renal tropism of current capsids (Lisowski et al. 2014). Scenario 1 represents best-case technical success.
 
-**Clinical Outcomes.** ESKD delay: +52 years (from age 32 to age 84). Life expectancy: 65-70 years (versus 42 years natural history; +23-28 years gained). Quality of life: Maintained in CKD Stage 2-3 through age 50, progressing to Stage 4-5 in senior years. eGFR at age 40: ~45 ml/min/1.73m² (CKD Stage 3a) versus 30 ml/min/1.73m² (CKD Stage 3b) natural history.
+### Scenario 2: Realistic - Good Biodistribution (BASE CASE)
 
-**Scenario Justification.** The θ = 0.50 parameter represents the midpoint between complete protection (Scenario 1, θ=1.0) and no benefit (natural history, θ=0), providing a plausible intermediate efficacy outcome for economic modeling. This scenario could result from: suboptimal vector biodistribution to kidney tissue (liver sequestration limiting kidney exposure); inadequate transduction of critical renal cell populations (proximal tubule); or gradual waning of transgene expression over years. Without clinical trial data or mechanistic dose-response understanding linking enzyme restoration levels to eGFR outcomes, this scenario serves to bound value estimates between optimistic (Scenario 1) and pessimistic (Scenario 3) outcomes.
+**Treatment Effect Parameter: θ = 0.85 (85% Pathological Reduction).** Scenario 2 models the realistic base case outcome wherein gene therapy achieves substantial kidney protection representing successful but imperfect biodistribution. Gene therapy achieves 40-50% OCRL enzyme activity in kidney cells, sufficient to eliminate 85% of pathological decline. This represents a realistic expectation for AAV-mediated kidney gene therapy with good but not perfect vector targeting.
 
-### Scenario 3: Minimal Kidney Protection
+**eGFR Trajectory.** Time-averaged decline rate: **0.52 ml/min/1.73m²/year** (primarily normal aging with residual pathological component). Treated patients experience age-varying decline rates of:
+- Ages 1-10: 0.41 ml/min/yr (0.59 ml/min/yr slower than natural history)
+- Ages 10-20: 0.71 ml/min/yr (2.29 ml/min/yr slower than natural history) - substantial adolescent benefit
+- Ages 20+: 0.48 ml/min/yr (1.02 ml/min/yr slower than natural history)
 
-**eGFR Trajectory: Limited Pathological Decline Reduction.** Scenario 3 models a pessimistic outcome wherein gene therapy provides limited kidney protection. Treatment effect parameter: θ = 0.20 (20% reduction in pathological decline). Decline rate: D_treated = D_age + (1 - 0.20) × D_path = 0.3 + 0.80 × 0.80 = **0.94 ml/min/1.73m²/year**. Treated patients experience 0.94 ml/min/year decline (versus 1.10 natural history), representing minimal disease modification (15% slower progression). Starting from eGFR_0 = 70 ml/min/1.73m² at age 5, patients reach ESKD at approximately age 63 (versus age 32 untreated), delaying ESKD by 31 years.
+Starting from eGFR₀ = 95 ml/min/1.73m² at age 1, patients maintain excellent kidney function throughout life, avoiding ESKD within the 100-year time horizon.
 
-**Clinical Outcomes.** ESKD delay: +31 years (from age 32 to age 63). Life expectancy: ~55 years (versus 42 years natural history; +13 years gained). Quality of life: Modest benefit; progression through CKD stages only slightly delayed. eGFR at age 40: ~37 ml/min/1.73m² (CKD Stage 3b, same stage as natural history).
+**Clinical Outcomes (Recalibrated Model).** ESKD prevention within lifetime (patients never reach ESKD by age 100). Life expectancy: 61.6 years (versus 37.5 years natural history; **+24.1 years gained**). Median age at death: 61.6 years. Quality-adjusted life years gained: 7.86 QALYs (discounted at 1.5%). Cost-effectiveness: **$327,070/QALY** or **$106,652 per life year gained**.
 
-**Scenario Justification.** The θ = 0.20 parameter represents conservative lower-bound efficacy for economic modeling. This scenario could result from: poor renal vector tropism (preferential targeting of liver and muscle over kidney; Zincarelli et al. 2008); inadequate vector dosing for kidney transduction; immune responses limiting kidney-specific transgene expression; or failure to transduce critical renal cell populations. While analogies to other enzyme replacement therapies (hemophilia B, Gaucher disease) suggest minimal enzyme restoration typically provides minimal clinical benefit (Miesbach 2021; Beutler & Grabowski 2001), we cannot directly translate enzyme-activity thresholds to eGFR outcomes without clinical data. Scenario 3 defines the lower bound for "successful but inadequate" gene therapy; θ < 0.20 would represent treatment failure scenarios not modeled in this analysis.
+**Scenario Justification and BASE CASE Selection.** The θ = 0.85 parameter represents a realistic middle-ground expectation for AAV-based kidney gene therapy. This scenario assumes: (1) high but not perfect vector transduction efficiency in proximal tubule cells; (2) sustained transgene expression without significant waning; (3) absence of neutralizing antibodies or immune-mediated clearance. We designate Scenario 2 as the BASE CASE for economic evaluation because it balances optimism about achieving substantial OCRL restoration with conservatism about technical challenges (liver sequestration, modest renal tropism, immune responses). The resulting cost-effectiveness ($327K/QALY) approaches the €300K threshold for ultra-rare diseases while remaining defensible. More optimistic assumptions (θ=1.0) yield better cost-effectiveness but may overstate achievable outcomes; more pessimistic assumptions (θ<0.70) yield marginal cost-effectiveness and may understate likely success given advancing AAV technology.
 
-**Clinical Trial Design Implications.** Scenarios 2 and 3 highlight the critical importance of **eGFR as the primary endpoint** in early-phase trials. While enzyme restoration measurements (serum, fibroblasts, kidney biopsy) provide mechanistic insights, eGFR trajectory over 12-24 months post-treatment will determine clinical value. If Phase 1/2 data demonstrate eGFR decline rates of 0.7-0.9 ml/min/year (consistent with Scenarios 2-3), developers should carefully weigh whether to proceed to Phase 3 given limited cost-effectiveness at these efficacy levels (ICERs >€1M/QALY).
+### Scenario 3: Conservative - Moderate Biodistribution
 
-**Summary of Treatment Effect Scenarios.** All scenarios assume immediate treatment effect onset at age 5 and lifelong durability without waning. While optimistic regarding durability, this assumption aligns with long-term follow-up data from other AAV gene therapies demonstrating sustained transgene expression beyond 10 years (Nathwani et al. 2014; Russell et al. 2017). These assumptions favor treatment and represent best-case durability and safety profiles. Real-world outcomes may be less favorable if immune responses emerge, transgene expression wanes, or off-target effects occur.
+**Treatment Effect Parameter: θ = 0.70 (70% Pathological Reduction).** Scenario 3 models a conservative outcome wherein gene therapy achieves moderate kidney protection. Gene therapy achieves 30-40% OCRL enzyme activity, sufficient to eliminate 70% of pathological decline. This scenario represents suboptimal but meaningful biodistribution, with some proximal tubule regions under-treated.
+
+**eGFR Trajectory.** Time-averaged decline rate: **0.74 ml/min/1.73m²/year** (normal aging plus residual pathological component). Treated patients experience age-varying decline rates of:
+- Ages 1-10: 0.51 ml/min/yr (0.49 ml/min/yr slower than natural history)
+- Ages 10-20: 1.11 ml/min/yr (1.89 ml/min/yr slower than natural history)
+- Ages 20+: 0.66 ml/min/yr (0.84 ml/min/yr slower than natural history)
+
+Starting from eGFR₀ = 95 ml/min/1.73m² at age 1, patients maintain good kidney function and avoid ESKD within the 100-year horizon, though progression is faster than realistic scenario.
+
+**Clinical Outcomes (Recalibrated Model).** ESKD prevention within lifetime (no ESKD by age 100). Life expectancy: 56.4 years (versus 37.5 years natural history; **+18.9 years gained**). Median age at death: 56.4 years. Quality-adjusted life years gained: 6.48 QALYs (discounted at 1.5%). Cost-effectiveness: **$413,893/QALY** or **$142,244 per life year gained**.
+
+**Scenario Justification.** This scenario could result from: moderate vector transduction efficiency; suboptimal capsid selection for kidney targeting; or partial immune-mediated clearance reducing sustained expression. While ICER exceeds €300K threshold, it remains within range considered for ultra-rare life-threatening diseases (€300K-500K/QALY). Cost per life year gained ($142K) remains highly favorable.
+
+### Scenario 4: Pessimistic - Suboptimal Biodistribution
+
+**Treatment Effect Parameter: θ = 0.50 (50% Pathological Reduction).** Scenario 4 models a pessimistic outcome wherein gene therapy provides limited kidney protection. Gene therapy achieves 25-30% OCRL enzyme activity, eliminating only 50% of pathological decline. This scenario represents poor biodistribution or limited transduction of critical renal cell populations.
+
+**eGFR Trajectory.** Time-averaged decline rate: **1.04 ml/min/1.73m²/year** (substantial residual pathological decline). Treated patients experience age-varying decline rates of:
+- Ages 1-10: 0.65 ml/min/yr (0.35 ml/min/yr slower than natural history)
+- Ages 10-20: 1.65 ml/min/yr (1.35 ml/min/yr slower than natural history)
+- Ages 20+: 0.90 ml/min/yr (0.60 ml/min/yr slower than natural history)
+
+Starting from eGFR₀ = 95 ml/min/1.73m² at age 1, patients progress more rapidly through CKD stages but still avoid ESKD within 100-year horizon.
+
+**Clinical Outcomes (Recalibrated Model).** ESKD prevention within lifetime (barely avoids ESKD by age 100). Life expectancy: 48.3 years (versus 37.5 years natural history; **+10.8 years gained**). Median age at death: 48.3 years. Quality-adjusted life years gained: 4.13 QALYs (discounted at 1.5%). Cost-effectiveness: **$689,209/QALY** or **$263,663 per life year gained**.
+
+**Scenario Justification.** This pessimistic scenario represents lower-bound efficacy expectations. It could result from: poor renal vector tropism (preferential liver capture); inadequate vector dosing; immune responses; or failure to transduce critical proximal tubule populations. While ICER exceeds typical thresholds, the substantial survival benefit (11 years) and favorable cost per life year gained ($264K) suggest meaningful clinical value even in this worst-case scenario. θ < 0.50 would represent treatment failure not modeled in this analysis.
+
+**Clinical Trial Design Implications.** These scenarios highlight the critical importance of **eGFR as the primary endpoint** in early-phase trials. While enzyme restoration measurements (serum, fibroblasts, kidney biopsy) provide mechanistic insights, eGFR trajectory over 12-24 months post-treatment will determine clinical value and inform go/no-go decisions for Phase 3 development.
+
+**Summary of Treatment Effect Scenarios.** Scenarios 1-4 assume immediate treatment effect onset at age 1 and lifelong durability without waning. While optimistic regarding durability, this assumption aligns with long-term follow-up data from other AAV gene therapies demonstrating sustained transgene expression beyond 10 years (Nathwani et al. 2014; Russell et al. 2017). These assumptions favor treatment and represent best-case durability and safety profiles. Real-world outcomes may be less favorable if immune responses emerge, transgene expression wanes, or off-target effects occur. We model treatment waning scenarios separately (Scenario 5, described in Section D.1 below) to address long-term durability uncertainty.
 
 ## E. Cost Parameters
 

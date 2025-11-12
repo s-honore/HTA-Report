@@ -146,7 +146,7 @@ The larger absolute benefit during adolescence (2.29 vs 0.59-1.02 ml/min/yr) ref
 
 **Treatment Effect Parameter: θ = 1.0 (100% Pathological Reduction).** Scenario 1 models the optimistic outcome wherein gene therapy achieves carrier-equivalent kidney protection by completely eliminating pathological decline. Gene therapy achieves ≥50% OCRL enzyme activity in kidney proximal tubule cells, matching heterozygous carrier phenotype.
 
-**eGFR Trajectory.** Time-averaged decline rate: **0.30 ml/min/1.73m²/year** (only normal aging, no pathological component). Treated patients experience age-varying decline rates of:
+**eGFR Trajectory.** Time-averaged decline rate: **0.30 ml/min/1.73m²/year** (only normal aging decline; see δ_age derivation in equation 9). Treated patients experience age-varying decline rates of:
 - Ages 1-10: 0.30 ml/min/yr (vs 1.0 natural history)
 - Ages 10-20: 0.30 ml/min/yr (vs 3.0 natural history) - largest benefit during adolescence
 - Ages 20+: 0.30 ml/min/yr (vs 1.5 natural history)

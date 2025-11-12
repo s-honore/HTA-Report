@@ -246,8 +246,6 @@ where U_ref represents a reference utility value. We define U_ref as the average
 
 # III. RESULTS
 
-**Note on Reported ICERs:** Multiple ICER values appear throughout this section due to different scenarios and discount rate assumptions. The base case (Scenario 1: 50% enzyme restoration) ICER is €241,480/QALY at 1.5% discount rate (NICE non-reference case for curative therapies). Alternative scenarios (30% and 15% enzyme restoration) and sensitivity analyses (complete stabilization, varied parameters) yield different ICERs. All base case results use 1.5% discounting unless explicitly stated otherwise; 3.5% reference case discounting is presented in sensitivity analysis.
-
 ## A. Value-Based Pricing Analysis
 
 We first determine the maximum justifiable gene therapy acquisition cost under each efficacy scenario at standard cost-effectiveness thresholds. This value-based approach solves for price rather than assuming it, providing decision-relevant guidance for manufacturers (pricing strategy) and payers (reimbursement negotiations).

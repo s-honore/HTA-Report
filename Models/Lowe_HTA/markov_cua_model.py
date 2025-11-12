@@ -1056,6 +1056,26 @@ def run_full_analysis(
         summary_df.to_csv(f"{output_dir}/scenario_results.csv", index=False)
         print(f"Scenario results saved to: {output_dir}/scenario_results.csv")
 
+    # Run value-based pricing analysis (PRIMARY ANALYSIS)
+    print("\n" + "-" * 80)
+    print("VALUE-BASED PRICING ANALYSIS (PRIMARY)")
+    print("-" * 80)
+    pricing_df = scenario_analysis.value_based_pricing_analysis(
+        thresholds=[100000, 150000, 300000]
+    )
+    print("\nMaximum Justifiable Gene Therapy Prices by Scenario:")
+    print(pricing_df.to_string(index=False))
+    print()
+    print("Interpretation:")
+    print("  - $100K/QALY: Conventional US threshold")
+    print("  - $150K/QALY: High-value threshold for severe conditions")
+    print("  - $300K/QALY: Ultra-rare disease threshold (e.g., NICE HST)")
+    print()
+
+    if save_results:
+        pricing_df.to_csv(f"{output_dir}/value_based_pricing.csv", index=False)
+        print(f"Value-based pricing saved to: {output_dir}/value_based_pricing.csv")
+
     # Run one-way sensitivity analysis
     print("-" * 80)
     print("ONE-WAY SENSITIVITY ANALYSIS")
@@ -1139,6 +1159,7 @@ def run_full_analysis(
     return {
         'scenario_results': scenario_results,
         'summary_df': summary_df,
+        'value_based_pricing': pricing_df,  # PRIMARY ANALYSIS
         'sensitivity_results': owa_results,
         'tornado_data': tornado_data,
         'threshold_results': threshold_results,

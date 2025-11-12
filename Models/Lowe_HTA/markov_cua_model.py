@@ -41,7 +41,15 @@ class ModelParameters:
 
     # eGFR parameters
     starting_egfr: float = 70.0  # ml/min/1.73m² at age 5
-    natural_decline_rate: float = 4.0  # ml/min/1.73m²/year natural history
+    # Calibrated to achieve median ESKD age 32 years (Ando et al. 2024)
+    # (70 - 15) / 27 years = 2.04 ml/min/year
+    natural_decline_rate: float = 2.04  # ml/min/1.73m²/year natural history
+
+    # Age-dependent decline rates (NOT CURRENTLY USED - disabled for simplicity)
+    use_age_dependent_decline: bool = False  # Disabled: use constant decline
+    decline_rate_early: float = 1.40  # ml/min/1.73m²/year for ages 5-15
+    decline_rate_late: float = 2.38  # ml/min/1.73m²/year for ages 15+ (1.7x acceleration)
+    decline_transition_age: int = 15  # Age at which decline accelerates
 
     # CKD stage thresholds (eGFR ml/min/1.73m²)
     ckd_thresholds: Dict[str, Tuple[float, float]] = field(default_factory=lambda: {
@@ -115,6 +123,43 @@ class MarkovCohortModel:
         self.trace = None  # Cohort distribution over time
         self.costs = None  # Costs by cycle
         self.qalys = None  # QALYs by cycle
+
+    def get_decline_rate(self, age: int, base_decline: float) -> float:
+        """
+        Calculate age-dependent eGFR decline rate.
+
+        Args:
+            age: Current age of patient
+            base_decline: Base decline rate (used for treatment scenarios)
+
+        Returns:
+            Adjusted decline rate for current age
+        """
+        if not self.params.use_age_dependent_decline:
+            # Use constant decline rate
+            return base_decline
+
+        # For natural history, use age-dependent rates
+        # For treatment scenarios, scale the age-dependent rate by treatment effect
+        if base_decline == self.params.natural_decline_rate:
+            # Natural history: use actual age-dependent rates
+            if age < self.params.decline_transition_age:
+                return self.params.decline_rate_early
+            else:
+                return self.params.decline_rate_late
+        else:
+            # Treatment scenario: scale age-dependent decline by treatment effect
+            # Calculate what the natural rate would be at this age
+            if age < self.params.decline_transition_age:
+                natural_rate = self.params.decline_rate_early
+            else:
+                natural_rate = self.params.decline_rate_late
+
+            # Scale by treatment effect
+            # treatment_effect = base_decline / self.params.natural_decline_rate
+            # return natural_rate * treatment_effect
+            # Actually, simpler: just use base_decline (it's already the treated rate)
+            return base_decline
 
     def egfr_to_state(self, egfr: float) -> str:
         """
@@ -307,6 +352,9 @@ class MarkovCohortModel:
         for cycle in range(1, self.n_cycles + 1):
             age = self.params.starting_age + cycle
 
+            # Get age-dependent decline rate for this cycle
+            current_decline_rate = self.get_decline_rate(age, egfr_decline_rate)
+
             # Update eGFR for each state based on occupancy in previous cycle
             new_state_egfrs = {}
             for i, state in enumerate(self.states):
@@ -318,7 +366,7 @@ class MarkovCohortModel:
                     if prev_egfr == 0:  # Initialize if needed
                         lower, upper = self.params.ckd_thresholds[state]
                         prev_egfr = (lower + upper) / 2
-                    new_state_egfrs[state] = max(0, prev_egfr - egfr_decline_rate)
+                    new_state_egfrs[state] = max(0, prev_egfr - current_decline_rate)
                 else:
                     # Use midpoint if unoccupied
                     if state != 'Death':

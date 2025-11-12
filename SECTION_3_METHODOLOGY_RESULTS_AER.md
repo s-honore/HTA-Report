@@ -207,7 +207,7 @@ For the United States, approximately 50 eligible patients at launch with 45 perc
 | Lowe-specific care | 445,000 | 720,000 | 275,000 |
 | **Total (discounted)** | **2,014,599** | **3,972,706** | **1,958,107** |
 
-*Notes:* All costs in 2024 EUR, discounted at 1.5 percent annually (NICE non-reference case for curative therapies). Cost decomposition represents approximate allocation; detailed component-level tracking available in model source code. Natural history accumulates 37.3 life years versus 58.6 life years in treatment scenario, generating higher CKD and Lowe-specific care costs despite avoiding ESKD. ESKD management costs avoided entirely under carrier-analogy scenario with 100-year time to ESKD. CKD = chronic kidney disease. ESKD = end-stage kidney disease.
+*Notes:* All costs in 2024 EUR, discounted at 1.5 percent annually (NICE non-reference case for curative therapies). Cost decomposition represents approximate allocation; detailed component-level tracking available in model source code (markov_cua_model.py). Natural history accumulates 42.46 undiscounted life years (Table 1) versus 61.77 life years in treatment scenario, generating higher CKD and Lowe-specific care costs despite avoiding ESKD. ESKD management costs avoided entirely under carrier-analogy scenario with 100-year time to ESKD. CKD = chronic kidney disease. ESKD = end-stage kidney disease.
 
 ---
 

@@ -151,7 +151,7 @@ The larger absolute benefit during adolescence (2.29 vs 0.59-1.02 ml/min/yr) ref
 - Ages 10-20: 0.30 ml/min/yr (vs 3.0 natural history) - largest benefit during adolescence
 - Ages 20+: 0.30 ml/min/yr (vs 1.5 natural history)
 
-Starting from eGFR₀ = 95 ml/min/1.73m² at age 1, patients maintain excellent kidney function throughout life, avoiding ESKD entirely.
+Starting from eGFR₀ = 95 ml/min/1.73m² at age 1, patients maintain excellent kidney function throughout life, avoiding ESKD entirely (Figure 2).
 
 **Clinical Outcomes (Recalibrated Model).** Complete ESKD prevention (patients never reach ESKD within 100-year horizon). Life expectancy: 62.6 years (versus 37.5 years natural history; **+25.1 years gained**). Median age at death: 62.6 years. Quality-adjusted life years gained: 8.21 QALYs (discounted at 1.5%). Cost-effectiveness: **$309,300/QALY** or **$101,213 per life year gained**.
 
@@ -166,9 +166,9 @@ Starting from eGFR₀ = 95 ml/min/1.73m² at age 1, patients maintain excellent 
 - Ages 10-20: δ_treated = 0.3 + (1-0.85)×2.7 = 0.71 ml/min/yr (2.29 ml/min/yr slower than natural history 3.0) - substantial adolescent benefit
 - Ages 20+: δ_treated = 0.3 + (1-0.85)×1.2 = 0.48 ml/min/yr (1.02 ml/min/yr slower than natural history 1.5)
 
-Starting from eGFR₀ = 95 ml/min/1.73m² at age 1, patients maintain excellent kidney function throughout life, avoiding ESKD within the 100-year time horizon.
+Starting from eGFR₀ = 95 ml/min/1.73m² at age 1, patients maintain excellent kidney function throughout life, avoiding ESKD within the 100-year time horizon (Figure 2).
 
-**Clinical Outcomes (Recalibrated Model).** ESKD prevention within lifetime (patients never reach ESKD by age 100). Life expectancy: 61.6 years (versus 37.5 years natural history; **+24.1 years gained**). Median age at death: 61.6 years. Quality-adjusted life years gained: 7.86 QALYs (discounted at 1.5%). Cost-effectiveness: **$327,070/QALY** or **$106,652 per life year gained**.
+**Clinical Outcomes (Recalibrated Model).** ESKD prevention within lifetime (patients never reach ESKD by age 100). Life expectancy: 61.6 years (versus 37.5 years natural history; **+24.1 years gained**). Median age at death: 61.6 years. Quality-adjusted life years gained: 7.86 QALYs (discounted at 1.5%).
 
 **Scenario Justification and BASE CASE Selection.** The θ = 0.85 parameter represents a realistic middle-ground expectation for AAV-based kidney gene therapy. This scenario assumes: (1) high but not perfect vector transduction efficiency in proximal tubule cells; (2) sustained transgene expression without significant waning; (3) absence of neutralizing antibodies or immune-mediated clearance. We designate Scenario 2 as the BASE CASE for economic evaluation because it balances optimism about achieving substantial OCRL restoration with conservatism about technical challenges (liver sequestration, modest renal tropism, immune responses). The resulting cost-effectiveness ($327K/QALY) approaches the €300K threshold for ultra-rare diseases while remaining defensible. More optimistic assumptions (θ=1.0) yield better cost-effectiveness but may overstate achievable outcomes; more pessimistic assumptions (θ<0.70) yield marginal cost-effectiveness and may understate likely success given advancing AAV technology.
 
@@ -181,7 +181,7 @@ Starting from eGFR₀ = 95 ml/min/1.73m² at age 1, patients maintain excellent 
 - Ages 10-20: δ_treated = 0.3 + (1-0.70)×2.7 = 1.11 ml/min/yr (1.89 ml/min/yr slower than natural history 3.0)
 - Ages 20+: δ_treated = 0.3 + (1-0.70)×1.2 = 0.66 ml/min/yr (0.84 ml/min/yr slower than natural history 1.5)
 
-Starting from eGFR₀ = 95 ml/min/1.73m² at age 1, patients maintain good kidney function and avoid ESKD within the 100-year horizon, though progression is faster than realistic scenario.
+Starting from eGFR₀ = 95 ml/min/1.73m² at age 1, patients maintain good kidney function and avoid ESKD within the 100-year horizon, though progression is faster than realistic scenario (Figure 2).
 
 **Clinical Outcomes (Recalibrated Model).** ESKD prevention within lifetime (no ESKD by age 100). Life expectancy: 56.4 years (versus 37.5 years natural history; **+18.9 years gained**). Median age at death: 56.4 years. Quality-adjusted life years gained: 6.48 QALYs (discounted at 1.5%). Cost-effectiveness: **$413,893/QALY** or **$142,244 per life year gained**.
 
@@ -196,7 +196,7 @@ Starting from eGFR₀ = 95 ml/min/1.73m² at age 1, patients maintain good kidne
 - Ages 10-20: δ_treated = 0.3 + (1-0.50)×2.7 = 1.65 ml/min/yr (1.35 ml/min/yr slower than natural history 3.0)
 - Ages 20+: δ_treated = 0.3 + (1-0.50)×1.2 = 0.90 ml/min/yr (0.60 ml/min/yr slower than natural history 1.5)
 
-Starting from eGFR₀ = 95 ml/min/1.73m² at age 1, patients progress more rapidly through CKD stages but still avoid ESKD within 100-year horizon.
+Starting from eGFR₀ = 95 ml/min/1.73m² at age 1, patients progress more rapidly through CKD stages but still avoid ESKD within 100-year horizon (Figure 2).
 
 **Clinical Outcomes (Recalibrated Model).** ESKD prevention within lifetime (barely avoids ESKD by age 100). Life expectancy: 48.3 years (versus 37.5 years natural history; **+10.8 years gained**). Median age at death: 48.3 years. Quality-adjusted life years gained: 4.13 QALYs (discounted at 1.5%). Cost-effectiveness: **$689,209/QALY** or **$263,663 per life year gained**.
 

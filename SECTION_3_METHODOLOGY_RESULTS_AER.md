@@ -54,7 +54,7 @@ where C_s denotes the annual cost incurred in state s, U_s the utility weight (Q
 
 ## C. Model Structure
 
-We employ a discrete-time Markov cohort model with annual cycles and six mutually exclusive health states defined by kidney function. The model tracks a cohort of 1,000 Lowe syndrome patients from age 1 (treatment at diagnosis) until death, accumulating costs and quality-adjusted life years (QALYs) over the lifetime horizon.
+The model operates with annual cycles and six mutually exclusive health states defined by kidney function. We track a cohort of 1,000 Lowe syndrome patients from age 1 (treatment at diagnosis) until death, accumulating costs and quality-adjusted life years (QALYs) over the lifetime horizon.
 
 **Health States.** The six health states are defined by estimated glomerular filtration rate (eGFR) following Kidney Disease: Improving Global Outcomes (KDIGO) guidelines (KDIGO 2012):
 

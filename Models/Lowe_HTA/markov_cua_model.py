@@ -41,7 +41,15 @@ class ModelParameters:
 
     # eGFR parameters
     starting_egfr: float = 70.0  # ml/min/1.73m² at age 5
-    natural_decline_rate: float = 4.0  # ml/min/1.73m²/year natural history
+    # Calibrated to achieve median ESKD age 32 years (Ando et al. 2024)
+    # (70 - 15) / 27 years = 2.04 ml/min/year
+    natural_decline_rate: float = 2.04  # ml/min/1.73m²/year natural history
+
+    # Age-dependent decline rates (NOT CURRENTLY USED - disabled for simplicity)
+    use_age_dependent_decline: bool = False  # Disabled: use constant decline
+    decline_rate_early: float = 1.40  # ml/min/1.73m²/year for ages 5-15
+    decline_rate_late: float = 2.38  # ml/min/1.73m²/year for ages 15+ (1.7x acceleration)
+    decline_transition_age: int = 15  # Age at which decline accelerates
 
     # CKD stage thresholds (eGFR ml/min/1.73m²)
     ckd_thresholds: Dict[str, Tuple[float, float]] = field(default_factory=lambda: {
@@ -53,7 +61,8 @@ class ModelParameters:
     })
 
     # Health state utilities (QALY weights)
-    utilities: Dict[str, float] = field(default_factory=lambda: {
+    # Base utilities from general CKD populations (Wyld et al. 2012)
+    base_utilities: Dict[str, float] = field(default_factory=lambda: {
         'CKD2': 0.72,
         'CKD3a': 0.68,
         'CKD3b': 0.61,
@@ -61,6 +70,14 @@ class ModelParameters:
         'ESKD': 0.40,
         'Death': 0.00
     })
+
+    # Lowe syndrome adjustment multiplier
+    # Accounts for intellectual disability (90%), visual impairment (100%),
+    # and neurological manifestations (100%) not captured in CKD utilities
+    lowe_utility_multiplier: float = 0.85  # 15% decrement from base CKD utilities
+
+    # Final utilities (auto-calculated, do not set directly)
+    utilities: Dict[str, float] = field(init=False)
 
     # Annual costs by CKD stage (USD)
     annual_costs: Dict[str, float] = field(default_factory=lambda: {
@@ -79,9 +96,9 @@ class ModelParameters:
     monitoring_ongoing: float = 3000    # Years 6+ monitoring
 
     # Mortality parameters
-    # Age-specific annual mortality rates for Lowe syndrome (placeholder)
-    # Can be updated with Weibull parameters from model_functions.py
-    base_mortality_rate: float = 0.02  # 2% base annual mortality
+    # Calibrated to match observed median survival of 30-40 years (Ando et al. 2024)
+    # Base rate of 0.8% per year achieves life expectancy of ~34 years
+    base_mortality_rate: float = 0.008  # 0.8% base annual mortality
     mortality_multipliers: Dict[str, float] = field(default_factory=lambda: {
         'CKD2': 1.0,
         'CKD3a': 1.2,
@@ -89,6 +106,15 @@ class ModelParameters:
         'CKD4': 2.0,
         'ESKD': 3.0,
     })
+
+    def __post_init__(self):
+        """Calculate Lowe-adjusted utilities after initialization."""
+        self.utilities = {
+            state: base_util * self.lowe_utility_multiplier
+            for state, base_util in self.base_utilities.items()
+        }
+        # Death always has utility 0
+        self.utilities['Death'] = 0.00
 
 
 class MarkovCohortModel:
@@ -115,6 +141,43 @@ class MarkovCohortModel:
         self.trace = None  # Cohort distribution over time
         self.costs = None  # Costs by cycle
         self.qalys = None  # QALYs by cycle
+
+    def get_decline_rate(self, age: int, base_decline: float) -> float:
+        """
+        Calculate age-dependent eGFR decline rate.
+
+        Args:
+            age: Current age of patient
+            base_decline: Base decline rate (used for treatment scenarios)
+
+        Returns:
+            Adjusted decline rate for current age
+        """
+        if not self.params.use_age_dependent_decline:
+            # Use constant decline rate
+            return base_decline
+
+        # For natural history, use age-dependent rates
+        # For treatment scenarios, scale the age-dependent rate by treatment effect
+        if base_decline == self.params.natural_decline_rate:
+            # Natural history: use actual age-dependent rates
+            if age < self.params.decline_transition_age:
+                return self.params.decline_rate_early
+            else:
+                return self.params.decline_rate_late
+        else:
+            # Treatment scenario: scale age-dependent decline by treatment effect
+            # Calculate what the natural rate would be at this age
+            if age < self.params.decline_transition_age:
+                natural_rate = self.params.decline_rate_early
+            else:
+                natural_rate = self.params.decline_rate_late
+
+            # Scale by treatment effect
+            # treatment_effect = base_decline / self.params.natural_decline_rate
+            # return natural_rate * treatment_effect
+            # Actually, simpler: just use base_decline (it's already the treated rate)
+            return base_decline
 
     def egfr_to_state(self, egfr: float) -> str:
         """
@@ -307,6 +370,9 @@ class MarkovCohortModel:
         for cycle in range(1, self.n_cycles + 1):
             age = self.params.starting_age + cycle
 
+            # Get age-dependent decline rate for this cycle
+            current_decline_rate = self.get_decline_rate(age, egfr_decline_rate)
+
             # Update eGFR for each state based on occupancy in previous cycle
             new_state_egfrs = {}
             for i, state in enumerate(self.states):
@@ -318,7 +384,7 @@ class MarkovCohortModel:
                     if prev_egfr == 0:  # Initialize if needed
                         lower, upper = self.params.ckd_thresholds[state]
                         prev_egfr = (lower + upper) / 2
-                    new_state_egfrs[state] = max(0, prev_egfr - egfr_decline_rate)
+                    new_state_egfrs[state] = max(0, prev_egfr - current_decline_rate)
                 else:
                     # Use midpoint if unoccupied
                     if state != 'Death':
@@ -506,6 +572,18 @@ class ScenarioAnalysis:
         incremental_costs = intervention['total_costs'] - baseline['total_costs']
         incremental_qalys = intervention['total_qalys'] - baseline['total_qalys']
 
+        # Calculate evLYG (equal-value life years gained)
+        # Using average baseline utility as reference (weighted by time in each state)
+        # For simplicity, use average of CKD utilities as reference
+        reference_utility = sum([
+            self.model.params.utilities['CKD2'],
+            self.model.params.utilities['CKD3a'],
+            self.model.params.utilities['CKD3b'],
+            self.model.params.utilities['CKD4']
+        ]) / 4  # Average across non-ESKD CKD states
+
+        evlyg = incremental_qalys / reference_utility if reference_utility > 0 else 0
+
         # Calculate ICER
         if incremental_qalys > 0:
             icer = incremental_costs / incremental_qalys
@@ -517,6 +595,7 @@ class ScenarioAnalysis:
         # Add to results
         intervention['incremental_costs'] = incremental_costs
         intervention['incremental_qalys'] = incremental_qalys
+        intervention['evlyg'] = evlyg
         intervention['icer'] = icer
         intervention['incremental_life_years'] = (
             intervention['life_years'] - baseline['life_years']

@@ -159,7 +159,7 @@ Starting from eGFR₀ = 95 ml/min/1.73m² at age 1, patients maintain excellent 
 
 ### Scenario 2: Realistic - Good Biodistribution (BASE CASE)
 
-**Treatment Effect Parameter: θ = 0.85 (85% Pathological Reduction).** Scenario 2 models the realistic base case outcome wherein gene therapy achieves substantial kidney protection representing successful but imperfect biodistribution. Gene therapy achieves 40-50% OCRL enzyme activity in kidney cells, sufficient to eliminate 85% of pathological decline. This represents a realistic expectation for AAV-mediated kidney gene therapy with good but not perfect vector targeting.
+**Treatment Effect Parameter: θ = 0.85 (85% Pathological Reduction).** Scenario 2 models the realistic base case outcome wherein gene therapy achieves substantial kidney protection representing successful but imperfect biodistribution, eliminating 85% of pathological decline. This represents a realistic expectation for AAV-mediated kidney gene therapy with good but not perfect vector targeting.
 
 **eGFR Trajectory.** Time-averaged decline rate: **0.52 ml/min/1.73m²/year** (primarily normal aging with residual pathological component). Treated patients experience age-varying decline rates of:
 - Ages 1-10: 0.41 ml/min/yr (0.59 ml/min/yr slower than natural history)
@@ -174,7 +174,7 @@ Starting from eGFR₀ = 95 ml/min/1.73m² at age 1, patients maintain excellent 
 
 ### Scenario 3: Conservative - Moderate Biodistribution
 
-**Treatment Effect Parameter: θ = 0.70 (70% Pathological Reduction).** Scenario 3 models a conservative outcome wherein gene therapy achieves moderate kidney protection. Gene therapy achieves 30-40% OCRL enzyme activity, sufficient to eliminate 70% of pathological decline. This scenario represents suboptimal but meaningful biodistribution, with some proximal tubule regions under-treated.
+**Treatment Effect Parameter: θ = 0.70 (70% Pathological Reduction).** Scenario 3 models a conservative outcome wherein gene therapy achieves moderate kidney protection, eliminating 70% of pathological decline. This scenario represents suboptimal but meaningful biodistribution, with some proximal tubule regions under-treated.
 
 **eGFR Trajectory.** Time-averaged decline rate: **0.74 ml/min/1.73m²/year** (normal aging plus residual pathological component). Treated patients experience age-varying decline rates of:
 - Ages 1-10: 0.51 ml/min/yr (0.49 ml/min/yr slower than natural history)

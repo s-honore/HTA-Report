@@ -61,7 +61,8 @@ class ModelParameters:
     })
 
     # Health state utilities (QALY weights)
-    utilities: Dict[str, float] = field(default_factory=lambda: {
+    # Base utilities from general CKD populations (Wyld et al. 2012)
+    base_utilities: Dict[str, float] = field(default_factory=lambda: {
         'CKD2': 0.72,
         'CKD3a': 0.68,
         'CKD3b': 0.61,
@@ -69,6 +70,14 @@ class ModelParameters:
         'ESKD': 0.40,
         'Death': 0.00
     })
+
+    # Lowe syndrome adjustment multiplier
+    # Accounts for intellectual disability (90%), visual impairment (100%),
+    # and neurological manifestations (100%) not captured in CKD utilities
+    lowe_utility_multiplier: float = 0.85  # 15% decrement from base CKD utilities
+
+    # Final utilities (auto-calculated, do not set directly)
+    utilities: Dict[str, float] = field(init=False)
 
     # Annual costs by CKD stage (USD)
     annual_costs: Dict[str, float] = field(default_factory=lambda: {
@@ -97,6 +106,15 @@ class ModelParameters:
         'CKD4': 2.0,
         'ESKD': 3.0,
     })
+
+    def __post_init__(self):
+        """Calculate Lowe-adjusted utilities after initialization."""
+        self.utilities = {
+            state: base_util * self.lowe_utility_multiplier
+            for state, base_util in self.base_utilities.items()
+        }
+        # Death always has utility 0
+        self.utilities['Death'] = 0.00
 
 
 class MarkovCohortModel:

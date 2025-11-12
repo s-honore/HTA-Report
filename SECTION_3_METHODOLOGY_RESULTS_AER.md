@@ -311,7 +311,47 @@ Notably, ESKD-related parameters (ESKD utility, ESKD costs, natural decline rate
 
 **Earlier Treatment.** We examine an alternative scenario with gene therapy administered at age 2 (versus base case age 5), starting eGFR at 80 ml/min/1.73m² (higher baseline). Under complete stabilization, this yields 8.50 incremental QALYs (versus 6.88 in base case) due to extended time in good health. The ICER improves to 270,000 euros per QALY, suggesting meaningful cost-effectiveness advantages to early intervention before kidney damage accumulates. This finding motivates investigation of optimal treatment timing, potentially incorporating newborn screening to identify patients shortly after birth when 67 percent of Lowe syndrome diagnoses occur (Ando et al. 2024).
 
-**Treatment Waning.** Our base case assumes lifelong durability of treatment effect. We relax this assumption by modeling partial effect loss: full efficacy (θ = 1.0) for 10 years, then 50 percent reduction (effective θ = 0.50) thereafter. Patients maintain stable kidney function through age 15, then experience resumed decline of 2.0 ml/min/1.73m²/year. This produces 4.20 incremental QALYs and an ICER of 540,000 euros per QALY—substantially worse than base case durability assumptions. The sensitivity to durability assumptions underscores the importance of long-term follow-up data and motivates outcomes-based pricing mechanisms linking reimbursement to sustained eGFR stability at 5 and 10 years post-treatment.
+### D.1 Treatment Waning: Modeling Gradual Loss of Therapeutic Effect
+
+**Rationale for Waning Scenario (Scenario 5).** Scenarios 1-4 assume lifelong durability of treatment effect without waning—an optimistic assumption that favors gene therapy. Long-term durability of AAV-mediated gene therapy remains uncertain, particularly in pediatric applications where organ growth, immune maturation, and potential transgene silencing may impact sustained expression. While some AAV therapies demonstrate stable expression beyond 10 years (e.g., hemophilia B), kidney-specific challenges include high cell turnover in proximal tubule and potential immune responses to capsid or transgene products. The waning scenario models gradual loss of therapeutic effect as a sensitivity analysis for long-term uncertainty.
+
+**Implementation: Gradual Linear Waning Over Years 10-20.** Rather than modeling abrupt treatment failure, we implement biologically plausible gradual waning via linear interpolation over a 10-year period (years 10-20 post-therapy):
+
+**(12)   δ_treated(t, age) = δ_initial(age)                                                if t < 10
+                             = δ_initial(age) + [(t-10)/10] × [δ_final(age) - δ_initial(age)]    if 10 ≤ t < 20
+                             = δ_final(age)                                                   if t ≥ 20**
+
+where *t* represents years since gene therapy administration, δ_initial corresponds to optimistic scenario (θ=1.0, decline rate 0.30 ml/min/yr time-averaged), and δ_final corresponds to conservative scenario (θ=0.70, decline rate 0.74 ml/min/yr time-averaged). The patient receives full optimistic-level protection for the first 10 years (ages 1-11), experiences gradually decreasing protection over years 10-20 (ages 11-21), and maintains conservative-level protection thereafter.
+
+**Rationale for Gradual vs Sudden Waning.** We implement gradual waning over 10 years rather than sudden loss for biological plausibility. Transgene expression loss likely occurs gradually through progressive cell turnover, immune-mediated clearance, or epigenetic silencing rather than acute failure. The 10-year waning period represents a conservative assumption; actual durability data from ongoing trials may support longer sustained expression or demonstrate stable plateau after initial decline. Sudden waning (e.g., 50% reduction from year 10 to year 11) would be biologically implausible except in cases of acute immune rejection.
+
+**Clinical Outcomes: Scenario 5 (Treatment Waning).** Gradual waning from optimistic (θ=1.0) to conservative (θ=0.70) over years 10-20 produces intermediate outcomes between sustained optimistic and conservative scenarios:
+
+- Life expectancy: 59.1 years (versus 37.5 natural history; **+21.7 years gained**)
+- Incremental QALYs: 7.21 (discounted at 1.5%)
+- Incremental costs: $2,633K
+- ICER: **$365,245/QALY**
+- Cost per life year gained: **$125,514/LYG**
+
+These results suggest that even with significant waning starting at year 10, gene therapy provides substantial clinical benefit and reasonable cost-effectiveness. The ICER ($365K/QALY) exceeds the €300K threshold but remains within the range considered for ultra-rare curative therapies (€300K-500K/QALY per NICE HST framework). The cost per life year gained ($125K) remains highly favorable.
+
+**Comparison Across Durability Assumptions:**
+
+| Durability Assumption | Life Years Gained | Inc. QALYs | ICER ($/QALY) | $/LYG |
+|-----------------------|-------------------|------------|---------------|-------|
+| Sustained Optimistic (θ=1.0, no waning) | 25.1 | 8.21 | $309,300 | $101,213 |
+| **Gradual Waning (θ: 1.0→0.70, years 10-20)** | **21.7** | **7.21** | **$365,245** | **$125,514** |
+| Sustained Conservative (θ=0.70, no waning) | 18.9 | 6.48 | $413,893 | $142,244 |
+
+The waning scenario produces outcomes intermediate between sustained optimistic and sustained conservative, as expected. The relatively modest impact of waning (ICER increase from $309K to $365K, 18% worse) reflects two factors: (1) gradual rather than sudden loss preserves substantial benefit during the waning period; (2) even post-waning conservative-level protection (θ=0.70) provides meaningful disease modification, preventing ESKD and extending survival by 19 years.
+
+**Implications for Long-Term Follow-Up and Outcomes-Based Pricing.** The sensitivity to durability assumptions (ICER range $309K-$365K across sustained vs waning scenarios) underscores the importance of long-term follow-up data from clinical trials. We recommend:
+
+1. **Primary endpoint**: eGFR trajectory measured at 12, 24, 36, 48, and 60 months post-therapy to detect early evidence of waning
+2. **Durability biomarkers**: Serial kidney biopsy (at 1, 3, 5, 10 years) to assess sustained transgene expression and OCRL enzyme restoration
+3. **Outcomes-based pricing**: Link reimbursement to sustained eGFR stability milestones (e.g., full price if decline <0.5 ml/min/yr at 5 years; 80% refund if decline >1.0 ml/min/yr)
+
+Even in the waning scenario, cost-effectiveness remains reasonable for an ultra-rare life-threatening disease, supporting consideration of reimbursement with long-term performance monitoring rather than categorical rejection due to durability uncertainty.
 
 ## E. Budget Impact Analysis
 

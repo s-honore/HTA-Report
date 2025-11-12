@@ -131,7 +131,7 @@ The ICER rises to 638,682 dollars per QALY gained (standard error 78,234 dollars
 
 The resulting ICER of 1,446,388 dollars per QALY gained (standard error 183,420 dollars) substantially exceeds ultra-rare disease thresholds. The combination of modest clinical benefit (1.937 QALYs gained) and high costs (2,801,836 dollars incremental) yields poor cost-effectiveness. This scenario would likely require substantial price reductions or risk-sharing mechanisms for market access.
 
-## B. Cost and QALY Decomposition
+## C. Cost and QALY Decomposition
 
 Figure 1 displays the cost-effectiveness plane, plotting incremental costs against incremental QALYs for each scenario. Scenario 1 lies closest to the origin with the most favorable QALY-to-cost ratio. Scenarios 2 and 3 demonstrate progressively worse cost-effectiveness, with Scenario 3 positioned in the northeast quadrant with high costs and modest QALY gains.
 
@@ -139,7 +139,7 @@ Table 2 decomposes total costs by component for natural history and Scenario 1. 
 
 The QALY decomposition reveals that life extension contributes substantially to health gains. Under natural history, patients accumulate 5.87 QALYs over 17.05 years (average 0.34 QALYs per life year) due to low ESKD utility (0.40). Complete stabilization yields 12.75 QALYs over 36.84 years (average 0.35 QALYs per life year), with the incremental 6.88 QALYs arising from both extended survival (19.8 additional life years) and improved quality of life (CKD Stage 2 utility 0.72 versus ESKD 0.40).
 
-## C. Sensitivity Analysis
+## D. Sensitivity Analysis
 
 **One-Way Deterministic Sensitivity.** Table 3 presents one-way sensitivity analysis results, varying key parameters individually while holding others at base case values. The discount rate exerts the largest influence on cost-effectiveness. At zero percent discounting, the Scenario 1 ICER improves to 113,793 dollars per QALY—approaching conventional thresholds—because future QALY gains receive equal weight to near-term costs. Conversely, at 7 percent discounting, the ICER rises to 681,690 dollars per QALY as future health benefits are heavily discounted. The 567,897 dollar range across discount rates exceeds the impact of any other parameter.
 
@@ -153,13 +153,13 @@ Notably, ESKD-related parameters (ESKD utility, ESKD costs, natural decline rate
 
 These results suggest the current base case price of 3,000,000 dollars yields borderline cost-effectiveness under ultra-rare disease frameworks (ICER 328,288 dollars per QALY) but would require reduction to approximately 2,000,000 dollars to meet conventional 150,000 dollars per QALY thresholds. For Scenario 2 (70 percent efficacy), the price would need reduction to 2,860,000 dollars for 300,000 dollars per QALY acceptability or 1,290,000 dollars for 150,000 dollars per QALY.
 
-## D. Scenario Analysis: Treatment Timing and Durability
+## E. Scenario Analysis: Treatment Timing and Durability
 
 **Earlier Treatment.** We examine an alternative scenario with gene therapy administered at age 2 (versus base case age 5), starting eGFR at 80 ml/min/1.73m² (higher baseline). Under complete stabilization, this yields 8.50 incremental QALYs (versus 6.88 in base case) due to extended time in good health. The ICER improves to 270,000 dollars per QALY, suggesting meaningful cost-effectiveness advantages to early intervention before kidney damage accumulates. This finding motivates investigation of optimal treatment timing, potentially incorporating newborn screening to identify patients shortly after birth when 67 percent of Lowe syndrome diagnoses occur (Ando et al. 2024).
 
 **Treatment Waning.** Our base case assumes lifelong durability of treatment effect. We relax this assumption by modeling partial effect loss: full efficacy (θ = 1.0) for 10 years, then 50 percent reduction (effective θ = 0.50) thereafter. Patients maintain stable kidney function through age 15, then experience resumed decline of 2.0 ml/min/1.73m²/year. This produces 4.20 incremental QALYs and an ICER of 540,000 dollars per QALY—substantially worse than base case durability assumptions. The sensitivity to durability assumptions underscores the importance of long-term follow-up data and motivates outcomes-based pricing mechanisms linking reimbursement to sustained eGFR stability at 5 and 10 years post-treatment.
 
-## E. Budget Impact Analysis
+## F. Budget Impact Analysis
 
 We estimate annual budget impact for major healthcare systems under Scenario 1 efficacy assumptions. For the United Kingdom, approximately 15 treatment-eligible patients (age less than 21, pre-ESKD) exist at Wave 1 market launch. With 40 percent first-year market penetration, 6 patients receive treatment annually at a per-patient cost of 2,800,000 pounds (assuming 20 percent confidential discount), yielding Year 1 budget impact of 16,800,000 pounds. Annual impact declines to 10,900,000 pounds by Year 5 as the prevalent pool depletes. Cumulative 10-year impact totals 95,000,000 to 120,000,000 pounds for approximately 35 treated patients.
 

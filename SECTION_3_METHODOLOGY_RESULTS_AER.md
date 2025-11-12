@@ -161,10 +161,10 @@ Starting from eGFR₀ = 95 ml/min/1.73m² at age 1, patients maintain excellent 
 
 **Treatment Effect Parameter: θ = 0.85 (85% Pathological Reduction).** Scenario 2 models the realistic base case outcome wherein gene therapy achieves substantial kidney protection representing successful but imperfect biodistribution, eliminating 85% of pathological decline. This represents a realistic expectation for AAV-mediated kidney gene therapy with good but not perfect vector targeting.
 
-**eGFR Trajectory.** Time-averaged decline rate: **0.52 ml/min/1.73m²/year** (primarily normal aging with residual pathological component). Treated patients experience age-varying decline rates of:
-- Ages 1-10: 0.41 ml/min/yr (0.59 ml/min/yr slower than natural history)
-- Ages 10-20: 0.71 ml/min/yr (2.29 ml/min/yr slower than natural history) - substantial adolescent benefit
-- Ages 20+: 0.48 ml/min/yr (1.02 ml/min/yr slower than natural history)
+**eGFR Trajectory.** Time-averaged decline rate: **0.52 ml/min/1.73m²/year** (primarily normal aging with residual pathological component). Using decomposition equation (11) with θ = 0.85, treated patients experience age-varying decline rates of:
+- Ages 1-10: δ_treated = 0.3 + (1-0.85)×0.7 = 0.41 ml/min/yr (0.59 ml/min/yr slower than natural history 1.0)
+- Ages 10-20: δ_treated = 0.3 + (1-0.85)×2.7 = 0.71 ml/min/yr (2.29 ml/min/yr slower than natural history 3.0) - substantial adolescent benefit
+- Ages 20+: δ_treated = 0.3 + (1-0.85)×1.2 = 0.48 ml/min/yr (1.02 ml/min/yr slower than natural history 1.5)
 
 Starting from eGFR₀ = 95 ml/min/1.73m² at age 1, patients maintain excellent kidney function throughout life, avoiding ESKD within the 100-year time horizon.
 
@@ -176,10 +176,10 @@ Starting from eGFR₀ = 95 ml/min/1.73m² at age 1, patients maintain excellent 
 
 **Treatment Effect Parameter: θ = 0.70 (70% Pathological Reduction).** Scenario 3 models a conservative outcome wherein gene therapy achieves moderate kidney protection, eliminating 70% of pathological decline. This scenario represents suboptimal but meaningful biodistribution, with some proximal tubule regions under-treated.
 
-**eGFR Trajectory.** Time-averaged decline rate: **0.74 ml/min/1.73m²/year** (normal aging plus residual pathological component). Treated patients experience age-varying decline rates of:
-- Ages 1-10: 0.51 ml/min/yr (0.49 ml/min/yr slower than natural history)
-- Ages 10-20: 1.11 ml/min/yr (1.89 ml/min/yr slower than natural history)
-- Ages 20+: 0.66 ml/min/yr (0.84 ml/min/yr slower than natural history)
+**eGFR Trajectory.** Time-averaged decline rate: **0.74 ml/min/1.73m²/year** (normal aging plus residual pathological component). Using decomposition equation (11) with θ = 0.70, treated patients experience age-varying decline rates of:
+- Ages 1-10: δ_treated = 0.3 + (1-0.70)×0.7 = 0.51 ml/min/yr (0.49 ml/min/yr slower than natural history 1.0)
+- Ages 10-20: δ_treated = 0.3 + (1-0.70)×2.7 = 1.11 ml/min/yr (1.89 ml/min/yr slower than natural history 3.0)
+- Ages 20+: δ_treated = 0.3 + (1-0.70)×1.2 = 0.66 ml/min/yr (0.84 ml/min/yr slower than natural history 1.5)
 
 Starting from eGFR₀ = 95 ml/min/1.73m² at age 1, patients maintain good kidney function and avoid ESKD within the 100-year horizon, though progression is faster than realistic scenario.
 
@@ -189,12 +189,12 @@ Starting from eGFR₀ = 95 ml/min/1.73m² at age 1, patients maintain good kidne
 
 ### Scenario 4: Pessimistic - Suboptimal Biodistribution
 
-**Treatment Effect Parameter: θ = 0.50 (50% Pathological Reduction).** Scenario 4 models a pessimistic outcome wherein gene therapy provides limited kidney protection. Gene therapy achieves 25-30% OCRL enzyme activity, eliminating only 50% of pathological decline. This scenario represents poor biodistribution or limited transduction of critical renal cell populations.
+**Treatment Effect Parameter: θ = 0.50 (50% Pathological Reduction).** Scenario 4 models a pessimistic outcome wherein gene therapy provides limited kidney protection, eliminating only 50% of pathological decline. This scenario represents poor biodistribution or limited transduction of critical renal cell populations.
 
-**eGFR Trajectory.** Time-averaged decline rate: **1.04 ml/min/1.73m²/year** (substantial residual pathological decline). Treated patients experience age-varying decline rates of:
-- Ages 1-10: 0.65 ml/min/yr (0.35 ml/min/yr slower than natural history)
-- Ages 10-20: 1.65 ml/min/yr (1.35 ml/min/yr slower than natural history)
-- Ages 20+: 0.90 ml/min/yr (0.60 ml/min/yr slower than natural history)
+**eGFR Trajectory.** Time-averaged decline rate: **1.04 ml/min/1.73m²/year** (substantial residual pathological decline). Using decomposition equation (11) with θ = 0.50, treated patients experience age-varying decline rates of:
+- Ages 1-10: δ_treated = 0.3 + (1-0.50)×0.7 = 0.65 ml/min/yr (0.35 ml/min/yr slower than natural history 1.0)
+- Ages 10-20: δ_treated = 0.3 + (1-0.50)×2.7 = 1.65 ml/min/yr (1.35 ml/min/yr slower than natural history 3.0)
+- Ages 20+: δ_treated = 0.3 + (1-0.50)×1.2 = 0.90 ml/min/yr (0.60 ml/min/yr slower than natural history 1.5)
 
 Starting from eGFR₀ = 95 ml/min/1.73m² at age 1, patients progress more rapidly through CKD stages but still avoid ESKD within 100-year horizon.
 

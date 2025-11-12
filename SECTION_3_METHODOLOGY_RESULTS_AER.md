@@ -202,10 +202,6 @@ Starting from eGFR₀ = 95 ml/min/1.73m² at age 1, patients progress more rapid
 
 **Scenario Justification.** This pessimistic scenario represents lower-bound efficacy expectations. It could result from: poor renal vector tropism (preferential liver capture); inadequate vector dosing; immune responses; or failure to transduce critical proximal tubule populations. While ICER exceeds typical thresholds, the substantial survival benefit (11 years) and favorable cost per life year gained ($264K) suggest meaningful clinical value even in this worst-case scenario. θ < 0.50 would represent treatment failure not modeled in this analysis.
 
-**Clinical Trial Design Implications.** These scenarios highlight the critical importance of **eGFR as the primary endpoint** in early-phase trials. While enzyme restoration measurements (serum, fibroblasts, kidney biopsy) provide mechanistic insights, eGFR trajectory over 12-24 months post-treatment will determine clinical value and inform go/no-go decisions for Phase 3 development.
-
-**Summary of Treatment Effect Scenarios.** Scenarios 1-4 assume immediate treatment effect onset at age 1 and lifelong durability without waning. While optimistic regarding durability, this assumption aligns with long-term follow-up data from other AAV gene therapies demonstrating sustained transgene expression beyond 10 years (Nathwani et al. 2014; Russell et al. 2017). These assumptions favor treatment and represent best-case durability and safety profiles. Real-world outcomes may be less favorable if immune responses emerge, transgene expression wanes, or off-target effects occur. We model treatment waning scenarios separately (Scenario 5, described in Section D.1 below) to address long-term durability uncertainty.
-
 ## E. Cost Parameters
 
 We adopt a healthcare system perspective, including direct medical costs but excluding productivity losses and caregiver burden. All costs are reported in 2024 euros, with historical costs inflated using the medical care component of the Consumer Price Index (Bureau of Labor Statistics 2024).

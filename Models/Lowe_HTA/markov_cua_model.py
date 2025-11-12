@@ -572,6 +572,18 @@ class ScenarioAnalysis:
         incremental_costs = intervention['total_costs'] - baseline['total_costs']
         incremental_qalys = intervention['total_qalys'] - baseline['total_qalys']
 
+        # Calculate evLYG (equal-value life years gained)
+        # Using average baseline utility as reference (weighted by time in each state)
+        # For simplicity, use average of CKD utilities as reference
+        reference_utility = sum([
+            self.model.params.utilities['CKD2'],
+            self.model.params.utilities['CKD3a'],
+            self.model.params.utilities['CKD3b'],
+            self.model.params.utilities['CKD4']
+        ]) / 4  # Average across non-ESKD CKD states
+
+        evlyg = incremental_qalys / reference_utility if reference_utility > 0 else 0
+
         # Calculate ICER
         if incremental_qalys > 0:
             icer = incremental_costs / incremental_qalys
@@ -583,6 +595,7 @@ class ScenarioAnalysis:
         # Add to results
         intervention['incremental_costs'] = incremental_costs
         intervention['incremental_qalys'] = incremental_qalys
+        intervention['evlyg'] = evlyg
         intervention['icer'] = icer
         intervention['incremental_life_years'] = (
             intervention['life_years'] - baseline['life_years']

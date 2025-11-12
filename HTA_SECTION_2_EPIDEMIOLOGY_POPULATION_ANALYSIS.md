@@ -627,50 +627,80 @@ High upfront costs exceeding $3 million per patient create budget impact challen
 
 ## I. Summary and Key Findings
 
-**Global burden estimates.**
-- **~7,100 individuals** living with Lowe syndrome worldwide (2025)
-- **Geographic concentration:** Asia (58%), Africa (20%), Americas (14%), Europe (8%)
-- **Detection gaps:** Approximately 19% of cases globally remain undiagnosed, with higher rates in low-HDI regions (38% in Africa)
+**Global Prevalence Estimates (2025):**
+- 7,100 prevalent cases globally (95% CI: 6,934–7,268)
+- Geographic distribution: Asia 58%, Africa 20%, Americas 14%, Europe 8%
+- Detection gap: 19% of cases remain undiagnosed globally (38% in Africa, 3% in Europe)
+- Validation: Consistent with US/European registry data (300–350 US, 150–200 EU documented cases)
+- Model predicts 1.0–1.2 per million in high-income countries, matching published estimates
 
-**Validation:**
-- Model estimates consistent with published registry data (40-60% registry capture rate)
-- Order-of-magnitude agreement with sparse published prevalence estimates (0.5-1.5 per million)
+**Treatment-Eligible Population (<21 Years):**
+- 5,100 patients globally (72% of prevalent population)
+- Standard intervention window (ages 6–15): 2,553 patients (36% of total) — recommended primary target
+- Early intervention (ages 2–5): 694 patients (10%)
+- Late intervention (ages 16–20): 1,064 patients (15%)
 
-**Treatment-eligible population.** Primary market for patients under age 21 years comprises:
-- **~5,100 patients globally** (72% of prevalent population)
-- **Wave 1 markets (2030):** ~1,450 eligible patients
-- **Wave 2 markets (2033):** ~780 eligible patients
-- **Wave 3 markets (2032):** ~95 eligible patients
+**Market Access Wave Strategy:**
+- **Wave 1 (2030 launch):** 19 countries, 1,450 eligible patients, 45% penetration
+- **Wave 2 (2033 launch):** 9 countries, 780 eligible patients, 35% penetration
+- **Wave 3 (2032 launch):** 4 countries, 95 eligible patients, 25% penetration
+- **Steady-state:** 73 incident cases annually across all launch markets after Year 3
 
-**Market Access Dynamics:**
-- Prevalent patient backlog treated over first 3 years post-approval
-- Steady-state: ~73 new incident cases annually across all launch markets
-- Market penetration: 40-55% (Wave 1), 25-45% (Wave 2), 15-30% (Wave 3)
+**Budget Impact Analysis:**
+- Wave 1 Year 1–3 (backlog): $651M to $783M annually
+- Steady-state (Year 4+): $60M to $70M annually across all Wave 1 markets
+- US steady-state: ~$30M annually (0.0007% of US healthcare spending)
+- UK: £37.5M Year 1, £7.5–10M steady-state (manageable within NICE HST framework)
+- Germany: €63M Year 1, €12–15M steady-state (0.02% of statutory insurance expenditures)
 
-**Methodological strengths.** The approach demonstrates several advantages: peer-reviewed framework using Zero-Inflated Poisson model with HDI-based detection adjustment,
-transparent assumptions with all parameters documented with literature sources, individual-level simulation capturing heterogeneity in survival and age distribution, sensitivity testing demonstrating robustness to parameter variations within plausible ranges, and reproducible open-source implementation enabling verification and adaptation. **Key uncertainties.** Principal sources of uncertainty include birth incidence rate with literature estimates ranging 1/200,000 to 1/1,000,000 representing 2.5-fold uncertainty,
-survival parameters with limited longitudinal data calibrated to published median survival, detection model functional form with linear relationship between HDI and detection assumed but not empirically validated, and geographic heterogeneity with model assuming uniform incidence across populations which may not hold due to founder effects or consanguinity. **Implications for health technology assessment submission.** Strengths supporting reimbursement include:
+**Diagnostic Infrastructure:**
+- Wave 1: 2–4 week OCRL testing turnaround, >50 US labs, established reimbursement
+- Wave 2: 4–8 week turnaround, provincial/national labs, variable coverage
+- Wave 3: 6–12 week turnaround, international send-out required, $1,500–$3,000 per test
+- Targeted screening recommended: Reflex OCRL testing for all male infants with congenital cataracts
+
+**Uncertainty Analysis:**
+- **Primary uncertainty:** Birth incidence (1/200,000 to 1/1,000,000) → 2.5-fold prevalence range (3,550 to 17,750 cases)
+- **Secondary uncertainty:** Survival parameters (median 20–35 years) → ±26% prevalence variation
+- **Detection model:** HDI adjustment increases estimates by 35% versus no adjustment
+- **Conservative range:** 5,000 to 10,000 prevalent cases represents most plausible interval for HTA planning
+
+**Methodological Strengths:**
+- Zero-Inflated Poisson framework explicitly models detection gaps versus true disease absence
+- Individual-level simulation captures heterogeneity in survival and age distribution
+- HDI-based detection adjustment quantifies underdiagnosis in low-resource settings
+- Transparent assumptions with all parameters documented from peer-reviewed sources
+- Reproducible open-source implementation enables verification and adaptation
+
+**Key Limitations:**
+- Birth incidence assumption of uniform global rate may not hold (founder effects, consanguinity)
+- Detection model functional form (linear HDI relationship) lacks direct empirical validation
+- Survival calibration relies on cohorts (n=50–100) from single countries
+- No gold-standard population-based prevalence studies exist for external validation
+
+**HTA Submission Strengths:**
 - Well-defined target population with validated epidemiological model
-- Small patient numbers → manageable budget impact despite high per-patient cost
-- Clear diagnostic pathway (OCRL genetic testing) → low misdiagnosis risk
-- Orphan disease status → eligibility for flexible HTA frameworks
+- Small patient numbers generate manageable budget impact despite $3M per-patient cost
+- Clear diagnostic pathway (OCRL sequencing) minimizes misdiagnosis risk
+- Orphan disease status enables access to flexible HTA frameworks (NICE HST, G-BA orphan pathway)
 
-Challenges to address include global prevalence primarily in non-launch markets raising equity concerns,
-- Detection gaps in low-resource settings → patient identification barriers
-- Long-term durability uncertainty → requires post-approval evidence generation
-- High upfront cost → may necessitate outcomes-based payment models
+**HTA Submission Challenges:**
+- 72% of global prevalence in non-launch markets raises equity concerns
+- Detection gaps in low-resource settings create patient identification barriers
+- Long-term durability uncertainty requires post-approval registry evidence
+- High upfront cost necessitates outcomes-based payment models (pay-for-performance, installments, annuities)
 
-**Data transparency and reproducibility.** Model availability includes:
+**Clinical Development Recommendations:**
+- Phase 1/2 trial: 12–20 patients over 18–24 months feasible across 4–6 US/European sites
+- Single-arm design with external control from natural history registries (Lowe Syndrome Association, European registries)
+- Primary endpoint: Change in eGFR slope over 24 months versus natural history decline (3–5 mL/min/1.73m²/year)
+- Mandatory 10-year post-approval registry for all treated patients
+
+**Data Transparency:**
 - Population model code: `/home/user/HTA-Report/Models/Befolkningsmodel/Population_model.ipynb`
 - Methodology paper: `/home/user/HTA-Report/Litterature/Population model/draft_v1.md`
-- Output visualizations: `/home/user/HTA-Report/Models/Befolkningsmodel/output_data/`
-
-**Parameter Documentation:**
-- Birth incidence: 1/500,000 (Orphanet)
-- Survival: Weibull(k=2.0, λ=28.0) calibrated to Bökenkamp et al., 2016
-- Detection: HDI-based ZIP model with floor=0.15
-- Population: UN World Population Prospects 2024
-- HDI: UNDP Human Development Report 2023-2024
+- Model parameters: Birth incidence 1/500,000 (Orphanet), Survival Weibull(k=2.0, λ=28.0), Detection HDI-based ZIP (floor=0.15)
+- Data sources: UN World Population Prospects 2024, UNDP Human Development Report 2023-2024
 
 ---
 

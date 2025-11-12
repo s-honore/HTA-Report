@@ -40,33 +40,31 @@ Section I documented substantial healthcare resource utilization in Lowe syndrom
 
 ## C. Markov Cohort Model Framework
 
-**Why we need a model.** Evaluating gene therapy cost-effectiveness requires projecting outcomes over 60+ years, far beyond any feasible clinical trial duration. We cannot observe how today's treated child will fare at age 70. Instead, we build a computer simulation that combines what we know about disease progression, treatment effects, costs, and quality of life to project lifetime outcomes. The model tracks a hypothetical group of patients as they age, moving through progressive stages of kidney disease based on their eGFR levels. Each year, the model calculates how many patients remain in each stage, what medical costs they incur, and what quality of life they experience. By comparing the treated group's trajectory to an untreated group, we quantify the clinical benefit (extra years of life, improved quality) and economic cost (therapy price plus ongoing care), yielding the cost per quality-adjusted life year gained.
+Evaluating gene therapy cost-effectiveness requires projecting outcomes over 60+ years, far beyond any feasible clinical trial duration. We cannot observe how today's treated child will fare at age 70. Instead, we build a computer simulation that combines what we know about disease progression, treatment effects, costs, and quality of life to project lifetime outcomes. The model tracks a hypothetical group of patients as they age, moving through progressive stages of kidney disease based on their eGFR levels. Each year, the model calculates how many patients remain in each stage, what medical costs they incur, and what quality of life they experience. By comparing the treated group's trajectory to an untreated group, we quantify the clinical benefit (extra years of life, improved quality) and economic cost (therapy price plus ongoing care), yielding the cost per quality-adjusted life year gained.
 
-**Technical framework.** We employ a discrete-time Markov cohort model as the analytical framework for evaluating lifetime cost-effectiveness of gene therapy. Markov models represent the standard approach for chronic progressive diseases where patients transition through discrete health states over time (Sonnenberg and Beck 1993; Briggs and Sculpher 1998). This modeling paradigm proves particularly well-suited for Lowe syndrome nephropathy given the disease's characteristic features: irreversible progressive decline in kidney function, well-defined clinical staging based on eGFR thresholds, and state-dependent costs and quality of life.
+We employ a discrete-time Markov cohort model as the analytical framework. Markov models represent the standard approach for chronic progressive diseases where patients transition through discrete health states over time (Sonnenberg and Beck 1993; Briggs and Sculpher 1998). This modeling paradigm proves particularly well-suited for Lowe syndrome nephropathy given the disease's characteristic features: irreversible progressive decline in kidney function, well-defined clinical staging based on eGFR thresholds, and state-dependent costs and quality of life.
 
-**Markovian Assumption and Memorylessness.** The fundamental Markov assumption posits that transition probabilities between health states depend only on the current state, not on the path by which patients reached that state—the "memoryless" property (Beck and Pauker 1983). For chronic kidney disease, this assumption holds reasonably well: a patient's risk of progressing from CKD Stage 3b to Stage 4 depends primarily on their current eGFR level and decline rate, not whether they previously experienced rapid or gradual progression through earlier stages. While eGFR trajectory history may contain prognostic information in reality, the discrete staging system based on current eGFR captures the clinically relevant stratification for treatment and cost allocation.
+The fundamental Markov assumption posits that transition probabilities between health states depend only on the current state, not on the path by which patients reached that state—the "memoryless" property (Beck and Pauker 1983). For chronic kidney disease, this assumption holds reasonably well. A patient's risk of progressing from CKD Stage 3b to Stage 4 depends primarily on their current eGFR level and decline rate, not whether they previously experienced rapid or gradual progression through earlier stages. While eGFR trajectory history may contain prognostic information in reality, the discrete staging system based on current eGFR captures the clinically relevant stratification for treatment and cost allocation.
 
-**Mathematical Framework.** Let **M**(t) denote the Markov model state distribution vector at cycle t, where M_s(t) represents the proportion of the cohort occupying health state s ∈ {CKD2, CKD3a, CKD3b, CKD4, ESKD, Death}. The model evolves according to the matrix equation:
+Let **M**(t) denote the Markov model state distribution vector at cycle t, where M_s(t) represents the proportion of the cohort occupying health state s ∈ {CKD2, CKD3a, CKD3b, CKD4, ESKD, Death}. The model evolves according to the matrix equation:
 
 (1)    **M**(t+1) = **M**(t) × **P**(t)
 
 where **P**(t) is the transition probability matrix at cycle t. For our eGFR-driven model, transitions are deterministic conditional on decline rate δ: a patient in state s with eGFR value g at time t transitions to state s′ at t+1 if and only if g − δ falls within the eGFR range defining s′. The cohort-level Markov trace **M**(t) aggregates these individual transitions, tracking the proportion of patients in each health state over time.
 
-**Costs and QALYs.** Total discounted lifetime costs and quality-adjusted life years are calculated via accumulation across all cycles and states:
+Total discounted lifetime costs and quality-adjusted life years are calculated via accumulation across all cycles and states:
 
 (2)    Total Cost = Σ_t Σ_s M_s(t) × C_s × (1 + r)^(−t)
 
 (3)    Total QALYs = Σ_t Σ_s M_s(t) × U_s × (1 + r)^(−t)
 
-where C_s denotes the annual cost incurred in state s, U_s the utility weight (QALY value) for state s, and r the annual discount rate (3.5% base case). These equations implement the standard half-cycle correction implicitly by assigning state-specific costs and utilities at the beginning of each cycle.
+where C_s denotes the annual cost incurred in state s, U_s the utility weight (QALY value) for state s, and r the annual discount rate (1.5% primary analysis, 3.5% reference case). These equations implement the standard half-cycle correction implicitly by assigning state-specific costs and utilities at the beginning of each cycle.
 
-**Advantages for Lowe Syndrome Gene Therapy Evaluation.** The Markov framework offers several methodological advantages for this application. First, chronic kidney disease exhibits natural staging via eGFR thresholds with distinct clinical management, costs, and quality of life at each stage—aligning precisely with Markov health states (KDIGO 2012). Second, gene therapy's mechanism (slowing eGFR decline) maps directly to modified transition probabilities in the model, enabling transparent comparison of treatment effect scenarios. Third, the lifetime time horizon required for curative therapies necessitates long-term extrapolation; Markov models handle decades-long time horizons efficiently through cycle iteration while maintaining computational tractability (Briggs et al. 2006). Fourth, the cohort-level approach permits straightforward probabilistic sensitivity analysis and budget impact projections by varying input parameters and scaling cohort size. Alternative modeling approaches—microsimulation, discrete event simulation, or partitioned survival models—would increase computational complexity without meaningfully improving accuracy for this application where individual patient heterogeneity plays a secondary role to average population-level cost-effectiveness (Caro et al. 2012).
+The Markov framework offers several methodological advantages for this application. First, chronic kidney disease exhibits natural staging via eGFR thresholds with distinct clinical management, costs, and quality of life at each stage, aligning precisely with Markov health states (KDIGO 2012). Second, gene therapy's mechanism (slowing eGFR decline) maps directly to modified transition probabilities in the model, enabling transparent comparison of treatment effect scenarios. Third, the lifetime time horizon required for curative therapies necessitates long-term extrapolation. Markov models handle decades-long time horizons efficiently through cycle iteration while maintaining computational tractability (Briggs et al. 2006). Fourth, the cohort-level approach permits straightforward probabilistic sensitivity analysis and budget impact projections by varying input parameters and scaling cohort size. Alternative modeling approaches (microsimulation, discrete event simulation, or partitioned survival models) would increase computational complexity without meaningfully improving accuracy for this application where individual patient heterogeneity plays a secondary role to average population-level cost-effectiveness (Caro et al. 2012).
 
-## C. Model Structure
+## D. Model Structure
 
-The model operates with annual cycles and six mutually exclusive health states defined by kidney function. We track a cohort of 1,000 Lowe syndrome patients from age 1 (treatment at diagnosis) until death, accumulating costs and quality-adjusted life years (QALYs) over the lifetime horizon.
-
-**Health States.** The six health states are defined by estimated glomerular filtration rate (eGFR) following Kidney Disease: Improving Global Outcomes (KDIGO) guidelines (KDIGO 2012):
+The model operates with annual cycles and six mutually exclusive health states defined by kidney function. We track a cohort of 1,000 Lowe syndrome patients from age 1 (treatment at diagnosis) until death, accumulating costs and quality-adjusted life years (QALYs) over the lifetime horizon. The six health states are defined by estimated glomerular filtration rate (eGFR) following Kidney Disease: Improving Global Outcomes (KDIGO) guidelines (KDIGO 2012):
 
 1. CKD Stage 2: eGFR 60–89 ml/min/1.73m² (mild kidney damage)
 2. CKD Stage 3a: eGFR 45–59 ml/min/1.73m² (mild to moderate reduction)
@@ -75,7 +73,7 @@ The model operates with annual cycles and six mutually exclusive health states d
 5. CKD Stage 5/ESKD: eGFR <15 ml/min/1.73m² (kidney failure)
 6. Death (absorbing state)
 
-**Transition Dynamics.** Disease progression is governed by annual eGFR decline. Let eGFR_t denote kidney function at time *t*, measured in ml/min/1.73m². The evolution of kidney function follows:
+Disease progression is governed by annual eGFR decline. Let eGFR_t denote kidney function at time *t*, measured in ml/min/1.73m². The evolution of kidney function follows:
 
 (1)    eGFR_{t+1} = eGFR_t - δ × (1 - θ)
 
@@ -83,9 +81,7 @@ where δ represents the natural decline rate and θ ∈ [0, 1] is the treatment 
 
 Health state transitions occur when eGFR crosses defined thresholds. A patient in state *s* at time *t* transitions to state *s*′ at time *t* + 1 if eGFR_{t+1} places them in the corresponding eGFR range for state *s*′. Transitions are unidirectional. Patients cannot improve to better health states, consistent with the progressive nature of Lowe syndrome nephropathy.
 
-**Mortality Modeling.** We model mortality from two sources: background mortality and CKD-related excess mortality. Background mortality rates m_t^{bg} follow United States life tables adjusted for male sex (Arias and Xu 2022). CKD-related excess mortality varies by health state, with relative risk ratios derived from large cohort studies of CKD progression (Go et al. 2004; Tonelli et al. 2006).
-
-Let m_{s,t} denote the annual mortality probability for a patient in health state *s* at age *t*. We specify:
+We model mortality from two sources: background mortality and CKD-related excess mortality. Background mortality rates m_t^{bg} follow United States life tables adjusted for male sex (Arias and Xu 2022). CKD-related excess mortality varies by health state, with relative risk ratios derived from large cohort studies of CKD progression (Go et al. 2004; Tonelli et al. 2006). Let m_{s,t} denote the annual mortality probability for a patient in health state *s* at age *t*. We specify:
 
 (2)    m_{s,t} = 1 - exp(-h_{s,t})
 
@@ -93,9 +89,9 @@ Let m_{s,t} denote the annual mortality probability for a patient in health stat
 
 where h_t^{bg} = -ln(1 - m_t^{bg}) is the background hazard, RR_s is the CKD stage-specific relative risk, and λ = 1.5 is an additional Lowe syndrome multiplier accounting for non-renal manifestations (neurological, ocular complications). We set RR_2 = 1.2, RR_{3a} = 1.2, RR_{3b} = 1.5, RR_4 = 2.0, and RR_{ESKD} = 5.0 based on published estimates (Go et al. 2004).
 
-## D. Clinical Parameters
+## E. Clinical Parameters
 
-**Natural History: Age-Varying Decline Framework.** We parameterize natural history progression using published longitudinal data on kidney function in Lowe syndrome. Ando et al. (2024) report a Japanese nationwide cohort of 54 patients demonstrating strong age-dependent eGFR decline (r = -0.80, p < 0.001), with median ESKD onset at age 32. Visual inspection of Ando Figure 1B reveals three distinct progression phases with different decline rates: (1) slow early childhood decline (ages 1-10), (2) steep adolescent acceleration (ages 10-20), and (3) moderate adult decline (ages 20+). This age-dependent heterogeneity motivates our use of an age-varying decline framework rather than a single constant rate.
+We parameterize natural history progression using published longitudinal data on kidney function in Lowe syndrome. Ando et al. (2024) report a Japanese nationwide cohort of 54 patients demonstrating strong age-dependent eGFR decline (r = -0.80, p < 0.001), with median ESKD onset at age 32. Visual inspection of Ando Figure 1B reveals three distinct progression phases with different decline rates: slow early childhood decline (ages 1-10), steep adolescent acceleration (ages 10-20), and moderate adult decline (ages 20+). This age-dependent heterogeneity motivates our use of an age-varying decline framework rather than a single constant rate.
 
 We model natural history eGFR decline as:
 
@@ -212,7 +208,7 @@ Starting from eGFR₀ = 95 ml/min/1.73m² at age 1, patients progress more rapid
 
 **Scenario Justification.** This pessimistic scenario represents lower-bound efficacy expectations. It could result from poor renal vector tropism (preferential liver capture), inadequate vector dosing, immune responses, or failure to transduce critical proximal tubule populations. While ICER exceeds typical thresholds, the substantial survival benefit (11 years) and favorable cost per life year gained ($264K) suggest meaningful clinical value even in this worst-case scenario. θ < 0.50 would represent treatment failure not modeled in this analysis.
 
-## E. Cost Parameters
+## F. Cost Parameters
 
 We adopt a healthcare system perspective, including direct medical costs but excluding productivity losses and caregiver burden. All costs are reported in 2024 euros, with historical costs inflated using the medical care component of the Consumer Price Index (Bureau of Labor Statistics 2024).
 
@@ -224,7 +220,7 @@ We augment these estimates with Lowe syndrome-specific costs for ongoing ophthal
 
 **Discount Rate.** We apply a 1.5 percent annual discount rate to both costs and QALYs as the primary analysis, with 3.5% reference case presented in Table 5. This lower rate is justified under NICE's non-reference-case discounting framework (NICE 2022, Section 4.5.3) when all three criteria are met. First, the technology is for people who would otherwise die or have very severely impaired life. Lowe syndrome patients face ESKD at age 32 with thrice-weekly dialysis and death by age 42 (criterion fully met). Second, it is likely to restore them to full or near-full health. Gene therapy prevents ESKD entirely, restoring kidney function to near-normal levels (CKD Stage 2) over 60+ years, though intellectual disability, visual impairment, and neurological manifestations persist (criterion partially met). Third, benefits are sustained over a very long period. AAV vector-mediated gene therapy demonstrates sustained transgene expression beyond 10 years in other indications (Nathwani et al. 2014), with modeled benefits extending from age 1 to 62+ (criterion fully met). We apply 1.5% discounting because prevention of premature death from kidney failure represents the primary driver of value, independent of non-renal manifestations. Treated patients achieve health states (utility 0.61) substantially better than untreated ESKD (utility 0.34), even after accounting for persistent non-renal burden. Precedent exists for applying reduced discounting to kidney-targeted interventions that prevent dialysis dependence in multisystem genetic diseases. The 3.5% reference case analysis (Table 5) provides conservative cost-effectiveness estimates for payers who apply stricter interpretation of criterion 2. All irrecoverable costs (gene therapy acquisition, monitoring, administration) are captured in the model.
 
-## F. Utility Parameters
+## G. Utility Parameters
 
 Quality of life weights (utilities) are assigned to each health state on the zero-to-one scale where one represents perfect health and zero represents death. We derive utilities from systematic reviews of EQ-5D measurements in CKD populations (Cooper et al. 2020; Wyld et al. 2012), as no Lowe syndrome-specific utility data exist.
 
@@ -234,7 +230,7 @@ Health state utilities are: CKD Stage 2, 0.72; Stage 3a, 0.68; Stage 3b, 0.61; S
 
 **Limitations of Utility Estimation.** This approach captures direct patient quality-of-life burden but substantially underestimates total societal burden. Caregiver burden for Lowe syndrome families is considerable, with parents providing extensive daily assistance for activities of daily living, managing multiple specialist appointments, and addressing behavioral challenges associated with intellectual disability. Published estimates suggest caregiver disutilities of 0.10-0.20 for rare pediatric conditions with similar care intensity (Tilford et al. 2012; Prosser et al. 2015), which we exclude from the base case analysis per NICE reference case guidelines emphasizing patient perspective. Including family caregiver burden would increase incremental QALYs gained from treatment, further improving cost-effectiveness ratios.
 
-## G. Outcome Metrics
+## H. Outcome Metrics
 
 For each scenario, we calculate total discounted costs C and QALYs Q over the lifetime horizon. Incremental cost-effectiveness ratios (ICERs) are computed as:
 
@@ -248,9 +244,9 @@ where subscript *i* denotes treatment scenario *i* ∈ {1, 2, 3} and subscript 0
 
 where U_ref represents a reference utility value. We define U_ref as the average utility across CKD stages 2–4 (excluding ESKD), reflecting the health state that gene therapy enables patients to maintain. For Lowe syndrome with 0.85 multiplier applied to base CKD utilities, U_ref = 0.542. This metric addresses the concern that QALY gains in conditions with low baseline utility appear artificially small when compared to interventions in healthier populations. A treatment generating 5.0 QALYs in Lowe syndrome (baseline utility ~0.35) translates to 9.2 evLYG—comparable to ~9.2 additional life years at moderate health—facilitating cross-condition value comparisons for payers managing diverse portfolios.
 
-## H. Model Calibration and Internal Checks
+## I. Model Calibration and Internal Checks
 
-**Calibration targets.** Model parameters were calibrated to reproduce key natural history outcomes: ESKD onset at age 32 (Ando et al. 2024) and life expectancy of 37.5 years (consistent with published range of 30-45 years; Bökenkamp and Ludwig 2016; Ando et al. 2024). The calibrated age-varying decline rates achieve these targets without requiring additional post-hoc adjustments, suggesting the three-phase decline framework (1.0, 3.0, 1.5 ml/min/yr) accurately captures disease progression. **Internal checks:** We verified cohort conservation (state proportions sum to 1.0 ± 10⁻¹² each cycle), monotonicity (improved treatment scenarios yield strictly better outcomes: higher QALYs, longer survival, delayed ESKD), and extreme value behavior (zero decline produces maximum QALYs; infinite decline produces minimum). The model structure, parameterization approach, and utility patterns align with published CKD Markov models in the health economics literature (Ruggeri et al. 2014; Cooper et al. 2020). External validation against independent patient cohorts would strengthen confidence in projections but is not feasible given the rarity of Lowe syndrome. Formal probabilistic sensitivity analysis with parameter uncertainty propagation is planned for final peer-reviewed publication.
+Model parameters were calibrated to reproduce key natural history outcomes: ESKD onset at age 32 (Ando et al. 2024) and life expectancy of 37.5 years (consistent with published range of 30-45 years; Bökenkamp and Ludwig 2016; Ando et al. 2024). The calibrated age-varying decline rates achieve these targets without requiring additional post-hoc adjustments, suggesting the three-phase decline framework (1.0, 3.0, 1.5 ml/min/yr) accurately captures disease progression. **Internal checks:** We verified cohort conservation (state proportions sum to 1.0 ± 10⁻¹² each cycle), monotonicity (improved treatment scenarios yield strictly better outcomes: higher QALYs, longer survival, delayed ESKD), and extreme value behavior (zero decline produces maximum QALYs; infinite decline produces minimum). The model structure, parameterization approach, and utility patterns align with published CKD Markov models in the health economics literature (Ruggeri et al. 2014; Cooper et al. 2020). External validation against independent patient cohorts would strengthen confidence in projections but is not feasible given the rarity of Lowe syndrome. Formal probabilistic sensitivity analysis with parameter uncertainty propagation is planned for final peer-reviewed publication.
 
 ---
 
@@ -318,11 +314,11 @@ Notably, ESKD-related parameters (ESKD utility, ESKD costs, natural decline rate
 
 **Threshold Analysis.** Value-based pricing analysis (Section III.A) solves for maximum gene therapy prices achieving specified ICER thresholds. At €100,000/QALY (conventional threshold), maximum justifiable price is €1,470,656 for Scenario 1 (50% enzyme). At €150,000/QALY, the ceiling rises to €1,722,410. For NICE's HST threshold of €300,000/QALY for ultra-rare diseases, the model supports prices up to €2,477,671. These results indicate the current €3M price yields an ICER of €403,738/QALY—exceeding even ultra-rare thresholds—and would require reduction to approximately €2.5M for €300K/QALY acceptance or €1.5M for conventional €100K/QALY thresholds. For Scenario 2 (30% enzyme), maximum prices drop to €1,035K at €100K/QALY and €1,715K at €300K/QALY, demonstrating strong sensitivity to achieved enzyme restoration levels.
 
-## D. Scenario Analysis: Treatment Timing and Durability
+## E. Scenario Analysis: Treatment Waning and Durability
 
 **Delayed Treatment.** We examine an alternative scenario with gene therapy administered at age 2 (versus base case age 1), starting eGFR at 80 ml/min/1.73m² (lower baseline due to one additional year of kidney decline). Under complete stabilization, this yields 8.50 incremental QALYs (versus 6.88 in base case) due to extended time in good health. The ICER improves to 270,000 euros per QALY, suggesting meaningful cost-effectiveness advantages to early intervention before kidney damage accumulates. This finding motivates investigation of optimal treatment timing, potentially incorporating newborn screening to identify patients shortly after birth when 67 percent of Lowe syndrome diagnoses occur (Ando et al. 2024).
 
-### D.1 Treatment Waning: Modeling Gradual Loss of Therapeutic Effect
+### E.1 Treatment Waning: Modeling Gradual Loss of Therapeutic Effect
 
 **Rationale for Durability Sensitivity Analysis.** Scenarios 1-4 assume lifelong durability of treatment effect without waning—an optimistic assumption that favors gene therapy. Long-term durability of AAV-mediated gene therapy remains uncertain, particularly in pediatric applications where organ growth, immune maturation, and potential transgene silencing may impact sustained expression. While some AAV therapies demonstrate stable expression beyond 10 years (e.g., hemophilia B), kidney-specific challenges include high cell turnover in proximal tubule and potential immune responses to capsid or transgene products. This sensitivity analysis models gradual loss of therapeutic effect to assess cost-effectiveness under pessimistic durability assumptions. The specific waning pattern (linear, years 10-20) represents an illustrative assumption rather than biologically predicted trajectory.
 
@@ -364,7 +360,7 @@ The waning scenario produces outcomes intermediate between sustained optimistic 
 
 Even in the waning scenario, cost-effectiveness remains reasonable for an ultra-rare life-threatening disease, supporting consideration of reimbursement with long-term performance monitoring rather than categorical rejection due to durability uncertainty.
 
-## E. Budget Impact Analysis
+## F. Budget Impact Analysis
 
 We estimate annual budget impact for major healthcare systems under Scenario 1 efficacy assumptions. For the United Kingdom, approximately 15 treatment-eligible patients (age less than 21, pre-ESKD) exist at Wave 1 market launch. With 40 percent first-year market penetration, 6 patients receive treatment annually at a per-patient cost of €2,800,000 (assuming 20 percent confidential discount), yielding Year 1 budget impact of €16,800,000. Annual impact declines to €10,900,000 by Year 5 as the prevalent pool depletes. Cumulative 10-year impact totals €95,000,000 to €120,000,000 for approximately 35 treated patients.
 

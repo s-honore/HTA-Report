@@ -58,7 +58,7 @@ where C_s denotes the annual cost incurred in state s, U_s the utility weight (Q
 
 ## C. Model Structure
 
-We employ a discrete-time Markov cohort model with annual cycles and six mutually exclusive health states defined by kidney function. The model tracks a cohort of 1,000 Lowe syndrome patients from age 5 (median treatment age) until death, accumulating costs and quality-adjusted life years (QALYs) over the lifetime horizon.
+We employ a discrete-time Markov cohort model with annual cycles and six mutually exclusive health states defined by kidney function. The model tracks a cohort of 1,000 Lowe syndrome patients from age 1 (treatment at diagnosis) until death, accumulating costs and quality-adjusted life years (QALYs) over the lifetime horizon.
 
 **Health States.** The six health states are defined by estimated glomerular filtration rate (eGFR) following Kidney Disease: Improving Global Outcomes (KDIGO) guidelines (KDIGO 2012):
 
@@ -220,7 +220,7 @@ We adopt a healthcare system perspective, including direct medical costs but exc
 
 We augment these estimates with Lowe syndrome-specific costs for ongoing ophthalmologic care (4,000 euros annually), neurodevelopmental services (6,000 euros annually), and physical therapy (3,000 euros annually), yielding an additional 13,000 euros annually across all health states.
 
-**Discount Rate.** We apply a 1.5 percent annual discount rate to both costs and QALYs, justified under NICE's non-reference-case discounting framework (NICE 2022, Section 4.5.3). This lower rate is appropriate when all three criteria are met: (1) the technology is for people who would otherwise die or have very severely impaired life—Lowe syndrome patients face ESKD at age 32 with thrice-weekly dialysis and death by age 42; (2) it is likely to restore them to full or near-full health—gene therapy achieving 50% enzyme restoration (carrier-analogous state) prevents ESKD entirely, maintaining patients in CKD Stage 2 with near-normal kidney function over 57+ years; and (3) benefits are sustained over a very long period—AAV vector-mediated gene therapy demonstrates sustained transgene expression beyond 10 years in other indications (Nathwani et al. 2014), with modeled benefits extending from age 5 to 62+. All irrecoverable costs (gene therapy acquisition, monitoring, administration) are captured in the model. We present 3.5% discount rate results in sensitivity analysis for comparison to the reference case.
+**Discount Rate.** We apply a 1.5 percent annual discount rate to both costs and QALYs, justified under NICE's non-reference-case discounting framework (NICE 2022, Section 4.5.3). This lower rate is appropriate when all three criteria are met: (1) the technology is for people who would otherwise die or have very severely impaired life—Lowe syndrome patients face ESKD at age 32 with thrice-weekly dialysis and death by age 42; (2) it is likely to restore them to full or near-full health—gene therapy achieving 50% enzyme restoration (carrier-analogous state) prevents ESKD entirely, maintaining patients in CKD Stage 2 with near-normal kidney function over 57+ years; and (3) benefits are sustained over a very long period—AAV vector-mediated gene therapy demonstrates sustained transgene expression beyond 10 years in other indications (Nathwani et al. 2014), with modeled benefits extending from age 1 to 62+. All irrecoverable costs (gene therapy acquisition, monitoring, administration) are captured in the model. We present 3.5% discount rate results in sensitivity analysis for comparison to the reference case.
 
 ## F. Utility Parameters
 
@@ -309,7 +309,7 @@ Notably, ESKD-related parameters (ESKD utility, ESKD costs, natural decline rate
 
 ## D. Scenario Analysis: Treatment Timing and Durability
 
-**Earlier Treatment.** We examine an alternative scenario with gene therapy administered at age 2 (versus base case age 5), starting eGFR at 80 ml/min/1.73m² (higher baseline). Under complete stabilization, this yields 8.50 incremental QALYs (versus 6.88 in base case) due to extended time in good health. The ICER improves to 270,000 euros per QALY, suggesting meaningful cost-effectiveness advantages to early intervention before kidney damage accumulates. This finding motivates investigation of optimal treatment timing, potentially incorporating newborn screening to identify patients shortly after birth when 67 percent of Lowe syndrome diagnoses occur (Ando et al. 2024).
+**Delayed Treatment.** We examine an alternative scenario with gene therapy administered at age 2 (versus base case age 1), starting eGFR at 80 ml/min/1.73m² (lower baseline due to one additional year of kidney decline). Under complete stabilization, this yields 8.50 incremental QALYs (versus 6.88 in base case) due to extended time in good health. The ICER improves to 270,000 euros per QALY, suggesting meaningful cost-effectiveness advantages to early intervention before kidney damage accumulates. This finding motivates investigation of optimal treatment timing, potentially incorporating newborn screening to identify patients shortly after birth when 67 percent of Lowe syndrome diagnoses occur (Ando et al. 2024).
 
 ### D.1 Treatment Waning: Modeling Gradual Loss of Therapeutic Effect
 

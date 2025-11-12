@@ -434,53 +434,7 @@ Presentation occurs from birth to three months with dense bilateral congenital c
 
 ---
 
-## F. Prevalence by Age and Treatment Window
-
-Beyond total eligible population counts, age distribution within the prevalent population determines optimal treatment timing, expected quality-adjusted life year gains, and steady-state market dynamics following initial backlog clearance. Age at treatment represents a critical determinant of therapeutic benefit given the progressive nature of renal decline and importance of preserving nephron mass before irreversible damage occurs. This section analyzes age distribution patterns and defines treatment windows balancing clinical benefit against practical feasibility.
-
-Figure 2.6 (Weibull survival curves, available at `/home/user/HTA-Report/Models/Befolkningsmodel/output_data/survival_curves.png`) shows that the age distribution of Lowe syndrome patients exhibits right-skew, with concentration in childhood and adolescence followed by a long tail extending to the fifth decade of life.
-
-**Age-Specific Prevalence (2025):**
-
-| Age Range | Number of Patients | % of Total | Cumulative % | Median eGFR (estimated) |
-|-----------|-------------------|------------|--------------|------------------------|
-| 0-2 years | 387 | 5.5% | 5.5% | 80-90 mL/min/1.73m² |
-| 3-5 years | 694 | 9.8% | 15.3% | 75-85 |
-| 6-10 years | 1,347 | 19.0% | 34.3% | 60-75 |
-| 11-15 years | 1,206 | 17.0% | 51.3% | 45-60 |
-| 16-20 years | 1,064 | 15.0% | 66.3% | 30-45 |
-| 21-25 years | 851 | 12.0% | 78.3% | 20-30 |
-| 26-30 years | 639 | 9.0% | 87.3% | 15-25 (approaching ESKD) |
-| 31-35 years | 426 | 6.0% | 93.3% | <15 (many on dialysis) |
-| 36-40 years | 284 | 4.0% | 97.3% | <15 (dialysis/transplant) |
-| 41-50 years | 142 | 2.0% | 99.3% | <15 (renal replacement) |
-| 51+ years | 59 | 0.8% | 100.0% | <15 (long-term survivors) |
-
-The age distribution exhibits median age of 14.0 years, mean age of 15.8 years, and interquartile range of 7.2 to 22.6 years, with maximum observed age of 58 years representing a patient born in 1967 surviving substantially beyond typical life expectancy (Honoré 2025).
-
-The therapeutic window for gene therapy is defined by the balance between early enough administration before irreversible nephron loss (eGFR decline) and late enough administration after definitive diagnosis and medical stability. Proposed treatment age bands balance these competing considerations. **Early intervention (ages 2-5).** Maximum nephron preservation potential provides rationale for treatment in this age band, though challenges include younger age increasing adeno-associated virus vector dosing complexity with higher milligrams per kilogram requirements, limited renal function baseline data in very young children, and longer follow-up required to assess durability. This band represents 9.8 percent of the global population with 694 patients.
-
-**Standard intervention (ages 6-15).** Established renal baseline and optimal risk-benefit profile provide rationale for this age band, with advantages including clear documentation of estimated glomerular filtration rate decline trajectory, better long-term outcome data feasible within reasonable timeframe, and lower adeno-associated virus dose requirements. This band represents 36.0 percent of the global population with 2,553 patients and constitutes the recommended primary target population for initial market authorization (Ando et al. 2024; Zaniew et al. 2018).
-
-**Late intervention (ages 16-20).** Most patients remain pre-end-stage kidney disease providing rationale for treatment, though considerations include more advanced disease at treatment, reduced quality-adjusted life year gains due to shorter remaining lifespan, and potential to still prevent or delay end-stage kidney disease onset. This band represents 15.0 percent of the global population with 1,064 patients.
-
-**Post-end-stage kidney disease (age 21+, estimated glomerular filtration rate below 15).** Irreversible damage makes benefit uncertain excluding this group from initial eligibility, though future consideration may expand to late-stage disease if early-treated cohorts demonstrate benefit. **Regional age distribution differences.** Regional variation in mean patient age reflects healthcare infrastructure differences and survival outcomes, as shown in Table 2.6 below.
-
-**Table 2.6: Mean Age of Prevalent Patients by Region**
-
-| Region | Mean Age (years) | Median Age (years) | % Under Age 15 | % Ages 15-21 | % Over 21 |
-|--------|------------------|-------------------|---------------|--------------|-----------|
-| Europe | 18.9 | 16.8 | 42% | 16% | 42% |
-| Americas | 17.4 | 15.2 | 47% | 17% | 36% |
-| Oceania | 19.1 | 17.1 | 40% | 15% | 45% |
-| Asia | 16.2 | 13.9 | 52% | 19% | 29% |
-| Africa | 13.1 | 11.2 | 62% | 21% | 17% |
-
-**Regional age differences reflect healthcare infrastructure and survival.** European patients are oldest on average at 18.9 years, reflecting earlier diagnosis enabling longer survival, better supportive care delaying end-stage kidney disease onset, and higher proportion of patients surviving past typical life expectancy into their third and fourth decades (Bökenkamp and Ludwig 2016). African patients are youngest at 13.1 years, reflecting more recent diagnoses as Human Development Index rises and detection improves, potentially shorter survival due to limited access to end-stage kidney disease care including dialysis and transplantation, and younger population demographics in African countries with median age below 20 years in many nations (UNDP 2024). **Treatment eligibility implications.** Africa has highest proportion eligible by age with 83 percent below age 21, while Europe has lowest proportion eligible at 58 percent, though Wave 1 markets in Europe and Americas have more absolute eligible patients due to better detection rates approaching 95 percent compared to 62 percent in Africa (Honoré 2025).
-
----
-
-## G. Regional Market Considerations
+## F. Regional Market Considerations
 
 Translating global epidemiological burden into actionable market access strategies requires country-level analysis of prevalent cases, healthcare infrastructure capacity, regulatory pathways, and budget impact within specific payer systems. Regional heterogeneity in diagnostic capacity, reimbursement frameworks, and rare disease infrastructure creates distinct market dynamics across Wave 1, 2, and 3 launch geographies. This section provides country-specific prevalence estimates for key markets and assesses infrastructure prerequisites for successful therapy launch. **Country-specific prevalence in key Wave 1 markets.** Table 2.7 below provides prevalence estimates, treatment-eligible populations, and health technology assessment timelines for primary launch countries.
 
@@ -612,7 +566,7 @@ Translating global epidemiological burden into actionable market access strategi
 
 ---
 
-## H. Implications for Clinical Development and Market Access
+## G. Implications for Clinical Development and Market Access
 
 The epidemiological landscape characterized above carries direct implications for clinical trial design, regulatory approval strategies, and post-marketing surveillance requirements. Ultra-rare disease development faces distinct challenges including limited patient availability for randomized trials, reliance on natural history comparators, and necessity of long-term registry-based evidence generation. This section translates population estimates into actionable recommendations for clinical development planning and evidence generation strategies supporting regulatory approval and reimbursement decisions. **Patient recruitment feasibility for clinical trials.** Clinical trial considerations for
 
@@ -688,7 +642,7 @@ Given rarity of Lowe syndrome, randomized controlled trial may be:
 
 ---
 
-## I. Summary and Key Findings
+## H. Summary and Key Findings
 
 **Global burden estimates.**
 - **~7,100 individuals** living with Lowe syndrome worldwide (2025)

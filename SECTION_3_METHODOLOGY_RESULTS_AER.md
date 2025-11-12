@@ -404,13 +404,13 @@ For the United States, approximately 50 eligible patients at launch with 45 perc
 
 # Table 1—Clinical Outcomes by Scenario (Recalibrated Model with Dual Metrics)
 
-| Scenario | θ | eGFR Decline (ml/min/yr) | Death Age | Life Years Gained | Total QALYs | Inc. QALYs | Total Cost ($) | Inc. Cost ($) | ICER ($/QALY) | **$/LYG** |
-|----------|---|--------------------------|-----------|-------------------|-------------|------------|----------------|---------------|---------------|-----------|
-| **Natural history** | — | 1.77* | 37.5 | Reference | 14.59 | Reference | $1,561K | Reference | Reference | Reference |
-| **Optimistic** (θ=1.0) | 1.0 | 0.30* | 62.6 | **25.1** | 22.80 | 8.21 | $4,100K | $2,539K | **$309,300** | **$101,213** |
-| **Realistic (BASE)** (θ=0.85) | 0.85 | 0.52* | 61.6 | **24.1** | 22.45 | 7.86 | $4,132K | $2,571K | **$327,070** | **$106,652** |
-| Conservative (θ=0.70) | 0.70 | 0.74* | 56.4 | **18.9** | 21.07 | 6.48 | $4,243K | $2,682K | $413,893 | $142,244 |
-| Pessimistic (θ=0.50) | 0.50 | 1.04* | 48.3 | **10.8** | 18.72 | 4.13 | $4,409K | $2,848K | $689,209 | $263,663 |
+| Scenario | eGFR Decline (ml/min/yr) | Death Age | Life Years Gained | Inc. QALYs | Total Cost ($) | Inc. Cost ($) | ICER ($/QALY) | **$/LYG** |
+|----------|--------------------------|-----------|-------------------|------------|----------------|---------------|---------------|-----------|
+| **Natural history** | 1.77* | 37.5 | Reference | Reference | $1,561K | Reference | Reference | Reference |
+| **Optimistic** (θ=1.0) | 0.30* | 62.6 | **25.1** | 8.21 | $4,100K | $2,539K | **$309,300** | **$101,213** |
+| **Realistic (BASE)** (θ=0.85) | 0.52* | 61.6 | **24.1** | 7.86 | $4,132K | $2,571K | **$327,070** | **$106,652** |
+| Conservative (θ=0.70) | 0.74* | 56.4 | **18.9** | 6.48 | $4,243K | $2,682K | $413,893 | $142,244 |
+| Pessimistic (θ=0.50) | 1.04* | 48.3 | **10.8** | 4.13 | $4,409K | $2,848K | $689,209 | $263,663 |
 
 *\*Time-averaged decline rate over lifetime; actual rates are age-varying: natural history = {1.0, 3.0, 1.5} ml/min/yr for ages {1-10, 10-20, 20+}; treatment scenarios apply decomposition δ_treated(age) = 0.3 + (1-θ)×δ_path(age) where δ_path(age) = {0.7, 2.7, 1.2} ml/min/yr.*
 

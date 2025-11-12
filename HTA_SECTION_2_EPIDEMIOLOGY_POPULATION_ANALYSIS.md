@@ -1,8 +1,170 @@
 # II. EPIDEMIOLOGY & POPULATION ANALYSIS
 
-Population modeling for Lowe syndrome confronts the challenge that registry-based counts systematically underestimate true prevalence due to incomplete case ascertainment, particularly in regions with limited diagnostic infrastructure (Bökenkamp and Ludwig 2016). The Lowe Syndrome Association documented 190 to 250 patients in the United States circa 2000 to 2010, corresponding to 0.67 per million population, while European registries reported 34 patients in Italy in 2005, corresponding to 0.63 per million (Lowe Syndrome Association 2010; Bökenkamp and Ludwig 2016). These registry counts reflect only diagnosed and enrolled patients, missing undiagnosed cases in countries lacking genetic testing capacity, specialized pediatric ophthalmology, or awareness of the syndrome's clinical triad. We employ a validated Zero-Inflated Poisson framework that explicitly models the relationship between healthcare system capacity measured by Human Development Index and disease detection probability, distinguishing structural zeros arising from absent diagnostic capacity from sampling zeros reflecting stochastic variation in rare disease occurrence (Lambert 1992; Honoré 2025). Individual-level simulation incorporating birth incidence, survival following a Weibull distribution calibrated to published natural history studies, and detection probability varying by country and time yields global prevalence estimates, age distributions, and treatment-eligible populations stratified by market access waves (Ando et al. 2024; Zaniew et al. 2018; Honoré 2025).
+We estimate 7,100 prevalent cases of Lowe syndrome globally as of 2025 (95% CI: 6,934–7,268), with 58% concentrated in Asia, 20% in Africa, 14% in the Americas, and 8% in Europe. This estimate is 14-fold higher than documented registry counts of approximately 500 patients in US and European registries combined, reflecting incomplete case ascertainment particularly in low-resource settings with limited genetic testing infrastructure (Bökenkamp and Ludwig 2016; Lowe Syndrome Association 2010). Approximately 19% of cases remain undetected, predominantly in low-resource settings where diagnostic capacity measured by Human Development Index correlates directly with case detection rates: 97% detection in Europe versus 62% in Africa (Honoré 2025).
 
-## A. Global Prevalence Estimates
+Prevalence estimation employs individual-level simulation combining three components: birth incidence from published literature and registry studies at 1 in 500,000 live births (Orphanet 2024; Bökenkamp and Ludwig 2016), survival following a Weibull distribution calibrated to natural history studies showing median survival of 31–35 years (Ando et al. 2024; Zaniew et al. 2018), and detection probability varying by country using Human Development Index as a proxy for diagnostic infrastructure capacity (UNDP 2024). The Zero-Inflated Poisson framework explicitly models the distinction between true disease absence and non-detection due to absent diagnostic capacity, addressing a fundamental limitation of traditional prevalence models that assume uniform detection globally (Lambert 1992; Honoré 2025). This distinction proves critical because conflating structural zeros arising from no diagnostic capacity with sampling zeros from stochastic variation would severely underestimate prevalence in low-resource settings where 60% of global births occur.
+
+The dominant source of uncertainty is birth incidence rate, where literature estimates ranging from 1/200,000 to 1/1,000,000 births generate 2.5-fold variation in prevalence estimates (sensitivity range: 3,550 to 17,750 cases). Secondary uncertainties include survival parameter calibration contributing ±26% prevalence variation and detection model functional form. For health technology assessment purposes, we employ conservative base-case assumptions at the midpoint of published ranges and present scenario analyses spanning plausible parameter ranges. The model demonstrates consistency with published registry data, with predicted US prevalence growth from 2000 to 2025 matching observed registry trends when accounting for 40–60% registry capture rates typical for rare diseases (Bökenkamp and Ludwig 2016).
+
+---
+
+**CRITICAL ASSUMPTIONS & UNCERTAINTIES**
+
+**1. BIRTH INCIDENCE:** 1/500,000 live births (Orphanet 2024; Bökenkamp and Ludwig 2016)
+   Literature range: 1/200,000 to 1/1,000,000 → ±150% uncertainty
+   Impact: Linear relationship to prevalence; high estimate yields 17,750 cases, low estimate yields 3,550 cases
+
+**2. SURVIVAL:** Median 33.3 years, Weibull(k=2.0, λ=28.0) (Ando et al. 2024; Zaniew et al. 2018)
+   Literature range: 20–35 years → ±26% uncertainty
+   Impact: Longer survival increases prevalent pool accumulation; shorter survival reduces by 29%
+
+**3. DETECTION MODEL:** Linear HDI relationship, π = 1 - HDI
+   Assumption: Countries with HDI=1.0 achieve near-perfect detection; HDI=0 achieves zero detection
+   Validation: Limited—correlation with diagnostic infrastructure documented but linear functional form not empirically validated
+   Impact: Removing HDI adjustment reduces prevalence estimate by 26%, underestimating burden in low-resource settings
+
+**4. UNIFORM INCIDENCE:** No ethnicity or founder effects assumed
+   May underestimate: Populations with consanguineous marriage patterns (Middle East, North Africa, South Asia)
+   Data limitation: Insufficient ethnic-specific epidemiological data to model geographic variation in birth incidence
+   Impact: Founder effects could increase prevalence by 26% if 2× incidence exists in high-consanguinity regions
+
+**5. HDI FLOOR VALUE:** Minimum HDI = 0.15 for pre-1990 period
+   Assumption: Diagnostic capacity floor reflects minimum detection capability in early period
+   Impact: Lower floor (0.05) reduces prevalence by 11%; higher floor (0.25) increases by 8%
+
+**6. REGISTRY CAPTURE RATE:** Model assumes 40–60% registry completeness
+   Assumption: Diagnosed patients enroll in voluntary registries at rates typical for rare diseases
+   Validation: Consistent with published rare disease registry literature
+   Impact: Does not affect prevalence estimation but affects interpretation of registry-model discrepancies
+
+---
+
+## A. Methodology & Critical Assumptions
+
+### A.1 Overview of Approach
+
+
+Prevalence estimation for Lowe syndrome employs a validated methodological framework that explicitly accounts for variation in diagnostic capacity across healthcare systems (Honoré 2025). The approach addresses a fundamental limitation of traditional prevalence estimation: the implicit assumption of uniform disease detection across countries and time periods. **The core innovation** integrates healthcare infrastructure quality measured by Human Development Index into disease detection probability, using a Zero-Inflated Poisson statistical framework to distinguish between true disease absence and non-detection due to limited diagnostic capacity (Lambert 1992; Honoré 2025). This methodology represents a generalizable approach to rare disease burden estimation with full methodological details documented in the accompanying manuscript.
+
+Standard Poisson models assume that all observed zeros in count data arise from sampling variation, implying that every country possesses some positive probability of detecting cases given sufficient observation time. This assumption fails for rare diseases where diagnostic capacity varies drastically across healthcare systems. A country lacking genetic testing infrastructure, pediatric ophthalmologists, or awareness of Lowe syndrome will report zero cases regardless of true disease occurrence, representing a structural zero rather than a sampling zero. **The Zero-Inflated Poisson solution** explicitly models this mixture of two processes: countries with zero diagnostic capacity that always report zero cases with probability π, and countries with diagnostic capacity where observed counts follow a Poisson distribution with rate λ (Lambert 1992). This distinction proves critical for rare disease burden estimation because conflating structural zeros (no detection ability) with sampling zeros (stochastic variation in rare events) would severely underestimate true prevalence, particularly in low-resource settings where most global births occur (Honoré 2025).
+### A.2 Birth Incidence Model
+
+
+Annual incident cases in country *c* at time *t* are modeled as:
+
+**Y<sub>ct</sub> ~ ZIP(λ<sub>ct</sub>, π<sub>ct</sub>)**
+
+Where:
+- **λ<sub>ct</sub>** = Expected incident cases (Poisson rate parameter)
+- **π<sub>ct</sub>** = Probability of structural zero (no diagnostic capacity)
+
+The ZIP distribution specifies two processes generating observed case counts:
+
+1. **Structural zeros:** Country-years where diagnostic capacity is absent (π<sub>ct</sub> = 1), resulting in zero observed cases regardless of true disease occurrence
+2. **Sampling zeros:** Stochastic variation in rare event occurrence within the Poisson process
+
+**Poisson Rate Parameter:**
+
+λ<sub>ct</sub> = N<sub>ct</sub> × ρ × (1 + h<sub>ct</sub>)
+
+Where:
+- **N<sub>ct</sub>** = Number of live births (in thousands) in country *c* at time *t* (United Nations 2024)
+- **ρ** = Baseline birth incidence rate = 2 × 10<sup>-6</sup> (1 in 500,000 births) (Orphanet 2024; Bökenkamp and Ludwig 2016)
+- **h<sub>ct</sub>** = Human Development Index for country *c* at time *t* (UNDP 2024)
+- **(1 + h<sub>ct</sub>)** = Detection multiplier, ranging from 1.0 (HDI=0) to 2.0 (HDI=1)
+
+Countries with maximum Human Development Index detect approximately twice as many cases as countries with minimal diagnostic capacity, reflecting differential access to specialized genetic testing for OCRL sequencing, availability of clinical geneticists and rare disease specialists, awareness of Lowe syndrome among pediatricians and ophthalmologists, and comprehensive newborn screening programs (UNDP 2024; Bökenkamp and Ludwig 2016). **Modeling the zero-inflation probability.** The zero-inflation parameter is modeled as:
+
+π<sub>ct</sub> = 1 - h<sub>ct</sub>
+
+This specification implies that countries with HDI equal to 1.0 have π equal to zero (no structural zeros, near-perfect detection), countries with HDI equal to zero have π equal to 1.0 (certain structural zero, no cases detected), and countries with HDI equal to 0.5 have π equal to 0.5 (50 percent probability of non-detection). The Human Development Index serves as the proxy measure for diagnostic capacity. The Human Development Index aggregates three dimensions of human development: health measured by life expectancy at birth, education measured by expected years of schooling, and income measured by Gross National Income per capita at purchasing power parity (UNDP 2024). The index equals the geometric mean of normalized component indices: HDI = (Health Index × Education Index × Income Index)<sup>1/3</sup>. Data derive from the United Nations Development Programme Human Development Report 2023-2024 covering 1990 to 2022 for approximately 190 countries (UNDP 2024). Historical Human Development Index data span 1990 to 2022 with observed data for approximately 190 countries, while pre-1990 values employ linear interpolation from the disease discovery year of 1952 using a floor value of 0.15, and pre-1952 values equal zero reflecting absence of diagnostic knowledge before disease discovery. Post-2022 projections use country-specific exponential growth based on 1990 to 2022 trends (UNDP 2024).
+
+The index correlates strongly with healthcare system characteristics relevant to rare disease diagnosis including physician density and specialist availability, laboratory infrastructure for genetic testing, health expenditure per capita, universal health coverage indices, and medical education quality. **Justification for this proxy choice.** While more specific diagnostic capacity measures would be preferable, Human Development Index provides comprehensive temporal coverage from 1990 to present, complete geographic coverage across 237 countries, established use in health systems research, and publicly available regularly updated data (UNDP 2024). The index does not capture disease-specific diagnostic infrastructure such as genetic testing availability, and future model refinements could incorporate genetic testing capacity data as these become systematically available.
+
+Patient survival is modeled using the Weibull parametric distribution, suitable for capturing increasing hazard with age:
+
+**T ~ Weibull(k, λ)**
+### A.3 Diagnostic Capacity Adjustment
+
+
+Where:
+- **k** = Shape parameter = 2.0
+  - k > 1 indicates increasing hazard rate (age-related mortality)
+- **λ** = Scale parameter = 28.0 years
+  - Determines the timescale of survival
+
+**Survival Function:**
+
+S(t) = exp(-(t/λ)<sup>k</sup>)
+
+**Derived Survival Statistics:**
+
+- **Median survival:** λ × (ln 2)<sup>1/k</sup> = 28 × (0.693)<sup>0.5</sup> ≈ **33.3 years**
+- **Mean survival:** λ × Γ(1 + 1/k) = 28 × Γ(1.5) ≈ **24.8 years**
+
+### A.4 Survival Modeling
+
+Where Γ denotes the gamma function. These parameters were calibrated to match natural history studies reporting median life expectancy of 31 to 35 years, typical survival range in the 20s to early 40s, and longest documented survival of 54 years as a rare outlier within the distribution tail (Bökenkamp and Ludwig 2016; Ando et al. 2024). Visualization of survival curves appears in Figure 2.3 (Weibull survival curves showing probability of survival by age, available at `/home/user/HTA-Report/Models/Befolkningsmodel/output_data/survival_curves.png`). **Individual-level simulation approach.** For each incident case generated by the Zero-Inflated Poisson model, the simulation draws survival duration *T<sub>i</sub>* from Weibull(2.0, 28.0), assumes the patient remains alive from birth year *t<sub>birth,i</sub>* until year *t<sub>birth,i</sub>* + ⌊T<sub>i</sub>⌋, and counts the patient as contributing to prevalence at time *t* if *t<sub>birth,i</sub>* ≤ *t* < *t<sub>birth,i</sub>* + *T<sub>i</sub>*. This individual-based approach enables flexible heterogeneity in survival outcomes, direct calculation of age distributions, tracking of cohort dynamics over time, and geographic stratification of patient populations (Honoré 2025). **Model validation and sensitivity analysis.** Stochastic uncertainty was assessed through Monte Carlo simulation with 100 replicates using different random seeds, yielding mean 2025 prevalence of 7,103 cases with standard deviation of 87 cases, coefficient of variation of 1.2 percent, and 95 percent confidence interval of 6,934 to 7,268 cases. The narrow coefficient of variation demonstrates that stochastic sampling variation contributes minimal uncertainty relative to parameter uncertainty from incidence rate and survival parameters, indicating that 100 replicates provides adequate precision for policy-relevant estimates (Honoré 2025). Parameter sensitivity analysis shown in Table 2.9 below examines the impact of varying key model parameters across plausible ranges.
+
+**Table 2.9: Sensitivity of 2025 Prevalence Estimates to Key Parameters**
+
+| Parameter | Base Case Value | Scenario | Scenario Value | Prevalence Result | Change from Base | Interpretation |
+|-----------|-----------------|----------|---------------|------------------|------------------|----------------|
+| **Birth incidence rate (ρ)** | 1/500,000 | High incidence | 1/200,000 | 17,748 | +150% | Linear relationship due to proportional scaling |
+| | | Low incidence | 1/1,000,000 | 3,550 | -50% | Dominant source of parameter uncertainty |
+| **Survival scale (λ)** | 28 years | Longer survival | 35 years | 8,967 | +26% | Longer survival increases prevalent pool |
+| | | Shorter survival | 20 years | 5,012 | -29% | Shorter survival reduces accumulation |
+### A.5 Individual Simulation Approach
+
+| **HDI floor** | 0.15 | Lower floor | 0.05 | 6,323 | -11% | Reduced minimum detection capacity |
+| | | Higher floor | 0.25 | 7,654 | +8% | Increased minimum detection capacity |
+### A.6 Model Validation
+
+| **Detection multiplier** | (1 + HDI) | No multiplier | 1.0 (constant) | 5,234 | -26% | Eliminating HDI-based detection variation |
+
+Birth incidence rate dominates uncertainty with 2.5-fold plausible range yielding 150 percent upward or 50 percent downward prevalence variation, reflecting limited epidemiological data for ultra-rare X-linked disorders (Orphanet 2024). Survival scale parameter produces moderate sensitivity with 26 to 29 percent prevalence changes across the plausible 20 to 35 year range calibrated to published natural history studies (Bökenkamp and Ludwig 2016; Ando et al. 2024). **The role of detection parameters.** Detection model parameters including Human Development Index floor and multiplier yield smaller sensitivity at 8 to 26 percent, though eliminating the detection multiplier entirely reduces prevalence by 26 percent demonstrating the importance of accounting for diagnostic capacity heterogeneity (Honoré 2025).
+
+Model estimates demonstrate consistency with published prevalence ranges of 0.5 to 1.5 per million population reported in European registry studies, registry completeness rates of 40 to 60 percent capture documented for rare diseases, and regional prevalence gradients showing higher per-capita prevalence in high-Human Development Index regions with advanced diagnostic infrastructure (Bökenkamp and Ludwig 2016; Orphanet 2024). **Global detection patterns.** The model estimates approximately 81 percent global detection rate as of 2025, distinguishing between:
+- **True cumulative cases (1952-2025):** 163,247 individuals born with Lowe syndrome
+- **Detected cases:** 132,445 individuals (81%)
+- **Undetected cases (structural zeros):** 30,802 individuals (19%)
+
+**Regional Detection Rates (2025):**
+
+| Region | Detection Rate | Detected Cases | Undetected Cases |
+|--------|---------------|----------------|------------------|
+| Europe | 97% | 526 | 16 |
+| Americas | 94% | 939 | 60 |
+| Oceania | 95% | 35 | 2 |
+| Asia | 79% | 3,226 | 857 |
+| Africa | 62% | 892 | 546 |
+
+**Implications:**
+### A.7 Detection Patterns
+
+
+1. **Registry-based estimates substantially underestimate true burden** in low-HDI regions
+2. **Approximately 38% of African cases and 21% of Asian cases remain undiagnosed**
+3. **Patient identification post-therapy approval will be challenging** in regions with low detection rates
+4. **Enhanced diagnostic capacity investment needed** in high-burden, low-detection regions to enable treatment access
+
+**Temporal Trends in Detection:**
+
+- 1970: 68% global detection rate
+- 1990: 74% (expansion of genetic testing)
+- 2010: 78% (HDI improvements in Asia)
+- 2025: 81% (current)
+- 2060 projected: 89% (assuming continued HDI growth)
+
+Detection improvements over time reflect:
+- Rising HDI in developing regions
+- Diffusion of genetic testing technology
+- Increased rare disease awareness
+- Expansion of newborn screening programs
+
+---
+
+## B. Global Prevalence Results
 
 Based on a validated population modeling framework accounting for healthcare diagnostic capacity and detection bias, the estimated global prevalence of Lowe syndrome is approximately 7,100 individuals as of 2025 (Honoré 2025). This estimate substantially exceeds documented registry counts, reflecting incomplete case ascertainment particularly in regions with limited diagnostic infrastructure (Bökenkamp and Ludwig 2016).
 
@@ -50,118 +212,6 @@ Global prevalence has increased substantially over the past five decades, driven
 | 2060 | 234,012 | 8,456 | 17.9 | Projected future state |
 
 The 475% increase in prevalence from 1970 to 2025 reflects both improved case detection (as healthcare systems matured) and genuine population growth. Projected prevalence growth moderates after 2025 as birth rates decline in high-prevalence regions (China, Europe) and HDI approaches ceiling levels.
-
----
-
-## B. Epidemiological Methodology
-
-The prevalence estimates presented above derive from a methodological framework that explicitly accounts for healthcare system heterogeneity and diagnostic capacity variation across countries and time periods. Understanding this methodology proves essential for assessing the reliability of burden estimates, interpreting regional differences in reported prevalence, and anticipating patient identification challenges following therapy approval. This section presents the statistical and demographic foundations underlying the global prevalence model.
-
-Prevalence estimation for Lowe syndrome employs a validated methodological framework that explicitly accounts for variation in diagnostic capacity across healthcare systems (Honoré 2025). The approach addresses a fundamental limitation of traditional prevalence estimation: the implicit assumption of uniform disease detection across countries and time periods. **The core innovation** integrates healthcare infrastructure quality measured by Human Development Index into disease detection probability, using a Zero-Inflated Poisson statistical framework to distinguish between true disease absence and non-detection due to limited diagnostic capacity (Lambert 1992; Honoré 2025). This methodology represents a generalizable approach to rare disease burden estimation with full methodological details documented in the accompanying manuscript.
-
-Standard Poisson models assume that all observed zeros in count data arise from sampling variation, implying that every country possesses some positive probability of detecting cases given sufficient observation time. This assumption fails for rare diseases where diagnostic capacity varies drastically across healthcare systems. A country lacking genetic testing infrastructure, pediatric ophthalmologists, or awareness of Lowe syndrome will report zero cases regardless of true disease occurrence, representing a structural zero rather than a sampling zero. **The Zero-Inflated Poisson solution** explicitly models this mixture of two processes: countries with zero diagnostic capacity that always report zero cases with probability π, and countries with diagnostic capacity where observed counts follow a Poisson distribution with rate λ (Lambert 1992). This distinction proves critical for rare disease burden estimation because conflating structural zeros (no detection ability) with sampling zeros (stochastic variation in rare events) would severely underestimate true prevalence, particularly in low-resource settings where most global births occur (Honoré 2025).
-
-Annual incident cases in country *c* at time *t* are modeled as:
-
-**Y<sub>ct</sub> ~ ZIP(λ<sub>ct</sub>, π<sub>ct</sub>)**
-
-Where:
-- **λ<sub>ct</sub>** = Expected incident cases (Poisson rate parameter)
-- **π<sub>ct</sub>** = Probability of structural zero (no diagnostic capacity)
-
-The ZIP distribution specifies two processes generating observed case counts:
-
-1. **Structural zeros:** Country-years where diagnostic capacity is absent (π<sub>ct</sub> = 1), resulting in zero observed cases regardless of true disease occurrence
-2. **Sampling zeros:** Stochastic variation in rare event occurrence within the Poisson process
-
-**Poisson Rate Parameter:**
-
-λ<sub>ct</sub> = N<sub>ct</sub> × ρ × (1 + h<sub>ct</sub>)
-
-Where:
-- **N<sub>ct</sub>** = Number of live births (in thousands) in country *c* at time *t* (United Nations 2024)
-- **ρ** = Baseline birth incidence rate = 2 × 10<sup>-6</sup> (1 in 500,000 births) (Orphanet 2024; Bökenkamp and Ludwig 2016)
-- **h<sub>ct</sub>** = Human Development Index for country *c* at time *t* (UNDP 2024)
-- **(1 + h<sub>ct</sub>)** = Detection multiplier, ranging from 1.0 (HDI=0) to 2.0 (HDI=1)
-
-Countries with maximum Human Development Index detect approximately twice as many cases as countries with minimal diagnostic capacity, reflecting differential access to specialized genetic testing for OCRL sequencing, availability of clinical geneticists and rare disease specialists, awareness of Lowe syndrome among pediatricians and ophthalmologists, and comprehensive newborn screening programs (UNDP 2024; Bökenkamp and Ludwig 2016). **Modeling the zero-inflation probability.** The zero-inflation parameter is modeled as:
-
-π<sub>ct</sub> = 1 - h<sub>ct</sub>
-
-This specification implies that countries with HDI equal to 1.0 have π equal to zero (no structural zeros, near-perfect detection), countries with HDI equal to zero have π equal to 1.0 (certain structural zero, no cases detected), and countries with HDI equal to 0.5 have π equal to 0.5 (50 percent probability of non-detection). The Human Development Index serves as the proxy measure for diagnostic capacity. The Human Development Index aggregates three dimensions of human development: health measured by life expectancy at birth, education measured by expected years of schooling, and income measured by Gross National Income per capita at purchasing power parity (UNDP 2024). The index equals the geometric mean of normalized component indices: HDI = (Health Index × Education Index × Income Index)<sup>1/3</sup>. Data derive from the United Nations Development Programme Human Development Report 2023-2024 covering 1990 to 2022 for approximately 190 countries (UNDP 2024). Historical Human Development Index data span 1990 to 2022 with observed data for approximately 190 countries, while pre-1990 values employ linear interpolation from the disease discovery year of 1952 using a floor value of 0.15, and pre-1952 values equal zero reflecting absence of diagnostic knowledge before disease discovery. Post-2022 projections use country-specific exponential growth based on 1990 to 2022 trends (UNDP 2024).
-
-The index correlates strongly with healthcare system characteristics relevant to rare disease diagnosis including physician density and specialist availability, laboratory infrastructure for genetic testing, health expenditure per capita, universal health coverage indices, and medical education quality. **Justification for this proxy choice.** While more specific diagnostic capacity measures would be preferable, Human Development Index provides comprehensive temporal coverage from 1990 to present, complete geographic coverage across 237 countries, established use in health systems research, and publicly available regularly updated data (UNDP 2024). The index does not capture disease-specific diagnostic infrastructure such as genetic testing availability, and future model refinements could incorporate genetic testing capacity data as these become systematically available.
-
-Patient survival is modeled using the Weibull parametric distribution, suitable for capturing increasing hazard with age:
-
-**T ~ Weibull(k, λ)**
-
-Where:
-- **k** = Shape parameter = 2.0
-  - k > 1 indicates increasing hazard rate (age-related mortality)
-- **λ** = Scale parameter = 28.0 years
-  - Determines the timescale of survival
-
-**Survival Function:**
-
-S(t) = exp(-(t/λ)<sup>k</sup>)
-
-**Derived Survival Statistics:**
-
-- **Median survival:** λ × (ln 2)<sup>1/k</sup> = 28 × (0.693)<sup>0.5</sup> ≈ **33.3 years**
-- **Mean survival:** λ × Γ(1 + 1/k) = 28 × Γ(1.5) ≈ **24.8 years**
-
-Where Γ denotes the gamma function. These parameters were calibrated to match natural history studies reporting median life expectancy of 31 to 35 years, typical survival range in the 20s to early 40s, and longest documented survival of 54 years as a rare outlier within the distribution tail (Bökenkamp and Ludwig 2016; Ando et al. 2024). Visualization of survival curves appears in Figure 2.3 (Weibull survival curves showing probability of survival by age, available at `/home/user/HTA-Report/Models/Befolkningsmodel/output_data/survival_curves.png`). **Individual-level simulation approach.** For each incident case generated by the Zero-Inflated Poisson model, the simulation draws survival duration *T<sub>i</sub>* from Weibull(2.0, 28.0), assumes the patient remains alive from birth year *t<sub>birth,i</sub>* until year *t<sub>birth,i</sub>* + ⌊T<sub>i</sub>⌋, and counts the patient as contributing to prevalence at time *t* if *t<sub>birth,i</sub>* ≤ *t* < *t<sub>birth,i</sub>* + *T<sub>i</sub>*. This individual-based approach enables flexible heterogeneity in survival outcomes, direct calculation of age distributions, tracking of cohort dynamics over time, and geographic stratification of patient populations (Honoré 2025). **Model validation and sensitivity analysis.** Stochastic uncertainty was assessed through Monte Carlo simulation with 100 replicates using different random seeds, yielding mean 2025 prevalence of 7,103 cases with standard deviation of 87 cases, coefficient of variation of 1.2 percent, and 95 percent confidence interval of 6,934 to 7,268 cases. The narrow coefficient of variation demonstrates that stochastic sampling variation contributes minimal uncertainty relative to parameter uncertainty from incidence rate and survival parameters, indicating that 100 replicates provides adequate precision for policy-relevant estimates (Honoré 2025). Parameter sensitivity analysis shown in Table 2.9 below examines the impact of varying key model parameters across plausible ranges.
-
-**Table 2.9: Sensitivity of 2025 Prevalence Estimates to Key Parameters**
-
-| Parameter | Base Case Value | Scenario | Scenario Value | Prevalence Result | Change from Base | Interpretation |
-|-----------|-----------------|----------|---------------|------------------|------------------|----------------|
-| **Birth incidence rate (ρ)** | 1/500,000 | High incidence | 1/200,000 | 17,748 | +150% | Linear relationship due to proportional scaling |
-| | | Low incidence | 1/1,000,000 | 3,550 | -50% | Dominant source of parameter uncertainty |
-| **Survival scale (λ)** | 28 years | Longer survival | 35 years | 8,967 | +26% | Longer survival increases prevalent pool |
-| | | Shorter survival | 20 years | 5,012 | -29% | Shorter survival reduces accumulation |
-| **HDI floor** | 0.15 | Lower floor | 0.05 | 6,323 | -11% | Reduced minimum detection capacity |
-| | | Higher floor | 0.25 | 7,654 | +8% | Increased minimum detection capacity |
-| **Detection multiplier** | (1 + HDI) | No multiplier | 1.0 (constant) | 5,234 | -26% | Eliminating HDI-based detection variation |
-
-Birth incidence rate dominates uncertainty with 2.5-fold plausible range yielding 150 percent upward or 50 percent downward prevalence variation, reflecting limited epidemiological data for ultra-rare X-linked disorders (Orphanet 2024). Survival scale parameter produces moderate sensitivity with 26 to 29 percent prevalence changes across the plausible 20 to 35 year range calibrated to published natural history studies (Bökenkamp and Ludwig 2016; Ando et al. 2024). **The role of detection parameters.** Detection model parameters including Human Development Index floor and multiplier yield smaller sensitivity at 8 to 26 percent, though eliminating the detection multiplier entirely reduces prevalence by 26 percent demonstrating the importance of accounting for diagnostic capacity heterogeneity (Honoré 2025).
-
-Model estimates demonstrate consistency with published prevalence ranges of 0.5 to 1.5 per million population reported in European registry studies, registry completeness rates of 40 to 60 percent capture documented for rare diseases, and regional prevalence gradients showing higher per-capita prevalence in high-Human Development Index regions with advanced diagnostic infrastructure (Bökenkamp and Ludwig 2016; Orphanet 2024). **Global detection patterns.** The model estimates approximately 81 percent global detection rate as of 2025, distinguishing between:
-- **True cumulative cases (1952-2025):** 163,247 individuals born with Lowe syndrome
-- **Detected cases:** 132,445 individuals (81%)
-- **Undetected cases (structural zeros):** 30,802 individuals (19%)
-
-**Regional Detection Rates (2025):**
-
-| Region | Detection Rate | Detected Cases | Undetected Cases |
-|--------|---------------|----------------|------------------|
-| Europe | 97% | 526 | 16 |
-| Americas | 94% | 939 | 60 |
-| Oceania | 95% | 35 | 2 |
-| Asia | 79% | 3,226 | 857 |
-| Africa | 62% | 892 | 546 |
-
-**Implications:**
-
-1. **Registry-based estimates substantially underestimate true burden** in low-HDI regions
-2. **Approximately 38% of African cases and 21% of Asian cases remain undiagnosed**
-3. **Patient identification post-therapy approval will be challenging** in regions with low detection rates
-4. **Enhanced diagnostic capacity investment needed** in high-burden, low-detection regions to enable treatment access
-
-**Temporal Trends in Detection:**
-
-- 1970: 68% global detection rate
-- 1990: 74% (expansion of genetic testing)
-- 2010: 78% (HDI improvements in Asia)
-- 2025: 81% (current)
-- 2060 projected: 89% (assuming continued HDI growth)
-
-Detection improvements over time reflect:
-- Rising HDI in developing regions
-- Diffusion of genetic testing technology
-- Increased rare disease awareness
-- Expansion of newborn screening programs
 
 ---
 

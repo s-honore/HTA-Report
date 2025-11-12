@@ -85,7 +85,7 @@ All scenarios assume immediate treatment effect onset at age 5 and lifelong dura
 
 ## E. Cost Parameters
 
-We adopt a healthcare system perspective, including direct medical costs but excluding productivity losses and caregiver burden. All costs are reported in 2024 United States euros, with historical costs inflated using the medical care component of the Consumer Price Index (Bureau of Labor Statistics 2024).
+We adopt a healthcare system perspective, including direct medical costs but excluding productivity losses and caregiver burden. All costs are reported in 2024 euros, with historical costs inflated using the medical care component of the Consumer Price Index (Bureau of Labor Statistics 2024).
 
 **Gene Therapy Costs.** Our economic analysis employs value-based pricing (Section III.A), solving for the maximum justifiable acquisition price at specified cost-effectiveness thresholds (€100K, €150K, €300K per QALY) based on simulated clinical outcomes (QALYs gained, life years extended). We do not assume any acquisition price a priori; instead, the Markov model calculates incremental costs and QALYs, from which we solve for prices that achieve target cost-effectiveness thresholds. This approach provides decision-relevant guidance for manufacturers (pricing strategy) and payers (reimbursement negotiations) by identifying the value-justified price ceiling for each efficacy scenario. Administration costs include pre-treatment assessment (€5,000), inpatient infusion with anesthesia (€20,000), and post-treatment monitoring: €25,000 in year one (intensive hepatotoxicity surveillance), €10,000 annually in years two through five, and €3,000 annually thereafter.
 

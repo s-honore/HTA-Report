@@ -369,7 +369,10 @@ class MarkovCohortModel:
         self,
         egfr_decline_rate: float,
         scenario_name: str = "Baseline",
-        include_gene_therapy_cost: bool = False
+        include_gene_therapy_cost: bool = False,
+        treatment_waning: bool = False,
+        waning_start_year: int = 10,
+        waning_decline_rate: float = None
     ) -> Dict:
         """
         Run the Markov model for one scenario.
@@ -378,6 +381,9 @@ class MarkovCohortModel:
             egfr_decline_rate: Annual eGFR decline rate (ml/min/1.73m²/year)
             scenario_name: Name of scenario for tracking
             include_gene_therapy_cost: Whether to include gene therapy costs
+            treatment_waning: Whether treatment effect wanes over time
+            waning_start_year: Year when waning begins (default: 10)
+            waning_decline_rate: Decline rate after waning (if None, use natural history)
 
         Returns:
             Dictionary with model results
@@ -404,7 +410,39 @@ class MarkovCohortModel:
             age = self.params.starting_age + cycle
 
             # Get age-dependent decline rate for this cycle
-            current_decline_rate = self.get_decline_rate(age, egfr_decline_rate)
+            # Check if treatment waning applies (GRADUAL waning over time)
+            if treatment_waning and cycle >= waning_start_year:
+                # GRADUAL waning: linear interpolation from full effect to reduced effect
+                # Waning occurs over 10 years (years 10-20)
+                waning_duration = 10  # years over which waning occurs
+                years_since_waning_start = cycle - waning_start_year
+
+                if years_since_waning_start >= waning_duration:
+                    # Fully waned - use final waning rate
+                    if waning_decline_rate is None:
+                        waning_rate = self.params.natural_decline_rate
+                    else:
+                        waning_rate = waning_decline_rate
+                    current_decline_rate = self.get_decline_rate(age, waning_rate)
+                else:
+                    # Gradual waning - interpolate between initial and final rates
+                    waning_fraction = years_since_waning_start / waning_duration
+
+                    # Get initial rate (full treatment effect)
+                    initial_rate = self.get_decline_rate(age, egfr_decline_rate)
+
+                    # Get final waning rate
+                    if waning_decline_rate is None:
+                        waning_rate = self.params.natural_decline_rate
+                    else:
+                        waning_rate = waning_decline_rate
+                    final_rate = self.get_decline_rate(age, waning_rate)
+
+                    # Linear interpolation
+                    current_decline_rate = initial_rate + waning_fraction * (final_rate - initial_rate)
+            else:
+                # Before waning or no waning scenario
+                current_decline_rate = self.get_decline_rate(age, egfr_decline_rate)
 
             # Update eGFR for each state based on occupancy in previous cycle
             new_state_egfrs = {}
@@ -695,7 +733,16 @@ class ScenarioAnalysis:
             'Scenario 3: Minimal Benefit': {
                 'decline_rate': 0.94,  # D_age + 0.8×D_path (θ=0.2: 20% pathological reduction)
                 'include_gt_cost': True,
-                'description': '10-20% enzyme - limited benefit'
+                'description': '10-20% enzyme - limited benefit',
+                'treatment_waning': False
+            },
+            'Scenario 4: Treatment Waning': {
+                'decline_rate': 0.30,  # Start with carrier-equivalent (θ=1.0)
+                'include_gt_cost': True,
+                'description': 'Carrier-equivalent for 10 years, then GRADUAL waning over 10 years to subthreshold',
+                'treatment_waning': True,
+                'waning_start_year': 10,
+                'waning_decline_rate': 0.70  # Gradual waning to θ=0.5 (subthreshold)
             }
         }
 
@@ -705,7 +752,10 @@ class ScenarioAnalysis:
             results = self.model.run_model(
                 egfr_decline_rate=config['decline_rate'],
                 scenario_name=scenario_name,
-                include_gene_therapy_cost=config['include_gt_cost']
+                include_gene_therapy_cost=config['include_gt_cost'],
+                treatment_waning=config.get('treatment_waning', False),
+                waning_start_year=config.get('waning_start_year', 10),
+                waning_decline_rate=config.get('waning_decline_rate', None)
             )
             self.results[scenario_name] = results
 

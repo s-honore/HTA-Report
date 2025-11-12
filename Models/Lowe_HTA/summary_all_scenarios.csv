@@ -1,0 +1,6 @@
+Scenario,Total Cost ($),Total QALYs,Life Years,Time to ESKD (years),ESKD Age,Inc. Cost ($),Inc. QALYs,LYG,ICER ($/QALY)
+0: Natural History,"$1,748,203",11.80,31.5,18,19,Reference,Reference,Reference,Reference
+1: Carrier-Equivalent,"$3,961,881",22.66,62.2,100,101,"$2,213,678",10.860,30.7,"$203,847"
+2: Subthreshold,"$4,561,103",15.03,38.6,34,35,"$2,812,900",3.229,7.1,"$871,257"
+3: Minimal Benefit,"$4,888,603",12.24,32.4,20,21,"$3,140,400",0.440,0.9,"$7,135,762"
+4: Treatment Waning,"$4,371,782",17.52,44.7,46,47,"$2,623,579",5.718,13.2,"$458,836"

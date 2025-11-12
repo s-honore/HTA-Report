@@ -37,7 +37,7 @@ class ModelParameters:
     starting_age: int = 5
     time_horizon_years: int = 100
     cycle_length: float = 1.0  # Annual cycles
-    discount_rate: float = 0.035  # 3.5% base case
+    discount_rate: float = 0.015  # 1.5% base case (NICE non-reference case for curative therapies)
 
     # eGFR parameters
     starting_egfr: float = 70.0  # ml/min/1.73m² at age 5

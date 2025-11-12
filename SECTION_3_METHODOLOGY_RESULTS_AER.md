@@ -208,7 +208,7 @@ Starting from eGFR₀ = 95 ml/min/1.73m² at age 1, patients progress more rapid
 
 **Scenario Justification.** This pessimistic scenario represents lower-bound efficacy expectations. It could result from poor renal vector tropism (preferential liver capture), inadequate vector dosing, immune responses, or failure to transduce critical proximal tubule populations. While ICER exceeds typical thresholds, the substantial survival benefit (11 years) and favorable cost per life year gained ($264K) suggest meaningful clinical value even in this worst-case scenario. θ < 0.50 would represent treatment failure not modeled in this analysis.
 
-## E. Cost Parameters
+## F. Cost Parameters
 
 We adopt a healthcare system perspective, including direct medical costs but excluding productivity losses and caregiver burden. All costs are reported in 2024 euros, with historical costs inflated using the medical care component of the Consumer Price Index (Bureau of Labor Statistics 2024).
 
@@ -220,7 +220,7 @@ We augment these estimates with Lowe syndrome-specific costs for ongoing ophthal
 
 **Discount Rate.** We apply a 1.5 percent annual discount rate to both costs and QALYs as the primary analysis, with 3.5% reference case presented in Table 5. This lower rate is justified under NICE's non-reference-case discounting framework (NICE 2022, Section 4.5.3) when all three criteria are met. First, the technology is for people who would otherwise die or have very severely impaired life. Lowe syndrome patients face ESKD at age 32 with thrice-weekly dialysis and death by age 42 (criterion fully met). Second, it is likely to restore them to full or near-full health. Gene therapy prevents ESKD entirely, restoring kidney function to near-normal levels (CKD Stage 2) over 60+ years, though intellectual disability, visual impairment, and neurological manifestations persist (criterion partially met). Third, benefits are sustained over a very long period. AAV vector-mediated gene therapy demonstrates sustained transgene expression beyond 10 years in other indications (Nathwani et al. 2014), with modeled benefits extending from age 1 to 62+ (criterion fully met). We apply 1.5% discounting because prevention of premature death from kidney failure represents the primary driver of value, independent of non-renal manifestations. Treated patients achieve health states (utility 0.61) substantially better than untreated ESKD (utility 0.34), even after accounting for persistent non-renal burden. Precedent exists for applying reduced discounting to kidney-targeted interventions that prevent dialysis dependence in multisystem genetic diseases. The 3.5% reference case analysis (Table 5) provides conservative cost-effectiveness estimates for payers who apply stricter interpretation of criterion 2. All irrecoverable costs (gene therapy acquisition, monitoring, administration) are captured in the model.
 
-## F. Utility Parameters
+## G. Utility Parameters
 
 Quality of life weights (utilities) are assigned to each health state on the zero-to-one scale where one represents perfect health and zero represents death. We derive utilities from systematic reviews of EQ-5D measurements in CKD populations (Cooper et al. 2020; Wyld et al. 2012), as no Lowe syndrome-specific utility data exist.
 
@@ -230,7 +230,7 @@ Health state utilities are: CKD Stage 2, 0.72; Stage 3a, 0.68; Stage 3b, 0.61; S
 
 **Limitations of Utility Estimation.** This approach captures direct patient quality-of-life burden but substantially underestimates total societal burden. Caregiver burden for Lowe syndrome families is considerable, with parents providing extensive daily assistance for activities of daily living, managing multiple specialist appointments, and addressing behavioral challenges associated with intellectual disability. Published estimates suggest caregiver disutilities of 0.10-0.20 for rare pediatric conditions with similar care intensity (Tilford et al. 2012; Prosser et al. 2015), which we exclude from the base case analysis per NICE reference case guidelines emphasizing patient perspective. Including family caregiver burden would increase incremental QALYs gained from treatment, further improving cost-effectiveness ratios.
 
-## G. Outcome Metrics
+## H. Outcome Metrics
 
 For each scenario, we calculate total discounted costs C and QALYs Q over the lifetime horizon. Incremental cost-effectiveness ratios (ICERs) are computed as:
 
@@ -244,9 +244,9 @@ where subscript *i* denotes treatment scenario *i* ∈ {1, 2, 3} and subscript 0
 
 where U_ref represents a reference utility value. We define U_ref as the average utility across CKD stages 2–4 (excluding ESKD), reflecting the health state that gene therapy enables patients to maintain. For Lowe syndrome with 0.85 multiplier applied to base CKD utilities, U_ref = 0.542. This metric addresses the concern that QALY gains in conditions with low baseline utility appear artificially small when compared to interventions in healthier populations. A treatment generating 5.0 QALYs in Lowe syndrome (baseline utility ~0.35) translates to 9.2 evLYG—comparable to ~9.2 additional life years at moderate health—facilitating cross-condition value comparisons for payers managing diverse portfolios.
 
-## H. Model Calibration and Internal Checks
+## I. Model Calibration and Internal Checks
 
-**Calibration targets.** Model parameters were calibrated to reproduce key natural history outcomes: ESKD onset at age 32 (Ando et al. 2024) and life expectancy of 37.5 years (consistent with published range of 30-45 years; Bökenkamp and Ludwig 2016; Ando et al. 2024). The calibrated age-varying decline rates achieve these targets without requiring additional post-hoc adjustments, suggesting the three-phase decline framework (1.0, 3.0, 1.5 ml/min/yr) accurately captures disease progression. **Internal checks:** We verified cohort conservation (state proportions sum to 1.0 ± 10⁻¹² each cycle), monotonicity (improved treatment scenarios yield strictly better outcomes: higher QALYs, longer survival, delayed ESKD), and extreme value behavior (zero decline produces maximum QALYs; infinite decline produces minimum). The model structure, parameterization approach, and utility patterns align with published CKD Markov models in the health economics literature (Ruggeri et al. 2014; Cooper et al. 2020). External validation against independent patient cohorts would strengthen confidence in projections but is not feasible given the rarity of Lowe syndrome. Formal probabilistic sensitivity analysis with parameter uncertainty propagation is planned for final peer-reviewed publication.
+Model parameters were calibrated to reproduce key natural history outcomes: ESKD onset at age 32 (Ando et al. 2024) and life expectancy of 37.5 years (consistent with published range of 30-45 years; Bökenkamp and Ludwig 2016; Ando et al. 2024). The calibrated age-varying decline rates achieve these targets without requiring additional post-hoc adjustments, suggesting the three-phase decline framework (1.0, 3.0, 1.5 ml/min/yr) accurately captures disease progression. **Internal checks:** We verified cohort conservation (state proportions sum to 1.0 ± 10⁻¹² each cycle), monotonicity (improved treatment scenarios yield strictly better outcomes: higher QALYs, longer survival, delayed ESKD), and extreme value behavior (zero decline produces maximum QALYs; infinite decline produces minimum). The model structure, parameterization approach, and utility patterns align with published CKD Markov models in the health economics literature (Ruggeri et al. 2014; Cooper et al. 2020). External validation against independent patient cohorts would strengthen confidence in projections but is not feasible given the rarity of Lowe syndrome. Formal probabilistic sensitivity analysis with parameter uncertainty propagation is planned for final peer-reviewed publication.
 
 ---
 
@@ -314,11 +314,11 @@ Notably, ESKD-related parameters (ESKD utility, ESKD costs, natural decline rate
 
 **Threshold Analysis.** Value-based pricing analysis (Section III.A) solves for maximum gene therapy prices achieving specified ICER thresholds. At €100,000/QALY (conventional threshold), maximum justifiable price is €1,470,656 for Scenario 1 (50% enzyme). At €150,000/QALY, the ceiling rises to €1,722,410. For NICE's HST threshold of €300,000/QALY for ultra-rare diseases, the model supports prices up to €2,477,671. These results indicate the current €3M price yields an ICER of €403,738/QALY—exceeding even ultra-rare thresholds—and would require reduction to approximately €2.5M for €300K/QALY acceptance or €1.5M for conventional €100K/QALY thresholds. For Scenario 2 (30% enzyme), maximum prices drop to €1,035K at €100K/QALY and €1,715K at €300K/QALY, demonstrating strong sensitivity to achieved enzyme restoration levels.
 
-## D. Scenario Analysis: Treatment Timing and Durability
+## E. Scenario Analysis: Treatment Waning and Durability
 
 **Delayed Treatment.** We examine an alternative scenario with gene therapy administered at age 2 (versus base case age 1), starting eGFR at 80 ml/min/1.73m² (lower baseline due to one additional year of kidney decline). Under complete stabilization, this yields 8.50 incremental QALYs (versus 6.88 in base case) due to extended time in good health. The ICER improves to 270,000 euros per QALY, suggesting meaningful cost-effectiveness advantages to early intervention before kidney damage accumulates. This finding motivates investigation of optimal treatment timing, potentially incorporating newborn screening to identify patients shortly after birth when 67 percent of Lowe syndrome diagnoses occur (Ando et al. 2024).
 
-### D.1 Treatment Waning: Modeling Gradual Loss of Therapeutic Effect
+### E.1 Treatment Waning: Modeling Gradual Loss of Therapeutic Effect
 
 **Rationale for Durability Sensitivity Analysis.** Scenarios 1-4 assume lifelong durability of treatment effect without waning—an optimistic assumption that favors gene therapy. Long-term durability of AAV-mediated gene therapy remains uncertain, particularly in pediatric applications where organ growth, immune maturation, and potential transgene silencing may impact sustained expression. While some AAV therapies demonstrate stable expression beyond 10 years (e.g., hemophilia B), kidney-specific challenges include high cell turnover in proximal tubule and potential immune responses to capsid or transgene products. This sensitivity analysis models gradual loss of therapeutic effect to assess cost-effectiveness under pessimistic durability assumptions. The specific waning pattern (linear, years 10-20) represents an illustrative assumption rather than biologically predicted trajectory.
 
@@ -360,7 +360,7 @@ The waning scenario produces outcomes intermediate between sustained optimistic 
 
 Even in the waning scenario, cost-effectiveness remains reasonable for an ultra-rare life-threatening disease, supporting consideration of reimbursement with long-term performance monitoring rather than categorical rejection due to durability uncertainty.
 
-## E. Budget Impact Analysis
+## F. Budget Impact Analysis
 
 We estimate annual budget impact for major healthcare systems under Scenario 1 efficacy assumptions. For the United Kingdom, approximately 15 treatment-eligible patients (age less than 21, pre-ESKD) exist at Wave 1 market launch. With 40 percent first-year market penetration, 6 patients receive treatment annually at a per-patient cost of €2,800,000 (assuming 20 percent confidential discount), yielding Year 1 budget impact of €16,800,000. Annual impact declines to €10,900,000 by Year 5 as the prevalent pool depletes. Cumulative 10-year impact totals €95,000,000 to €120,000,000 for approximately 35 treated patients.
 

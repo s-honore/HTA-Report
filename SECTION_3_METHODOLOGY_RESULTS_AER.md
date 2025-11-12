@@ -192,7 +192,7 @@ For the United States, approximately 50 eligible patients at launch with 45 perc
 | 30% Enzyme | 0.39 | 4,225,332 | 20.20 | 56.04 | 100 | 2,210,734 | 5.826 | 379,477 |
 | 15% Enzyme (Minimal) | 0.72 | 4,768,006 | 16.75 | 47.35 | 43 | 2,753,407 | 2.372 | 1,160,621 |
 
-*Notes:* ICER = incremental cost-effectiveness ratio. All costs and QALYs discounted at 1.5 percent annually, justified under NICE non-reference-case framework (Section 4.5.3) for curative therapies restoring patients to near-full health with sustained long-term benefits. QALY = quality-adjusted life year. eGFR = estimated glomerular filtration rate. ESKD = end-stage kidney disease. Model empirically calibrated to match observed median ESKD onset at age 32 (year 27) from Ando et al. (2024). Scenario nomenclature reflects predicted enzyme restoration levels based on carrier biology: 50 percent enzyme restoration (carrier-analogous state) yields 85 percent reduction in eGFR decline; 30 percent and 15 percent restoration yield 65 percent and 35 percent reductions respectively.
+*Notes:* ICER = incremental cost-effectiveness ratio. All costs and QALYs discounted at 1.5 percent annually, justified under NICE non-reference-case framework (Section 4.5.3) for curative therapies restoring patients to near-full health with sustained long-term benefits. Life years are reported undiscounted (total years lived from starting age 5). QALY = quality-adjusted life year. eGFR = estimated glomerular filtration rate. ESKD = end-stage kidney disease. Model empirically calibrated to match observed median ESKD onset at age 32 (year 27) from Ando et al. (2024). Scenario nomenclature reflects predicted enzyme restoration levels based on carrier biology: 50 percent enzyme restoration (carrier-analogous state) yields 85 percent reduction in eGFR decline; 30 percent and 15 percent restoration yield 65 percent and 35 percent reductions respectively.
 
 ---
 
@@ -239,7 +239,7 @@ For the United States, approximately 50 eligible patients at launch with 45 perc
 
 ---
 
-# Table 5—Comprehensive Summary of Cost-Effectiveness Analysis
+# Table 5—Sensitivity Analysis: Results at 3.5% Reference Case Discount Rate
 
 | Metric | Natural History | Scenario 1 (50% Enzyme) | Scenario 2 (30% Enzyme) | Scenario 3 (15% Enzyme) |
 |--------|----------------|------------------------|------------------------|------------------------|
@@ -264,6 +264,6 @@ For the United States, approximately 50 eligible patients at launch with 45 perc
 | Compared to €300K/QALY threshold | N/A | Exceeds by 1.3× | Exceeds by 2.3× | Exceeds by 6.6× |
 | Comparable gene therapy precedent | N/A | Within range (see Table 4) | Above typical range | Far above precedent |
 
-*Notes:* All costs in 2024 EUR, discounted at 1.5% annually (NICE non-reference case for curative therapies; 3.5% reference case results differ—see sensitivity analysis). QALY = quality-adjusted life year. evLYG = equal-value life years gained. ESKD = end-stage kidney disease. ICER = incremental cost-effectiveness ratio. Scenario 1 (50% enzyme restoration - carrier analogy) represents the biologically plausible primary scenario based on asymptomatic carrier phenotype. Maximum prices calculated via value-based pricing formula: Max Price = (Threshold × Incremental QALYs) - (Incremental Costs excluding gene therapy acquisition). Scenario 1 ICER of €403,738/QALY falls within the range of approved ultra-rare disease gene therapies (€181K–€1.9M/QALY; see Table 4) but exceeds ultra-rare disease threshold of €300K/QALY, requiring price reduction to approximately €2.5M for threshold acceptance.
+*Notes:* All costs and QALYs discounted at 3.5% annually (reference case), not 1.5% used in base case (Tables 1-2). Life expectancy values differ from Table 1 due to discount rate effects on model dynamics. QALY = quality-adjusted life year. evLYG = equal-value life years gained. ESKD = end-stage kidney disease. ICER = incremental cost-effectiveness ratio. Scenario 1 (50% enzyme restoration - carrier analogy) represents the biologically plausible primary scenario based on asymptomatic carrier phenotype. Maximum prices calculated via value-based pricing formula: Max Price = (Threshold × Incremental QALYs) - (Incremental Costs excluding gene therapy acquisition). Scenario 1 ICER of €403,738/QALY at 3.5% discount falls within the range of approved ultra-rare disease gene therapies (€181K–€1.9M/QALY; see Table 4) but exceeds ultra-rare disease threshold of €300K/QALY. Compare to base case ICER of €241,480/QALY at 1.5% discount (Table 1).
 
 ---

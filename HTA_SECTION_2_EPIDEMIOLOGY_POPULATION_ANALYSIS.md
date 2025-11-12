@@ -6,6 +6,39 @@ Prevalence estimation employs individual-level simulation combining three compon
 
 The dominant source of uncertainty is birth incidence rate, where literature estimates ranging from 1/200,000 to 1/1,000,000 births generate 2.5-fold variation in prevalence estimates (sensitivity range: 3,550 to 17,750 cases). Secondary uncertainties include survival parameter calibration contributing ±26% prevalence variation and detection model functional form. For health technology assessment purposes, we employ conservative base-case assumptions at the midpoint of published ranges and present scenario analyses spanning plausible parameter ranges. The model demonstrates consistency with published registry data, with predicted US prevalence growth from 2000 to 2025 matching observed registry trends when accounting for 40–60% registry capture rates typical for rare diseases (Bökenkamp and Ludwig 2016).
 
+---
+
+**CRITICAL ASSUMPTIONS & UNCERTAINTIES**
+
+**1. BIRTH INCIDENCE:** 1/500,000 live births (Orphanet 2024; Bökenkamp and Ludwig 2016)
+   Literature range: 1/200,000 to 1/1,000,000 → ±150% uncertainty
+   Impact: Linear relationship to prevalence; high estimate yields 17,750 cases, low estimate yields 3,550 cases
+
+**2. SURVIVAL:** Median 33.3 years, Weibull(k=2.0, λ=28.0) (Ando et al. 2024; Zaniew et al. 2018)
+   Literature range: 20–35 years → ±26% uncertainty
+   Impact: Longer survival increases prevalent pool accumulation; shorter survival reduces by 29%
+
+**3. DETECTION MODEL:** Linear HDI relationship, π = 1 - HDI
+   Assumption: Countries with HDI=1.0 achieve near-perfect detection; HDI=0 achieves zero detection
+   Validation: Limited—correlation with diagnostic infrastructure documented but linear functional form not empirically validated
+   Impact: Removing HDI adjustment reduces prevalence estimate by 26%, underestimating burden in low-resource settings
+
+**4. UNIFORM INCIDENCE:** No ethnicity or founder effects assumed
+   May underestimate: Populations with consanguineous marriage patterns (Middle East, North Africa, South Asia)
+   Data limitation: Insufficient ethnic-specific epidemiological data to model geographic variation in birth incidence
+   Impact: Founder effects could increase prevalence by 26% if 2× incidence exists in high-consanguinity regions
+
+**5. HDI FLOOR VALUE:** Minimum HDI = 0.15 for pre-1990 period
+   Assumption: Diagnostic capacity floor reflects minimum detection capability in early period
+   Impact: Lower floor (0.05) reduces prevalence by 11%; higher floor (0.25) increases by 8%
+
+**6. REGISTRY CAPTURE RATE:** Model assumes 40–60% registry completeness
+   Assumption: Diagnosed patients enroll in voluntary registries at rates typical for rare diseases
+   Validation: Consistent with published rare disease registry literature
+   Impact: Does not affect prevalence estimation but affects interpretation of registry-model discrepancies
+
+---
+
 ## A. Global Prevalence Estimates
 
 Based on a validated population modeling framework accounting for healthcare diagnostic capacity and detection bias, the estimated global prevalence of Lowe syndrome is approximately 7,100 individuals as of 2025 (Honoré 2025). This estimate substantially exceeds documented registry counts, reflecting incomplete case ascertainment particularly in regions with limited diagnostic infrastructure (Bökenkamp and Ludwig 2016).

@@ -224,18 +224,7 @@ Health state utilities are: CKD Stage 2, 0.72; Stage 3a, 0.68; Stage 3b, 0.61; S
 
 **Limitations of Utility Estimation.** This approach captures direct patient quality-of-life burden but substantially underestimates total societal burden. Caregiver burden for Lowe syndrome families is considerable, with parents providing extensive daily assistance for activities of daily living, managing multiple specialist appointments, and addressing behavioral challenges associated with intellectual disability. Published estimates suggest caregiver disutilities of 0.10-0.20 for rare pediatric conditions with similar care intensity (Tilford et al. 2012; Prosser et al. 2015), which we exclude from the base case analysis per NICE reference case guidelines emphasizing patient perspective. Including family caregiver burden would increase incremental QALYs gained from treatment, further improving cost-effectiveness ratios.
 
-## G. Model Implementation and Outcome Metrics
-
-We implement the model in Python 3.9+ using NumPy 1.24.0 and Pandas 2.0.0 for numerical computation and data management. The complete implementation is available in `Models/Lowe_HTA/markov_cua_model.py` (1,192 lines). Model parameters are specified in the `ModelParameters` dataclass (lines 32-119), the Markov cohort simulation in the `MarkovCohortModel` class (lines 121-486), and scenario analysis in the `ScenarioAnalysis` class (lines 488-729). All results presented in Tables 1-5 can be reproduced by executing:
-
-```bash
-cd Models/Lowe_HTA
-python markov_cua_model.py
-```
-
-which generates CSV output files (`scenario_results.csv`, `sensitivity_analysis.csv`, `ce_plane_data.csv`) matching reported values.
-
-In each annual cycle, we: (1) calculate state-specific mortality rates (lines 265-291), (2) advance surviving patients' eGFR according to equation (1), (3) assign patients to health states based on updated eGFR (lines 183-204), (4) accumulate state-specific costs and QALYs with discounting (lines 416-442), and (5) transition deceased patients to the death state. The model terminates when all patients have died or age 100 is reached. Cohort conservation is verified each cycle (row sums equal 1.0 to machine precision).
+## G. Outcome Metrics
 
 For each scenario, we calculate total discounted costs C and QALYs Q over the lifetime horizon. Incremental cost-effectiveness ratios (ICERs) are computed as:
 

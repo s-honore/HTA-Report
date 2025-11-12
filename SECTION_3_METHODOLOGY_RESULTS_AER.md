@@ -2,7 +2,19 @@
 
 We evaluate the cost-effectiveness of AAV-based gene therapy for Lowe syndrome using a Markov cohort model that simulates disease progression through chronic kidney disease (CKD) stages. Our analysis compares gene therapy to natural history (no disease-modifying treatment) from a healthcare system perspective over a lifetime horizon.
 
-## A. Model Structure
+## A. Synthesis of Natural History Evidence
+
+The modeling approach integrates key findings from Section I regarding disease natural history, treatment effect expectations, and economic burden.
+
+**Disease Progression Parameters.** Longitudinal studies demonstrate progressive kidney function decline in Lowe syndrome. Ando et al. (2024) report median ESKD onset at age 32 in a Japanese cohort (n=54), while Zaniew et al. (2018) document strong age-dependent eGFR decline (r=-0.80, p<0.001) in an international cohort (n=88). We calibrate the model's natural decline rate to 2.04 ml/min/1.73m²/year to match the observed 27-year progression from typical treatment age (5 years) to median ESKD age (32 years), starting from eGFR 70 ml/min/1.73m².
+
+**Treatment Effect Rationale.** Section I highlighted critical evidence from carrier biology: female carriers expressing approximately 50% of normal OCRL enzyme levels remain clinically asymptomatic without kidney disease (Charnas et al. 2000). This carrier phenotype provides biological grounding for treatment effect scenarios. Our primary scenario models 50% enzyme restoration (85% reduction in eGFR decline), representing efficacy analogous to the carrier state. Alternative scenarios test 30% and 15% enzyme restoration, reflecting partial or minimal therapeutic benefit.
+
+**Quality of Life Burden.** Lowe syndrome patients experience universal intellectual disability (90% prevalence), severe visual impairment (100%), and neurological complications independent of kidney function (Section I.C). Standard CKD utility values from general populations (Wyld et al. 2012) do not capture this additional burden. We therefore apply a 0.85 multiplier to CKD utilities, representing a 15% decrement for Lowe syndrome-specific manifestations.
+
+**Economic Impact.** Section I documented substantial healthcare resource utilization, with lifetime costs estimated at $2.5-3.5 million per patient in natural history, heavily concentrated in ESKD years where dialysis alone costs $150,000 annually. Prevention or delay of ESKD progression represents the primary source of economic value for gene therapy.
+
+## B. Model Structure
 
 We employ a discrete-time Markov cohort model with annual cycles and six mutually exclusive health states defined by kidney function. The model tracks a cohort of 1,000 Lowe syndrome patients from age 5 (median treatment age) until death, accumulating costs and quality-adjusted life years (QALYs) over the lifetime horizon.
 

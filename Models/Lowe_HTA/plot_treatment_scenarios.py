@@ -1,19 +1,23 @@
 """
 Plot treatment scenarios for Lowe syndrome gene therapy
-Recreates natural history progression and shows 3 treatment scenarios
+Uses actual Markov model output to show natural history and treatment scenarios
 """
 
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 from matplotlib.patches import Rectangle
+from markov_cua_model import ModelParameters, MarkovCohortModel
 
-# Model parameters from markov_cua_model.py
-starting_age = 5
-starting_egfr = 70.0
-natural_decline_rate = 1.10  # ml/min/1.73m²/year
+# Initialize model
+params = ModelParameters()
+model = MarkovCohortModel(params)
 
-# Treatment scenarios (decline reduction)
+# Model parameters
+starting_age = params.starting_age
+natural_decline_rate = params.natural_decline_rate
+
+# Treatment scenarios - run actual model for each
 scenarios = {
     'Natural History': {
         'decline_rate': natural_decline_rate * 1.0,  # 100% (no reduction)
@@ -45,6 +49,17 @@ scenarios = {
     }
 }
 
+print("Running Markov model for all scenarios...")
+model_results = {}
+for scenario_name, config in scenarios.items():
+    print(f"  {scenario_name}...")
+    results = model.run_model(
+        egfr_decline_rate=config['decline_rate'],
+        scenario_name=scenario_name,
+        include_gene_therapy_cost=False
+    )
+    model_results[scenario_name] = results
+
 # CKD stage thresholds
 ckd_stages = {
     'CKD 1': (90, 120, '#A3BE8C', 0.15),
@@ -55,22 +70,19 @@ ckd_stages = {
     'ESKD': (0, 15, '#5E81AC', 0.2)
 }
 
-# Time horizon
-years = np.arange(0, 101)  # 0 to 100 years from treatment
-ages = starting_age + years
-
-# Calculate eGFR trajectories
+# Create figure
 fig, ax = plt.subplots(figsize=(14, 8))
 
 # Add CKD stage background shading
 for stage_name, (lower, upper, color, alpha) in ckd_stages.items():
     ax.axhspan(lower, upper, color=color, alpha=alpha, zorder=0)
 
-# Plot each scenario
+# Plot each scenario using actual model output
 for scenario_name, config in scenarios.items():
-    decline_rate = config['decline_rate']
-    egfr_trajectory = starting_egfr - (decline_rate * years)
-    egfr_trajectory = np.maximum(egfr_trajectory, 0)  # Floor at 0
+    results = model_results[scenario_name]
+    egfr_trajectory = results['egfr_track']
+    years = np.arange(len(egfr_trajectory))
+    ages = starting_age + years
 
     ax.plot(
         ages,
@@ -81,6 +93,10 @@ for scenario_name, config in scenarios.items():
         label=config['label'],
         zorder=10
     )
+
+# Get natural history time to ESKD for annotation
+natural_results = model_results['Natural History']
+natural_eskd_age = starting_age + natural_results['time_to_eskd']
 
 # Add CKD stage labels on the right
 stage_label_x = 107  # x-position for stage labels
@@ -126,12 +142,11 @@ ax.legend(
 )
 
 # Add annotations for key events
-# Natural history reaches ESKD
-natural_eskd_age = starting_age + (starting_egfr - 15) / natural_decline_rate
+# Natural history reaches ESKD (using actual model result)
 ax.annotate(
-    f'Natural history\nreaches ESKD\n~age {natural_eskd_age:.0f}',
+    f'Natural history\nreaches ESKD\nat age {natural_eskd_age:.0f}\n(Ando 2024)',
     xy=(natural_eskd_age, 15),
-    xytext=(natural_eskd_age + 5, 35),
+    xytext=(natural_eskd_age + 8, 35),
     fontsize=10,
     ha='left',
     bbox=dict(boxstyle='round,pad=0.5', facecolor='#ECEFF4', edgecolor='#2E3440', linewidth=1.5),

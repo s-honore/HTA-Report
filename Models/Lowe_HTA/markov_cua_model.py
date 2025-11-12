@@ -79,9 +79,9 @@ class ModelParameters:
     monitoring_ongoing: float = 3000    # Years 6+ monitoring
 
     # Mortality parameters
-    # Age-specific annual mortality rates for Lowe syndrome (placeholder)
-    # Can be updated with Weibull parameters from model_functions.py
-    base_mortality_rate: float = 0.02  # 2% base annual mortality
+    # Calibrated to match observed median survival of 30-40 years (Ando et al. 2024)
+    # Base rate of 0.8% per year achieves life expectancy of ~34 years
+    base_mortality_rate: float = 0.008  # 0.8% base annual mortality
     mortality_multipliers: Dict[str, float] = field(default_factory=lambda: {
         'CKD2': 1.0,
         'CKD3a': 1.2,

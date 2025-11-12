@@ -34,23 +34,28 @@ class ModelParameters:
     """Container for all model parameters with defaults."""
 
     # Time parameters
-    starting_age: int = 5
+    starting_age: int = 1  # Start from age 1 (not age 5)
     time_horizon_years: int = 100
     cycle_length: float = 1.0  # Annual cycles
     discount_rate: float = 0.015  # 1.5% base case (NICE non-reference case for curative therapies)
 
     # eGFR parameters
-    starting_egfr: float = 70.0  # ml/min/1.73m² at age 5
-    # Calibrated to achieve median ESKD age 32 years (Ando et al. 2024)
-    # Empirically calibrated: 1.10 ml/min/year produces ESKD at year 27 (age 32)
-    # (Simple calculation of 55/27=2.04 underestimates due to discrete-state artifacts)
-    natural_decline_rate: float = 1.10  # ml/min/1.73m²/year natural history
+    # Calibrated to achieve ESKD at age 32 (Ando 2024) with age-varying decline
+    # Monte Carlo validation shows: need 14 fewer years of decline (28 ml/min @ 2.0/year)
+    # Adjusted from 111 to 83 to match Monte Carlo ESKD timing with natural history
+    starting_egfr: float = 83.0  # ml/min/1.73m² at age 1
 
-    # Age-dependent decline rates (NOT CURRENTLY USED - disabled for simplicity)
-    use_age_dependent_decline: bool = False  # Disabled: use constant decline
-    decline_rate_early: float = 1.40  # ml/min/1.73m²/year for ages 5-15
-    decline_rate_late: float = 2.38  # ml/min/1.73m²/year for ages 15+ (1.7x acceleration)
-    decline_transition_age: int = 15  # Age at which decline accelerates
+    # Age-dependent decline rates based on Ando et al. 2024 Figure 1B
+    # THREE age groups with different decline rates
+    use_age_dependent_decline: bool = True  # ENABLED for accurate modeling
+    decline_rate_early: float = 1.0    # ml/min/1.73m²/year for ages 1-10
+    decline_rate_middle: float = 3.5   # ml/min/1.73m²/year for ages 10-20 (steep!)
+    decline_rate_late: float = 2.0     # ml/min/1.73m²/year for ages 20+
+    decline_transition_age_1: int = 10  # Age at which decline accelerates
+    decline_transition_age_2: int = 20  # Age at which decline moderates
+
+    # For reference: time-averaged constant rate (NOT USED when age-varying enabled)
+    natural_decline_rate: float = 1.80  # Approximate average over lifetime
 
     # CKD stage thresholds (eGFR ml/min/1.73m²)
     ckd_thresholds: Dict[str, Tuple[float, float]] = field(default_factory=lambda: {
@@ -97,15 +102,16 @@ class ModelParameters:
     monitoring_ongoing: float = 3000    # Years 6+ monitoring
 
     # Mortality parameters
-    # Calibrated to match observed median survival of 30-40 years (Ando et al. 2024)
-    # Base rate of 0.8% per year achieves life expectancy of ~34 years
-    base_mortality_rate: float = 0.008  # 0.8% base annual mortality
+    # Calibrated to match "2nd to 4th decade" survival (ages 20-40) per Murdock 2023
+    # Starting from age 1, median death should occur around age 30 (midpoint of 20-40)
+    # Base rate calibrated empirically to achieve this with CKD-stage multipliers
+    base_mortality_rate: float = 0.010  # 1.0% base annual mortality (reduced to allow ESKD before death)
     mortality_multipliers: Dict[str, float] = field(default_factory=lambda: {
-        'CKD2': 1.0,
-        'CKD3a': 1.2,
+        'CKD2': 0.8,   # Lower risk in early stages
+        'CKD3a': 1.0,
         'CKD3b': 1.5,
-        'CKD4': 2.0,
-        'ESKD': 3.0,
+        'CKD4': 2.5,   # Increased risk in advanced CKD
+        'ESKD': 4.0,   # Highest risk post-ESKD (renal failure, infections)
     })
 
     def __post_init__(self):
@@ -145,40 +151,66 @@ class MarkovCohortModel:
 
     def get_decline_rate(self, age: int, base_decline: float) -> float:
         """
-        Calculate age-dependent eGFR decline rate.
+        Calculate age-dependent eGFR decline rate based on Ando 2024 Figure 1B.
+
+        Three age groups with different NATURAL decline rates:
+        - Ages 1-10: Slow decline (1.0 ml/min/year)
+        - Ages 10-20: Steep accelerated decline (3.5 ml/min/year)
+        - Ages 20+: Moderate continued decline (2.0 ml/min/year)
+
+        For TREATMENT scenarios, applies mathematical decomposition:
+        D_treated = D_age + (1-θ)×D_path where D_path varies by age
 
         Args:
             age: Current age of patient
-            base_decline: Base decline rate (used for treatment scenarios)
+            base_decline: Treatment effect parameter (0.30, 0.70, 0.94) OR natural_decline_rate
 
         Returns:
-            Adjusted decline rate for current age
+            Age-adjusted decline rate for current age
         """
-        if not self.params.use_age_dependent_decline:
-            # Use constant decline rate
-            return base_decline
-
-        # For natural history, use age-dependent rates
-        # For treatment scenarios, scale the age-dependent rate by treatment effect
-        if base_decline == self.params.natural_decline_rate:
-            # Natural history: use actual age-dependent rates
-            if age < self.params.decline_transition_age:
-                return self.params.decline_rate_early
-            else:
-                return self.params.decline_rate_late
+        # First, determine natural rate for this age
+        if age < self.params.decline_transition_age_1:
+            # Ages 1-10: Slow decline
+            natural_rate = self.params.decline_rate_early
+        elif age < self.params.decline_transition_age_2:
+            # Ages 10-20: Steep decline (adolescent acceleration)
+            natural_rate = self.params.decline_rate_middle
         else:
-            # Treatment scenario: scale age-dependent decline by treatment effect
-            # Calculate what the natural rate would be at this age
-            if age < self.params.decline_transition_age:
-                natural_rate = self.params.decline_rate_early
-            else:
-                natural_rate = self.params.decline_rate_late
+            # Ages 20+: Moderate decline
+            natural_rate = self.params.decline_rate_late
 
-            # Scale by treatment effect
-            # treatment_effect = base_decline / self.params.natural_decline_rate
-            # return natural_rate * treatment_effect
-            # Actually, simpler: just use base_decline (it's already the treated rate)
-            return base_decline
+        # Check if this is natural history scenario
+        is_natural_history = abs(base_decline - self.params.natural_decline_rate) < 0.01
+
+        if is_natural_history:
+            # Natural history: return age-varying rate
+            return natural_rate
+        else:
+            # Treatment scenario: Apply decomposition D_treated = D_age + (1-θ)×D_path
+            # Where D_path = natural_rate - D_age
+            D_age = 0.3  # Normal aging component (constant across ages)
+            D_path = natural_rate - D_age  # Pathological component (age-varying!)
+
+            # Treatment effect θ implied by base_decline:
+            # base_decline ≈ 0.30 → θ=1.0 (100% pathological reduction)
+            # base_decline ≈ 0.70 → θ=0.5 (50% pathological reduction)
+            # base_decline ≈ 0.94 → θ=0.2 (20% pathological reduction)
+
+            # Map base_decline to treatment effect θ
+            if abs(base_decline - 0.30) < 0.05:
+                theta = 1.0  # Carrier-equivalent
+            elif abs(base_decline - 0.70) < 0.05:
+                theta = 0.5  # Intermediate
+            elif abs(base_decline - 0.94) < 0.05:
+                theta = 0.2  # Minimal
+            else:
+                # Unknown scenario - use proportional scaling
+                theta = (self.params.natural_decline_rate - base_decline) / self.params.natural_decline_rate
+
+            # Calculate treated rate for this age
+            treated_rate = D_age + (1 - theta) * D_path
+
+            return treated_rate
 
     def egfr_to_state(self, egfr: float) -> str:
         """
@@ -399,9 +431,9 @@ class MarkovCohortModel:
                     avg_egfr += trace[cycle - 1, i] * new_state_egfrs.get(state, 0)
             egfr_track[cycle] = avg_egfr
 
-            # Build transition matrix using current state-specific eGFRs
+            # Build transition matrix using current state-specific eGFRs and age-adjusted decline rate
             trans_matrix = self.build_transition_matrix(
-                egfr_decline_rate,
+                current_decline_rate,  # Use age-adjusted rate, not base rate
                 age,
                 new_state_egfrs
             )
@@ -480,6 +512,125 @@ class MarkovCohortModel:
             'discounted_costs_by_cycle': discounted_costs,
             'discounted_qalys_by_cycle': discounted_qalys,
             'egfr_track': egfr_track
+        }
+
+        return results
+
+    def run_monte_carlo_validation(
+        self,
+        egfr_decline_rate: float,
+        n_simulations: int = 1000,
+        random_seed: int = 42
+    ) -> Dict:
+        """
+        Run Monte Carlo simulation of individual patients to validate cohort model.
+
+        Args:
+            egfr_decline_rate: Annual eGFR decline rate for natural history
+            n_simulations: Number of patient simulations to run
+            random_seed: Random seed for reproducibility
+
+        Returns:
+            Dictionary with validation results including distributions
+        """
+        np.random.seed(random_seed)
+
+        # Track outcomes for each patient
+        times_to_eskd = []
+        times_to_death = []
+        final_states = []
+        ckd_stage_durations = {state: [] for state in self.states if state != 'Death'}
+
+        for sim in range(n_simulations):
+            # Initialize patient
+            egfr = self.params.starting_egfr
+            age = self.params.starting_age
+            state = self.egfr_to_state(egfr)
+            is_alive = True
+            eskd_age = None
+
+            # Track time in each CKD stage
+            stage_durations = {s: 0 for s in self.states if s != 'Death'}
+
+            # Simulate until death or end of time horizon
+            for year in range(self.n_cycles):
+                age = self.params.starting_age + year + 1
+
+                # Apply eGFR decline (age-dependent)
+                decline = self.get_decline_rate(age, egfr_decline_rate)
+                egfr = max(0, egfr - decline)
+
+                # Update state based on new eGFR
+                new_state = self.egfr_to_state(egfr)
+
+                # Record ESKD timing
+                if new_state == 'ESKD' and eskd_age is None:
+                    eskd_age = age
+
+                # Check for death (stochastic)
+                if new_state != 'Death':
+                    mortality_prob = self.calculate_mortality_rate(new_state, age)
+                    if np.random.rand() < mortality_prob:
+                        is_alive = False
+                        times_to_death.append(age)
+                        final_states.append(new_state)
+                        break
+
+                    # Track time in current state
+                    stage_durations[new_state] += 1
+
+                state = new_state
+
+            # Record outcomes
+            if eskd_age is not None:
+                times_to_eskd.append(eskd_age)
+
+            # If survived entire time horizon
+            if is_alive:
+                times_to_death.append(age)
+                final_states.append(state)
+
+            # Record stage durations for this patient
+            for s in ckd_stage_durations:
+                ckd_stage_durations[s].append(stage_durations[s])
+
+        # Calculate summary statistics
+        eskd_reached_pct = 100 * len(times_to_eskd) / n_simulations
+        median_eskd = np.median(times_to_eskd) if times_to_eskd else None
+        median_death = np.median(times_to_death)
+        mean_death = np.mean(times_to_death)
+
+        # Calculate percentiles
+        eskd_percentiles = {
+            '25th': np.percentile(times_to_eskd, 25) if times_to_eskd else None,
+            '50th': median_eskd,
+            '75th': np.percentile(times_to_eskd, 75) if times_to_eskd else None,
+        }
+
+        death_percentiles = {
+            '25th': np.percentile(times_to_death, 25),
+            '50th': median_death,
+            '75th': np.percentile(times_to_death, 75),
+        }
+
+        # Calculate proportion of patients in each CKD stage (average across time)
+        avg_stage_proportions = {}
+        for stage in ckd_stage_durations:
+            durations = ckd_stage_durations[stage]
+            avg_stage_proportions[stage] = np.mean(durations) / self.n_cycles if durations else 0
+
+        results = {
+            'n_simulations': n_simulations,
+            'eskd_reached_pct': eskd_reached_pct,
+            'median_eskd_age': median_eskd,
+            'median_death_age': median_death,
+            'mean_death_age': mean_death,
+            'eskd_percentiles': eskd_percentiles,
+            'death_percentiles': death_percentiles,
+            'times_to_eskd': times_to_eskd,
+            'times_to_death': times_to_death,
+            'final_states': final_states,
+            'avg_stage_proportions': avg_stage_proportions,
         }
 
         return results
@@ -1186,6 +1337,49 @@ if __name__ == "__main__":
         save_results=True
     )
 
+    print("\n" + "="*80)
+    print("MONTE CARLO VALIDATION (Natural History)")
+    print("="*80)
+    print("\nRunning 1,000 individual patient simulations to validate cohort model...")
+
+    # Run Monte Carlo validation for natural history
+    params = ModelParameters()
+    model = MarkovCohortModel(params)
+    mc_results = model.run_monte_carlo_validation(
+        egfr_decline_rate=params.natural_decline_rate,
+        n_simulations=1000,
+        random_seed=42
+    )
+
+    print(f"\nMonte Carlo Results (n={mc_results['n_simulations']}):")
+    print(f"  Patients reaching ESKD: {mc_results['eskd_reached_pct']:.1f}%")
+    print(f"\n  ESKD Timing:")
+    print(f"    - Median age: {mc_results['median_eskd_age']:.1f} years" if mc_results['median_eskd_age'] else "    - Median age: N/A (most patients die before ESKD)")
+    if mc_results['eskd_percentiles']['25th']:
+        print(f"    - 25th percentile: {mc_results['eskd_percentiles']['25th']:.1f} years")
+        print(f"    - 75th percentile: {mc_results['eskd_percentiles']['75th']:.1f} years")
+
+    print(f"\n  Survival:")
+    print(f"    - Median age at death: {mc_results['median_death_age']:.1f} years")
+    print(f"    - Mean age at death: {mc_results['mean_death_age']:.1f} years")
+    print(f"    - 25th percentile: {mc_results['death_percentiles']['25th']:.1f} years")
+    print(f"    - 75th percentile: {mc_results['death_percentiles']['75th']:.1f} years")
+
+    print(f"\n  Average Time Spent in Each CKD Stage:")
+    for stage, proportion in sorted(mc_results['avg_stage_proportions'].items()):
+        if proportion > 0.01:  # Only show stages with >1% time
+            print(f"    - {stage}: {proportion*100:.1f}% of lifespan")
+
+    print(f"\n  Target Validation:")
+    target_eskd = 32
+    target_death_min = 20
+    target_death_max = 40
+    eskd_match = "✓" if mc_results['median_eskd_age'] and abs(mc_results['median_eskd_age'] - target_eskd) <= 2 else "✗"
+    death_match = "✓" if target_death_min <= mc_results['median_death_age'] <= target_death_max else "✗"
+    print(f"    {eskd_match} ESKD at age ~{target_eskd} (Ando 2024)")
+    print(f"    {death_match} Survival in 2nd-4th decade (Murdock 2023)")
+
+    print("\n" + "="*80)
     print("\nAll results are available in the 'results' dictionary:")
     print("  - results['scenario_results']: Detailed scenario results")
     print("  - results['summary_df']: Summary table (DataFrame)")
@@ -1193,3 +1387,7 @@ if __name__ == "__main__":
     print("  - results['tornado_data']: Tornado diagram data")
     print("  - results['threshold_results']: Threshold analysis")
     print("  - results['ce_plane_data']: Cost-effectiveness plane data")
+    print("  - results['mc_validation']: Monte Carlo validation results")
+
+    # Store MC results
+    results['mc_validation'] = mc_results

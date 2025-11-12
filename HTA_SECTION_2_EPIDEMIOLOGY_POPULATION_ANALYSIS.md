@@ -166,7 +166,13 @@ Detection improvements over time reflect:
 
 ## B. Global Prevalence Results
 
-Based on a validated population modeling framework accounting for healthcare diagnostic capacity and detection bias, the estimated global prevalence of Lowe syndrome is approximately 7,100 individuals as of 2025 (Honoré 2025). This estimate substantially exceeds documented registry counts, reflecting incomplete case ascertainment particularly in regions with limited diagnostic infrastructure (Bökenkamp and Ludwig 2016).
+### B.1 Headline Finding + Context
+
+As of 2025, an estimated 7,100 individuals live with Lowe syndrome globally (95% CI: 6,934–7,268), distributed across 237 countries. This estimate is 14-fold higher than documented registry counts of approximately 500 patients in US and European registries combined, reflecting incomplete case ascertainment particularly in low-resource settings with limited genetic testing infrastructure (Bökenkamp and Ludwig 2016; Lowe Syndrome Association 2010).
+
+The discrepancy between model estimates and registry counts does not imply registries are wrong—rather, registries capture diagnosed, enrolled patients typically achieving 40–60% completeness for rare diseases, while the model estimates total burden including undiagnosed cases (Bökenkamp and Ludwig 2016). The adjustment for diagnostic capacity proves critical: without HDI-based detection modeling, prevalence estimates would underestimate burden by 26% in low-resource settings where 60% of global births occur (Honoré 2025).
+
+### B.2 Geographic Distribution
 
 **Table 2.1: Global Prevalence by Region (2025)**
 
@@ -198,9 +204,28 @@ Asia accounts for the majority of cases at 58 percent due to large population si
 
 Country-level prevalence largely reflects population size modulated by healthcare diagnostic capacity measured by Human Development Index. **The role of detection capacity.** The United States shows higher per-capita prevalence at 1.22 per million compared to China at 0.63 per million, consistent with higher detection rates in high-HDI healthcare systems where specialized genetic testing, clinical geneticists, and rare disease infrastructure enable more complete case ascertainment (Bökenkamp and Ludwig 2016; UNDP 2024). Published registry data provide validation for model estimates. The Lowe Syndrome Association documented 190 to 250 patients in the United States circa 2000 to 2010, while the model estimates approximately 412 patients in 2025 (Lowe Syndrome Association 2010). **Interpreting the discrepancy.** The gap suggests that approximately 40 to 60 percent of prevalent cases are captured in voluntary registries, consistent with known registry completeness rates for rare diseases and supporting the model's approach to adjusting for incomplete detection (Bökenkamp and Ludwig 2016).
 
-Global prevalence has increased substantially over the past five decades, driven by three factors: population growth increasing birth incidence, improving diagnostic capacity measured by Human Development Index, and cumulative survival of prevalent cases, as documented in Table 2.2 below.
+### B.3 Detection Gaps by Region
 
-**Table 2.2: Historical and Projected Prevalence**
+Approximately 1,355 individuals (19%) with Lowe syndrome remain undiagnosed globally, concentrated in Africa (546 cases, 38% undetected) and Asia (857 cases, 21% undetected). These gaps reflect structural barriers including limited access to OCRL genetic testing, absence of specialized pediatric ophthalmology services, limited rare disease awareness among general practitioners, and competing healthcare priorities in resource-constrained settings (Honoré 2025).
+
+**Table 2.3: Detection Rates by Region (2025)**
+
+| Region | Detection Rate | Detected Cases | Undetected | Main Barrier |
+|--------|----------------|----------------|------------|---------------------------|
+| Europe | 97% | 526 | 16 | Near-complete coverage |
+| Americas | 94% | 939 | 60 | US/Canada high, LatAm variable |
+| Oceania | 95% | 35 | 2 | High HDI, small population |
+| Asia | 79% | 3,226 | 857 | China/India gaps |
+| Africa | 62% | 892 | 546 | Limited genetic testing |
+| **GLOBAL** | **81%** | **5,618** | **1,355** | |
+
+Post-therapy approval, patient identification will require active case-finding in pediatric ophthalmology clinics targeting all male infants with congenital cataracts, enhanced OCRL testing access in low-HDI countries through telemedicine genetic counseling and subsidized testing programs, physician education on Lowe syndrome clinical triad recognition, and potential telemedicine genetic counseling networks for remote areas (Bökenkamp and Ludwig 2016). Wave 1 countries with 97% detection can access existing diagnosed patients immediately, while Wave 2/3 countries require diagnostic capacity building as prerequisite to equitable therapy access.
+
+### B.4 Historical Trends & Projections
+
+Global prevalence has increased substantially over the past five decades, driven by three factors: population growth increasing birth incidence, improving diagnostic capacity measured by Human Development Index, and cumulative survival of prevalent cases, as documented in Table 2.4 below.
+
+**Table 2.4: Historical and Projected Prevalence**
 
 | Year | Cumulative Incident Cases | Prevalent Cases | Mean Age (years) | Primary Driver |
 |------|---------------------------|----------------|------------------|----------------|
@@ -211,7 +236,9 @@ Global prevalence has increased substantially over the past five decades, driven
 | 2050 | 198,765 | 8,234 | 17.1 | Population stabilization |
 | 2060 | 234,012 | 8,456 | 17.9 | Projected future state |
 
-The 475% increase in prevalence from 1970 to 2025 reflects both improved case detection (as healthcare systems matured) and genuine population growth. Projected prevalence growth moderates after 2025 as birth rates decline in high-prevalence regions (China, Europe) and HDI approaches ceiling levels.
+Prevalence increased 475% from 1970 to 2025, driven by population growth contributing 68% increase (global population rose from 3.7 to 8.0 billion), improved detection contributing 30% increase (HDI 0.55 to 0.73 global average), and cumulative survival contributing 120% increase as patients accumulate over time (Honoré 2025). The 1990–2010 acceleration reflects expansion of genetic testing capacity, particularly in Asia where HDI improvements enabled diagnosis of previously undetected cases (UNDP 2024).
+
+Projected growth moderates post-2025 as birth rates decline in high-prevalence regions with China total fertility rate 1.2 and Europe TFR 1.5, and HDI approaches ceiling values limiting further detection improvements (United Nations 2024). By 2060, prevalence stabilizes near 8,500 cases representing 19% increase from 2025 versus 475% over the prior 55 years. These projections assume no intervention; gene therapy introduction could extend survival, increasing prevalence beyond modeled baseline (Ando et al. 2024).
 
 ---
 

@@ -407,7 +407,7 @@ Pre-launch activities recommended 12–18 months before approval include collabo
 
 ---
 
-## D. Diagnostic Landscape
+## E. Diagnostic Landscape
 
 Identifying the approximately 5,100 treatment-eligible patients globally requires robust diagnostic pathways from initial clinical presentation through genetic confirmation. The diagnostic landscape varies substantially across market access waves, with implications for patient identification timelines, pre-treatment workup protocols, and family cascade screening strategies. This section characterizes the clinical diagnostic journey, genetic testing infrastructure by geography, and considerations for newborn screening expansion.
 
@@ -434,7 +434,7 @@ Presentation occurs from birth to three months with dense bilateral congenital c
 
 ---
 
-## E. Prevalence by Age and Treatment Window
+## F. Prevalence by Age and Treatment Window
 
 Beyond total eligible population counts, age distribution within the prevalent population determines optimal treatment timing, expected quality-adjusted life year gains, and steady-state market dynamics following initial backlog clearance. Age at treatment represents a critical determinant of therapeutic benefit given the progressive nature of renal decline and importance of preserving nephron mass before irreversible damage occurs. This section analyzes age distribution patterns and defines treatment windows balancing clinical benefit against practical feasibility.
 
@@ -480,7 +480,7 @@ The therapeutic window for gene therapy is defined by the balance between early 
 
 ---
 
-## F. Regional Market Considerations
+## G. Regional Market Considerations
 
 Translating global epidemiological burden into actionable market access strategies requires country-level analysis of prevalent cases, healthcare infrastructure capacity, regulatory pathways, and budget impact within specific payer systems. Regional heterogeneity in diagnostic capacity, reimbursement frameworks, and rare disease infrastructure creates distinct market dynamics across Wave 1, 2, and 3 launch geographies. This section provides country-specific prevalence estimates for key markets and assesses infrastructure prerequisites for successful therapy launch. **Country-specific prevalence in key Wave 1 markets.** Table 2.7 below provides prevalence estimates, treatment-eligible populations, and health technology assessment timelines for primary launch countries.
 
@@ -612,7 +612,7 @@ Translating global epidemiological burden into actionable market access strategi
 
 ---
 
-## G. Implications for Clinical Development and Market Access
+## H. Implications for Clinical Development and Market Access
 
 The epidemiological landscape characterized above carries direct implications for clinical trial design, regulatory approval strategies, and post-marketing surveillance requirements. Ultra-rare disease development faces distinct challenges including limited patient availability for randomized trials, reliance on natural history comparators, and necessity of long-term registry-based evidence generation. This section translates population estimates into actionable recommendations for clinical development planning and evidence generation strategies supporting regulatory approval and reimbursement decisions. **Patient recruitment feasibility for clinical trials.** Clinical trial considerations for
 
@@ -688,7 +688,7 @@ Given rarity of Lowe syndrome, randomized controlled trial may be:
 
 ---
 
-## H. Summary and Key Findings
+## I. Summary and Key Findings
 
 **Global burden estimates.**
 - **~7,100 individuals** living with Lowe syndrome worldwide (2025)

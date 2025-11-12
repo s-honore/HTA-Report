@@ -649,6 +649,83 @@ class ScenarioAnalysis:
 
         return pd.DataFrame(summary_data)
 
+    def value_based_pricing_analysis(
+        self,
+        thresholds: List[float] = None
+    ) -> pd.DataFrame:
+        """
+        Calculate maximum justifiable gene therapy price for each scenario at various
+        cost-effectiveness thresholds.
+
+        This is the PRIMARY economic analysis: rather than assuming a price and
+        calculating ICER, we solve for the maximum price that achieves each threshold.
+
+        Formula: Max Price = (Threshold × Incremental QALYs) - Incremental Costs (excl. GT)
+
+        Args:
+            thresholds: List of ICER thresholds ($/QALY). Default: [100K, 150K, 300K]
+
+        Returns:
+            DataFrame with columns:
+            - Scenario name
+            - Incremental QALYs
+            - evLYG
+            - Life Years Gained
+            - Max price at each threshold
+        """
+        if thresholds is None:
+            thresholds = [100000, 150000, 300000]  # Standard thresholds
+
+        if not self.results:
+            raise ValueError("Must run run_all_scenarios() first")
+
+        baseline = self.results['Scenario 0: Natural History']
+        pricing_data = []
+
+        for scenario_name, results in self.results.items():
+            # Skip natural history
+            if scenario_name == 'Scenario 0: Natural History':
+                continue
+
+            # Get health outcomes
+            inc_qalys = results.get('incremental_qalys', 0)
+            evlyg = results.get('evlyg', 0)
+            inc_life_years = results.get('incremental_life_years', 0)
+
+            # Calculate costs excluding gene therapy price
+            # Total costs include: GT acquisition + monitoring + CKD management
+            # We need to subtract GT acquisition to get other costs
+            gt_price = self.params.gene_therapy_cost
+            total_costs = results['total_costs']
+            baseline_costs = baseline['total_costs']
+
+            # Incremental costs excluding gene therapy acquisition price
+            # = (total intervention costs - GT price) - baseline costs
+            costs_excl_gt = (total_costs - gt_price) - baseline_costs
+
+            # For each threshold, solve for maximum price
+            max_prices = {}
+            for threshold in thresholds:
+                # Max price = (threshold × inc_QALYs) - costs_excl_gt
+                # This ensures: (costs_excl_gt + max_price) / inc_QALYs = threshold
+                if inc_qalys > 0:
+                    max_price = (threshold * inc_qalys) - costs_excl_gt
+                    max_prices[f'${threshold/1000:.0f}K/QALY'] = max(0, max_price)
+                else:
+                    max_prices[f'${threshold/1000:.0f}K/QALY'] = 0
+
+            row = {
+                'Scenario': scenario_name,
+                'Incremental QALYs': inc_qalys,
+                'evLYG': evlyg,
+                'Life Years Gained': inc_life_years,
+                **max_prices
+            }
+            pricing_data.append(row)
+
+        df = pd.DataFrame(pricing_data)
+        return df
+
 
 class SensitivityAnalysis:
     """

@@ -504,34 +504,42 @@ class ScenarioAnalysis:
         """
         Run all four scenarios and calculate ICERs.
 
-        Scenarios:
-        0. Natural history (baseline)
-        1. Stabilization (0% decline)
-        2. 70% reduction in decline
-        3. 40% reduction in decline
+        Scenarios based on predicted enzyme restoration levels:
+        0. Natural history (baseline) - no treatment
+        1. 50% enzyme restoration (carrier analogy) - 85% decline reduction
+        2. 30% enzyme restoration - 65% decline reduction
+        3. 15% enzyme restoration (minimal benefit) - 35% decline reduction
+
+        Biological rationale: Female carriers with ~50% OCRL enzyme activity
+        remain asymptomatic (Charnas 2000), suggesting gene therapy achieving
+        50% enzyme restoration should provide substantial clinical benefit.
 
         Returns:
             Dictionary with all scenario results
         """
         natural_decline = self.params.natural_decline_rate
 
-        # Define scenarios
+        # Define scenarios based on enzyme restoration levels
         scenarios = {
             'Scenario 0: Natural History': {
                 'decline_rate': natural_decline,
-                'include_gt_cost': False
+                'include_gt_cost': False,
+                'description': 'No treatment - natural disease progression'
             },
-            'Scenario 1: Stabilization (0%)': {
-                'decline_rate': 0.0,
-                'include_gt_cost': True
+            'Scenario 1: 50% Enzyme (Carrier)': {
+                'decline_rate': natural_decline * 0.15,  # 85% reduction (θ=0.85)
+                'include_gt_cost': True,
+                'description': '50% enzyme restoration - carrier analogy'
             },
-            'Scenario 2: 70% Reduction': {
-                'decline_rate': natural_decline * 0.30,  # 70% reduction = 30% of baseline
-                'include_gt_cost': True
+            'Scenario 2: 30% Enzyme': {
+                'decline_rate': natural_decline * 0.35,  # 65% reduction (θ=0.65)
+                'include_gt_cost': True,
+                'description': '30% enzyme restoration - partial benefit'
             },
-            'Scenario 3: 40% Reduction': {
-                'decline_rate': natural_decline * 0.60,  # 40% reduction = 60% of baseline
-                'include_gt_cost': True
+            'Scenario 3: 15% Enzyme (Minimal)': {
+                'decline_rate': natural_decline * 0.65,  # 35% reduction (θ=0.35)
+                'include_gt_cost': True,
+                'description': '15% enzyme restoration - minimal benefit'
             }
         }
 

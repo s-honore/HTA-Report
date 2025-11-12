@@ -181,16 +181,16 @@ For the United States, approximately 50 eligible patients at launch with 45 perc
 
 ---
 
-# Table 1—Base Case Cost-Effectiveness Results
+# Table 1—Clinical Outcomes by Scenario
 
 | Scenario | eGFR Decline (ml/min/yr) | Total Cost ($) | Total QALYs | Life Years | Time to ESKD (yr) | Incremental Cost ($) | Incremental QALYs | ICER ($/QALY) |
 |----------|--------------------------|----------------|-------------|------------|-------------------|----------------------|-------------------|---------------|
-| Natural history | 2.04 | 1,599,959 | 8.55 | 37.30 | 13 | Reference | Reference | Reference |
-| 50% Enzyme (Carrier) | 0.31 | 3,632,810 | 13.59 | 58.59 | 100 | 2,032,851 | 5.035 | 403,738 |
-| 30% Enzyme | 0.71 | 3,905,150 | 11.95 | 47.74 | 44 | 2,305,191 | 3.400 | 678,013 |
-| 15% Enzyme (Minimal) | 1.33 | 4,366,515 | 9.94 | 40.65 | 22 | 2,766,555 | 1.393 | 1,985,946 |
+| Natural history | 1.10 | 1,082,726 | 10.57 | 42.46 | 27 | Reference | Reference | Reference |
+| 50% Enzyme (Carrier) | 0.17 | 3,597,365 | 13.97 | 61.77 | 100 | 2,514,639 | 3.394 | 740,880 |
+| 30% Enzyme | 0.39 | 3,674,325 | 13.27 | 56.04 | 100 | 2,591,599 | 2.697 | 960,770 |
+| 15% Enzyme (Minimal) | 0.72 | 3,920,980 | 11.85 | 47.35 | 43 | 2,838,254 | 1.278 | 2,220,497 |
 
-*Notes:* ICER = incremental cost-effectiveness ratio. All costs in 2024 USD, discounted at 3.5 percent annually. QALY = quality-adjusted life year. eGFR = estimated glomerular filtration rate. ESKD = end-stage kidney disease. Scenario nomenclature reflects predicted enzyme restoration levels based on carrier biology: 50 percent enzyme restoration (carrier-analogous state) yields 85 percent reduction in eGFR decline; 30 percent and 15 percent restoration yield 65 percent and 35 percent reductions respectively.
+*Notes:* ICER = incremental cost-effectiveness ratio. All costs in 2024 USD, discounted at 3.5 percent annually. QALY = quality-adjusted life year. eGFR = estimated glomerular filtration rate. ESKD = end-stage kidney disease. Model empirically calibrated to match observed median ESKD onset at age 32 (year 27) from Ando et al. (2024). Scenario nomenclature reflects predicted enzyme restoration levels based on carrier biology: 50 percent enzyme restoration (carrier-analogous state) yields 85 percent reduction in eGFR decline; 30 percent and 15 percent restoration yield 65 percent and 35 percent reductions respectively.
 
 ---
 
@@ -232,9 +232,8 @@ For the United States, approximately 50 eligible patients at launch with 45 perc
 | Luxturna | RPE65-mediated retinal dystrophy | 2017 | $850,000 | $435,000–$851,000 | Whittington et al. 2018 |
 | Elevidys | Duchenne muscular dystrophy | 2023 | $3,200,000 | $1,100,000–$2,100,000 | ICER 2023 (est.) |
 | Hemgenix | Hemophilia B | 2022 | $3,500,000 | $181,000–$262,000 | ICER 2022 |
-| **Lowe Syndrome GT** | **Lowe syndrome** | **Not approved** | **$3,000,000 (ref.)** | **$404,000 (Scenario 1)** | **This analysis** |
 
-*Notes:* ICER ranges reflect variation across published economic evaluations using different time horizons, discount rates, and modeling assumptions. Lowe syndrome ICER ($403,738/QALY for Scenario 1: 50% enzyme restoration) falls within the range of approved gene therapies for ultra-rare diseases. Hemgenix demonstrates favorable cost-effectiveness due to substantial avoided factor IX replacement costs in hemophilia B natural history. Zolgensma and Elevidys show higher ICERs but achieved regulatory approval and market access through managed access agreements, outcomes-based contracts, and ultra-rare disease frameworks permitting thresholds above conventional $100K–$150K/QALY levels.
+*Notes:* ICER ranges reflect variation across published economic evaluations using different time horizons, discount rates, and modeling assumptions. Approved gene therapies show wide ICER variation ($181K–$1.9M/QALY), establishing precedent that payers accept ultra-rare disease gene therapies well above conventional $100K–$150K/QALY thresholds. Hemgenix demonstrates favorable cost-effectiveness due to substantial avoided factor IX replacement costs in hemophilia B natural history. Zolgensma and Elevidys show higher ICERs but achieved regulatory approval and market access through managed access agreements, outcomes-based contracts, and ultra-rare disease frameworks permitting flexible thresholds. This comparative context informs value-based pricing ranges for Lowe syndrome gene therapy (Section III.A).
 
 ---
 

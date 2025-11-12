@@ -504,34 +504,42 @@ class ScenarioAnalysis:
         """
         Run all four scenarios and calculate ICERs.
 
-        Scenarios:
-        0. Natural history (baseline)
-        1. Stabilization (0% decline)
-        2. 70% reduction in decline
-        3. 40% reduction in decline
+        Scenarios based on predicted enzyme restoration levels:
+        0. Natural history (baseline) - no treatment
+        1. 50% enzyme restoration (carrier analogy) - 85% decline reduction
+        2. 30% enzyme restoration - 65% decline reduction
+        3. 15% enzyme restoration (minimal benefit) - 35% decline reduction
+
+        Biological rationale: Female carriers with ~50% OCRL enzyme activity
+        remain asymptomatic (Charnas 2000), suggesting gene therapy achieving
+        50% enzyme restoration should provide substantial clinical benefit.
 
         Returns:
             Dictionary with all scenario results
         """
         natural_decline = self.params.natural_decline_rate
 
-        # Define scenarios
+        # Define scenarios based on enzyme restoration levels
         scenarios = {
             'Scenario 0: Natural History': {
                 'decline_rate': natural_decline,
-                'include_gt_cost': False
+                'include_gt_cost': False,
+                'description': 'No treatment - natural disease progression'
             },
-            'Scenario 1: Stabilization (0%)': {
-                'decline_rate': 0.0,
-                'include_gt_cost': True
+            'Scenario 1: 50% Enzyme (Carrier)': {
+                'decline_rate': natural_decline * 0.15,  # 85% reduction (θ=0.85)
+                'include_gt_cost': True,
+                'description': '50% enzyme restoration - carrier analogy'
             },
-            'Scenario 2: 70% Reduction': {
-                'decline_rate': natural_decline * 0.30,  # 70% reduction = 30% of baseline
-                'include_gt_cost': True
+            'Scenario 2: 30% Enzyme': {
+                'decline_rate': natural_decline * 0.35,  # 65% reduction (θ=0.65)
+                'include_gt_cost': True,
+                'description': '30% enzyme restoration - partial benefit'
             },
-            'Scenario 3: 40% Reduction': {
-                'decline_rate': natural_decline * 0.60,  # 40% reduction = 60% of baseline
-                'include_gt_cost': True
+            'Scenario 3: 15% Enzyme (Minimal)': {
+                'decline_rate': natural_decline * 0.65,  # 35% reduction (θ=0.35)
+                'include_gt_cost': True,
+                'description': '15% enzyme restoration - minimal benefit'
             }
         }
 
@@ -640,6 +648,83 @@ class ScenarioAnalysis:
             summary_data.append(row)
 
         return pd.DataFrame(summary_data)
+
+    def value_based_pricing_analysis(
+        self,
+        thresholds: List[float] = None
+    ) -> pd.DataFrame:
+        """
+        Calculate maximum justifiable gene therapy price for each scenario at various
+        cost-effectiveness thresholds.
+
+        This is the PRIMARY economic analysis: rather than assuming a price and
+        calculating ICER, we solve for the maximum price that achieves each threshold.
+
+        Formula: Max Price = (Threshold × Incremental QALYs) - Incremental Costs (excl. GT)
+
+        Args:
+            thresholds: List of ICER thresholds ($/QALY). Default: [100K, 150K, 300K]
+
+        Returns:
+            DataFrame with columns:
+            - Scenario name
+            - Incremental QALYs
+            - evLYG
+            - Life Years Gained
+            - Max price at each threshold
+        """
+        if thresholds is None:
+            thresholds = [100000, 150000, 300000]  # Standard thresholds
+
+        if not self.results:
+            raise ValueError("Must run run_all_scenarios() first")
+
+        baseline = self.results['Scenario 0: Natural History']
+        pricing_data = []
+
+        for scenario_name, results in self.results.items():
+            # Skip natural history
+            if scenario_name == 'Scenario 0: Natural History':
+                continue
+
+            # Get health outcomes
+            inc_qalys = results.get('incremental_qalys', 0)
+            evlyg = results.get('evlyg', 0)
+            inc_life_years = results.get('incremental_life_years', 0)
+
+            # Calculate costs excluding gene therapy price
+            # Total costs include: GT acquisition + monitoring + CKD management
+            # We need to subtract GT acquisition to get other costs
+            gt_price = self.params.gene_therapy_cost
+            total_costs = results['total_costs']
+            baseline_costs = baseline['total_costs']
+
+            # Incremental costs excluding gene therapy acquisition price
+            # = (total intervention costs - GT price) - baseline costs
+            costs_excl_gt = (total_costs - gt_price) - baseline_costs
+
+            # For each threshold, solve for maximum price
+            max_prices = {}
+            for threshold in thresholds:
+                # Max price = (threshold × inc_QALYs) - costs_excl_gt
+                # This ensures: (costs_excl_gt + max_price) / inc_QALYs = threshold
+                if inc_qalys > 0:
+                    max_price = (threshold * inc_qalys) - costs_excl_gt
+                    max_prices[f'${threshold/1000:.0f}K/QALY'] = max(0, max_price)
+                else:
+                    max_prices[f'${threshold/1000:.0f}K/QALY'] = 0
+
+            row = {
+                'Scenario': scenario_name,
+                'Incremental QALYs': inc_qalys,
+                'evLYG': evlyg,
+                'Life Years Gained': inc_life_years,
+                **max_prices
+            }
+            pricing_data.append(row)
+
+        df = pd.DataFrame(pricing_data)
+        return df
 
 
 class SensitivityAnalysis:
@@ -971,6 +1056,26 @@ def run_full_analysis(
         summary_df.to_csv(f"{output_dir}/scenario_results.csv", index=False)
         print(f"Scenario results saved to: {output_dir}/scenario_results.csv")
 
+    # Run value-based pricing analysis (PRIMARY ANALYSIS)
+    print("\n" + "-" * 80)
+    print("VALUE-BASED PRICING ANALYSIS (PRIMARY)")
+    print("-" * 80)
+    pricing_df = scenario_analysis.value_based_pricing_analysis(
+        thresholds=[100000, 150000, 300000]
+    )
+    print("\nMaximum Justifiable Gene Therapy Prices by Scenario:")
+    print(pricing_df.to_string(index=False))
+    print()
+    print("Interpretation:")
+    print("  - $100K/QALY: Conventional US threshold")
+    print("  - $150K/QALY: High-value threshold for severe conditions")
+    print("  - $300K/QALY: Ultra-rare disease threshold (e.g., NICE HST)")
+    print()
+
+    if save_results:
+        pricing_df.to_csv(f"{output_dir}/value_based_pricing.csv", index=False)
+        print(f"Value-based pricing saved to: {output_dir}/value_based_pricing.csv")
+
     # Run one-way sensitivity analysis
     print("-" * 80)
     print("ONE-WAY SENSITIVITY ANALYSIS")
@@ -1054,6 +1159,7 @@ def run_full_analysis(
     return {
         'scenario_results': scenario_results,
         'summary_df': summary_df,
+        'value_based_pricing': pricing_df,  # PRIMARY ANALYSIS
         'sensitivity_results': owa_results,
         'tornado_data': tornado_data,
         'threshold_results': threshold_results,

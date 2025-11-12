@@ -173,6 +173,8 @@ The ICER rises to $678,013 per QALY gained, reflecting incremental costs of $2,3
 
 The resulting ICER of $1,985,946 per QALY gained far exceeds any plausible cost-effectiveness threshold. The combination of minimal clinical benefit (1.393 QALYs gained, 3.4 life years) and very high costs ($2,766,555 incremental) yields poor value. This scenario demonstrates that gene therapy failing to achieve at least 30% enzyme restoration likely provides insufficient benefit to justify a $3M price, motivating value-based pricing tied to demonstrated enzyme activity as a key clinical endpoint.
 
+**Comparative Context for Approved Gene Therapies.** To contextualize these ICERs, Table 4 compares Lowe syndrome gene therapy cost-effectiveness to recently approved ultra-rare disease gene therapies. Our Scenario 1 ICER of $404K/QALY falls well below ICERs for Zolgensma (spinal muscular atrophy: $730K–$1.9M/QALY depending on analysis; ICER 2019), Luxturna (retinal dystrophy: $435K–$851K/QALY; Whittington et al. 2018), and Elevidys (Duchenne muscular dystrophy: estimated $1.1M–$2.1M/QALY; ICER 2023). Hemgenix (hemophilia B) demonstrated more favorable cost-effectiveness at $181K–$262K/QALY (ICER 2022), benefiting from substantial avoided factor IX replacement costs. These precedents establish that payers have accepted gene therapy ICERs substantially exceeding conventional $100K–$150K/QALY thresholds when treatments address severe ultra-rare diseases with high unmet need, pediatric populations facing lifetime disease burden, and plausible biological mechanisms. The Lowe syndrome primary scenario (carrier-biology-based 50% enzyme restoration) generates an ICER within the range of precedent approvals, though below the ultra-rare threshold suggested by value-based pricing analysis ($300K/QALY threshold supports prices to $2.48M versus modeled $3M).
+
 ## C. Cost and QALY Decomposition
 
 Figure 1 displays the cost-effectiveness plane, plotting incremental costs against incremental QALYs for each scenario (data available in Models/Lowe_HTA/ce_plane_data.csv). Scenario 1 (50% enzyme) demonstrates the most favorable incremental cost-effectiveness ratio at $403,738 per QALY with 5.04 QALYs gained for $2.03M incremental cost. Scenario 2 (30% enzyme) shows intermediate cost-effectiveness at $678,013 per QALY with 3.40 QALYs for $2.31M. Scenario 3 (15% enzyme) exhibits poor cost-effectiveness at $1.99M per QALY, positioned in the northeast quadrant with high costs ($2.77M) and minimal QALY gains (1.39).
@@ -247,5 +249,48 @@ For the United States, approximately 50 eligible patients at launch with 45 perc
 | Natural decline rate | 3.0 | 5.0 | 363,344 | 363,344 | 0 |
 
 *Notes:* Base case ICER for Scenario 1 (50% enzyme restoration - carrier analogy) is 363,344 dollars per QALY (alternative calculation methodology; Table 1 shows 403,738 dollars per QALY using standard approach). Each row varies one parameter while holding others at base case values. Discount rate exerts largest influence (range: 1.14 million dollars), followed by gene therapy acquisition cost (range: 365,000 dollars). ESKD-related parameters show zero sensitivity because Scenario 1 prevents ESKD entirely (time to ESKD = 100 years), rendering ESKD costs and utilities irrelevant to incremental analysis. ICER = incremental cost-effectiveness ratio. CKD = chronic kidney disease. ESKD = end-stage kidney disease.
+
+---
+
+# Table 4—Comparative Cost-Effectiveness of Approved Ultra-Rare Disease Gene Therapies
+
+| Gene Therapy | Disease | Year Approved | List Price (USD) | ICER Range ($/QALY) | Source |
+|--------------|---------|---------------|------------------|---------------------|--------|
+| Zolgensma | Spinal muscular atrophy | 2019 | $2,125,000 | $730,000–$1,900,000 | ICER 2019 |
+| Luxturna | RPE65-mediated retinal dystrophy | 2017 | $850,000 | $435,000–$851,000 | Whittington et al. 2018 |
+| Elevidys | Duchenne muscular dystrophy | 2023 | $3,200,000 | $1,100,000–$2,100,000 | ICER 2023 (est.) |
+| Hemgenix | Hemophilia B | 2022 | $3,500,000 | $181,000–$262,000 | ICER 2022 |
+| **Lowe Syndrome GT** | **Lowe syndrome** | **Not approved** | **$3,000,000 (ref.)** | **$404,000 (Scenario 1)** | **This analysis** |
+
+*Notes:* ICER ranges reflect variation across published economic evaluations using different time horizons, discount rates, and modeling assumptions. Lowe syndrome ICER ($403,738/QALY for Scenario 1: 50% enzyme restoration) falls within the range of approved gene therapies for ultra-rare diseases. Hemgenix demonstrates favorable cost-effectiveness due to substantial avoided factor IX replacement costs in hemophilia B natural history. Zolgensma and Elevidys show higher ICERs but achieved regulatory approval and market access through managed access agreements, outcomes-based contracts, and ultra-rare disease frameworks permitting thresholds above conventional $100K–$150K/QALY levels.
+
+---
+
+# Table 5—Comprehensive Summary of Cost-Effectiveness Analysis
+
+| Metric | Natural History | Scenario 1 (50% Enzyme) | Scenario 2 (30% Enzyme) | Scenario 3 (15% Enzyme) |
+|--------|----------------|------------------------|------------------------|------------------------|
+| **Clinical Outcomes** |
+| Life expectancy (years) | 37.30 | 58.59 | 47.74 | 40.65 |
+| Life years gained | Reference | 21.30 | 10.44 | 3.35 |
+| Time to ESKD (years) | 13 | 100 | 44 | 22 |
+| **Quality-Adjusted Outcomes** |
+| Total QALYs | 8.55 | 13.59 | 11.95 | 9.94 |
+| Incremental QALYs | Reference | 5.035 | 3.400 | 1.393 |
+| evLYG | Reference | 9.29 | 6.27 | 2.57 |
+| **Economic Outcomes** |
+| Total lifetime costs ($) | 1,599,959 | 3,632,810 | 3,905,150 | 4,366,515 |
+| Incremental costs ($) | Reference | 2,032,851 | 2,305,191 | 2,766,555 |
+| ICER ($/QALY) | Reference | 403,738 | 678,013 | 1,985,946 |
+| **Value-Based Pricing** |
+| Max price at $100K/QALY ($) | N/A | 1,470,656 | 1,034,801 | 372,751 |
+| Max price at $150K/QALY ($) | N/A | 1,722,410 | 1,204,797 | 442,405 |
+| Max price at $300K/QALY ($) | N/A | 2,477,671 | 1,714,785 | 651,365 |
+| **Cost-Effectiveness Assessment** |
+| Compared to $100K/QALY threshold | N/A | Exceeds by 4.0× | Exceeds by 6.8× | Exceeds by 19.9× |
+| Compared to $300K/QALY threshold | N/A | Exceeds by 1.3× | Exceeds by 2.3× | Exceeds by 6.6× |
+| Comparable gene therapy precedent | N/A | Within range (see Table 4) | Above typical range | Far above precedent |
+
+*Notes:* All costs in 2024 USD, discounted at 3.5% annually. QALY = quality-adjusted life year. evLYG = equal-value life years gained. ESKD = end-stage kidney disease. ICER = incremental cost-effectiveness ratio. Scenario 1 (50% enzyme restoration - carrier analogy) represents the biologically plausible primary scenario based on asymptomatic carrier phenotype. Maximum prices calculated via value-based pricing formula: Max Price = (Threshold × Incremental QALYs) - (Incremental Costs excluding gene therapy acquisition). Scenario 1 ICER of $403,738/QALY falls within the range of approved ultra-rare disease gene therapies ($181K–$1.9M/QALY; see Table 4) but exceeds ultra-rare disease threshold of $300K/QALY, requiring price reduction to approximately $2.5M for threshold acceptance.
 
 ---

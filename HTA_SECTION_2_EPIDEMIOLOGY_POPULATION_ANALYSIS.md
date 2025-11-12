@@ -248,18 +248,17 @@ Projected growth moderates post-2025 as birth rates decline in high-prevalence r
 
 ---
 
-## C. Target Population for Treatment
+## C. Treatment-Eligible Population
 
-Having established the global epidemiological burden of Lowe syndrome at approximately 7,100 prevalent individuals, we now identify the subset of this population eligible for gene therapy intervention. Treatment eligibility depends on age-related disease progression, renal function status, and geographic access to therapy following regulatory approval. Defining this target population enables market sizing, clinical trial planning, and health technology assessment budget impact analysis.
+### C.1 Eligibility Criteria & Rationale
 
-Gene therapy for Lowe syndrome is most likely to demonstrate efficacy when administered before irreversible organ damage occurs. The target population for treatment is defined by:
+Gene therapy for Lowe syndrome is most likely to demonstrate efficacy when administered before irreversible organ damage occurs. Primary eligibility criteria for gene therapy are age less than 21 years at treatment, pre-ESKD renal status with eGFR at least 15 mL/min/1.73m², and confirmed pathogenic OCRL mutation (Ando et al. 2024).
 
-**Primary Eligibility Criteria:**
-- **Age:** <21 years at time of treatment
-- **Renal status:** Pre-ESKD (eGFR ≥15 mL/min/1.73m²)
-- **Genetic confirmation:** Pathogenic OCRL mutation identified
+The progressive renal disease trajectory shows proximal tubule dysfunction beginning in infancy but end-stage kidney disease typically occurring in late 20s to early 30s at median age 28 to 32 years, establishing a therapeutic window where treatment before age 21 targets patients with functional nephrons still amenable to preservation (Ando et al. 2024; Zaniew et al. 2018). Younger patients possess longer life expectancy maximizing lifetime quality-adjusted life year gains. Precedent from other gene therapies demonstrates Zolgensma for spinal muscular atrophy achieving greater efficacy with earlier treatment, supporting age-dependent benefit hypothesis (Mendell et al. 2017; FDA 2019).
 
-The progressive renal disease trajectory shows proximal tubule dysfunction beginning in infancy but end-stage kidney disease typically occurring in late 20s to early 30s at median age 28 to 32 years, establishing a therapeutic window where treatment before age 21 targets patients with functional nephrons still amenable to preservation (Ando et al. 2024; Zaniew et al. 2018). **Maximizing therapeutic benefit.** Younger patients possess longer life expectancy maximizing lifetime quality-adjusted life year gains. Precedent from other gene therapies demonstrates Zolgensma for spinal muscular atrophy achieving greater efficacy with earlier treatment (Mendell et al. 2017; FDA 2019).
+Patients excluded from initial eligibility include those age 21 or older with ESKD where irreversible damage limits benefit potential, advanced CKD with eGFR below 15 where limited nephron mass remains to preserve, and cases lacking genetic confirmation where misdiagnosis risk exists (Bökenkamp and Ludwig 2016). Future label expansion may include older patients if early-treated cohorts demonstrate benefit at advanced disease stages.
+
+### C.2 Age Distribution Analysis
 
 **Age Distribution of Prevalent Population (2025):**
 
@@ -275,9 +274,27 @@ The progressive renal disease trajectory shows proximal tubule dysfunction begin
 | 41+ years | 183 | 3% | 100% |
 | **Total** | **7,099** | **100%** | - |
 
-Approximately 72 percent of prevalent patients—5,106 individuals globally—fall within the target age range below 21 years for treatment. **Geographic distribution of eligible patients.** Regional patterns in treatment-eligible populations shown in Table 2.3 below reflect both overall disease burden and age structure differences across populations.
+Approximately 72 percent of prevalent patients—5,106 individuals globally—fall within the target age range below 21 years for treatment. Age distribution exhibits median age 14.0 years, mean age 15.8 years, and interquartile range 7.2 to 22.6 years, with maximum observed age 58 years representing a patient born in 1967 surviving substantially beyond typical life expectancy (Honoré 2025). Concentration in childhood and adolescence reflects progressive disease reducing survival past third decade.
 
-**Table 2.3: Treatment-Eligible Population by Region (Age <21, 2025)**
+### C.3 Therapeutic Window Definition
+
+The therapeutic window balances early enough administration before irreversible nephron loss against late enough administration after definitive diagnosis and medical stability. Three treatment age bands define optimal intervention timing based on risk-benefit considerations (Ando et al. 2024).
+
+**Early Intervention (Ages 2-5):** 694 patients (9.8%)
+
+Maximum nephron preservation potential provides rationale for treatment in this age band. Advantages include highest baseline eGFR at 75–85 mL/min/1.73m² and longest potential benefit duration. Challenges include higher AAV dose per kilogram due to smaller body size, limited baseline renal function data in very young children complicating slope measurement, and longer follow-up required to assess durability. Regulatory pathway may require pediatric investigation plan (Zaniew et al. 2018).
+
+**Standard Intervention (Ages 6-15):** 2,553 patients (36.0%)
+
+Established renal baseline and optimal risk-benefit profile provide rationale for this age band. Advantages include clear documentation of eGFR decline trajectory, better long-term outcome data feasible within reasonable timeframe, lower AAV dose requirements, and most clinical trial data expected from this band. This represents the recommended primary target population for initial market authorization (Ando et al. 2024).
+
+**Late Intervention (Ages 16-20):** 1,064 patients (15.0%)
+
+Most patients remain pre-ESKD providing rationale for treatment despite more advanced disease. Considerations include more advanced disease at treatment baseline, reduced QALY gains due to shorter remaining lifespan, but potential to still prevent or delay ESKD onset. May be excluded from initial approval pending demonstration of benefit in younger cohorts. Future label expansion candidate if ages 6-15 cohort demonstrates benefit (Zaniew et al. 2018).
+
+### C.4 Regional Eligibility Patterns
+
+**Table 2.5: Treatment-Eligible Population by Region (Age <21, 2025)**
 
 | Region | Total Prevalent Cases | Eligible Cases (<21 yrs) | % Eligible | Mean Age (years) |
 |--------|----------------------|-------------------------|------------|------------------|
@@ -288,10 +305,7 @@ Approximately 72 percent of prevalent patients—5,106 individuals globally—fa
 | Oceania | 37 | 26 | 70% | 19.1 |
 | **Total** | **7,099** | **5,095** | **72%** | **15.8** |
 
-African patients have highest proportion eligible at 74 percent due to younger mean age, reflecting more recent diagnoses and potentially shorter survival in low-resource settings. **Market access waves and launch strategy.** Gene therapy market access follows regulatory approval timelines, with staggered launches across geographic markets based on:
-- Regulatory pathway completion (FDA, EMA, other agencies)
-- Pricing and reimbursement negotiations
-- Healthcare infrastructure readiness
+Africa has highest proportion eligible at 74% due to younger mean age of 13.1 years, reflecting more recent diagnoses as HDI rises and detection improves, and potentially shorter survival in low-resource settings with limited access to ESKD care including dialysis and transplantation (UNDP 2024). Europe has lowest proportion eligible at 70% due to older patient population with mean age 18.9 years, reflecting earlier diagnosis and longer survival enabled by comprehensive supportive care (Bökenkamp and Ludwig 2016). However, absolute eligible numbers concentrate in Asia with 2,908 patients representing 57% of global eligible population, though many face access barriers in Wave 2/3 markets (see Section D). Wave 1 markets in Europe and Americas have fewer absolute eligible patients but more accessible diagnosed populations due to 95%+ detection rates versus 62-79% in Africa and Asia (Honoré 2025).
 
 **Projected Market Access Timeline:**
 

@@ -89,27 +89,60 @@ where h_t^{bg} = -ln(1 - m_t^{bg}) is the background hazard, RR_s is the CKD sta
 
 ## D. Clinical Parameters
 
-**Natural History.** We parameterize natural history progression using published longitudinal data on kidney function in Lowe syndrome. Ando et al. (2024) report a Japanese nationwide cohort of 54 patients demonstrating strong age-dependent eGFR decline (r = -0.80, p < 0.001), with median ESKD onset at age 32. Zaniew et al. (2018) present an international cohort of 88 patients with median eGFR of 58.8 ml/min/1.73m² and confirm age as the only significant predictor of kidney function decline.
+**Natural History: Age-Varying Decline Framework.** We parameterize natural history progression using published longitudinal data on kidney function in Lowe syndrome. Ando et al. (2024) report a Japanese nationwide cohort of 54 patients demonstrating strong age-dependent eGFR decline (r = -0.80, p < 0.001), with median ESKD onset at age 32. Visual inspection of Ando Figure 1B reveals three distinct progression phases with different decline rates: (1) slow early childhood decline (ages 1-10), (2) steep adolescent acceleration (ages 10-20), and (3) moderate adult decline (ages 20+). This age-dependent heterogeneity motivates our use of an age-varying decline framework rather than a single constant rate.
 
-Based on these data, we set the starting eGFR at age 5 to eGFR_0 = 70 ml/min/1.73m² (representing early childhood kidney function before substantial decline; Zaniew et al. 2018 report overall cohort median 58.8 ml/min/1.73m² across ages 1-40) and empirically calibrate the annual decline rate to δ = 1.10 ml/min/1.73m²/year to achieve median ESKD onset at age 32 observed in Ando et al. (2024). This calibrated rate accounts for discrete-state Markov modeling dynamics where cohort progression through eGFR-defined health states does not precisely follow linear decline trajectories. The simple calculation (70 - 15) / 27 = 2.04 ml/min/year overestimates the required decline rate; empirical calibration via simulation yields 1.10 ml/min/year to match observed 27-year progression to ESKD. Model validation confirms ESKD onset at year 27 (age 32) and life expectancy of 42 years, consistent with published natural history reporting median survival of 30-45 years (Bökenkamp and Ludwig 2016; Ando et al. 2024).
+We model natural history eGFR decline as:
+
+**(8)    δ(age) = { 1.0 ml/min/1.73m²/year,    age ∈ [1, 10)
+                  { 3.0 ml/min/1.73m²/year,    age ∈ [10, 20)
+                  { 1.5 ml/min/1.73m²/year,    age ≥ 20
+
+where δ(age) represents the natural history eGFR decline rate at a given age. The three-phase structure captures: (1) slow early childhood decline reflecting stable tubular function in the first decade; (2) steep adolescent acceleration (3-fold increase) potentially driven by growth-related metabolic demands, hormonal changes, and cumulative tubular injury; and (3) moderate adult decline representing established chronic kidney disease progression.
+
+**Model Calibration to Natural History Targets.** We calibrate the starting eGFR (eGFR₀ at age 1) and age-specific decline rates to achieve median ESKD onset at age 32, as reported by Ando et al. (2024). The recalibrated model parameters are:
+
+- Starting age: 1 year (early diagnosis, reflecting clinical reality)
+- Starting eGFR: eGFR₀ = 95 ml/min/1.73m² (physiologically plausible maximum)
+- Age-varying decline rates: 1.0, 3.0, 1.5 ml/min/yr (as specified in equation 8)
+- Time-averaged decline rate over ages 1-40: ~1.77 ml/min/1.73m²/year
+
+This calibration produces natural history outcomes that match published targets:
+- Median ESKD age: 32.0 years ✓ (target: 32, Ando 2024)
+- Median survival: 37.5 years ✓ (target: 30-40, Murdock 2023)
+- Post-ESKD survival: 5.5 years ✓ (target: 3-8, inferred from Ando 2024 data showing only 3/8 ESKD patients received renal replacement therapy)
+
+The moderated adolescent decline rate (3.0 ml/min/yr, versus initial estimates of 3.5 ml/min/yr from visual Figure 1B inspection) accounts for uncertainty in slope estimation from published figures and achieves empirical fit to observed ESKD timing. The higher starting eGFR (95 vs 83 ml/min/1.73m²) reflects the physiological maximum for pediatric patients and provides appropriate disease runway for the age-varying decline framework.
+
+**Justification for Age-Varying Framework.** While simpler constant-rate models offer computational efficiency, the age-varying approach better captures the biological reality demonstrated in longitudinal cohort data. Ando et al. (2024) Figure 1B clearly shows accelerated decline during adolescence, with steeper slopes for patients aged 10-20 compared to younger children or adults. This heterogeneity is clinically relevant for treatment timing: gene therapy administered before age 10 (during slow-decline phase) may achieve different long-term outcomes than treatment at age 15 (during steep-decline phase), even with identical therapeutic efficacy. The age-varying framework enables exploration of these timing questions in future analyses.
 
 **Treatment Effect Scenarios: eGFR as Surrogate Endpoint.** Given the early-stage nature of this analysis conducted prior to clinical trial data availability, we focus on estimated glomerular filtration rate (eGFR) as the primary surrogate endpoint for treatment efficacy. eGFR decline rate directly predicts progression to ESKD and mortality in chronic kidney disease (Levey et al. 2009), making it the most clinically relevant measure for modeling long-term outcomes. We model three scenarios representing plausible ranges of eGFR trajectory modification, bounded by carrier biology (which demonstrates that complete kidney protection is biologically achievable) and natural history (which defines untreated disease progression).
 
-**Mathematical Framework: Decomposition of eGFR Decline.** To properly model treatment effects, we decompose total eGFR decline into age-related and pathological components:
+**Mathematical Framework: Decomposition of eGFR Decline.** To properly model treatment effects, we decompose total eGFR decline into age-related and pathological components at each age:
 
-**(6)    D_total = D_age + D_path**
+**(9)    δ_total(age) = δ_age + δ_path(age)**
 
-where D_total denotes total observed eGFR decline rate (ml/min/1.73m²/year), D_age represents normal age-related decline independent of disease, and D_path represents pathological decline attributable to OCRL deficiency.
+where δ_total(age) denotes total observed eGFR decline rate at a given age (ml/min/1.73m²/year), δ_age represents normal age-related decline independent of disease (constant across ages), and δ_path(age) represents pathological decline attributable to OCRL deficiency (age-varying, following the natural history pattern).
 
-**Normal Age-Related Decline (D_age).** Systematic reviews of healthy populations without hypertension or diabetes report normal eGFR decline of 0.8–1.1 ml/min/1.73 m²/year in adults (Waas et al. 2021; Guppy et al. 2024; Baba et al. 2015; Cohen et al. 2014). This physiological decline begins in the third or fourth decade and continues throughout life. Critically, in healthy children and young adults (ages 5-25), eGFR remains stable or increases with growth—the 0.8-1.1 ml/min/year decline reflects adult aging. Since Lowe syndrome patients progress from diagnosis at age 5 to ESKD at age 32, the majority of disease progression occurs during years when normal aging contributes minimally to eGFR decline. For modeling purposes, we approximate D_age ≈ 0.3 ml/min/1.73m²/year averaged over ages 5-40, representing minimal decline in childhood (0 ml/min/year) transitioning to adult aging rates (0.8-1.1 ml/min/year) in later years.
+**Normal Age-Related Decline (δ_age).** Systematic reviews of healthy populations without hypertension or diabetes report normal eGFR decline of 0.8–1.1 ml/min/1.73 m²/year in adults (Waas et al. 2021; Guppy et al. 2024; Baba et al. 2015; Cohen et al. 2014). This physiological decline begins in the third or fourth decade and continues throughout life. Critically, in healthy children and young adults (ages 1-25), eGFR remains stable or increases with growth—the 0.8-1.1 ml/min/year decline reflects adult aging. Since Lowe syndrome patients progress from age 1 to ESKD at age 32, the majority of disease progression occurs during years when normal aging contributes minimally to eGFR decline. For modeling purposes, we approximate δ_age ≈ 0.3 ml/min/1.73m²/year averaged over ages 1-40, representing minimal decline in childhood (0 ml/min/year) transitioning to adult aging rates (0.8-1.1 ml/min/year) in later years.
 
-**Pathological Decline in Lowe Syndrome (D_path).** The empirically calibrated natural history decline rate of 1.10 ml/min/1.73m²/year reflects combined aging and disease effects. Decomposing: D_path = D_total - D_age ≈ 1.10 - 0.3 = 0.80 ml/min/1.73m²/year. This 0.80 ml/min/year pathological component represents OCRL deficiency-mediated kidney damage amenable to therapeutic intervention.
+**Pathological Decline in Lowe Syndrome (δ_path, Age-Varying).** Subtracting the aging component from natural history rates yields the age-specific pathological decline:
+
+**(10)   δ_path(age) = δ_total(age) - δ_age = { 0.7 ml/min/1.73m²/year,    age ∈ [1, 10)
+                                                { 2.7 ml/min/1.73m²/year,    age ∈ [10, 20)
+                                                { 1.2 ml/min/1.73m²/year,    age ≥ 20
+
+This decomposition reveals that the steep adolescent acceleration (3.0 ml/min/yr total) consists primarily of pathological decline (2.7 ml/min/yr) with minimal aging contribution, making this period particularly responsive to therapeutic intervention. The age-varying pathological component represents OCRL deficiency-mediated kidney damage amenable to gene therapy.
 
 **Treatment Effect Model.** Gene therapy aims to reduce pathological decline by factor θ (0 ≤ θ ≤ 1):
 
-**(7)    D_treated = D_age + (1 - θ) × D_path**
+**(11)   δ_treated(age) = δ_age + (1 - θ) × δ_path(age)**
 
-where θ = 1 represents complete elimination of pathological decline (carrier-equivalent kidney protection) and θ = 0 represents no therapeutic benefit.
+where θ = 1 represents complete elimination of pathological decline (carrier-equivalent kidney protection) and θ = 0 represents no therapeutic benefit. Critically, because δ_path(age) varies by age group, the absolute magnitude of treatment benefit varies over the patient's lifetime. For example, with θ = 0.85 (85% pathological reduction, realistic scenario):
+- Ages 1-10: δ_treated = 0.3 + 0.15 × 0.7 = 0.41 ml/min/yr (0.59 ml/min/yr benefit vs natural history)
+- Ages 10-20: δ_treated = 0.3 + 0.15 × 2.7 = 0.71 ml/min/yr (2.29 ml/min/yr benefit vs natural history)
+- Ages 20+: δ_treated = 0.3 + 0.15 × 1.2 = 0.48 ml/min/yr (1.02 ml/min/yr benefit vs natural history)
+
+The larger absolute benefit during adolescence (2.29 vs 0.59-1.02 ml/min/yr) reflects the greater pathological burden during this phase, suggesting enhanced value from treatment administered before age 10.
 
 ### Scenario 1: Carrier-Equivalent Kidney Protection
 

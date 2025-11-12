@@ -109,17 +109,26 @@ Health state utilities are: CKD Stage 2, 0.72; Stage 3a, 0.68; Stage 3b, 0.61; S
 
 ## G. Model Implementation and Outcome Metrics
 
-We implement the model in Python, tracking cohort distribution across health states annually. In each cycle, we: (1) calculate state-specific mortality, (2) advance surviving patients' eGFR according to equation (1), (3) assign patients to health states based on updated eGFR, (4) accumulate state-specific costs and QALYs with discounting, and (5) transition deceased patients to the death state. The model terminates when all patients have died or age 100 is reached.
+We implement the model in Python 3.9+ using NumPy 1.24.0 and Pandas 2.0.0 for numerical computation and data management. The complete implementation is available in `Models/Lowe_HTA/markov_cua_model.py` (1,192 lines). Model parameters are specified in the `ModelParameters` dataclass (lines 32-119), the Markov cohort simulation in the `MarkovCohortModel` class (lines 121-486), and scenario analysis in the `ScenarioAnalysis` class (lines 488-729). All results presented in Tables 1-5 can be reproduced by executing:
+
+```bash
+cd Models/Lowe_HTA
+python markov_cua_model.py
+```
+
+which generates CSV output files (`scenario_results.csv`, `sensitivity_analysis.csv`, `ce_plane_data.csv`) matching reported values.
+
+In each annual cycle, we: (1) calculate state-specific mortality rates (lines 265-291), (2) advance surviving patients' eGFR according to equation (1), (3) assign patients to health states based on updated eGFR (lines 183-204), (4) accumulate state-specific costs and QALYs with discounting (lines 416-442), and (5) transition deceased patients to the death state. The model terminates when all patients have died or age 100 is reached. Cohort conservation is verified each cycle (row sums equal 1.0 to machine precision).
 
 For each scenario, we calculate total discounted costs C and QALYs Q over the lifetime horizon. Incremental cost-effectiveness ratios (ICERs) are computed as:
 
-(4)    ICER_i = (C_i - C_0) / (Q_i - Q_0)
+(5)    ICER_i = (C_i - C_0) / (Q_i - Q_0)
 
-where subscript *i* denotes treatment scenario *i* ∈ {1, 2, 3} and subscript 0 denotes natural history. Standard errors for ICERs are calculated using the delta method with 1,000 bootstrap replications of input parameters.
+where subscript *i* denotes treatment scenario *i* ∈ {1, 2, 3} and subscript 0 denotes natural history. Uncertainty analysis via probabilistic sensitivity analysis (PSA) with 1,000 Monte Carlo simulations is planned for final publication but omitted from this preliminary analysis given the absence of clinical trial data to parameterize input distributions.
 
 **Equal-Value Life Years Gained (evLYG).** To facilitate comparison across diseases with different baseline quality of life, we calculate equal-value life years gained (evLYG) as a supplementary metric (Lakdawalla et al. 2021; Basu and Carlson 2022). evLYG converts incremental QALYs into an equivalent number of life years lived at a reference utility level:
 
-(5)    evLYG = (Q_i - Q_0) / U_ref
+(6)    evLYG = (Q_i - Q_0) / U_ref
 
 where U_ref represents a reference utility value. We define U_ref as the average utility across CKD stages 2–4 (excluding ESKD), reflecting the health state that gene therapy enables patients to maintain. For Lowe syndrome with 0.85 multiplier applied to base CKD utilities, U_ref = 0.542. This metric addresses the concern that QALY gains in conditions with low baseline utility appear artificially small when compared to interventions in healthier populations. A treatment generating 5.0 QALYs in Lowe syndrome (baseline utility ~0.35) translates to 9.2 evLYG—comparable to ~9.2 additional life years at moderate health—facilitating cross-condition value comparisons for payers managing diverse portfolios.
 

@@ -95,7 +95,27 @@ where subscript *i* denotes treatment scenario *i* ∈ {1, 2, 3} and subscript 0
 
 # III. RESULTS
 
-## A. Base Case Cost-Effectiveness
+## A. Value-Based Pricing Analysis
+
+We first determine the maximum justifiable gene therapy acquisition cost under each efficacy scenario at standard cost-effectiveness thresholds. This value-based approach solves for price rather than assuming it, providing decision-relevant guidance for manufacturers (pricing strategy) and payers (reimbursement negotiations).
+
+Table 1 presents maximum justifiable prices by scenario and threshold. For each scenario, we solve the equation:
+
+    Max Price = (Threshold × Incremental QALYs) - (Incremental Costs excluding GT acquisition)
+
+where incremental costs exclude the gene therapy acquisition price but include monitoring costs, CKD management costs avoided in natural history, and treatment administration. This formulation ensures that including the maximum price in total intervention costs yields an ICER exactly equal to the specified threshold.
+
+**Scenario 1 (50% Enzyme Restoration - Carrier Analogy).** This primary scenario models treatment efficacy analogous to female carriers expressing approximately 50% OCRL enzyme, who remain clinically asymptomatic. Gene therapy achieving 50% enzyme restoration yields 85% reduction in eGFR decline, generating 5.04 incremental QALYs (9.29 equal-value life years gained) and 21.3 additional life years.
+
+At the conventional US threshold of $100,000/QALY, the maximum justifiable price is **$1,470,656**. At $150,000/QALY (high-value threshold for severe conditions), the ceiling rises to **$1,722,410**. Under NICE's Highly Specialised Technologies framework threshold of $300,000/QALY for ultra-rare diseases, the model supports prices up to **$2,477,671**.
+
+**Scenario 2 (30% Enzyme Restoration).** With partial enzyme restoration (65% eGFR decline reduction), treatment generates 3.40 QALYs (6.27 evLYG) and 10.4 life years gained. Maximum justifiable prices are **$1,034,801** at $100K/QALY, **$1,204,797** at $150K/QALY, and **$1,714,785** at $300K/QALY.
+
+**Scenario 3 (15% Enzyme Restoration - Minimal Benefit).** This conservative scenario with minimal enzyme restoration (35% decline reduction) yields only 1.39 QALYs (2.57 evLYG) and 3.4 life years. Maximum prices drop substantially: **$372,751** at $100K/QALY, **$442,405** at $150K/QALY, and **$651,365** at $300K/QALY.
+
+**Implications for Pricing Strategy.** These results demonstrate efficacy-dependent pricing: achieving carrier-level enzyme restoration justifies prices approaching $2.5 million under ultra-rare disease thresholds, while minimal enzyme restoration supports only $650,000 even at generous thresholds. Phase 3 trial design should prioritize enzyme activity as a key secondary endpoint to inform value-based pricing negotiations. Manufacturers may consider outcomes-based pricing agreements where reimbursement tiers align with demonstrated enzyme restoration levels.
+
+## B. Base Case Cost-Effectiveness at Assumed $3M Price
 
 Table 1 presents lifetime costs, QALYs, and incremental cost-effectiveness ratios for each treatment scenario relative to natural history. Under natural history, patients starting at age 5 with eGFR 70 ml/min/1.73m² reach ESKD by year 5 (absolute age 10), accumulate 5.87 discounted QALYs over 17.05 life years, and incur total discounted costs of 1,229,454 dollars. The relatively short survival and low QALY accumulation reflect rapid progression to ESKD and dialysis-associated mortality.
 

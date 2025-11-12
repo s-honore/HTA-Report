@@ -42,8 +42,9 @@ class ModelParameters:
     # eGFR parameters
     starting_egfr: float = 70.0  # ml/min/1.73m² at age 5
     # Calibrated to achieve median ESKD age 32 years (Ando et al. 2024)
-    # (70 - 15) / 27 years = 2.04 ml/min/year
-    natural_decline_rate: float = 2.04  # ml/min/1.73m²/year natural history
+    # Empirically calibrated: 1.10 ml/min/year produces ESKD at year 27 (age 32)
+    # (Simple calculation of 55/27=2.04 underestimates due to discrete-state artifacts)
+    natural_decline_rate: float = 1.10  # ml/min/1.73m²/year natural history
 
     # Age-dependent decline rates (NOT CURRENTLY USED - disabled for simplicity)
     use_age_dependent_decline: bool = False  # Disabled: use constant decline

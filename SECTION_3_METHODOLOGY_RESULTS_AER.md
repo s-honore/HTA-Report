@@ -107,9 +107,9 @@ where δ(age) represents the natural history eGFR decline rate at a given age. T
 - Time-averaged decline rate over ages 1-40: ~1.77 ml/min/1.73m²/year
 
 This calibration produces natural history outcomes that match published targets:
-- Median ESKD age: 32.0 years ✓ (target: 32, Ando 2024)
-- Median survival: 37.5 years ✓ (target: 30-40, Murdock 2023)
-- Post-ESKD survival: 5.5 years ✓ (target: 3-8, inferred from Ando 2024 data showing only 3/8 ESKD patients received renal replacement therapy)
+- Median ESKD age: 32.0 years (target: 32, Ando 2024)
+- Median survival: 37.5 years (target: 30-40, Murdock 2023)
+- Post-ESKD survival: 5.5 years (assumed; no direct data available; consistent with general expectation of 3-8 years survival without renal replacement therapy in ultra-rare diseases)
 
 The moderated adolescent decline rate (3.0 ml/min/yr, versus initial estimates of 3.5 ml/min/yr from visual Figure 1B inspection) accounts for uncertainty in slope estimation from published figures and achieves empirical fit to observed ESKD timing. The higher starting eGFR (95 vs 83 ml/min/1.73m²) reflects the physiological maximum for pediatric patients and provides appropriate disease runway for the age-varying decline framework.
 

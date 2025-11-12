@@ -11,11 +11,11 @@ Model Structure:
 - Starting age: 5 years (median treatment age)
 - Discounting: 3.5% (base case)
 
-Scenarios:
-- Scenario 0: Natural history (baseline eGFR decline)
-- Scenario 1: Stabilization (0% decline)
-- Scenario 2: 70% reduction in decline rate
-- Scenario 3: 40% reduction in decline rate
+Scenarios (decomposed decline: D_total = D_age + (1-θ)×D_path):
+- Scenario 0: Natural history (1.10 ml/min/yr)
+- Scenario 1: Carrier-equivalent ≥50% enzyme (0.30 ml/min/yr, θ=1.0)
+- Scenario 2: Subthreshold 25-40% enzyme (0.70 ml/min/yr, θ=0.5)
+- Scenario 3: Minimal 10-20% enzyme (0.94 ml/min/yr, θ=0.2)
 
 Author: HTA Analysis Team
 Date: November 2025
@@ -505,42 +505,46 @@ class ScenarioAnalysis:
         """
         Run all four scenarios and calculate ICERs.
 
-        Scenarios based on predicted enzyme restoration levels:
-        0. Natural history (baseline) - no treatment
-        1. 50% enzyme restoration (carrier analogy) - 85% decline reduction
-        2. 30% enzyme restoration - 65% decline reduction
-        3. 15% enzyme restoration (minimal benefit) - 35% decline reduction
+        Scenarios model technical achievement of enzyme restoration with
+        mathematically decomposed decline rates: D_total = D_age + (1-θ)×D_path
+        where D_age ≈ 0.3 ml/min/yr (normal aging), D_path ≈ 0.8 ml/min/yr.
 
-        Biological rationale: Female carriers with ~50% OCRL enzyme activity
-        remain asymptomatic (Charnas 2000), suggesting gene therapy achieving
-        50% enzyme restoration should provide substantial clinical benefit.
+        0. Natural history (baseline) - no treatment (1.10 ml/min/yr)
+        1. Carrier-equivalent (≥50% enzyme) - 100% pathological reduction (0.30 ml/min/yr)
+        2. Subthreshold (25-40% enzyme) - 50% pathological reduction (0.70 ml/min/yr)
+        3. Minimal benefit (10-20% enzyme) - 20% pathological reduction (0.94 ml/min/yr)
+
+        Biological rationale: Female carriers with ~50% OCRL enzyme have no
+        progressive kidney disease (Röschinger et al. 2000), therefore 50%
+        enzyme should eliminate pathological decline, leaving only normal aging.
 
         Returns:
             Dictionary with all scenario results
         """
         natural_decline = self.params.natural_decline_rate
 
-        # Define scenarios based on enzyme restoration levels
+        # Define scenarios with mathematically decomposed decline rates
+        # D_total = D_age + (1-θ)×D_path where D_age≈0.3, D_path≈0.8
         scenarios = {
             'Scenario 0: Natural History': {
-                'decline_rate': natural_decline,
+                'decline_rate': natural_decline,  # 1.10 ml/min/yr
                 'include_gt_cost': False,
                 'description': 'No treatment - natural disease progression'
             },
-            'Scenario 1: 50% Enzyme (Carrier)': {
-                'decline_rate': natural_decline * 0.15,  # 85% reduction (θ=0.85)
+            'Scenario 1: Carrier-Equivalent': {
+                'decline_rate': 0.30,  # D_age + 0×D_path (θ=1.0: 100% pathological reduction)
                 'include_gt_cost': True,
-                'description': '50% enzyme restoration - carrier analogy'
+                'description': '≥50% enzyme - complete protection, normal aging only'
             },
-            'Scenario 2: 30% Enzyme': {
-                'decline_rate': natural_decline * 0.35,  # 65% reduction (θ=0.65)
+            'Scenario 2: Subthreshold': {
+                'decline_rate': 0.70,  # D_age + 0.5×D_path (θ=0.5: 50% pathological reduction)
                 'include_gt_cost': True,
-                'description': '30% enzyme restoration - partial benefit'
+                'description': '25-40% enzyme - partial protection'
             },
-            'Scenario 3: 15% Enzyme (Minimal)': {
-                'decline_rate': natural_decline * 0.65,  # 35% reduction (θ=0.35)
+            'Scenario 3: Minimal Benefit': {
+                'decline_rate': 0.94,  # D_age + 0.8×D_path (θ=0.2: 20% pathological reduction)
                 'include_gt_cost': True,
-                'description': '15% enzyme restoration - minimal benefit'
+                'description': '10-20% enzyme - limited benefit'
             }
         }
 

@@ -73,7 +73,7 @@ class ModelParameters:
     })
 
     # Gene therapy costs (USD)
-    gene_therapy_cost: float = 3000000  # $3.0M one-time cost
+    gene_therapy_cost: float = 2000000  # $2.0M one-time cost
     monitoring_year1: float = 25000     # Year 1 monitoring
     monitoring_year2_5: float = 10000   # Years 2-5 monitoring
     monitoring_ongoing: float = 3000    # Years 6+ monitoring
@@ -844,7 +844,7 @@ class SensitivityAnalysis:
 
 
 def run_full_analysis(
-    output_dir: str = '/home/user/HTA-Report/Models/Lowe_HTA',
+    output_dir: str = '/Users/smeden/Desktop/Lowe Syndrome Collaborative/Cure lowe foundation/HTA-Report/Models/Lowe_HTA/outputs',
     save_results: bool = True
 ) -> Dict:
     """
@@ -992,7 +992,7 @@ if __name__ == "__main__":
     """
     # Run the full analysis
     results = run_full_analysis(
-        output_dir='/home/user/HTA-Report/Models/Lowe_HTA',
+        output_dir='/Users/smeden/Desktop/Lowe Syndrome Collaborative/Cure lowe foundation/HTA-Report/Models/Lowe_HTA/outputs',
         save_results=True
     )
 

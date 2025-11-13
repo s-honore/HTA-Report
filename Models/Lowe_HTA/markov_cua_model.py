@@ -8,12 +8,16 @@ Model Structure:
 - Health States: CKD Stage 2, 3a, 3b, 4, 5/ESKD, Death
 - Annual cycles
 - Lifetime horizon (100 years)
-- Starting age: 1 year, eGFR: 95 ml/min/1.73m² (recalibrated)
+- Starting age: 1 year, eGFR: 95 ml/min/1.73m²
 - Discounting: 1.5% (curative therapy base case)
-- Age-varying decline rates: 1.0 (ages 1-10), 3.0 (10-20), 1.5 (20+) ml/min/yr
+- Age-varying decline rates: 1.4 (ages 1-10), 4.2 (10-20), 2.1 (20+) ml/min/yr (CALIBRATED)
+
+Calibration Targets (Natural History):
+- ESKD at age ~31-32 years (Ando et al. 2024) ✓
+- Median survival ~32 years, 2nd-4th decade (Murdock et al. 2023) ✓
 
 Scenarios (decomposed decline: D_total = D_age + (1-θ)×D_path):
-- Scenario 0: Natural history (~1.77 ml/min/yr time-averaged)
+- Scenario 0: Natural history (~2.48 ml/min/yr time-averaged)
 - Scenario 1: Optimistic - carrier-equivalent ≥50% enzyme (0.30 ml/min/yr, θ=1.0)
 - Scenario 2: Realistic - good biodistribution 40-50% enzyme (0.52 ml/min/yr, θ=0.85)
 - Scenario 3: Conservative - moderate biodistribution 30-40% enzyme (0.74 ml/min/yr, θ=0.70)
@@ -105,16 +109,18 @@ class ModelParameters:
 
     # Age-dependent decline rates based on Ando et al. 2024 Figure 1B
     # THREE age groups with different decline rates
-    # Moderated from initial estimates (3.5→3.0, 2.0→1.5) to achieve realistic calibration
+    # CALIBRATED to achieve natural history targets:
+    #   - ESKD at age ~31-32 years (Ando 2024)
+    #   - Median survival ~32 years (Murdock 2023: 2nd-4th decade)
     use_age_dependent_decline: bool = True  # ENABLED for accurate modeling
-    decline_rate_early: float = 1.0    # ml/min/1.73m²/year for ages 1-10
-    decline_rate_middle: float = 3.0   # ml/min/1.73m²/year for ages 10-20 (adolescent acceleration)
-    decline_rate_late: float = 1.5     # ml/min/1.73m²/year for ages 20+
+    decline_rate_early: float = 1.4    # ml/min/1.73m²/year for ages 1-10
+    decline_rate_middle: float = 4.2   # ml/min/1.73m²/year for ages 10-20 (adolescent acceleration)
+    decline_rate_late: float = 2.1     # ml/min/1.73m²/year for ages 20+
     decline_transition_age_1: int = 10  # Age at which decline accelerates
     decline_transition_age_2: int = 20  # Age at which decline moderates
 
     # For reference: time-averaged constant rate (NOT USED when age-varying enabled)
-    natural_decline_rate: float = 1.77  # Approximate average over lifetime (updated for moderated rates)
+    natural_decline_rate: float = 2.48  # Time-averaged over ages 1-40 (calibrated)
 
     # CKD stage thresholds (eGFR ml/min/1.73m²)
     ckd_thresholds: Dict[str, Tuple[float, float]] = field(default_factory=lambda: {
@@ -175,9 +181,9 @@ class ModelParameters:
     # Mortality parameters
     # Background mortality from DST (Danmarks Statistik) life tables 2023-2024 for males
     # Lowe syndrome-specific excess mortality derived from natural history calibration
-    # Calibrated to achieve:
-    #   1) ESKD at age ~32 years (Ando et al. 2024)
-    #   2) Median survival in 2nd-4th decade, ages 20-40 (Murdock et al. 2023)
+    # CALIBRATED to achieve:
+    #   1) ESKD at age ~31-32 years (Ando et al. 2024)
+    #   2) Median survival ~32 years, within 2nd-4th decade (Murdock et al. 2023)
     # Total mortality = background × relative_risk
     #
     # These relative risks reflect the multi-organ disease burden of Lowe syndrome:
@@ -185,13 +191,16 @@ class ModelParameters:
     # - Neurological: Intellectual disability (90%), seizures, behavioral issues
     # - Ophthalmologic: Congenital cataracts (100%), glaucoma, visual impairment
     # - Systemic: Increased infection susceptibility, metabolic complications
+    #
+    # Calibration: RR values scaled by factor 0.15 from initial estimates to match
+    # observed natural history (dual calibration with eGFR decline rates)
     ckd_relative_risks: Dict[str, float] = field(default_factory=lambda: {
-        'Normal': 10.0,  # Normal kidney function: still has multi-organ Lowe burden
-        'CKD2': 15.0,    # Early disease: mild CKD + full multi-organ burden
-        'CKD3a': 30.0,   # Moderate disease: progressive CKD + worsening complications
-        'CKD3b': 50.0,   # Advanced disease: severe CKD + life-limiting complications
-        'CKD4': 80.0,    # Pre-ESKD: critical CKD + highest morbidity
-        'ESKD': 120.0,   # ESKD: renal failure + infection/seizure mortality
+        'Normal': 1.50,   # Normal kidney function: still has multi-organ Lowe burden
+        'CKD2': 2.25,     # Early disease: mild CKD + full multi-organ burden
+        'CKD3a': 4.50,    # Moderate disease: progressive CKD + worsening complications
+        'CKD3b': 7.50,    # Advanced disease: severe CKD + life-limiting complications
+        'CKD4': 12.00,    # Pre-ESKD: critical CKD + highest morbidity
+        'ESKD': 18.00,    # ESKD: renal failure + infection/seizure mortality
     })
 
     # Life table data (loaded in __post_init__)

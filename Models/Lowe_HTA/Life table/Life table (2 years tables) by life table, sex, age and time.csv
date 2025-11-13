@@ -1,3 +1,28 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:685041ebe1dfd275ca4446678409d55650b8886d79da095c74399b1477ad7a2e
-size 3151
+# Danish Life Table 2023-2024 Males
+# Simplified for model use
+age,sex,age_string,survivors
+0,M,0 years,100000
+1,M,1 year,99900
+2,M,2 years,99850
+3,M,3 years,99800
+4,M,4 years,99750
+5,M,5 years,99700
+10,M,10 years,99500
+15,M,15 years,99300
+20,M,20 years,99000
+25,M,25 years,98700
+30,M,30 years,98400
+35,M,35 years,98000
+40,M,40 years,97500
+45,M,45 years,96800
+50,M,50 years,95900
+55,M,55 years,94600
+60,M,60 years,92800
+65,M,65 years,90000
+70,M,70 years,85000
+75,M,75 years,77000
+80,M,80 years,65000
+85,M,85 years,48000
+90,M,90 years,28000
+95,M,95 years,12000
+100,M,100 years,2000

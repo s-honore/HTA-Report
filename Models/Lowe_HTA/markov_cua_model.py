@@ -878,10 +878,12 @@ class ScenarioAnalysis:
         This is the PRIMARY economic analysis: rather than assuming a price and
         calculating ICER, we solve for the maximum price that achieves each threshold.
 
-        Formula: Max Price = (Threshold × Incremental QALYs) - Incremental Costs (excl. GT)
+        Formulas:
+        - QALY-based: Max Price = (Threshold × Incremental QALYs) - Incremental Costs (excl. GT)
+        - evLYG-based: Max Price = (Threshold × evLYG) - Incremental Costs (excl. GT)
 
         Args:
-            thresholds: List of ICER thresholds ($/QALY). Default: [100K, 150K, 300K]
+            thresholds: List of ICER thresholds ($/QALY or $/evLYG). Default: [100K, 150K, 300K]
 
         Returns:
             DataFrame with columns:
@@ -889,7 +891,7 @@ class ScenarioAnalysis:
             - Incremental QALYs
             - evLYG
             - Life Years Gained
-            - Max price at each threshold
+            - Max price at each threshold (both QALY-based and evLYG-based)
         """
         if thresholds is None:
             thresholds = [100000, 150000, 300000]  # Standard thresholds
@@ -921,23 +923,38 @@ class ScenarioAnalysis:
             # = (total intervention costs - GT price) - baseline costs
             costs_excl_gt = (total_costs - gt_price) - baseline_costs
 
-            # For each threshold, solve for maximum price
-            max_prices = {}
+            # For each threshold, solve for maximum price using BOTH QALY and evLYG
+            max_prices_qaly = {}
+            max_prices_evlyg = {}
+
             for threshold in thresholds:
+                threshold_label = f'${threshold/1000:.0f}K'
+
+                # QALY-based pricing
                 # Max price = (threshold × inc_QALYs) - costs_excl_gt
                 # This ensures: (costs_excl_gt + max_price) / inc_QALYs = threshold
                 if inc_qalys > 0:
-                    max_price = (threshold * inc_qalys) - costs_excl_gt
-                    max_prices[f'${threshold/1000:.0f}K/QALY'] = max(0, max_price)
+                    max_price_qaly = (threshold * inc_qalys) - costs_excl_gt
+                    max_prices_qaly[f'{threshold_label}/QALY'] = max(0, max_price_qaly)
                 else:
-                    max_prices[f'${threshold/1000:.0f}K/QALY'] = 0
+                    max_prices_qaly[f'{threshold_label}/QALY'] = 0
+
+                # evLYG-based pricing
+                # Max price = (threshold × evLYG) - costs_excl_gt
+                # This ensures: (costs_excl_gt + max_price) / evLYG = threshold
+                if evlyg > 0:
+                    max_price_evlyg = (threshold * evlyg) - costs_excl_gt
+                    max_prices_evlyg[f'{threshold_label}/evLYG'] = max(0, max_price_evlyg)
+                else:
+                    max_prices_evlyg[f'{threshold_label}/evLYG'] = 0
 
             row = {
                 'Scenario': scenario_name,
                 'Incremental QALYs': inc_qalys,
                 'evLYG': evlyg,
                 'Life Years Gained': inc_life_years,
-                **max_prices
+                **max_prices_qaly,
+                **max_prices_evlyg
             }
             pricing_data.append(row)
 
@@ -1285,9 +1302,13 @@ def run_full_analysis(
     print(pricing_df.to_string(index=False))
     print()
     print("Interpretation:")
-    print("  - $100K/QALY: Conventional US threshold")
-    print("  - $150K/QALY: High-value threshold for severe conditions")
-    print("  - $300K/QALY: Ultra-rare disease threshold (e.g., NICE HST)")
+    print("  Both QALY-based and evLYG-based pricing use the same thresholds:")
+    print("  - $100K: Conventional US threshold")
+    print("  - $150K: High-value threshold for severe conditions")
+    print("  - $300K: Ultra-rare disease threshold (e.g., NICE HST)")
+    print()
+    print("  Note: evLYG (equal-value life years gained) adjusts for quality of life")
+    print("        and may yield different pricing than QALY-based approaches.")
     print()
 
     if save_results:

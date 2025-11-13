@@ -1,5 +1,7 @@
 Scenario,eGFR Decline Rate,Total Costs ($),Total QALYs,Life Years,Time to ESKD (years),Incremental Costs ($),Incremental QALYs,ICER ($/QALY)
-Scenario 0: Natural History,1.80,"$1,748,203",11.80,31.52,18,Reference,Reference,Reference
-Scenario 1: Carrier-Equivalent,0.30,"$3,961,881",22.66,62.22,100,"$2,213,678",10.860,"$203,847"
-Scenario 2: Subthreshold,0.70,"$4,561,103",15.03,38.59,34,"$2,812,900",3.229,"$871,257"
-Scenario 3: Minimal Benefit,0.94,"$4,888,603",12.24,32.39,20,"$3,140,400",0.440,"$7,135,762"
+Scenario 0: Natural History,1.77,"$1,412,570",14.59,37.50,31,Reference,Reference,Reference
+Scenario 1: Optimistic,0.30,"$3,951,856",22.80,62.59,100,"$2,539,286",8.210,"$309,300"
+Scenario 2: Realistic,0.52,"$3,983,377",22.45,61.60,100,"$2,570,807",7.860,"$327,070"
+Scenario 3: Conservative,0.74,"$4,094,604",21.07,56.35,100,"$2,682,034",6.480,"$413,893"
+Scenario 4: Pessimistic,1.04,"$4,262,429",18.72,48.31,100,"$2,849,859",4.135,"$689,209"
+Scenario 5: Treatment Waning,0.30,"$4,044,795",21.79,59.14,100,"$2,632,225",7.207,"$365,245"

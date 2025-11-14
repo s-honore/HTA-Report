@@ -551,194 +551,7 @@ class ProbabilisticSensitivityAnalysis:
 
 
 # =============================================================================
-# 4. PATIENT HETEROGENEITY MODELING
-# =============================================================================
-
-class HeterogeneityAnalysis:
-    """
-    Models patient heterogeneity with responder/non-responder subgroups.
-
-    Key assumptions:
-    - Treatment response varies by patient characteristics
-    - Younger patients may respond better (earlier intervention)
-    - Some patients may be "super-responders" or "non-responders"
-    """
-
-    def __init__(self, params: EnhancedModelParameters):
-        """
-        Initialize heterogeneity analysis.
-
-        Args:
-            params: Base model parameters
-        """
-        self.params = params
-        self.results = {}
-
-    def run_heterogeneity_analysis(
-        self,
-        subgroups: Dict[str, Dict] = None
-    ) -> pd.DataFrame:
-        """
-        Run analysis across patient subgroups.
-
-        Args:
-            subgroups: Dictionary defining subgroups
-                Example: {
-                    'Super-responders': {'proportion': 0.20, 'decline_rate': 0.20, 'multiplier': 0.5},
-                    'Standard responders': {'proportion': 0.60, 'decline_rate': 0.52, 'multiplier': 1.0},
-                    'Non-responders': {'proportion': 0.20, 'decline_rate': 1.5, 'multiplier': 2.0}
-                }
-
-        Returns:
-            DataFrame with subgroup-specific results
-        """
-        if subgroups is None:
-            # Default subgroup definitions
-            subgroups = {
-                'Super-responders (20%)': {
-                    'proportion': 0.20,
-                    'decline_rate': 0.20,  # Better than optimistic
-                    'description': 'Excellent biodistribution, early treatment'
-                },
-                'Good responders (50%)': {
-                    'proportion': 0.50,
-                    'decline_rate': 0.52,  # Realistic scenario
-                    'description': 'Good biodistribution, typical response'
-                },
-                'Poor responders (25%)': {
-                    'proportion': 0.25,
-                    'decline_rate': 1.04,  # Pessimistic scenario
-                    'description': 'Suboptimal biodistribution or late treatment'
-                },
-                'Non-responders (5%)': {
-                    'proportion': 0.05,
-                    'decline_rate': 2.48,  # Natural history
-                    'description': 'No treatment benefit'
-                }
-            }
-
-        # Validate proportions sum to 1.0
-        total_prop = sum(sg['proportion'] for sg in subgroups.values())
-        if not np.isclose(total_prop, 1.0):
-            raise ValueError(f"Subgroup proportions must sum to 1.0 (got {total_prop})")
-
-        # Run natural history baseline
-        baseline_model = MarkovCohortModel(self.params)
-        baseline_results = baseline_model.run_model(
-            egfr_decline_rate=self.params.natural_decline_rate,
-            scenario_name="Natural History",
-            include_gene_therapy_cost=False
-        )
-
-        # Run each subgroup
-        subgroup_results = []
-        weighted_costs = 0
-        weighted_qalys = 0
-        weighted_life_years = 0
-
-        for subgroup_name, config in subgroups.items():
-            model = MarkovCohortModel(self.params)
-            results = model.run_model(
-                egfr_decline_rate=config['decline_rate'],
-                scenario_name=subgroup_name,
-                include_gene_therapy_cost=True
-            )
-
-            proportion = config['proportion']
-            weighted_costs += results['total_costs'] * proportion
-            weighted_qalys += results['total_qalys'] * proportion
-            weighted_life_years += results['life_years'] * proportion
-
-            # Calculate incremental vs baseline
-            inc_costs = results['total_costs'] - baseline_results['total_costs']
-            inc_qalys = results['total_qalys'] - baseline_results['total_qalys']
-            icer = inc_costs / inc_qalys if inc_qalys > 0 else np.inf
-
-            subgroup_results.append({
-                'Subgroup': subgroup_name,
-                'Proportion': f"{proportion*100:.0f}%",
-                'Decline Rate': config['decline_rate'],
-                'Description': config.get('description', ''),
-                'Total Costs': results['total_costs'],
-                'Total QALYs': results['total_qalys'],
-                'Life Years': results['life_years'],
-                'Time to ESKD': results['time_to_eskd'],
-                'Incremental Costs': inc_costs,
-                'Incremental QALYs': inc_qalys,
-                'ICER': icer
-            })
-
-        # Add population-weighted average
-        inc_costs_weighted = weighted_costs - baseline_results['total_costs']
-        inc_qalys_weighted = weighted_qalys - baseline_results['total_qalys']
-        icer_weighted = inc_costs_weighted / inc_qalys_weighted if inc_qalys_weighted > 0 else np.inf
-
-        subgroup_results.append({
-            'Subgroup': 'Population Average (weighted)',
-            'Proportion': '100%',
-            'Decline Rate': 'Mixed',
-            'Description': 'Weighted average across all subgroups',
-            'Total Costs': weighted_costs,
-            'Total QALYs': weighted_qalys,
-            'Life Years': weighted_life_years,
-            'Time to ESKD': np.nan,
-            'Incremental Costs': inc_costs_weighted,
-            'Incremental QALYs': inc_qalys_weighted,
-            'ICER': icer_weighted
-        })
-
-        self.results = pd.DataFrame(subgroup_results)
-        return self.results
-
-    def plot_subgroup_results(
-        self,
-        save_path: str = None
-    ):
-        """
-        Visualize subgroup results with forest plot style.
-
-        Args:
-            save_path: Path to save figure
-        """
-        if self.results is None:
-            raise ValueError("Must run run_heterogeneity_analysis() first")
-
-        # Exclude weighted average for plotting
-        plot_data = self.results[~self.results['Subgroup'].str.contains('weighted')].copy()
-
-        fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))
-
-        # Plot 1: Incremental QALYs
-        ax1.barh(plot_data['Subgroup'], plot_data['Incremental QALYs'], color='#2F6CD6')
-        ax1.set_xlabel('Incremental QALYs vs Natural History', fontsize=11)
-        ax1.set_title('Health Gains by Subgroup', fontsize=12, fontweight='bold')
-        ax1.grid(axis='x', alpha=0.3)
-
-        # Plot 2: ICERs
-        # Cap very high ICERs for visualization
-        icers_plot = plot_data['ICER'].clip(upper=500000)
-        colors = ['green' if x <= 100000 else 'orange' if x <= 300000 else 'red'
-                 for x in plot_data['ICER']]
-
-        ax2.barh(plot_data['Subgroup'], icers_plot / 1000, color=colors)
-        ax2.axvline(100, color='green', linestyle='--', alpha=0.5, label='€100K/QALY')
-        ax2.axvline(300, color='orange', linestyle='--', alpha=0.5, label='€300K/QALY')
-        ax2.set_xlabel('ICER (€ thousands/QALY)', fontsize=11)
-        ax2.set_title('Cost-Effectiveness by Subgroup', fontsize=12, fontweight='bold')
-        ax2.legend()
-        ax2.grid(axis='x', alpha=0.3)
-
-        plt.tight_layout()
-
-        if save_path:
-            plt.savefig(save_path, dpi=300, bbox_inches='tight')
-            print(f"Saved subgroup plot to {save_path}")
-
-        return fig
-
-
-# =============================================================================
-# 5. STARTING AGE SCENARIOS WITH HEATMAP
+# 4. STARTING AGE SCENARIOS WITH HEATMAP
 # =============================================================================
 
 class StartingAgeAnalysis:
@@ -1002,7 +815,7 @@ class StartingAgeAnalysis:
 
 
 # =============================================================================
-# 6. INTEGRATED ANALYSIS RUNNER
+# 5. INTEGRATED ANALYSIS RUNNER
 # =============================================================================
 
 def run_enhanced_analysis(
@@ -1036,11 +849,68 @@ def run_enhanced_analysis(
     results = {}
 
     # =======================================================================
+    # STEP 0: VALUE-BASED PRICING (Calculate gene therapy price first)
+    # =======================================================================
+    print("-" * 80)
+    print("0. VALUE-BASED PRICING CALCULATION")
+    print("-" * 80)
+    print("\nCalculating maximum justifiable gene therapy price...")
+
+    # Run base case scenario to get health benefits
+    baseline_model = MarkovCohortModel(params)
+    baseline_results = baseline_model.run_model(
+        egfr_decline_rate=params.natural_decline_rate,
+        scenario_name="Natural History",
+        include_gene_therapy_cost=False
+    )
+
+    # Run realistic treatment scenario WITHOUT gene therapy cost
+    treatment_model = MarkovCohortModel(params)
+    treatment_results = treatment_model.run_model(
+        egfr_decline_rate=0.52,  # Realistic scenario
+        scenario_name="Realistic Treatment (base case)",
+        include_gene_therapy_cost=False  # Don't include GT price yet
+    )
+
+    # Calculate incremental outcomes
+    inc_qalys = treatment_results['total_qalys'] - baseline_results['total_qalys']
+    inc_life_years = treatment_results['life_years'] - baseline_results['life_years']
+
+    # Costs EXCLUDING gene therapy (monitoring + differential CKD management)
+    costs_excl_gt = treatment_results['total_costs'] - baseline_results['total_costs']
+
+    # Calculate maximum price at key thresholds
+    target_threshold = 100000  # €100K/QALY
+    max_price = max(0, (target_threshold * inc_qalys) - costs_excl_gt)
+
+    print(f"\nBase Case Results (Realistic Scenario vs Natural History):")
+    print(f"  Incremental QALYs: {inc_qalys:.2f}")
+    print(f"  Incremental Life Years: {inc_life_years:.2f}")
+    print(f"  Costs excl. gene therapy: €{costs_excl_gt:,.0f}")
+    print(f"\nValue-Based Pricing at €{target_threshold/1000:.0f}K/QALY threshold:")
+    print(f"  Maximum justifiable price: €{max_price:,.0f}")
+
+    # Set gene therapy cost for PSA
+    params.gene_therapy_cost = max_price
+    print(f"\n✓ Using €{max_price:,.0f} as gene therapy price for PSA")
+
+    results['value_based_price'] = {
+        'threshold': target_threshold,
+        'max_price': max_price,
+        'inc_qalys': inc_qalys,
+        'inc_life_years': inc_life_years,
+        'costs_excl_gt': costs_excl_gt
+    }
+
+    print()
+
+    # =======================================================================
     # 1. PROBABILISTIC SENSITIVITY ANALYSIS
     # =======================================================================
     print("-" * 80)
     print("1. PROBABILISTIC SENSITIVITY ANALYSIS")
     print("-" * 80)
+    print(f"Running PSA with gene therapy price = €{params.gene_therapy_cost:,.0f}...")
 
     psa = ProbabilisticSensitivityAnalysis(
         base_params=params,
@@ -1083,30 +953,10 @@ def run_enhanced_analysis(
     print()
 
     # =======================================================================
-    # 2. PATIENT HETEROGENEITY ANALYSIS
+    # 2. STARTING AGE SCENARIOS
     # =======================================================================
     print("-" * 80)
-    print("2. PATIENT HETEROGENEITY ANALYSIS")
-    print("-" * 80)
-
-    het_analysis = HeterogeneityAnalysis(params)
-    het_results = het_analysis.run_heterogeneity_analysis()
-    results['heterogeneity_results'] = het_results
-
-    print("\nSubgroup Analysis Results:")
-    print(het_results[['Subgroup', 'Proportion', 'Incremental QALYs', 'ICER']].to_string(index=False))
-
-    if save_results:
-        het_analysis.plot_subgroup_results(save_path=os.path.join(output_dir, 'heterogeneity_plot.png'))
-        het_results.to_csv(os.path.join(output_dir, 'heterogeneity_results.csv'), index=False)
-
-    print()
-
-    # =======================================================================
-    # 3. STARTING AGE SCENARIOS
-    # =======================================================================
-    print("-" * 80)
-    print("3. STARTING AGE SCENARIOS")
+    print("2. STARTING AGE SCENARIOS")
     print("-" * 80)
 
     age_analysis = StartingAgeAnalysis(params)
@@ -1134,8 +984,7 @@ def run_enhanced_analysis(
     print(f"\nAll results saved to: {output_dir}")
     print("\nKey Findings:")
     print(f"  1. PSA: {prob_100k*100:.0f}% probability cost-effective at €100K/QALY")
-    print(f"  2. Heterogeneity: Population-weighted ICER = €{het_results[het_results['Subgroup'].str.contains('weighted')]['ICER'].values[0]:,.0f}/QALY")
-    print(f"  3. Starting age: Earlier treatment generally more cost-effective")
+    print(f"  2. Starting age: Earlier treatment generally more cost-effective")
 
     return results
 

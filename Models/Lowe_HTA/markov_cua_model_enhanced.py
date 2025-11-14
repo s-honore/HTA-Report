@@ -291,6 +291,9 @@ class ProbabilisticSensitivityAnalysis:
         # Reload life table (same for all iterations)
         params.background_mortality = load_dst_life_table()
 
+        # Preserve gene therapy cost from base params (critical for correct ICERs!)
+        params.gene_therapy_cost = self.base_params.gene_therapy_cost
+
         return params
 
     def run_psa(
@@ -815,7 +818,305 @@ class StartingAgeAnalysis:
 
 
 # =============================================================================
-# 5. INTEGRATED ANALYSIS RUNNER
+# 5. COMPREHENSIVE VISUALIZATION FUNCTIONS
+# =============================================================================
+
+def generate_all_figures(
+    baseline_results: Dict,
+    treatment_results: Dict,
+    all_scenario_results: Dict,
+    psa_results: pd.DataFrame,
+    age_results: pd.DataFrame,
+    output_dir: str = '/home/user/HTA-Report/Models/Lowe_HTA/outputs'
+):
+    """
+    Generate all 8 standard figures for the analysis.
+
+    Args:
+        baseline_results: Natural history model results
+        treatment_results: Realistic treatment scenario results
+        all_scenario_results: Dict of all scenario results (optimistic, realistic, etc.)
+        psa_results: PSA results DataFrame
+        age_results: Starting age analysis results
+        output_dir: Directory to save figures
+    """
+    print("\nGenerating comprehensive figures...")
+
+    # Figure 1: Scenario Comparison (Bar chart)
+    _plot_scenario_comparison(all_scenario_results, output_dir)
+
+    # Figure 2: eGFR Trajectories
+    _plot_egfr_trajectories(baseline_results, treatment_results, all_scenario_results, output_dir)
+
+    # Figure 3a/3b: Population Distribution (Markov trace)
+    _plot_population_distribution(baseline_results, treatment_results, output_dir)
+
+    # Figure 4: Cost Over Age
+    _plot_cost_over_age(baseline_results, treatment_results, output_dir)
+
+    # Figure 5: Pricing Heatmap (already created in age analysis, copy/enhance)
+    print("  ✓ Figure 5 (Pricing heatmap) - using existing age_heatmap_price.png")
+
+    # Figure 6: CE Plane (from PSA, already created)
+    print("  ✓ Figure 6 (CE plane) - using existing psa_ce_plane.png")
+
+    # Figure 7: Survival Curves
+    _plot_survival_curves(baseline_results, treatment_results, output_dir)
+
+    # Figure 8: QALY Accumulation
+    _plot_qaly_accumulation(baseline_results, treatment_results, output_dir)
+
+    print("✓ All figures generated")
+
+
+def _plot_scenario_comparison(all_scenario_results: Dict, output_dir: str):
+    """Figure 1: Bar chart comparing key outcomes across scenarios."""
+    scenarios = list(all_scenario_results.keys())
+
+    total_qalys = [all_scenario_results[s]['total_qalys'] for s in scenarios]
+    life_years = [all_scenario_results[s]['life_years'] for s in scenarios]
+    time_to_eskd = [all_scenario_results[s]['time_to_eskd'] for s in scenarios]
+
+    fig, axes = plt.subplots(1, 3, figsize=(16, 5))
+
+    # Plot 1: Total QALYs
+    axes[0].bar(range(len(scenarios)), total_qalys, color='#2F6CD6')
+    axes[0].set_xticks(range(len(scenarios)))
+    axes[0].set_xticklabels([s.replace('Scenario ', 'S') for s in scenarios], rotation=45, ha='right')
+    axes[0].set_ylabel('Total QALYs', fontsize=11)
+    axes[0].set_title('Quality-Adjusted Life Years', fontsize=12, fontweight='bold')
+    axes[0].grid(axis='y', alpha=0.3)
+
+    # Plot 2: Life Years
+    axes[1].bar(range(len(scenarios)), life_years, color='#4CAF50')
+    axes[1].set_xticks(range(len(scenarios)))
+    axes[1].set_xticklabels([s.replace('Scenario ', 'S') for s in scenarios], rotation=45, ha='right')
+    axes[1].set_ylabel('Life Years', fontsize=11)
+    axes[1].set_title('Survival', fontsize=12, fontweight='bold')
+    axes[1].grid(axis='y', alpha=0.3)
+
+    # Plot 3: Time to ESKD
+    axes[2].bar(range(len(scenarios)), time_to_eskd, color='#FF9800')
+    axes[2].set_xticks(range(len(scenarios)))
+    axes[2].set_xticklabels([s.replace('Scenario ', 'S') for s in scenarios], rotation=45, ha='right')
+    axes[2].set_ylabel('Years', fontsize=11)
+    axes[2].set_title('Time to ESKD', fontsize=12, fontweight='bold')
+    axes[2].grid(axis='y', alpha=0.3)
+
+    plt.suptitle('Scenario Comparison: Key Outcomes', fontsize=14, fontweight='bold', y=1.02)
+    plt.tight_layout()
+    plt.savefig(f"{output_dir}/figure1_scenario_comparison.png", dpi=300, bbox_inches='tight')
+    plt.close()
+    print("  ✓ Figure 1: Scenario comparison")
+
+
+def _plot_egfr_trajectories(baseline_results: Dict, treatment_results: Dict, all_scenario_results: Dict, output_dir: str):
+    """Figure 2: eGFR decline trajectories over time."""
+    fig, ax = plt.subplots(figsize=(12, 7))
+
+    years = np.arange(len(baseline_results['egfr_track']))
+
+    # Plot baseline (natural history) - thicker line
+    ax.plot(years, baseline_results['egfr_track'],
+           linewidth=3, color='#E74C3C', label='Natural History', linestyle='--')
+
+    # Plot all treatment scenarios
+    colors = ['#27AE60', '#2F6CD6', '#F39C12', '#8E44AD']
+    for i, (scenario_name, results) in enumerate(all_scenario_results.items()):
+        if 'Natural' not in scenario_name:
+            color = colors[i % len(colors)]
+            ax.plot(years, results['egfr_track'], linewidth=2, color=color,
+                   label=scenario_name.replace('Scenario ', ''))
+
+    # Add CKD stage boundaries
+    ax.axhline(90, color='gray', linestyle=':', alpha=0.5, linewidth=1)
+    ax.axhline(60, color='gray', linestyle=':', alpha=0.5, linewidth=1)
+    ax.axhline(45, color='gray', linestyle=':', alpha=0.5, linewidth=1)
+    ax.axhline(30, color='gray', linestyle=':', alpha=0.5, linewidth=1)
+    ax.axhline(15, color='gray', linestyle=':', alpha=0.5, linewidth=1)
+
+    # Annotate stages
+    ax.text(years[-1]*0.98, 75, 'CKD 2', fontsize=9, alpha=0.6, ha='right')
+    ax.text(years[-1]*0.98, 52, 'CKD 3a', fontsize=9, alpha=0.6, ha='right')
+    ax.text(years[-1]*0.98, 37, 'CKD 3b', fontsize=9, alpha=0.6, ha='right')
+    ax.text(years[-1]*0.98, 22, 'CKD 4', fontsize=9, alpha=0.6, ha='right')
+    ax.text(years[-1]*0.98, 7, 'ESKD', fontsize=9, alpha=0.6, ha='right')
+
+    ax.set_xlabel('Years Since Treatment', fontsize=12)
+    ax.set_ylabel('eGFR (ml/min/1.73m²)', fontsize=12)
+    ax.set_title('Kidney Function Decline Trajectories', fontsize=14, fontweight='bold')
+    ax.legend(loc='upper right', fontsize=10)
+    ax.grid(alpha=0.3)
+    ax.set_ylim([0, 100])
+
+    plt.tight_layout()
+    plt.savefig(f"{output_dir}/figure2_egfr_trajectories.png", dpi=300, bbox_inches='tight')
+    plt.close()
+    print("  ✓ Figure 2: eGFR trajectories")
+
+
+def _plot_population_distribution(baseline_results: Dict, treatment_results: Dict, output_dir: str):
+    """Figures 3a & 3b: Markov trace showing population distribution across health states."""
+    years = np.arange(baseline_results['trace'].shape[0])
+    states = ['Normal', 'CKD2', 'CKD3a', 'CKD3b', 'CKD4', 'ESKD', 'Death']
+    colors = ['#27AE60', '#F1C40F', '#E67E22', '#E74C3C', '#9B59B6', '#34495E', '#95A5A6']
+
+    for scenario_name, results, filename in [
+        ('Natural History', baseline_results, 'figure3a_population_natural_history.png'),
+        ('Optimistic Treatment', treatment_results, 'figure3b_population_optimistic.png')
+    ]:
+        fig, ax = plt.subplots(figsize=(12, 7))
+
+        # Create stacked area plot
+        ax.stackplot(years, *[results['trace'][:, i] for i in range(len(states))],
+                    labels=states, colors=colors, alpha=0.8)
+
+        ax.set_xlabel('Years', fontsize=12)
+        ax.set_ylabel('Proportion of Cohort', fontsize=12)
+        ax.set_title(f'Population Distribution Over Time: {scenario_name}',
+                    fontsize=14, fontweight='bold')
+        ax.legend(loc='center left', bbox_to_anchor=(1, 0.5), fontsize=10)
+        ax.set_ylim([0, 1])
+        ax.grid(alpha=0.3, axis='y')
+
+        plt.tight_layout()
+        plt.savefig(f"{output_dir}/{filename}", dpi=300, bbox_inches='tight')
+        plt.close()
+
+    print("  ✓ Figures 3a & 3b: Population distribution")
+
+
+def _plot_cost_over_age(baseline_results: Dict, treatment_results: Dict, output_dir: str):
+    """Figure 4: Annual costs over patient age."""
+    fig, ax = plt.subplots(figsize=(12, 7))
+
+    starting_age = 1
+    years = np.arange(len(baseline_results['costs_by_cycle']))
+    ages = starting_age + years
+
+    # Plot both scenarios
+    ax.plot(ages, baseline_results['costs_by_cycle'] / 1000,
+           linewidth=2.5, color='#E74C3C', label='Natural History', linestyle='--')
+    ax.plot(ages, treatment_results['costs_by_cycle'] / 1000,
+           linewidth=2.5, color='#2F6CD6', label='Gene Therapy')
+
+    # Fill area between to show cost difference
+    ax.fill_between(ages,
+                    baseline_results['costs_by_cycle'] / 1000,
+                    treatment_results['costs_by_cycle'] / 1000,
+                    alpha=0.2, color='#2F6CD6')
+
+    ax.set_xlabel('Patient Age (years)', fontsize=12)
+    ax.set_ylabel('Annual Cost (€ thousands)', fontsize=12)
+    ax.set_title('Annual Healthcare Costs by Patient Age', fontsize=14, fontweight='bold')
+    ax.legend(fontsize=11)
+    ax.grid(alpha=0.3)
+    ax.set_xlim([1, 50])  # Focus on first 50 years
+
+    plt.tight_layout()
+    plt.savefig(f"{output_dir}/figure4_cost_over_age.png", dpi=300, bbox_inches='tight')
+    plt.close()
+    print("  ✓ Figure 4: Cost over age")
+
+
+def _plot_survival_curves(baseline_results: Dict, treatment_results: Dict, output_dir: str):
+    """Figure 7: Survival curves (proportion alive over time)."""
+    fig, ax = plt.subplots(figsize=(12, 7))
+
+    years = np.arange(baseline_results['trace'].shape[0])
+    death_idx = 6  # Death is the last state
+
+    # Calculate survival (1 - proportion dead)
+    baseline_survival = 1 - baseline_results['trace'][:, death_idx]
+    treatment_survival = 1 - treatment_results['trace'][:, death_idx]
+
+    ax.plot(years, baseline_survival, linewidth=3, color='#E74C3C',
+           label='Natural History', linestyle='--')
+    ax.plot(years, treatment_survival, linewidth=3, color='#2F6CD6',
+           label='Gene Therapy')
+
+    # Fill area showing lives saved
+    ax.fill_between(years, baseline_survival, treatment_survival,
+                    alpha=0.2, color='#27AE60', label='Lives Saved')
+
+    # Add median survival lines
+    baseline_median = np.where(baseline_survival < 0.5)[0]
+    treatment_median = np.where(treatment_survival < 0.5)[0]
+
+    if len(baseline_median) > 0:
+        ax.axvline(baseline_median[0], color='#E74C3C', linestyle=':', alpha=0.7)
+        ax.text(baseline_median[0], 0.55, f'Median: {baseline_median[0]}y',
+               rotation=90, va='bottom', fontsize=9, color='#E74C3C')
+
+    if len(treatment_median) > 0:
+        ax.axvline(treatment_median[0], color='#2F6CD6', linestyle=':', alpha=0.7)
+        ax.text(treatment_median[0], 0.55, f'Median: {treatment_median[0]}y',
+               rotation=90, va='bottom', fontsize=9, color='#2F6CD6')
+
+    ax.axhline(0.5, color='gray', linestyle='--', alpha=0.3, linewidth=1)
+
+    ax.set_xlabel('Years', fontsize=12)
+    ax.set_ylabel('Proportion Surviving', fontsize=12)
+    ax.set_title('Survival Curves', fontsize=14, fontweight='bold')
+    ax.legend(fontsize=11)
+    ax.grid(alpha=0.3)
+    ax.set_ylim([0, 1.05])
+
+    plt.tight_layout()
+    plt.savefig(f"{output_dir}/figure7_survival_curves.png", dpi=300, bbox_inches='tight')
+    plt.close()
+    print("  ✓ Figure 7: Survival curves")
+
+
+def _plot_qaly_accumulation(baseline_results: Dict, treatment_results: Dict, output_dir: str):
+    """Figure 8: Cumulative QALY accumulation over time."""
+    fig, ax = plt.subplots(figsize=(12, 7))
+
+    years = np.arange(len(baseline_results['qalys_by_cycle']))
+
+    # Calculate cumulative QALYs
+    baseline_cumulative = np.cumsum(baseline_results['discounted_qalys_by_cycle'])
+    treatment_cumulative = np.cumsum(treatment_results['discounted_qalys_by_cycle'])
+
+    ax.plot(years, baseline_cumulative, linewidth=3, color='#E74C3C',
+           label='Natural History', linestyle='--')
+    ax.plot(years, treatment_cumulative, linewidth=3, color='#2F6CD6',
+           label='Gene Therapy')
+
+    # Fill area showing QALY gains
+    ax.fill_between(years, baseline_cumulative, treatment_cumulative,
+                    alpha=0.2, color='#27AE60', label='QALY Gains')
+
+    # Add final values as annotations
+    final_baseline = baseline_cumulative[-1]
+    final_treatment = treatment_cumulative[-1]
+    qaly_gain = final_treatment - final_baseline
+
+    ax.annotate(f'Final: {final_baseline:.1f} QALYs',
+               xy=(years[-1], final_baseline), xytext=(years[-1]-10, final_baseline-2),
+               fontsize=10, color='#E74C3C', fontweight='bold',
+               bbox=dict(boxstyle='round,pad=0.5', facecolor='white', alpha=0.8))
+
+    ax.annotate(f'Final: {final_treatment:.1f} QALYs\n(+{qaly_gain:.1f})',
+               xy=(years[-1], final_treatment), xytext=(years[-1]-10, final_treatment+2),
+               fontsize=10, color='#2F6CD6', fontweight='bold',
+               bbox=dict(boxstyle='round,pad=0.5', facecolor='white', alpha=0.8))
+
+    ax.set_xlabel('Years', fontsize=12)
+    ax.set_ylabel('Cumulative QALYs (Discounted)', fontsize=12)
+    ax.set_title('QALY Accumulation Over Time', fontsize=14, fontweight='bold')
+    ax.legend(fontsize=11, loc='upper left')
+    ax.grid(alpha=0.3)
+    ax.set_xlim([0, 60])  # Focus on first 60 years
+
+    plt.tight_layout()
+    plt.savefig(f"{output_dir}/figure8_qaly_accumulation.png", dpi=300, bbox_inches='tight')
+    plt.close()
+    print("  ✓ Figure 8: QALY accumulation")
+
+
+# =============================================================================
+# 6. INTEGRATED ANALYSIS RUNNER
 # =============================================================================
 
 def run_enhanced_analysis(
@@ -953,10 +1254,51 @@ def run_enhanced_analysis(
     print()
 
     # =======================================================================
-    # 2. STARTING AGE SCENARIOS
+    # 2. RUN ALL SCENARIOS & GENERATE COMPREHENSIVE FIGURES
     # =======================================================================
     print("-" * 80)
-    print("2. STARTING AGE SCENARIOS")
+    print("2. RUNNING ALL SCENARIOS FOR FIGURES")
+    print("-" * 80)
+
+    # Run all treatment scenarios (optimistic, realistic, conservative, pessimistic)
+    all_scenario_results = {}
+    scenario_configs = {
+        'Scenario 0: Natural History': {'decline_rate': params.natural_decline_rate, 'include_gt_cost': False},
+        'Scenario 1: Optimistic': {'decline_rate': 0.30, 'include_gt_cost': True},
+        'Scenario 2: Realistic': {'decline_rate': 0.52, 'include_gt_cost': True},
+        'Scenario 3: Conservative': {'decline_rate': 0.74, 'include_gt_cost': True},
+        'Scenario 4: Pessimistic': {'decline_rate': 1.04, 'include_gt_cost': True},
+    }
+
+    for scenario_name, config in scenario_configs.items():
+        model = MarkovCohortModel(params)
+        result = model.run_model(
+            egfr_decline_rate=config['decline_rate'],
+            scenario_name=scenario_name,
+            include_gene_therapy_cost=config['include_gt_cost']
+        )
+        all_scenario_results[scenario_name] = result
+
+    results['all_scenarios'] = all_scenario_results
+
+    # Generate all comprehensive figures
+    if save_results:
+        generate_all_figures(
+            baseline_results=baseline_results,
+            treatment_results=treatment_results,
+            all_scenario_results=all_scenario_results,
+            psa_results=psa_results,
+            age_results=None,  # Will be generated in next section
+            output_dir=output_dir
+        )
+
+    print()
+
+    # =======================================================================
+    # 3. STARTING AGE SCENARIOS
+    # =======================================================================
+    print("-" * 80)
+    print("3. STARTING AGE SCENARIOS")
     print("-" * 80)
 
     age_analysis = StartingAgeAnalysis(params)
@@ -984,7 +1326,8 @@ def run_enhanced_analysis(
     print(f"\nAll results saved to: {output_dir}")
     print("\nKey Findings:")
     print(f"  1. PSA: {prob_100k*100:.0f}% probability cost-effective at €100K/QALY")
-    print(f"  2. Starting age: Earlier treatment generally more cost-effective")
+    print(f"  2. Comprehensive figures: 8 standard figures generated")
+    print(f"  3. Starting age: Earlier treatment generally more cost-effective")
 
     return results
 

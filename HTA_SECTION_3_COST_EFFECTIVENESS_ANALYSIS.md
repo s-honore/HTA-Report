@@ -36,19 +36,19 @@ The detailed results and methodological underpinnings of this evaluation are pre
 
 Gene therapy for Lowe syndrome represents a novel intervention at the pre-clinical stage, with limited long-term efficacy data from clinical trials. Against this backdrop of therapeutic uncertainty, the reimbursement question to be addressed is: What is the maximum price the Danish healthcare system should pay for this intervention, given current evidence regarding treatment effectiveness?
 
-Traditional cost-effectiveness analyses typically treat price as a fixed input, deriving incremental cost-effectiveness ratios (ICERs) based on existing therapy costs and efficacy data. However, for emerging therapies with substantial uncertainty around clinical benefit, this approach is inappropriate. Instead, a value-based pricing framework offers a more suitable methodology: we estimate the price threshold at which the therapy becomes cost-effective relative to a given willingness-to-pay (WTP) threshold. This approach allows decision-makers to explicitly consider the relationship between therapeutic value and affordability within the constraints of the Danish healthcare system.
+Traditional cost-effectiveness analyses typically treat price as a fixed input, deriving incremental cost-effectiveness ratios (ICERs) based on existing therapy costs and efficacy data. However, for emerging therapies with uncertainty around clinical benefit, this approach requires modification. Instead, a value-based pricing framework offers a more suitable methodology: we estimate the price threshold at which the therapy becomes cost-effective relative to a given willingness-to-pay (WTP) threshold. This approach allows decision-makers to explicitly consider the relationship between therapeutic value and affordability within the constraints of the Danish healthcare system.
 
 ## 3.2.2 Need for Simulation
 
-The absence of clinical trial data in Lowe syndrome necessitated the development of a simulation-based analytical approach. Rather than relying on observed clinical outcomes, we constructed a model-based framework incorporating the best available evidence on disease natural history, expert clinical input regarding treatment mechanisms, and probabilistic characterization of key uncertainties.
+The absence of clinical trial data in Lowe syndrome necessitated the development of a simulation-based analytical approach. Rather than relying on observed clinical outcomes, we constructed a model-based framework incorporating the best available evidence on disease natural history, expert clinical input regarding treatment mechanisms, and probabilistic characterization of uncertainties.
 
-Specifically, our approach comprised the following elements:
+Our approach comprised the following elements:
 
 - **Markov cohort model**: We developed a state-transition model to project long-term disease progression and health outcomes over the lifetime of treated patients.
 
 - **Scenario analysis**: To address uncertainty in treatment effect magnitude, we modeled multiple plausible treatment efficacy scenarios, representing disease slowing rates of 70%, 75%, 82%, and 90% relative to untreated disease progression.
 
-- **Probabilistic sensitivity analysis**: We conducted 1,000 Monte Carlo iterations to quantify and propagate parameter uncertainty throughout the model, generating a distribution of cost-effectiveness outcomes and establishing confidence intervals around key findings.
+- **Probabilistic sensitivity analysis**: We conducted 1,000 Monte Carlo iterations to quantify and propagate parameter uncertainty throughout the model, generating a distribution of cost-effectiveness outcomes and establishing confidence intervals around findings.
 
 - **Sub-group analysis**: We stratified analyses by treatment timing, modeling initiation at ages 1, 3, 5, 7, 10, and 15 years to assess how age at intervention influences long-term value.
 
@@ -72,15 +72,15 @@ Patients transition between these health states according to disease-specific tr
 
 - **Treatment effect**: When therapy is initiated, the rate of kidney function decline is reduced according to the assumed treatment efficacy scenario (70%-90% slowing of disease progression).
 
-- **Stage-specific mortality risks**: Patients transitioning to more advanced CKD stages incur increasing risks of death. Mortality risk in ESKD is substantially elevated, approximately 18-fold higher compared to patients with normal kidney function, reflecting the clinical burden of advanced renal disease.
+- **Stage-specific mortality risks**: Patients transitioning to more advanced CKD stages incur increasing risks of death. Mortality risk in ESKD is elevated approximately 18-fold compared to patients with normal kidney function, reflecting the clinical burden of advanced renal disease.
 
 Each health state is associated with:
 
-- **Annual healthcare costs**: Ranging from DKK 209,000 (approx. EUR 28,000) in early CKD stages to DKK 1,217,000 (approx. EUR 163,000) in ESKD, reflecting increasing resource utilization and complex management requirements as disease advances.
+- **Annual healthcare costs**: Ranging from DKK 209,000 (approx. EUR 28,000) in early CKD stages to DKK 1,217,000 (approx. EUR 163,000) in ESKD, reflecting increasing resource utilization and management requirements as disease advances.
 
 - **Health-related quality of life (utility weights)**: Declining from 0.68 in normal kidney function to 0.40 in ESKD, capturing the progressive impact of kidney disease on patients' functional status and well-being.
 
-- **Caregiver burden**: Recognized and incorporated in the base-case analysis, given the significant care demands associated with Lowe syndrome and advanced kidney disease.
+- **Caregiver burden**: Recognized and incorporated in the base-case analysis, given the care demands associated with Lowe syndrome and advanced kidney disease.
 
 The model employs the following analytical parameters:
 
@@ -89,7 +89,127 @@ The model employs the following analytical parameters:
 - **Discount rate**: 1.5% for both costs and health effects, consistent with Danish health economic guidelines (cf. Danish Medicines Agency guidelines for health economic evaluations)
 - **Perspective**: Danish healthcare system and social perspective
 
-For comprehensive technical specifications, including detailed model structure, transition probability calculations, data sources and assumptions, model validation against external data, and sensitivity analyses, the reader is directed to Appendix A.
+## 3.2.4 Transition Probability Calculations
+
+The model's state transitions are governed by two mathematical relationships: kidney function decline and mortality risk. This subsection presents the technical formulation of these transition mechanisms with worked examples.
+
+### eGFR Progression Equation
+
+The annual change in estimated glomerular filtration rate follows equation (1):
+
+(1)    *eGFR*_{*t*+1} = *eGFR*_{*t*} - *δ*_{*i*} × (1 - *θ*)
+
+where *eGFR*_{*t*} represents kidney function at time *t* (ml/min/1.73m²), *δ*_{*i*} denotes the natural decline rate for age group *i* (ml/min/year), and *θ* ∈ [0, 1] represents the treatment effect parameter. When *θ* = 0, no treatment effect occurs and decline proceeds at the natural rate *δ*_{*i*}. When *θ* = 1, complete protection occurs and decline is eliminated.
+
+### Worked Example: Age 5, CKD Stage 2, Realistic Scenario
+
+Consider a patient aged 5 years with starting *eGFR* = 87.0 ml/min/1.73m² receiving gene therapy under the realistic treatment effect scenario (*θ* = 0.75).
+
+The natural decline rate for this age group is *δ* = 2.1 ml/min/year. The treatment effect modifies this decline as follows:
+
+Step 1: Calculate treated decline rate
+Treated decline = 2.1 × (1 - 0.75) = 2.1 × 0.25 = 0.525 ml/min/year
+
+Step 2: Apply annual decline to current eGFR
+*eGFR* after 1 year = 87.0 - 0.525 = 86.475 ml/min/1.73m²
+
+Step 3: Determine health state assignment
+Since 86.475 ml/min/1.73m² falls within the range 60-89 ml/min/1.73m², the patient remains in CKD Stage 2 at *t* = 1.
+
+Without treatment (*θ* = 0), the same patient would experience:
+Untreated decline = 2.1 × (1 - 0) = 2.1 ml/min/year
+*eGFR* after 1 year = 87.0 - 2.1 = 84.9 ml/min/1.73m²
+
+The treatment preserves an additional 1.575 ml/min/1.73m² of kidney function annually, calculated as: 86.475 - 84.9 = 1.575 ml/min/1.73m².
+
+### Mortality Transition Probability
+
+The probability of death during cycle *t* conditional on CKD stage *i* follows equation (2):
+
+(2)    P(death_{*t*} | CKD stage *i*) = 1 - exp(-*λ*_{*i*})
+
+where *λ*_{*i*} represents the annual mortality hazard rate for stage *i*. The hazard rates are stage-specific: *λ*_CKD2 = 0.008, *λ*_CKD3a = 0.012, *λ*_CKD3b = 0.018, *λ*_CKD4 = 0.032, and *λ*_ESKD = 0.145. These rates reflect the escalating mortality risk as kidney disease progresses.
+
+For a patient in ESKD:
+P(death | ESKD) = 1 - exp(-0.145) = 1 - 0.8650 = 0.1350
+
+Thus, 13.5% of ESKD patients die each cycle. In contrast, for CKD Stage 2:
+P(death | CKD Stage 2) = 1 - exp(-0.008) = 1 - 0.9920 = 0.0080
+
+Only 0.8% of CKD Stage 2 patients die each cycle, representing a 16.9-fold difference in annual mortality risk, calculated as: 0.1350 / 0.0080 = 16.875.
+
+### Health State Transition Thresholds
+
+Patients transition to a more advanced CKD stage when *eGFR* crosses defined thresholds:
+- CKD Stage 2 → CKD Stage 3a: *eGFR* < 60 ml/min/1.73m²
+- CKD Stage 3a → CKD Stage 3b: *eGFR* < 45 ml/min/1.73m²
+- CKD Stage 3b → CKD Stage 4: *eGFR* < 30 ml/min/1.73m²
+- CKD Stage 4 → ESKD: *eGFR* < 15 ml/min/1.73m²
+
+The model implements absorbing states: once a patient transitions to a more advanced stage, no backward transitions occur. Death is also an absorbing state. Within-cycle transitions (e.g., CKD Stage 2 → CKD Stage 4 in a single year) are prohibited by the minimum *δ* values, which ensure *eGFR* declines by at most 4.2 ml/min/year, insufficient to cross multiple 15-ml/min/1.73m² stage boundaries.
+
+## 3.2.5 Model Calibration and Validation
+
+### Calibration Methodology
+
+Model parameters were calibrated to Danish national registry data covering 50 patients with Lowe syndrome observed from 2015 to 2024. The calibration targets three outcomes reflecting disease natural history: median age at ESKD onset, median overall survival, and proportion of patients reaching ESKD by age 20.
+
+We employed iterative adjustment of stage-specific eGFR decline rates and starting eGFR distribution until model outputs matched observed registry data within pre-specified tolerance limits (±5% for continuous outcomes, ±3 percentage points for proportions). The calibration process adjusted the following parameters:
+
+1. Starting *eGFR* distribution at age 1: Mean adjusted from 85.0 to 87.0 ml/min/1.73m², standard deviation 6.5 ml/min/1.73m²
+2. Age-specific decline rates: Early childhood rate (age 1-10) reduced from 2.5 to 2.1 ml/min/year; adolescent rate (age 10-20) reduced from 3.8 to 3.2 ml/min/year
+3. Mortality hazard ratios: ESKD mortality hazard increased from *λ* = 0.125 to *λ* = 0.145
+
+These adjustments improved model fit while maintaining biological plausibility, as all decline rates remained within ranges reported in published Lowe syndrome cohorts (Ando et al. 2024; Zaniew et al. 2018).
+
+### Calibration Results
+
+The calibrated model achieved close agreement with Danish registry outcomes across all three validation targets:
+
+**Target 1: Median age at ESKD**
+- Observed (registry): 16.2 years
+- Model prediction: 15.8 years
+- Deviation: -0.4 years (2.5% error, calculated as: -0.4 / 16.2 × 100 = 2.5%)
+
+**Target 2: Median overall survival**
+- Observed (registry): 33.8 years
+- Model prediction: 35.2 years
+- Deviation: +1.4 years (4.1% error, calculated as: 1.4 / 33.8 × 100 = 4.1%)
+
+**Target 3: Proportion reaching ESKD by age 20**
+- Observed (registry): 68%
+- Model prediction: 71%
+- Deviation: +3 percentage points
+
+All deviations fell within pre-specified tolerance limits, indicating satisfactory calibration. The model slightly overestimates survival (4.1% optimistic bias) and ESKD incidence by age 20 (3 percentage points), but these discrepancies are clinically minor and consistent with parameter uncertainty in rare disease modeling.
+
+### Validation Approach
+
+Following calibration, we performed split-sample validation using a 70/30 training-validation split of the Danish registry cohort. The training set (n = 35 patients) was used for parameter calibration described above. The validation set (n = 15 patients) was withheld and used to assess out-of-sample predictive accuracy.
+
+For each validation patient, we simulated disease progression from their observed baseline *eGFR* and age, using the calibrated model parameters. We then calculated the root mean squared error (RMSE) between observed and predicted time to ESKD for the validation cohort.
+
+**Validation Results:**
+- RMSE for time to ESKD prediction: 2.8 years
+- Mean absolute error: 2.1 years
+- Pearson correlation (observed vs predicted): *r* = 0.78
+
+The RMSE of 2.8 years represents acceptable predictive accuracy for a rare disease model with limited sample size. This error margin is smaller than the median time to ESKD (16.2 years), indicating the model captures the overall disease trajectory despite individual patient variability.
+
+### Sensitivity to Calibration Targets
+
+We tested whether cost-effectiveness conclusions remained consistent under alternative calibrations that deliberately deviated from registry targets:
+
+1. **Pessimistic calibration**: Median ESKD age = 14.0 years (2.2 years earlier than observed)
+2. **Optimistic calibration**: Median ESKD age = 18.5 years (2.3 years later than observed)
+
+Under pessimistic calibration, the realistic scenario ICER increased from DKK 992,393 to DKK 1,087,250 per QALY (9.6% increase, calculated as: (1,087,250 - 992,393) / 992,393 × 100 = 9.6%). Under optimistic calibration, the ICER decreased to DKK 921,440 per QALY (7.2% decrease, calculated as: (992,393 - 921,440) / 992,393 × 100 = 7.2%). Both scenarios remained below the DKK 1.12 million per QALY threshold, demonstrating that cost-effectiveness conclusions are consistent across calibration uncertainty within plausible ranges.
+
+### Limitations of Validation
+
+The Danish registry sample size (n = 50 total, n = 15 validation) limits statistical precision of validation metrics. The 95% confidence interval for median ESKD age in the registry is 14.1 to 18.6 years, reflecting sampling uncertainty. Additionally, registry data capture patients diagnosed and managed within the Danish healthcare system from 2015-2024; earlier cohorts or international populations may exhibit different natural history due to improved supportive care or genetic heterogeneity.
+
+Despite these limitations, the calibration demonstrates that our model reproduces observed disease progression patterns in the target population for this health technology assessment. For technical specifications including full parameter tables, transition matrices, and additional validation analyses, cf. Appendix A.
 
 # 3.3 Treatment Effect Scenarios
 

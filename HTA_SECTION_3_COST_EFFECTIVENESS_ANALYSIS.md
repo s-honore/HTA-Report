@@ -139,3 +139,62 @@ Cost offsets arise from the delayed progression through advanced chronic kidney 
 Even the pessimistic treatment scenario, which assumes minimal efficacy, provides measurable clinical benefit with 4.11 incremental QALYs gained over the patient lifetime (a 36 percent improvement over natural history), indicating that gene therapy demonstrates benefit across a broad range of plausible assumptions regarding therapeutic effect.
 
 Comparative outcomes across treatment scenarios are presented in cf. Figure 1, which displays QALYs gained, life-year extension, and duration of ESKD delay. Cf. Figure 3b illustrates the population distribution across health states over time under the realistic treatment scenario, contrasting disease progression with the natural history baseline. Survival curves comparing natural history with the realistic treatment scenario are presented in cf. Figure 7, demonstrating extended overall survival with gene therapy intervention.
+
+# 3.5 Value-Based Pricing Analysis
+
+## 3.5.1 Methodology
+
+Rather than assuming a gene therapy price based on market comparables or payer budgets, we employed a value-based pricing approach to calculate the maximum justifiable price at standard willingness-to-pay thresholds. This approach ensures transparency in how the proposed price relates to the clinical and economic benefits demonstrated in the health-economic model.
+
+The maximum justifiable price was calculated using the following formula:
+
+**Max Price = (WTP Threshold × Incremental QALYs) - Incremental Costs (excluding gene therapy)**
+
+This formula ensures that when the gene therapy is priced at its maximum justifiable level, the incremental cost-effectiveness ratio (ICER) exactly equals the specified willingness-to-pay threshold. Any price below this maximum would result in an ICER more favorable than the threshold, while prices above it would exceed the threshold.
+
+## 3.5.2 Base Case (Realistic Scenario)
+
+Under the realistic scenario and applying the standard European willingness-to-pay threshold of DKK 1,117,500 per quality-adjusted life year (QALY) (approx. EUR 150,000) for orphan drugs in rare diseases, the maximum justifiable price for gene therapy in Lowe syndrome was calculated at **DKK 10,729,073 (approx. EUR 1,440,144)**.
+
+This price comprises two components:
+
+- **Health benefit value**: The incremental 7.72 QALYs gained from treatment × DKK 1,117,500/QALY threshold (approx. EUR 150,000) = DKK 8,627,100 (approx. EUR 1,158,000)
+- **Cost offsets from avoided complications**: Savings from prevented chronic kidney disease and end-stage kidney disease management = DKK 2,101,900 (approx. EUR 282,000)
+- **Total justifiable value**: DKK 10,729,073 (approx. EUR 1,440,144)
+
+The cost offset of DKK 2,101,900 (approx. EUR 282,000) reflects the burden of progressive renal dysfunction in untreated Lowe syndrome, including dialysis, transplantation, and associated comorbidity management. These avoided costs contribute to the overall value proposition of the therapy.
+
+## 3.5.3 Pricing Across Scenarios
+
+The maximum justifiable price varies substantially depending on assumptions about treatment efficacy and disease progression. The following table presents maximum justifiable prices across all modeled scenarios at the standard DKK 1,117,500/QALY (approx. EUR 150,000) threshold:
+
+| Scenario | Incremental QALYs | Cost Offset DKK (EUR) | Max Price DKK (EUR) |
+|----------|-------------------|------------------------|----------------------|
+| Optimistic | 8.62 | 2,160,500 (290,000) | 11,797,850 (1,583,000) |
+| Realistic | 7.72 | 2,101,900 (282,000) | 10,729,073 (1,440,000) |
+| Conservative | 6.27 | 1,288,850 (173,000) | 8,292,575 (1,113,000) |
+| Pessimistic | 4.11 | 528,950 (71,000) | 5,126,875 (688,000) |
+
+Pricing is also sensitive to the willingness-to-pay threshold used. Applying alternative thresholds yields:
+
+- **At DKK 745,000/QALY threshold (approx. EUR 100,000)** (lower bound): DKK 7,852,300 (approx. EUR 1,054,000)
+- **At DKK 2,235,000/QALY threshold (approx. EUR 300,000)** (upper bound): DKK 19,355,100 (approx. EUR 2,598,000)
+
+The variation of DKK 6.7 million (approx. EUR 900,000) between the pessimistic and optimistic scenarios reflects the inherent uncertainties in predicting long-term renal progression and life expectancy in a rare genetic disease with limited natural history data. The realistic scenario with DKK 1,117,500/QALY (approx. EUR 150,000) represents the most appropriate reference point for European health system decision-making.
+
+Annual healthcare cost dynamics and cumulative quality-of-life gains are illustrated in Figure 4 (annual healthcare costs by patient age comparing natural history versus treatment trajectory) and Figure 8 (cumulative QALY accumulation over the patient lifetime).
+
+## 3.5.4 Comparison to Other Gene Therapies
+
+The estimated maximum justifiable price of DKK 10.7 million (approx. EUR 1.44 million) aligns with the pricing of gene therapies approved between 2017 and 2023 for serious rare diseases, providing a market reference point for valuation. The following table presents launch prices for rare disease gene therapies:
+
+| Therapy | Indication | Approval Year | Launch Price (Local Currency) | Launch Price DKK (EUR) |
+|---------|-----------|--------------|-------------------------------|------------------------|
+| Zolgensma | Spinal muscular atrophy | 2019 | USD 2.1 million | 14,154,500 (1,900,000) |
+| Luxturna | RPE65-mediated retinal dystrophy | 2017 | USD 850,000 | 5,736,500 (770,000) |
+| Hemgenix | Hemophilia B | 2022 | USD 3.5 million | 23,840,000 (3,200,000) |
+| Gene therapy for Lowe syndrome (estimated) | Lowe syndrome | — | — | 10,729,073 (1,440,144) |
+
+*Note: Currency conversions based on 2023 average exchange rates. Source: Manufacturer public announcements and FDA approval documents.*
+
+The proposed price for Lowe syndrome gene therapy is positioned within the established range for approved therapies with similar disease severity and lifetime benefit horizons. Zolgensma provides survival extension and motor function preservation in spinal muscular atrophy type 1, a progressive neuromuscular disease; Luxturna addresses vision loss in RPE65-mediated retinal dystrophy; and Hemgenix offers factor IX expression in hemophilia B, a severe bleeding disorder. Gene therapy for Lowe syndrome similarly offers the prospect of preventing progressive renal failure and neurological complications in a severe X-linked genetic disorder, justifying a price point commensurate with these comparators.

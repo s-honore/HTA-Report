@@ -1283,15 +1283,15 @@ def run_enhanced_analysis(
     # Costs EXCLUDING gene therapy (monitoring + differential CKD management)
     costs_excl_gt = treatment_results['total_costs'] - baseline_results['total_costs']
 
-    # Calculate maximum price at key thresholds
-    target_threshold = 100000  # €100K/QALY
+    # Calculate maximum price at standard threshold (€150K/QALY)
+    target_threshold = 150000  # €150K/QALY - standard threshold
     max_price = max(0, (target_threshold * inc_qalys) - costs_excl_gt)
 
     print(f"\nBase Case Results (Realistic Scenario vs Natural History):")
     print(f"  Incremental QALYs: {inc_qalys:.2f}")
     print(f"  Incremental Life Years: {inc_life_years:.2f}")
     print(f"  Costs excl. gene therapy: €{costs_excl_gt:,.0f}")
-    print(f"\nValue-Based Pricing at €{target_threshold/1000:.0f}K/QALY threshold:")
+    print(f"\nValue-Based Pricing at €{target_threshold/1000:.0f}K/QALY threshold (standard):")
     print(f"  Maximum justifiable price: €{max_price:,.0f}")
 
     # Set gene therapy cost for PSA
@@ -1344,7 +1344,7 @@ def run_enhanced_analysis(
 
     print(f"\nProbability Cost-Effective:")
     print(f"  At €100K/QALY: {prob_100k*100:.1f}%")
-    print(f"  At €150K/QALY: {prob_150k*100:.1f}%")
+    print(f"  At €150K/QALY (standard): {prob_150k*100:.1f}%")
     print(f"  At €300K/QALY: {prob_300k*100:.1f}%")
 
     # Generate plots
@@ -1428,9 +1428,10 @@ def run_enhanced_analysis(
     print("=" * 80)
     print(f"\nAll results saved to: {output_dir}")
     print("\nKey Findings:")
-    print(f"  1. PSA: {prob_100k*100:.0f}% probability cost-effective at €100K/QALY")
-    print(f"  2. Comprehensive figures: 8 standard figures generated")
-    print(f"  3. Starting age: Earlier treatment generally more cost-effective")
+    print(f"  1. Value-based price: €{max_price:,.0f} at €150K/QALY threshold (standard)")
+    print(f"  2. PSA: {prob_150k*100:.0f}% probability cost-effective at €150K/QALY")
+    print(f"  3. Comprehensive figures: 8 standard figures generated")
+    print(f"  4. Starting age: Earlier treatment generally more cost-effective")
 
     return results
 

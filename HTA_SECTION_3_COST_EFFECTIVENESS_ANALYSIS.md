@@ -88,3 +88,23 @@ The model employs the following analytical parameters:
 - **Perspective**: Danish healthcare system and social perspective
 
 For comprehensive technical specifications, including detailed model structure, transition probability calculations, data sources and assumptions, model validation against external data, and sensitivity analyses, the reader is directed to Appendix A.
+
+# 3.3 Treatment Effect Scenarios
+
+Uncertainty in gene therapy efficacy for Lowe syndrome required modeling multiple scenarios representing different degrees of disease modification. These scenarios allowed evaluation of the robustness of findings across a range of plausible treatment effects, reflecting current evidence and clinical expectations for gene therapy in genetic kidney diseases.
+
+The analysis modeled four treatment effect scenarios, each defined by distinct annual estimated glomerular filtration rate (eGFR) decline rates, alongside the natural history baseline:
+
+| Scenario | eGFR Decline Rate | OCRL Enzyme Replacement | Interpretation |
+|----------|-------------------|-------------------------|----------------|
+| Natural History | 1.4–4.2 ml/min/year (age-dependent) | 0% | No treatment |
+| Optimistic | 0.30 ml/min/year | 90% | Substantial functional correction |
+| Realistic | 0.52 ml/min/year | 75% | Incomplete but substantial correction (base case) |
+| Conservative | 0.74 ml/min/year | 50% | Moderate functional correction |
+| Pessimistic | 1.04 ml/min/year | 25% | Minimal functional correction |
+
+*Note: OCRL enzyme replacement percentages represent assumed functional correction of the deficient enzyme in Lowe syndrome. Natural history decline rates based on Danish patient registry data (2015-2024). Treatment effect estimates derived from gene therapy outcomes in related genetic kidney diseases.*
+
+The realistic scenario served as the base case for primary analysis. This scenario assumed OCRL enzyme replacement of 75 percent, representing incomplete but substantial functional correction. This assumption is consistent with outcomes observed in successful gene therapy trials for related genetic kidney diseases. The realistic scenario reflects a middle-ground approach: more conservative than optimistic estimates based on best-case trial outcomes, yet more clinically plausible than pessimistic projections that assume minimal therapeutic benefit. The conservative scenario represents a moderately reduced treatment effect, while the pessimistic scenario reflects minimal benefit above natural disease progression, providing bounds for sensitivity analysis.
+
+Figure 2 presents projected eGFR trajectories across all treatment effect scenarios over a 50-year time horizon from 2024 to 2074 (cf. figure 2), illustrating the temporal impact of differential disease modification rates on estimated kidney function.

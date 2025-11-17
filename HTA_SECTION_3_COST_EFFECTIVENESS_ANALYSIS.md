@@ -108,3 +108,34 @@ The analysis modeled four treatment effect scenarios, each defined by distinct a
 The realistic scenario served as the base case for primary analysis. This scenario assumed OCRL enzyme replacement of 75 percent, representing incomplete but substantial functional correction. This assumption is consistent with outcomes observed in successful gene therapy trials for related genetic kidney diseases. The realistic scenario reflects a middle-ground approach: more conservative than optimistic estimates based on best-case trial outcomes, yet more clinically plausible than pessimistic projections that assume minimal therapeutic benefit. The conservative scenario represents a moderately reduced treatment effect, while the pessimistic scenario reflects minimal benefit above natural disease progression, providing bounds for sensitivity analysis.
 
 Figure 2 presents projected eGFR trajectories across all treatment effect scenarios over a 50-year time horizon from 2024 to 2074 (cf. figure 2), illustrating the temporal impact of differential disease modification rates on estimated kidney function.
+
+## 3.4 Treatment Results
+
+### 3.4.1 Natural History (Comparator)
+
+Without intervention, Lowe syndrome patients experience progressive decline in renal function with morbidity and mortality consequences. The natural history baseline demonstrates the clinical trajectory of untreated disease. Patients reach end-stage kidney disease (ESKD, defined as eGFR <15 ml/min/1.73m² requiring dialysis or transplantation) at a median age of approximately 15.8 years (14.8 years from age 1). Median overall survival extends to 35.2 years, reflecting the multisystemic nature of the condition and chronic management of renal and ocular complications. Over their lifetime, patients accrue 11.41 quality-adjusted life years (QALYs, a measure of disease burden combining length and quality of life, discounted at 1.5% annually), with total lifetime healthcare costs of DKK 21.2 million (approx. EUR 2.847 million) attributed to progressive renal failure, dialysis, transplantation, and management of associated complications. The population distribution across health states throughout the natural history trajectory is presented in cf. Figure 3a, illustrating the burden of disease progression without therapeutic intervention.
+
+### 3.4.2 Treatment Outcomes by Scenario
+
+Gene therapy treatment demonstrates benefit across all modelled scenarios, with differential efficacy reflected in distinct clinical and economic outcomes. Table 3.4 presents a comprehensive comparison of key outcomes across the natural history baseline and four treatment scenarios representing varying assumptions regarding gene therapy efficacy.
+
+**Table 3.4: Health Outcomes and Costs by Treatment Scenario**
+
+| Outcome | Natural History | Optimistic | Realistic | Conservative | Pessimistic |
+|---------|-----------------|-----------|-----------|--------------|-------------|
+| Time to ESKD (years) | 14.8 | 38.6 | 32.1 | 24.7 | 18.9 |
+| Life years | 35.2 | 52.8 | 52.7 | 49.1 | 44.3 |
+| Total QALYs (discounted) | 11.41 | 20.03 | 19.13 | 17.68 | 15.52 |
+| Incremental QALYs | -- | 8.62 | 7.72 | 6.27 | 4.11 |
+| Lifetime costs (excl. GT) | DKK 21.2m | DKK 19.0m | DKK 19.1m | DKK 19.9m | DKK 20.7m |
+| Cost offset vs. baseline | -- | DKK 2.2m | DKK 2.1m | DKK 1.3m | DKK 530k |
+
+*Note: ESKD = end-stage kidney disease; QALYs = quality-adjusted life years; GT = gene therapy; m = million; k = thousand. All costs expressed in DKK (Danish Kroner) with approximate EUR equivalents: DKK 21.2m ≈ EUR 2.847m; DKK 19.0m ≈ EUR 2.557m; DKK 19.1m ≈ EUR 2.565m; DKK 19.9m ≈ EUR 2.674m; DKK 20.7m ≈ EUR 2.776m; DKK 2.2m ≈ EUR 290k; DKK 2.1m ≈ EUR 282k; DKK 1.3m ≈ EUR 173k; DKK 530k ≈ EUR 71k. Conversion rate: 1 EUR ≈ 7.446 DKK. Source: Markov cohort model simulation (cf. Section 3.2); natural history data from Danish patient registry 2015-2024.*
+
+The results demonstrate benefit across all treatment scenarios. In the optimistic scenario, time to ESKD is extended by 23.8 years compared to natural history, while the pessimistic scenario extends ESKD onset by 4.1 years. This delay in renal failure progression is accompanied by gains in life expectancy ranging from 9.1 years (pessimistic) to 17.6 years (optimistic). The realistic treatment scenario, which represents the most probable clinical trajectory based on trial data and mechanistic considerations, yields a gain of 17.5 life-years (52.7 versus 35.2 years) and 7.72 incremental QALYs.
+
+Cost offsets arise from the delayed progression through advanced chronic kidney disease stages, reducing the cumulative duration of dialysis and transplantation-related costs. These savings partially offset the cost of gene therapy administration, resulting in cost reductions of DKK 530 thousand (approx. EUR 71 thousand) to DKK 2.2 million (approx. EUR 290 thousand) across treatment scenarios when dialysis and transplantation costs are excluded. This represents value through avoided healthcare resource utilization in end-stage renal disease management.
+
+Even the pessimistic treatment scenario, which assumes minimal efficacy, provides measurable clinical benefit with 4.11 incremental QALYs gained over the patient lifetime (a 36 percent improvement over natural history), indicating that gene therapy demonstrates benefit across a broad range of plausible assumptions regarding therapeutic effect.
+
+Comparative outcomes across treatment scenarios are presented in cf. Figure 1, which displays QALYs gained, life-year extension, and duration of ESKD delay. Cf. Figure 3b illustrates the population distribution across health states over time under the realistic treatment scenario, contrasting disease progression with the natural history baseline. Survival curves comparing natural history with the realistic treatment scenario are presented in cf. Figure 7, demonstrating extended overall survival with gene therapy intervention.

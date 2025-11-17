@@ -424,49 +424,64 @@ class ProbabilisticSensitivityAnalysis:
             thresholds: WTP thresholds to plot (lines)
             save_path: Path to save figure
         """
+        setup_plot_style()
+
         if thresholds is None:
             thresholds = [100000, 150000, 300000]
 
         icer_df = self.calculate_icers()
         scenario_data = icer_df[icer_df['scenario'] == scenario]
 
-        fig, ax = plt.subplots(figsize=(10, 8))
+        fig, ax1 = plt.subplots(figsize=(12, 8))
 
         # Scatter plot
-        ax.scatter(
+        ax1.scatter(
             scenario_data['incremental_qalys'],
             scenario_data['incremental_costs'] / 1000000,  # Convert to millions
-            alpha=0.3,
-            s=20,
-            color='#2F6CD6'
+            alpha=0.4,
+            s=30,
+            color=COLORS['primary'],
+            edgecolors=COLORS['text'],
+            linewidths=0.5
         )
 
         # Add threshold lines
-        xlim = ax.get_xlim()
-        for threshold in thresholds:
+        xlim = ax1.get_xlim()
+        threshold_colors = [COLORS['success'], COLORS['accent'], COLORS['danger']]
+        for i, threshold in enumerate(thresholds):
             x = np.linspace(max(0, xlim[0]), xlim[1], 100)
             y = threshold * x / 1000000
-            ax.plot(x, y, '--', alpha=0.5, label=f'€{threshold/1000:.0f}K/QALY')
+            ax1.plot(x, y, '--', alpha=0.7, linewidth=2,
+                    color=threshold_colors[i % len(threshold_colors)],
+                    label=f'€{threshold/1000:.0f}K/QALY')
 
         # Mean point
         mean_qalys = scenario_data['incremental_qalys'].mean()
         mean_costs = scenario_data['incremental_costs'].mean() / 1000000
-        ax.scatter(mean_qalys, mean_costs, s=200, color='red', marker='*',
+        ax1.scatter(mean_qalys, mean_costs, s=300, color=COLORS['danger'], marker='*',
                   label='Mean', zorder=5, edgecolors='white', linewidths=2)
 
-        ax.axhline(0, color='black', linewidth=0.5)
-        ax.axvline(0, color='black', linewidth=0.5)
-        ax.set_xlabel('Incremental QALYs', fontsize=12)
-        ax.set_ylabel('Incremental Costs (€ millions)', fontsize=12)
-        ax.set_title(f'Cost-Effectiveness Plane: {scenario}\n({self.n_iterations} PSA iterations)',
-                    fontsize=14, fontweight='bold')
-        ax.legend()
-        ax.grid(alpha=0.3)
+        ax1.axhline(0, color=COLORS['text'], linewidth=1, alpha=0.5)
+        ax1.axvline(0, color=COLORS['text'], linewidth=1, alpha=0.5)
+        ax1.set_xlabel('Incremental QALYs')
+        ax1.set_ylabel('Incremental Costs (€ millions)')
+        ax1.legend(loc='upper center', bbox_to_anchor=(0.5, -0.10), ncol=4, frameon=False)
+        ax1.spines['top'].set_visible(False)
+        ax1.spines['right'].set_visible(False)
+
+        # Twin x-axis
+        ax2 = ax1.twiny()
+        ax2.set_xlim(ax1.get_xlim())
+        ax2.set_xticks(ax1.get_xticks())
+        ax2.set_xticklabels(ax1.get_xticklabels())
+        ax2.set_xlabel('Incremental QALYs')
+        ax2.spines['top'].set_visible(False)
+        ax2.spines['right'].set_visible(False)
 
         plt.tight_layout()
 
         if save_path:
-            plt.savefig(save_path, dpi=300, bbox_inches='tight')
+            plt.savefig(save_path, dpi=300, bbox_inches='tight', transparent=True)
             print(f"Saved CE plane to {save_path}")
 
         return fig
@@ -517,37 +532,49 @@ class ProbabilisticSensitivityAnalysis:
         Args:
             save_path: Path to save figure
         """
+        setup_plot_style()
+
         ceac_df = self.calculate_ceac()
 
-        fig, ax = plt.subplots(figsize=(10, 6))
+        fig, ax1 = plt.subplots(figsize=(12, 7))
 
-        for scenario in ceac_df['scenario'].unique():
+        scenario_colors = [COLORS['primary'], COLORS['success'], COLORS['accent'], COLORS['purple']]
+        for i, scenario in enumerate(ceac_df['scenario'].unique()):
             data = ceac_df[ceac_df['scenario'] == scenario]
-            ax.plot(
+            ax1.plot(
                 data['threshold'] / 1000,  # Convert to thousands
                 data['probability_cost_effective'],
-                linewidth=2,
+                linewidth=3,
+                color=scenario_colors[i % len(scenario_colors)],
                 label=scenario
             )
 
         # Add reference lines
-        ax.axhline(0.5, color='gray', linestyle='--', alpha=0.5, label='50% threshold')
-        ax.axvline(100, color='red', linestyle='--', alpha=0.3, label='€100K/QALY')
-        ax.axvline(150, color='orange', linestyle='--', alpha=0.3, label='€150K/QALY')
-        ax.axvline(300, color='green', linestyle='--', alpha=0.3, label='€300K/QALY')
+        ax1.axhline(0.5, color=COLORS['text'], linestyle='--', alpha=0.5, linewidth=1.5)
+        ax1.axvline(100, color=COLORS['success'], linestyle=':', alpha=0.5, linewidth=1.5)
+        ax1.axvline(150, color=COLORS['accent'], linestyle=':', alpha=0.5, linewidth=1.5)
+        ax1.axvline(300, color=COLORS['danger'], linestyle=':', alpha=0.5, linewidth=1.5)
 
-        ax.set_xlabel('Willingness-to-Pay Threshold (€ thousands/QALY)', fontsize=12)
-        ax.set_ylabel('Probability Cost-Effective', fontsize=12)
-        ax.set_title(f'Cost-Effectiveness Acceptability Curve\n({self.n_iterations} PSA iterations)',
-                    fontsize=14, fontweight='bold')
-        ax.set_ylim([0, 1])
-        ax.legend()
-        ax.grid(alpha=0.3)
+        ax1.set_xlabel('Willingness-to-Pay Threshold (€ thousands/QALY)')
+        ax1.set_ylabel('Probability Cost-Effective')
+        ax1.set_ylim([0, 1])
+        ax1.legend(loc='upper center', bbox_to_anchor=(0.5, -0.12), ncol=2, frameon=False)
+        ax1.spines['top'].set_visible(False)
+        ax1.spines['right'].set_visible(False)
+
+        # Twin x-axis
+        ax2 = ax1.twiny()
+        ax2.set_xlim(ax1.get_xlim())
+        ax2.set_xticks(ax1.get_xticks())
+        ax2.set_xticklabels(ax1.get_xticklabels())
+        ax2.set_xlabel('Willingness-to-Pay Threshold (€ thousands/QALY)')
+        ax2.spines['top'].set_visible(False)
+        ax2.spines['right'].set_visible(False)
 
         plt.tight_layout()
 
         if save_path:
-            plt.savefig(save_path, dpi=300, bbox_inches='tight')
+            plt.savefig(save_path, dpi=300, bbox_inches='tight', transparent=True)
             print(f"Saved CEAC to {save_path}")
 
         return fig
@@ -682,6 +709,8 @@ class StartingAgeAnalysis:
             metric: Which metric to plot ('ICER', 'Incremental QALYs', 'Max Price €100K', etc.)
             save_path: Path to save figure
         """
+        setup_plot_style()
+
         if self.results is None:
             raise ValueError("Must run run_age_scenarios() first")
 
@@ -693,7 +722,7 @@ class StartingAgeAnalysis:
         )
 
         # Create figure
-        fig, ax = plt.subplots(figsize=(10, 6))
+        fig, ax = plt.subplots(figsize=(12, 6))
 
         # Format based on metric
         if metric == 'ICER':
@@ -726,18 +755,17 @@ class StartingAgeAnalysis:
             cmap=cmap,
             cbar_kws={'label': cbar_label},
             linewidths=0.5,
+            linecolor=COLORS['text'],
             ax=ax
         )
 
-        ax.set_title(f'{metric} by Starting Age and Treatment Scenario',
-                    fontsize=14, fontweight='bold', pad=20)
-        ax.set_xlabel('Starting Age (years)', fontsize=12)
-        ax.set_ylabel('Treatment Scenario', fontsize=12)
+        ax.set_xlabel('Starting Age (years)')
+        ax.set_ylabel('Treatment Scenario')
 
         plt.tight_layout()
 
         if save_path:
-            plt.savefig(save_path, dpi=300, bbox_inches='tight')
+            plt.savefig(save_path, dpi=300, bbox_inches='tight', transparent=True)
             print(f"Saved heatmap to {save_path}")
 
         return fig
@@ -752,74 +780,113 @@ class StartingAgeAnalysis:
         Args:
             save_path: Path to save figure
         """
+        setup_plot_style()
+
         if self.results is None:
             raise ValueError("Must run run_age_scenarios() first")
 
-        fig, axes = plt.subplots(2, 2, figsize=(14, 10))
+        fig, axes = plt.subplots(2, 2, figsize=(16, 11))
 
-        # Plot 1: Incremental QALYs vs Age
-        for scenario in self.results['Scenario'].unique():
+        scenario_colors = [COLORS['success'], COLORS['primary'], COLORS['accent'], COLORS['purple']]
+
+        # Plot A: Incremental QALYs vs Age
+        for i, scenario in enumerate(self.results['Scenario'].unique()):
             data = self.results[self.results['Scenario'] == scenario]
             axes[0, 0].plot(data['Starting Age'], data['Incremental QALYs'],
-                          marker='o', label=scenario, linewidth=2)
+                          marker='o', label=scenario, linewidth=2.5,
+                          color=scenario_colors[i % len(scenario_colors)])
         axes[0, 0].set_xlabel('Starting Age (years)')
         axes[0, 0].set_ylabel('Incremental QALYs')
-        axes[0, 0].set_title('Health Gains by Starting Age')
-        axes[0, 0].legend()
-        axes[0, 0].grid(alpha=0.3)
+        axes[0, 0].text(-0.15, 1.05, 'A', transform=axes[0, 0].transAxes, fontsize=16, fontweight='bold')
+        axes[0, 0].spines['top'].set_visible(False)
+        axes[0, 0].spines['right'].set_visible(False)
 
-        # Plot 2: ICER vs Age
-        for scenario in self.results['Scenario'].unique():
+        # Plot B: ICER vs Age
+        for i, scenario in enumerate(self.results['Scenario'].unique()):
             data = self.results[self.results['Scenario'] == scenario]
             icers_plot = data['ICER'].clip(upper=500000) / 1000
             axes[0, 1].plot(data['Starting Age'], icers_plot,
-                          marker='o', label=scenario, linewidth=2)
-        axes[0, 1].axhline(100, color='green', linestyle='--', alpha=0.5, label='€100K/QALY')
-        axes[0, 1].axhline(300, color='orange', linestyle='--', alpha=0.5, label='€300K/QALY')
+                          marker='o', label=scenario, linewidth=2.5,
+                          color=scenario_colors[i % len(scenario_colors)])
+        axes[0, 1].axhline(100, color=COLORS['success'], linestyle='--', alpha=0.5)
+        axes[0, 1].axhline(300, color=COLORS['danger'], linestyle='--', alpha=0.5)
         axes[0, 1].set_xlabel('Starting Age (years)')
         axes[0, 1].set_ylabel('ICER (€ thousands/QALY)')
-        axes[0, 1].set_title('Cost-Effectiveness by Starting Age')
-        axes[0, 1].legend()
-        axes[0, 1].grid(alpha=0.3)
+        axes[0, 1].text(-0.15, 1.05, 'B', transform=axes[0, 1].transAxes, fontsize=16, fontweight='bold')
+        axes[0, 1].spines['top'].set_visible(False)
+        axes[0, 1].spines['right'].set_visible(False)
 
-        # Plot 3: Max Price (€100K threshold) vs Age
-        for scenario in self.results['Scenario'].unique():
+        # Plot C: Max Price (€100K threshold) vs Age
+        for i, scenario in enumerate(self.results['Scenario'].unique()):
             data = self.results[self.results['Scenario'] == scenario]
             axes[1, 0].plot(data['Starting Age'], data['Max Price €100K'] / 1000000,
-                          marker='o', label=scenario, linewidth=2)
+                          marker='o', label=scenario, linewidth=2.5,
+                          color=scenario_colors[i % len(scenario_colors)])
         axes[1, 0].set_xlabel('Starting Age (years)')
         axes[1, 0].set_ylabel('Maximum Price (€ millions)')
-        axes[1, 0].set_title('Value-Based Price at €100K/QALY Threshold')
-        axes[1, 0].legend()
-        axes[1, 0].grid(alpha=0.3)
+        axes[1, 0].text(-0.15, 1.05, 'C', transform=axes[1, 0].transAxes, fontsize=16, fontweight='bold')
+        axes[1, 0].spines['top'].set_visible(False)
+        axes[1, 0].spines['right'].set_visible(False)
 
-        # Plot 4: Life Years Gained vs Age
-        for scenario in self.results['Scenario'].unique():
+        # Plot D: Life Years vs Age
+        for i, scenario in enumerate(self.results['Scenario'].unique()):
             data = self.results[self.results['Scenario'] == scenario]
-            # Calculate baseline life years for each age (need to store separately)
-            # For now, approximate from incremental QALYs / average utility
             axes[1, 1].plot(data['Starting Age'], data['Life Years'],
-                          marker='o', label=scenario, linewidth=2)
+                          marker='o', label=scenario, linewidth=2.5,
+                          color=scenario_colors[i % len(scenario_colors)])
         axes[1, 1].set_xlabel('Starting Age (years)')
         axes[1, 1].set_ylabel('Life Years')
-        axes[1, 1].set_title('Survival by Starting Age')
-        axes[1, 1].legend()
-        axes[1, 1].grid(alpha=0.3)
+        axes[1, 1].text(-0.15, 1.05, 'D', transform=axes[1, 1].transAxes, fontsize=16, fontweight='bold')
+        axes[1, 1].spines['top'].set_visible(False)
+        axes[1, 1].spines['right'].set_visible(False)
 
-        plt.suptitle('Impact of Treatment Timing on Outcomes',
-                    fontsize=16, fontweight='bold', y=1.00)
-        plt.tight_layout()
+        # Single legend at bottom for all panels
+        handles, labels = axes[0, 0].get_legend_handles_labels()
+        fig.legend(handles, labels, loc='lower center', bbox_to_anchor=(0.5, -0.02),
+                  ncol=4, frameon=False, fontsize=14)
+
+        plt.tight_layout(rect=[0, 0.03, 1, 1])
 
         if save_path:
-            plt.savefig(save_path, dpi=300, bbox_inches='tight')
+            plt.savefig(save_path, dpi=300, bbox_inches='tight', transparent=True)
             print(f"Saved age impact plot to {save_path}")
 
         return fig
 
 
 # =============================================================================
-# 5. COMPREHENSIVE VISUALIZATION FUNCTIONS
+# 5. COMPREHENSIVE VISUALIZATION FUNCTIONS (USER STYLE)
 # =============================================================================
+
+# Color scheme
+COLORS = {
+    'primary': '#2F6CD6',      # Ultramarine Blue - Primary brand
+    'background': '#F1ECE2',   # Ivory - Clean background
+    'accent': '#F3A87B',       # Orange Shake - Warmth/emphasis
+    'text': '#262626',         # Payne's Gray - Body text
+    'success': '#27AE60',      # Green for positive outcomes
+    'danger': '#E74C3C',       # Red for negative/baseline
+    'purple': '#9B59B6',       # Additional accent
+}
+
+def setup_plot_style():
+    """Apply consistent styling to all plots per user specifications."""
+    plt.rcParams.update({
+        'font.size': 14,
+        'axes.labelsize': 14,
+        'axes.titlesize': 14,
+        'xtick.labelsize': 14,
+        'ytick.labelsize': 14,
+        'legend.fontsize': 14,
+        'figure.dpi': 300,
+        'savefig.dpi': 300,
+        'savefig.transparent': True,
+        'axes.grid': True,
+        'axes.grid.axis': 'y',
+        'grid.alpha': 0.3,
+        'axes.spines.top': False,
+        'axes.spines.right': False,
+    })
 
 def generate_all_figures(
     baseline_results: Dict,
@@ -830,7 +897,7 @@ def generate_all_figures(
     output_dir: str = '/home/user/HTA-Report/Models/Lowe_HTA/outputs'
 ):
     """
-    Generate all 8 standard figures for the analysis.
+    Generate all 8 standard figures with consistent user-specified styling.
 
     Args:
         baseline_results: Natural history model results
@@ -840,7 +907,8 @@ def generate_all_figures(
         age_results: Starting age analysis results
         output_dir: Directory to save figures
     """
-    print("\nGenerating comprehensive figures...")
+    print("\nGenerating comprehensive figures with user styling...")
+    setup_plot_style()
 
     # Figure 1: Scenario Comparison (Bar chart)
     _plot_scenario_comparison(all_scenario_results, output_dir)
@@ -854,11 +922,11 @@ def generate_all_figures(
     # Figure 4: Cost Over Age
     _plot_cost_over_age(baseline_results, treatment_results, output_dir)
 
-    # Figure 5: Pricing Heatmap (already created in age analysis, copy/enhance)
-    print("  ✓ Figure 5 (Pricing heatmap) - using existing age_heatmap_price.png")
+    # Figure 5: Pricing Heatmap - already created in age analysis section
+    print("  ✓ Figure 5 (Pricing heatmap) - see age_heatmap_*.png")
 
-    # Figure 6: CE Plane (from PSA, already created)
-    print("  ✓ Figure 6 (CE plane) - using existing psa_ce_plane.png")
+    # Figure 6: CE Plane - already created in PSA section
+    print("  ✓ Figure 6 (CE plane) - see psa_ce_plane.png")
 
     # Figure 7: Survival Curves
     _plot_survival_curves(baseline_results, treatment_results, output_dir)
@@ -866,7 +934,7 @@ def generate_all_figures(
     # Figure 8: QALY Accumulation
     _plot_qaly_accumulation(baseline_results, treatment_results, output_dir)
 
-    print("✓ All figures generated")
+    print("✓ All figures generated with consistent styling")
 
 
 def _plot_scenario_comparison(all_scenario_results: Dict, output_dir: str):
@@ -877,35 +945,37 @@ def _plot_scenario_comparison(all_scenario_results: Dict, output_dir: str):
     life_years = [all_scenario_results[s]['life_years'] for s in scenarios]
     time_to_eskd = [all_scenario_results[s]['time_to_eskd'] for s in scenarios]
 
-    fig, axes = plt.subplots(1, 3, figsize=(16, 5))
+    fig, axes = plt.subplots(1, 3, figsize=(18, 6))
 
-    # Plot 1: Total QALYs
-    axes[0].bar(range(len(scenarios)), total_qalys, color='#2F6CD6')
+    # Plot A: Total QALYs
+    axes[0].bar(range(len(scenarios)), total_qalys, color=COLORS['primary'], edgecolor=COLORS['text'], linewidth=0.5)
     axes[0].set_xticks(range(len(scenarios)))
     axes[0].set_xticklabels([s.replace('Scenario ', 'S') for s in scenarios], rotation=45, ha='right')
-    axes[0].set_ylabel('Total QALYs', fontsize=11)
-    axes[0].set_title('Quality-Adjusted Life Years', fontsize=12, fontweight='bold')
-    axes[0].grid(axis='y', alpha=0.3)
+    axes[0].set_ylabel('Total QALYs')
+    axes[0].text(-0.1, 1.05, 'A', transform=axes[0].transAxes, fontsize=16, fontweight='bold')
+    axes[0].spines['top'].set_visible(False)
+    axes[0].spines['right'].set_visible(False)
 
-    # Plot 2: Life Years
-    axes[1].bar(range(len(scenarios)), life_years, color='#4CAF50')
+    # Plot B: Life Years
+    axes[1].bar(range(len(scenarios)), life_years, color=COLORS['success'], edgecolor=COLORS['text'], linewidth=0.5)
     axes[1].set_xticks(range(len(scenarios)))
     axes[1].set_xticklabels([s.replace('Scenario ', 'S') for s in scenarios], rotation=45, ha='right')
-    axes[1].set_ylabel('Life Years', fontsize=11)
-    axes[1].set_title('Survival', fontsize=12, fontweight='bold')
-    axes[1].grid(axis='y', alpha=0.3)
+    axes[1].set_ylabel('Life Years')
+    axes[1].text(-0.1, 1.05, 'B', transform=axes[1].transAxes, fontsize=16, fontweight='bold')
+    axes[1].spines['top'].set_visible(False)
+    axes[1].spines['right'].set_visible(False)
 
-    # Plot 3: Time to ESKD
-    axes[2].bar(range(len(scenarios)), time_to_eskd, color='#FF9800')
+    # Plot C: Time to ESKD
+    axes[2].bar(range(len(scenarios)), time_to_eskd, color=COLORS['accent'], edgecolor=COLORS['text'], linewidth=0.5)
     axes[2].set_xticks(range(len(scenarios)))
     axes[2].set_xticklabels([s.replace('Scenario ', 'S') for s in scenarios], rotation=45, ha='right')
-    axes[2].set_ylabel('Years', fontsize=11)
-    axes[2].set_title('Time to ESKD', fontsize=12, fontweight='bold')
-    axes[2].grid(axis='y', alpha=0.3)
+    axes[2].set_ylabel('Years to ESKD')
+    axes[2].text(-0.1, 1.05, 'C', transform=axes[2].transAxes, fontsize=16, fontweight='bold')
+    axes[2].spines['top'].set_visible(False)
+    axes[2].spines['right'].set_visible(False)
 
-    plt.suptitle('Scenario Comparison: Key Outcomes', fontsize=14, fontweight='bold', y=1.02)
     plt.tight_layout()
-    plt.savefig(f"{output_dir}/figure1_scenario_comparison.png", dpi=300, bbox_inches='tight')
+    plt.savefig(f"{output_dir}/figure1_scenario_comparison.png", dpi=300, bbox_inches='tight', transparent=True)
     plt.close()
     print("  ✓ Figure 1: Scenario comparison")
 
@@ -918,39 +988,36 @@ def _plot_egfr_trajectories(baseline_results: Dict, treatment_results: Dict, all
 
     # Plot baseline (natural history) - thicker line
     ax.plot(years, baseline_results['egfr_track'],
-           linewidth=3, color='#E74C3C', label='Natural History', linestyle='--')
+           linewidth=3, color=COLORS['danger'], label='Natural History', linestyle='--')
 
-    # Plot all treatment scenarios
-    colors = ['#27AE60', '#2F6CD6', '#F39C12', '#8E44AD']
+    # Plot all treatment scenarios using color scheme
+    scenario_colors = [COLORS['success'], COLORS['primary'], COLORS['accent'], COLORS['purple']]
     for i, (scenario_name, results) in enumerate(all_scenario_results.items()):
         if 'Natural' not in scenario_name:
-            color = colors[i % len(colors)]
-            ax.plot(years, results['egfr_track'], linewidth=2, color=color,
+            color = scenario_colors[i % len(scenario_colors)]
+            ax.plot(years, results['egfr_track'], linewidth=2.5, color=color,
                    label=scenario_name.replace('Scenario ', ''))
 
     # Add CKD stage boundaries
-    ax.axhline(90, color='gray', linestyle=':', alpha=0.5, linewidth=1)
-    ax.axhline(60, color='gray', linestyle=':', alpha=0.5, linewidth=1)
-    ax.axhline(45, color='gray', linestyle=':', alpha=0.5, linewidth=1)
-    ax.axhline(30, color='gray', linestyle=':', alpha=0.5, linewidth=1)
-    ax.axhline(15, color='gray', linestyle=':', alpha=0.5, linewidth=1)
+    for egfr_val in [90, 60, 45, 30, 15]:
+        ax.axhline(egfr_val, color=COLORS['text'], linestyle=':', alpha=0.3, linewidth=1)
 
-    # Annotate stages
-    ax.text(years[-1]*0.98, 75, 'CKD 2', fontsize=9, alpha=0.6, ha='right')
-    ax.text(years[-1]*0.98, 52, 'CKD 3a', fontsize=9, alpha=0.6, ha='right')
-    ax.text(years[-1]*0.98, 37, 'CKD 3b', fontsize=9, alpha=0.6, ha='right')
-    ax.text(years[-1]*0.98, 22, 'CKD 4', fontsize=9, alpha=0.6, ha='right')
-    ax.text(years[-1]*0.98, 7, 'ESKD', fontsize=9, alpha=0.6, ha='right')
+    # Annotate stages on the right
+    ax.text(years[-1]*1.01, 75, 'CKD 2', fontsize=10, alpha=0.7, ha='left', color=COLORS['text'])
+    ax.text(years[-1]*1.01, 52, 'CKD 3a', fontsize=10, alpha=0.7, ha='left', color=COLORS['text'])
+    ax.text(years[-1]*1.01, 37, 'CKD 3b', fontsize=10, alpha=0.7, ha='left', color=COLORS['text'])
+    ax.text(years[-1]*1.01, 22, 'CKD 4', fontsize=10, alpha=0.7, ha='left', color=COLORS['text'])
+    ax.text(years[-1]*1.01, 7, 'ESKD', fontsize=10, alpha=0.7, ha='left', color=COLORS['text'])
 
-    ax.set_xlabel('Years Since Treatment', fontsize=12)
-    ax.set_ylabel('eGFR (ml/min/1.73m²)', fontsize=12)
-    ax.set_title('Kidney Function Decline Trajectories', fontsize=14, fontweight='bold')
-    ax.legend(loc='upper right', fontsize=10)
-    ax.grid(alpha=0.3)
+    ax.set_xlabel('Years Since Treatment')
+    ax.set_ylabel('eGFR (ml/min/1.73m²)')
+    ax.legend(loc='upper center', bbox_to_anchor=(0.5, -0.12), ncol=3, frameon=False)
     ax.set_ylim([0, 100])
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
 
     plt.tight_layout()
-    plt.savefig(f"{output_dir}/figure2_egfr_trajectories.png", dpi=300, bbox_inches='tight')
+    plt.savefig(f"{output_dir}/figure2_egfr_trajectories.png", dpi=300, bbox_inches='tight', transparent=True)
     plt.close()
     print("  ✓ Figure 2: eGFR trajectories")
 
@@ -959,69 +1026,81 @@ def _plot_population_distribution(baseline_results: Dict, treatment_results: Dic
     """Figures 3a & 3b: Markov trace showing population distribution across health states."""
     years = np.arange(baseline_results['trace'].shape[0])
     states = ['Normal', 'CKD2', 'CKD3a', 'CKD3b', 'CKD4', 'ESKD', 'Death']
-    colors = ['#27AE60', '#F1C40F', '#E67E22', '#E74C3C', '#9B59B6', '#34495E', '#95A5A6']
+    # Use consistent color scheme for health states
+    state_colors = ['#27AE60', '#F1C40F', '#E67E22', COLORS['danger'], COLORS['purple'], '#34495E', '#95A5A6']
 
     for scenario_name, results, filename in [
         ('Natural History', baseline_results, 'figure3a_population_natural_history.png'),
-        ('Optimistic Treatment', treatment_results, 'figure3b_population_optimistic.png')
+        ('Realistic Treatment', treatment_results, 'figure3b_population_optimistic.png')
     ]:
         fig, ax = plt.subplots(figsize=(12, 7))
 
         # Create stacked area plot
         ax.stackplot(years, *[results['trace'][:, i] for i in range(len(states))],
-                    labels=states, colors=colors, alpha=0.8)
+                    labels=states, colors=state_colors, alpha=0.85)
 
-        ax.set_xlabel('Years', fontsize=12)
-        ax.set_ylabel('Proportion of Cohort', fontsize=12)
-        ax.set_title(f'Population Distribution Over Time: {scenario_name}',
-                    fontsize=14, fontweight='bold')
-        ax.legend(loc='center left', bbox_to_anchor=(1, 0.5), fontsize=10)
+        ax.set_xlabel('Years')
+        ax.set_ylabel('Proportion of Cohort')
+        ax.legend(loc='upper center', bbox_to_anchor=(0.5, -0.10), ncol=4, frameon=False)
         ax.set_ylim([0, 1])
-        ax.grid(alpha=0.3, axis='y')
+        ax.spines['top'].set_visible(False)
+        ax.spines['right'].set_visible(False)
 
         plt.tight_layout()
-        plt.savefig(f"{output_dir}/{filename}", dpi=300, bbox_inches='tight')
+        plt.savefig(f"{output_dir}/{filename}", dpi=300, bbox_inches='tight', transparent=True)
         plt.close()
 
     print("  ✓ Figures 3a & 3b: Population distribution")
 
 
 def _plot_cost_over_age(baseline_results: Dict, treatment_results: Dict, output_dir: str):
-    """Figure 4: Annual costs over patient age."""
-    fig, ax = plt.subplots(figsize=(12, 7))
+    """Figure 4: Annual costs over patient age with twin axes."""
+    fig, ax1 = plt.subplots(figsize=(12, 7))
 
     starting_age = 1
     years = np.arange(len(baseline_results['costs_by_cycle']))
     ages = starting_age + years
 
-    # Plot both scenarios
-    ax.plot(ages, baseline_results['costs_by_cycle'] / 1000,
-           linewidth=2.5, color='#E74C3C', label='Natural History', linestyle='--')
-    ax.plot(ages, treatment_results['costs_by_cycle'] / 1000,
-           linewidth=2.5, color='#2F6CD6', label='Gene Therapy')
+    # First y-axis (left) for costs
+    line1 = ax1.plot(ages, baseline_results['costs_by_cycle'] / 1000,
+           linewidth=3, color=COLORS['danger'], label='Natural History', linestyle='--')
+    line2 = ax1.plot(ages, treatment_results['costs_by_cycle'] / 1000,
+           linewidth=3, color=COLORS['primary'], label='Gene Therapy')
 
     # Fill area between to show cost difference
-    ax.fill_between(ages,
+    ax1.fill_between(ages,
                     baseline_results['costs_by_cycle'] / 1000,
                     treatment_results['costs_by_cycle'] / 1000,
-                    alpha=0.2, color='#2F6CD6')
+                    alpha=0.15, color=COLORS['primary'])
 
-    ax.set_xlabel('Patient Age (years)', fontsize=12)
-    ax.set_ylabel('Annual Cost (€ thousands)', fontsize=12)
-    ax.set_title('Annual Healthcare Costs by Patient Age', fontsize=14, fontweight='bold')
-    ax.legend(fontsize=11)
-    ax.grid(alpha=0.3)
-    ax.set_xlim([1, 50])  # Focus on first 50 years
+    ax1.set_xlabel('Patient Age (years)')
+    ax1.set_ylabel('Annual Cost (€ thousands)')
+    ax1.set_xlim([1, 50])  # Focus on first 50 years
+    ax1.spines['top'].set_visible(False)
+
+    # Twin x-axis (right) with identical y-axis scale
+    ax2 = ax1.twiny()
+    ax2.set_xlim(ax1.get_xlim())
+    ax2.set_xticks(ax1.get_xticks())
+    ax2.set_xticklabels(ax1.get_xticklabels())
+    ax2.set_xlabel('Patient Age (years)')
+    ax2.spines['top'].set_visible(False)
+    ax2.spines['right'].set_visible(False)
+
+    # Combine legend entries
+    lines = line1 + line2
+    labels = [l.get_label() for l in lines]
+    ax1.legend(lines, labels, loc='upper center', bbox_to_anchor=(0.5, -0.12), ncol=2, frameon=False)
 
     plt.tight_layout()
-    plt.savefig(f"{output_dir}/figure4_cost_over_age.png", dpi=300, bbox_inches='tight')
+    plt.savefig(f"{output_dir}/figure4_cost_over_age.png", dpi=300, bbox_inches='tight', transparent=True)
     plt.close()
     print("  ✓ Figure 4: Cost over age")
 
 
 def _plot_survival_curves(baseline_results: Dict, treatment_results: Dict, output_dir: str):
-    """Figure 7: Survival curves (proportion alive over time)."""
-    fig, ax = plt.subplots(figsize=(12, 7))
+    """Figure 7: Survival curves with twin axes."""
+    fig, ax1 = plt.subplots(figsize=(12, 7))
 
     years = np.arange(baseline_results['trace'].shape[0])
     death_idx = 6  # Death is the last state
@@ -1030,47 +1109,59 @@ def _plot_survival_curves(baseline_results: Dict, treatment_results: Dict, outpu
     baseline_survival = 1 - baseline_results['trace'][:, death_idx]
     treatment_survival = 1 - treatment_results['trace'][:, death_idx]
 
-    ax.plot(years, baseline_survival, linewidth=3, color='#E74C3C',
+    line1 = ax1.plot(years, baseline_survival, linewidth=3.5, color=COLORS['danger'],
            label='Natural History', linestyle='--')
-    ax.plot(years, treatment_survival, linewidth=3, color='#2F6CD6',
+    line2 = ax1.plot(years, treatment_survival, linewidth=3.5, color=COLORS['primary'],
            label='Gene Therapy')
 
     # Fill area showing lives saved
-    ax.fill_between(years, baseline_survival, treatment_survival,
-                    alpha=0.2, color='#27AE60', label='Lives Saved')
+    ax1.fill_between(years, baseline_survival, treatment_survival,
+                    alpha=0.2, color=COLORS['success'])
 
     # Add median survival lines
     baseline_median = np.where(baseline_survival < 0.5)[0]
     treatment_median = np.where(treatment_survival < 0.5)[0]
 
     if len(baseline_median) > 0:
-        ax.axvline(baseline_median[0], color='#E74C3C', linestyle=':', alpha=0.7)
-        ax.text(baseline_median[0], 0.55, f'Median: {baseline_median[0]}y',
-               rotation=90, va='bottom', fontsize=9, color='#E74C3C')
+        ax1.axvline(baseline_median[0], color=COLORS['danger'], linestyle=':', alpha=0.6)
+        ax1.text(baseline_median[0]+1, 0.52, f'Median: {baseline_median[0]}y',
+               rotation=90, va='bottom', fontsize=11, color=COLORS['danger'])
 
     if len(treatment_median) > 0:
-        ax.axvline(treatment_median[0], color='#2F6CD6', linestyle=':', alpha=0.7)
-        ax.text(treatment_median[0], 0.55, f'Median: {treatment_median[0]}y',
-               rotation=90, va='bottom', fontsize=9, color='#2F6CD6')
+        ax1.axvline(treatment_median[0], color=COLORS['primary'], linestyle=':', alpha=0.6)
+        ax1.text(treatment_median[0]+1, 0.52, f'Median: {treatment_median[0]}y',
+               rotation=90, va='bottom', fontsize=11, color=COLORS['primary'])
 
-    ax.axhline(0.5, color='gray', linestyle='--', alpha=0.3, linewidth=1)
+    ax1.axhline(0.5, color=COLORS['text'], linestyle='--', alpha=0.3, linewidth=1)
 
-    ax.set_xlabel('Years', fontsize=12)
-    ax.set_ylabel('Proportion Surviving', fontsize=12)
-    ax.set_title('Survival Curves', fontsize=14, fontweight='bold')
-    ax.legend(fontsize=11)
-    ax.grid(alpha=0.3)
-    ax.set_ylim([0, 1.05])
+    ax1.set_xlabel('Years')
+    ax1.set_ylabel('Proportion Surviving')
+    ax1.set_ylim([0, 1.05])
+    ax1.spines['top'].set_visible(False)
+
+    # Twin x-axis (top) with identical scale
+    ax2 = ax1.twiny()
+    ax2.set_xlim(ax1.get_xlim())
+    ax2.set_xticks(ax1.get_xticks())
+    ax2.set_xticklabels(ax1.get_xticklabels())
+    ax2.set_xlabel('Years')
+    ax2.spines['top'].set_visible(False)
+    ax2.spines['right'].set_visible(False)
+
+    # Legend below
+    lines = line1 + line2
+    labels = [l.get_label() for l in lines]
+    ax1.legend(lines, labels, loc='upper center', bbox_to_anchor=(0.5, -0.12), ncol=2, frameon=False)
 
     plt.tight_layout()
-    plt.savefig(f"{output_dir}/figure7_survival_curves.png", dpi=300, bbox_inches='tight')
+    plt.savefig(f"{output_dir}/figure7_survival_curves.png", dpi=300, bbox_inches='tight', transparent=True)
     plt.close()
     print("  ✓ Figure 7: Survival curves")
 
 
 def _plot_qaly_accumulation(baseline_results: Dict, treatment_results: Dict, output_dir: str):
-    """Figure 8: Cumulative QALY accumulation over time."""
-    fig, ax = plt.subplots(figsize=(12, 7))
+    """Figure 8: Cumulative QALY accumulation with twin axes."""
+    fig, ax1 = plt.subplots(figsize=(12, 7))
 
     years = np.arange(len(baseline_results['qalys_by_cycle']))
 
@@ -1078,39 +1169,51 @@ def _plot_qaly_accumulation(baseline_results: Dict, treatment_results: Dict, out
     baseline_cumulative = np.cumsum(baseline_results['discounted_qalys_by_cycle'])
     treatment_cumulative = np.cumsum(treatment_results['discounted_qalys_by_cycle'])
 
-    ax.plot(years, baseline_cumulative, linewidth=3, color='#E74C3C',
+    line1 = ax1.plot(years, baseline_cumulative, linewidth=3.5, color=COLORS['danger'],
            label='Natural History', linestyle='--')
-    ax.plot(years, treatment_cumulative, linewidth=3, color='#2F6CD6',
+    line2 = ax1.plot(years, treatment_cumulative, linewidth=3.5, color=COLORS['primary'],
            label='Gene Therapy')
 
     # Fill area showing QALY gains
-    ax.fill_between(years, baseline_cumulative, treatment_cumulative,
-                    alpha=0.2, color='#27AE60', label='QALY Gains')
+    ax1.fill_between(years, baseline_cumulative, treatment_cumulative,
+                    alpha=0.2, color=COLORS['success'])
 
     # Add final values as annotations
     final_baseline = baseline_cumulative[-1]
     final_treatment = treatment_cumulative[-1]
     qaly_gain = final_treatment - final_baseline
 
-    ax.annotate(f'Final: {final_baseline:.1f} QALYs',
-               xy=(years[-1], final_baseline), xytext=(years[-1]-10, final_baseline-2),
-               fontsize=10, color='#E74C3C', fontweight='bold',
-               bbox=dict(boxstyle='round,pad=0.5', facecolor='white', alpha=0.8))
+    ax1.annotate(f'{final_baseline:.1f}',
+               xy=(years[-1], final_baseline), xytext=(years[-1]+2, final_baseline),
+               fontsize=12, color=COLORS['danger'], fontweight='bold',
+               bbox=dict(boxstyle='round,pad=0.4', facecolor='white', alpha=0.9, edgecolor=COLORS['danger']))
 
-    ax.annotate(f'Final: {final_treatment:.1f} QALYs\n(+{qaly_gain:.1f})',
-               xy=(years[-1], final_treatment), xytext=(years[-1]-10, final_treatment+2),
-               fontsize=10, color='#2F6CD6', fontweight='bold',
-               bbox=dict(boxstyle='round,pad=0.5', facecolor='white', alpha=0.8))
+    ax1.annotate(f'{final_treatment:.1f}\n(+{qaly_gain:.1f})',
+               xy=(years[-1], final_treatment), xytext=(years[-1]+2, final_treatment),
+               fontsize=12, color=COLORS['primary'], fontweight='bold',
+               bbox=dict(boxstyle='round,pad=0.4', facecolor='white', alpha=0.9, edgecolor=COLORS['primary']))
 
-    ax.set_xlabel('Years', fontsize=12)
-    ax.set_ylabel('Cumulative QALYs (Discounted)', fontsize=12)
-    ax.set_title('QALY Accumulation Over Time', fontsize=14, fontweight='bold')
-    ax.legend(fontsize=11, loc='upper left')
-    ax.grid(alpha=0.3)
-    ax.set_xlim([0, 60])  # Focus on first 60 years
+    ax1.set_xlabel('Years')
+    ax1.set_ylabel('Cumulative QALYs (Discounted)')
+    ax1.set_xlim([0, 60])  # Focus on first 60 years
+    ax1.spines['top'].set_visible(False)
+
+    # Twin x-axis (top) with identical scale
+    ax2 = ax1.twiny()
+    ax2.set_xlim(ax1.get_xlim())
+    ax2.set_xticks(ax1.get_xticks())
+    ax2.set_xticklabels(ax1.get_xticklabels())
+    ax2.set_xlabel('Years')
+    ax2.spines['top'].set_visible(False)
+    ax2.spines['right'].set_visible(False)
+
+    # Legend below
+    lines = line1 + line2
+    labels = [l.get_label() for l in lines]
+    ax1.legend(lines, labels, loc='upper center', bbox_to_anchor=(0.5, -0.12), ncol=2, frameon=False)
 
     plt.tight_layout()
-    plt.savefig(f"{output_dir}/figure8_qaly_accumulation.png", dpi=300, bbox_inches='tight')
+    plt.savefig(f"{output_dir}/figure8_qaly_accumulation.png", dpi=300, bbox_inches='tight', transparent=True)
     plt.close()
     print("  ✓ Figure 8: QALY accumulation")
 

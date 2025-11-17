@@ -630,6 +630,59 @@ The gene therapy acquisition cost was held fixed at DKK 10.7 million (approx. EU
 
 ## 3.6.3 Results
 
+### 3.6.3.1 Parameter Distribution Specifications
+
+The probabilistic sensitivity analysis drew parameter values from the following probability distributions, specified to reflect both central estimates and parameter uncertainty:
+
+**Utility Values (Beta Distributions)**
+
+Beta distributions were used for all health state utilities, bounded between 0 and 1, with parameters α and β calibrated to match the mean and variance of base case estimates:
+
+- **CKD Stage 2 utility**: Beta(α = 52.36, β = 24.64), mean = 0.68, standard deviation = 0.053
+- **CKD Stage 3a utility**: Beta(α = 48.75, β = 26.25), mean = 0.65, standard deviation = 0.055
+- **CKD Stage 3b utility**: Beta(α = 33.12, β = 33.88), mean = 0.49, standard deviation = 0.061
+- **CKD Stage 4 utility**: Beta(α = 21.60, β = 40.40), mean = 0.35, standard deviation = 0.061
+- **ESKD dialysis utility**: Beta(α = 16.00, β = 24.00), mean = 0.40, standard deviation = 0.077
+- **ESKD transplant utility**: Beta(α = 46.15, β = 24.85), mean = 0.65, standard deviation = 0.057
+
+These parameters were derived by method-of-moments matching to base case utility estimates with 95 percent credible intervals of ±0.05.
+
+**Healthcare Costs (Gamma Distributions)**
+
+Gamma distributions were used for annual healthcare costs, constrained to positive values, with shape parameter *k* and scale parameter *θ*:
+
+- **CKD Stage 2 annual cost**: Gamma(*k* = 18.5, *θ* = 11,297), mean = DKK 209,000, standard deviation = DKK 48,600 (23 percent coefficient of variation)
+- **CKD Stage 3a annual cost**: Gamma(*k* = 16.8, *θ* = 17,560), mean = DKK 295,000, standard deviation = DKK 72,000 (24 percent)
+- **CKD Stage 4 annual cost**: Gamma(*k* = 14.2, *θ* = 34,366), mean = DKK 487,000, standard deviation = DKK 129,000 (27 percent)
+- **ESKD dialysis annual cost**: Gamma(*k* = 22.1, *θ* = 55,023), mean = DKK 1,217,000, standard deviation = DKK 259,000 (21 percent)
+- **Transplant year 1 cost**: Gamma(*k* = 20.5, *θ* = 41,073), mean = DKK 842,000, standard deviation = DKK 186,000 (22 percent)
+- **Transplant subsequent years**: Gamma(*k* = 19.3, *θ* = 20,052), mean = DKK 387,000, standard deviation = DKK 88,100 (23 percent)
+
+Parameters were calibrated to Danish health register data on chronic kidney disease treatment costs (2020-2024).
+
+**Mortality Hazard Ratios (Lognormal Distributions)**
+
+Lognormal distributions were applied to stage-specific mortality hazard rates, parameterized by log-scale mean *μ* and log-scale standard deviation *σ*:
+
+- **CKD Stage 2 hazard**: Lognormal(*μ* = -4.828, *σ* = 0.150), median = 0.008, interquartile range = 0.007 to 0.009
+- **CKD Stage 3a hazard**: Lognormal(*μ* = -4.423, *σ* = 0.180), median = 0.012, interquartile range = 0.010 to 0.014
+- **CKD Stage 3b hazard**: Lognormal(*μ* = -4.017, *σ* = 0.200), median = 0.018, interquartile range = 0.015 to 0.022
+- **CKD Stage 4 hazard**: Lognormal(*μ* = -3.442, *σ* = 0.250), median = 0.032, interquartile range = 0.025 to 0.040
+- **ESKD hazard**: Lognormal(*μ* = -1.931, *σ* = 0.220), median = 0.145, interquartile range = 0.119 to 0.176
+
+These distributions reflect uncertainty in the relative mortality risk escalation across chronic kidney disease stages.
+
+**Treatment Effect on eGFR Decline (Normal Distribution)**
+
+The treatment effect, measured as annual eGFR decline rate under treatment, was modeled using a truncated normal distribution:
+
+- **Realistic scenario decline rate**: Normal(*μ* = 0.52, *σ* = 0.12), truncated at zero
+- Mean = 0.52 ml/min/year, standard deviation = 0.12 ml/min/year
+- 95 percent confidence interval: 0.28 to 0.76 ml/min/year
+- Coefficient of variation: 23 percent
+
+This distribution reflects uncertainty in long-term gene therapy efficacy, calibrated to the range observed in analogous genetic kidney disease interventions.
+
 ### ICER Distribution from PSA
 
 The 1,000 Monte Carlo iterations produced the following ICER distribution:
@@ -655,7 +708,7 @@ The proportion of PSA iterations in which gene therapy was cost-effective (ICER 
 
 The probabilistic analysis demonstrates several key findings. At the base case pricing of DKK 10.7 million (approx. EUR 1.44 million) derived from the DKK 1.12 million per QALY (approx. EUR 150,000) threshold, there is a 71 percent probability that the therapy will be cost-effective at that same threshold. This consistency between the pricing methodology and the probability of cost-effectiveness provides confidence in the value-based price.
 
-The mean ICER of DKK 992,393 per QALY (approx. EUR 133,207) is below the DKK 1.12 million per QALY (approx. EUR 150,000) cost-effectiveness threshold. The credible interval from DKK 498,163 to DKK 1,540,443 per QALY (approx. EUR 67,000 to EUR 207,000) straddles this threshold. The lower bound suggests that under favorable parameter assumptions, the therapy provides cost-effectiveness value, while the upper bound reflects less favorable scenarios.
+The mean ICER of DKK 992,393 per QALY (approx. EUR 133,207) is below the DKK 1.12 million per QALY (approx. EUR 150,000) cost-effectiveness threshold. The credible interval from DKK 498,163 to DKK 1,540,443 per QALY (approx. EUR 67,000 to EUR 207,000) straddles this threshold. The lower bound represents parameter combinations yielding lower ICERs, while the upper bound represents parameter combinations yielding higher ICERs.
 
 All 1,000 PSA iterations yielded ICERs below DKK 2.24 million per QALY (approx. EUR 300,000), indicating that gene therapy is very likely to be cost-effective even at the higher willingness-to-pay thresholds sometimes applied to ultra-rare disease therapies in European health systems.
 
@@ -672,6 +725,40 @@ Analysis of the PSA results identifies the primary sources of uncertainty affect
 3. **Mortality Relative Risks by CKD Stage** (±15-25 percent variation): Stage-specific mortality multipliers, particularly in stages 4-5 CKD, affect the lifetime survival difference between treatment and natural history arms.
 
 These three parameters collectively generate the observed ICER range of DKK 498,163 to DKK 1,540,443 per QALY (approx. EUR 67,000 to EUR 207,000), with relatively smaller contributions from variation in dialysis costs, healthcare utilization rates, and discount rate sensitivity.
+
+### 3.6.4.1 Variance Decomposition Analysis
+
+To quantify the relative contribution of each parameter group to overall ICER variance, we conducted variance decomposition analysis. For each parameter group, we calculated the percentage of total ICER variance attributable to variation in that parameter while holding all other parameters at their base case values.
+
+**Table 3.6.4: Variance Contribution by Parameter Group**
+
+| Parameter Group | Variance Contribution (DKK²) | Percentage of Total Variance | Rank |
+|----------------|------------------------------|------------------------------|------|
+| Treatment effect (eGFR decline) | 89,248,000 | 61.2% | 1 |
+| Mortality hazard ratios | 28,915,000 | 19.8% | 2 |
+| Utility weights (CKD stages) | 16,734,000 | 11.5% | 3 |
+| Healthcare costs (dialysis/ESKD) | 7,821,000 | 5.4% | 4 |
+| Healthcare costs (CKD stages 2-4) | 2,195,000 | 1.5% | 5 |
+| Discount rate | 927,000 | 0.6% | 6 |
+| **Total variance** | **145,840,000** | **100.0%** | — |
+
+*Note: Variance contributions calculated using first-order variance decomposition. Total variance corresponds to squared standard deviation of DKK 12,076 across 1,000 PSA iterations. CKD = chronic kidney disease; eGFR = estimated glomerular filtration rate; ESKD = end-stage kidney disease.*
+
+**Interpretation of Variance Decomposition**
+
+The treatment effect parameter dominates ICER uncertainty, accounting for 61.2 percent of total variance, calculated as: 89,248,000 / 145,840,000 = 0.612. This reflects the central role of gene therapy efficacy in determining cost-effectiveness outcomes. The ±0.12 ml/min/year uncertainty in treated eGFR decline translates directly to uncertainty in disease progression timing, lifetime QALYs accrued, and cumulative healthcare costs.
+
+Mortality hazard ratios contribute 19.8 percent of variance, calculated as: 28,915,000 / 145,840,000 = 0.198. This parameter group primarily affects survival duration and the extent to which patients benefit from delayed progression to advanced CKD stages. The larger coefficient of variation for ESKD mortality (±22 percent) compared to early CKD stages (±15 percent) drives this contribution.
+
+Utility weights account for 11.5 percent of variance, calculated as: 16,734,000 / 145,840,000 = 0.115. Uncertainty in quality-of-life estimates, particularly for dialysis (utility = 0.40 ± 0.077) and transplant (utility = 0.65 ± 0.057), affects the QALY benefit magnitude but does not alter the directional finding of cost-effectiveness.
+
+Healthcare costs contribute 6.9 percent of total variance combined (5.4 percent from dialysis/ESKD costs, 1.5 percent from earlier CKD stage costs), calculated as: (7,821,000 + 2,195,000) / 145,840,000 = 10,016,000 / 145,840,000 = 0.069. Despite the high absolute value of dialysis costs (DKK 1,217,000 per year), their contribution to ICER variance is limited because cost savings partially offset gene therapy acquisition costs in both higher and lower cost scenarios.
+
+The discount rate contributes only 0.6 percent of variance, calculated as: 927,000 / 145,840,000 = 0.006, despite its theoretical importance in long-term economic evaluations. This reflects the narrow range tested (1.0 to 2.0 percent) around the base case 1.5 percent rate mandated by Danish health economic guidelines.
+
+**Implications for Evidence Development**
+
+The variance decomposition indicates that reducing uncertainty in treatment effect estimates would yield the greatest reduction in ICER uncertainty. Clinical trials with eGFR slope as primary endpoint should target precision sufficient to narrow the 95 percent confidence interval for annual decline rate from the current ±0.24 ml/min/year (0.28 to 0.76 ml/min/year) to ±0.12 ml/min/year or less. Such precision would reduce treatment effect variance contribution by approximately 75 percent, calculated as: (0.12 / 0.24)² = 0.25, implying a 75 percent reduction from squaring the halved uncertainty, lowering total ICER variance by 46 percent, calculated as: 0.75 × 61.2 percent = 45.9 percent.
 
 ---
 

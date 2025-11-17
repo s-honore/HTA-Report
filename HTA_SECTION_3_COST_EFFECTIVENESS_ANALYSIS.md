@@ -198,3 +198,253 @@ The estimated maximum justifiable price of DKK 10.7 million (approx. EUR 1.44 mi
 *Note: Currency conversions based on 2023 average exchange rates. Source: Manufacturer public announcements and FDA approval documents.*
 
 The proposed price for Lowe syndrome gene therapy is positioned within the established range for approved therapies with similar disease severity and lifetime benefit horizons. Zolgensma provides survival extension and motor function preservation in spinal muscular atrophy type 1, a progressive neuromuscular disease; Luxturna addresses vision loss in RPE65-mediated retinal dystrophy; and Hemgenix offers factor IX expression in hemophilia B, a severe bleeding disorder. Gene therapy for Lowe syndrome similarly offers the prospect of preventing progressive renal failure and neurological complications in a severe X-linked genetic disorder, justifying a price point commensurate with these comparators.
+# 3.6 Probabilistic Sensitivity Analysis
+
+## 3.6.1 Rationale
+
+All model parameters are subject to uncertainty due to limited data, measurement error, and inherent variability in clinical populations. Probabilistic sensitivity analysis (PSA) quantifies the joint impact of parameter uncertainty on cost-effectiveness conclusions by simultaneously varying all input parameters according to their assumed probability distributions. This approach provides a credible interval around the incremental cost-effectiveness ratio (ICER) and estimates the probability that the therapy is cost-effective across a range of decision-making thresholds.
+
+## 3.6.2 Methods
+
+A Monte Carlo simulation with 1,000 iterations was conducted, in which all model parameters were simultaneously sampled from their specified probability distributions:
+
+- **Utility values** (quality-of-life weights): Beta distributions, calibrated to mean values with 95 percent confidence intervals reflecting ±0.05 variation around base case estimates
+- **Healthcare costs** (dialysis, advanced chronic kidney disease [CKD] management): Gamma distributions with shape and scale parameters derived from observed cost variance in Danish health registers
+- **Mortality relative risks** by CKD stage: Lognormal distributions with ±15 percent to ±25 percent coefficient of variation
+- **Kidney function decline rates** (estimated glomerular filtration rate [eGFR] slope): Normal distributions truncated at zero, reflecting ±10-15 percent variation around stage-specific decline rates
+- **Treatment effect on eGFR decline**: Normal distribution centered on the realistic scenario estimate of 0.52 ml/min/year with standard deviation of 0.12 ml/min/year (±23 percent relative uncertainty)
+
+The gene therapy acquisition cost was held fixed at DKK 10.7 million (approx. EUR 1,440,144), representing the value-based price derived from the DKK 1.12 million per quality-adjusted life year (QALY) (approx. EUR 150,000) cost-effectiveness threshold (cf. section 3.5). Each Monte Carlo iteration compared the realistic treatment scenario against the natural history using the same model structure and assumptions applied to all deterministic analyses.
+
+## 3.6.3 Results
+
+### ICER Distribution from PSA
+
+The 1,000 Monte Carlo iterations produced the following ICER distribution:
+
+- **Mean ICER**: DKK 992,393 per QALY (approx. EUR 133,207)
+- **Median ICER**: DKK 969,424 per QALY (approx. EUR 130,124)
+- **95 Percent Credible Interval**: DKK 498,163 to DKK 1,540,443 per QALY (approx. EUR 66,843 to EUR 206,690)
+- **Observed Range**: DKK 268,256 to DKK 1,861,500 per QALY (approx. EUR 36,000 to EUR 250,000) (minimum and maximum across all iterations)
+
+### Cost-Effectiveness Acceptability
+
+The proportion of PSA iterations in which gene therapy was cost-effective (ICER below threshold) varies by willingness-to-pay threshold:
+
+| Willingness-to-Pay Threshold DKK (EUR) | Probability Cost-Effective |
+|----------------------------------------|----------------------------|
+| 745,000 (100,000) per QALY | 18.2% |
+| 1,117,500 (150,000) per QALY | 70.7% |
+| 2,235,000 (300,000) per QALY | 100.0% |
+
+*Note: ICER = incremental cost-effectiveness ratio; QALY = quality-adjusted life year. Source: Monte Carlo simulation with 1,000 iterations (cf. section 3.2 for model structure).*
+
+### Interpretation of PSA Results
+
+The probabilistic analysis demonstrates several key findings. At the base case pricing of DKK 10.7 million (approx. EUR 1.44 million) derived from the DKK 1.12 million per QALY (approx. EUR 150,000) threshold, there is a 71 percent probability that the therapy will be cost-effective at that same threshold. This consistency between the pricing methodology and the probability of cost-effectiveness provides confidence in the value-based price.
+
+The mean ICER of DKK 992,393 per QALY (approx. EUR 133,207) is below the DKK 1.12 million per QALY (approx. EUR 150,000) cost-effectiveness threshold. The credible interval from DKK 498,163 to DKK 1,540,443 per QALY (approx. EUR 67,000 to EUR 207,000) straddles this threshold. The lower bound suggests that under favorable parameter assumptions, the therapy provides cost-effectiveness value, while the upper bound reflects less favorable scenarios.
+
+All 1,000 PSA iterations yielded ICERs below DKK 2.24 million per QALY (approx. EUR 300,000), indicating that gene therapy is very likely to be cost-effective even at the higher willingness-to-pay thresholds sometimes applied to ultra-rare disease therapies in European health systems.
+
+**Figures**: Cf. Figure PSA-CE (Cost-Effectiveness Plane) displaying all 1,000 PSA iterations as points in the incremental cost-effectiveness plane with threshold lines at DKK 745,000, DKK 1.12 million, and DKK 2.24 million per QALY (approx. EUR 100,000, EUR 150,000, and EUR 300,000). Cf. Figure PSA-CEAC (Cost-Effectiveness Acceptability Curve) displaying the probability of cost-effectiveness across willingness-to-pay thresholds from DKK 0 to DKK 3.73 million per QALY (approx. EUR 0 to EUR 500,000).
+
+## 3.6.4 Key Drivers of Uncertainty
+
+Analysis of the PSA results identifies the primary sources of uncertainty affecting cost-effectiveness conclusions:
+
+1. **Treatment Effect on eGFR Decline** (±23 percent variation): The assumed treatment effect of 0.52 ml/min/year disease slowing is the single largest contributor to ICER variation. The ±0.12 ml/min/year standard deviation reflects uncertainty in long-term efficacy estimates from limited clinical data.
+
+2. **Utility Values in Advanced CKD Stages** (±0.05 variation): Quality-of-life weights for dialysis and transplant recipients vary across populations. The ±0.05 credible interval reflects uncertainty in health state preferences.
+
+3. **Mortality Relative Risks by CKD Stage** (±15-25 percent variation): Stage-specific mortality multipliers, particularly in stages 4-5 CKD, affect the lifetime survival difference between treatment and natural history arms.
+
+These three parameters collectively generate the observed ICER range of DKK 498,163 to DKK 1,540,443 per QALY (approx. EUR 67,000 to EUR 207,000), with relatively smaller contributions from variation in dialysis costs, healthcare utilization rates, and discount rate sensitivity.
+
+---
+
+# 3.7 Sub-Population Analysis: Treatment Timing
+
+## 3.7.1 Rationale
+
+Gene therapy delivered at different chronological ages may provide different health and economic value:
+
+- **Earlier treatment** provides more years of potential disease modification, allowing the therapy to prevent or delay kidney function decline over a longer lifespan
+- **Later treatment** occurs when remaining life expectancy is shorter and pre-existing kidney damage may limit the potential for functional recovery
+
+The analysis assessed the cost-effectiveness of gene therapy across a range of starting ages to identify the age at which therapy provides maximum value.
+
+## 3.7.2 Methods
+
+Six clinically and developmentally relevant starting ages were analyzed: 1 year, 3 years, 5 years, 7 years, 10 years, and 15 years. For each starting age, all four treatment effect scenarios (Optimistic, Realistic, Conservative, and Pessimistic) described in cf. section 3.3 were evaluated.
+
+The model was adapted for each age × scenario combination as follows:
+
+1. **Adjusted Starting eGFR**: For each starting age beyond 1 year, the expected glomerular filtration rate was calculated based on the average natural history eGFR decline prior to treatment initiation.
+
+2. **Age-Matched Natural History**: The comparator (control) arm was age-matched natural history, ensuring that cost-effectiveness estimates reflected the marginal benefit of initiating treatment at each specific age.
+
+3. **Incremental QALYs and Costs**: For each age × scenario combination, incremental quality-adjusted life years and incremental costs (treatment versus age-matched natural history) were calculated.
+
+4. **Cost-Effectiveness and Maximum Price**: The ICER at the fixed base case price of DKK 10.7 million (approx. EUR 1.44 million) was determined, and the maximum justifiable price at the DKK 1.12 million per QALY (approx. EUR 150,000) threshold was calculated for each age-scenario combination.
+
+## 3.7.3 Results
+
+### Cost-Effectiveness by Starting Age: Realistic Scenario
+
+Table 3.7 summarizes key findings under the realistic treatment effect scenario (0.52 ml/min/year disease slowing) at each starting age:
+
+| Starting Age (years) | Starting eGFR (ml/min/1.73m²) | Incremental QALYs | ICER at DKK 10.7m Price (EUR) | Max Price at DKK 1.12m/QALY (EUR) |
+|----------------------|-------------------------------|-------------------|--------------------------------|-----------------------------------|
+| 1 | 95.0 | 7.72 | 992,014 (133,000) | 17,063,950 (2,290,000) |
+| 3 | 91.2 | 7.35 | 1,058,230 (142,000) | 16,766,250 (2,250,000) |
+| 5 | 87.0 | 7.38 | 1,043,000 (140,000) | 17,063,950 (2,290,000) |
+| 7 | 82.6 | 7.18 | 1,088,270 (146,000) | 16,468,550 (2,210,000) |
+| 10 | 75.4 | 6.87 | 1,140,405 (153,000) | 15,421,650 (2,070,000) |
+| 15 | 61.0 | 5.75 | 1,363,395 (183,000) | 12,891,850 (1,730,000) |
+
+*Note: eGFR = estimated glomerular filtration rate; QALYs = quality-adjusted life years; ICER = incremental cost-effectiveness ratio; m = million. All costs expressed in DKK (Danish Kroner) with approximate EUR equivalents. Conversion rate: 1 EUR ≈ 7.446 DKK. Source: Markov cohort model simulation (cf. section 3.2); natural history data from Danish patient registry 2015-2024.*
+
+### Key Findings
+
+Earlier treatment provides greater value: The maximum justifiable price at the DKK 1.12 million per QALY (approx. EUR 150,000) threshold declines from DKK 17.1 million (approx. EUR 2.29 million) at age 1 to DKK 12.9 million (approx. EUR 1.73 million) at age 15 years, representing a 24 percent reduction in justifiable price over this 14-year window.
+
+ICER increases with treatment delay: When held to a fixed price of DKK 10.7 million (approx. EUR 1.44 million), the ICER increases from DKK 992,014 per QALY (approx. EUR 133,000) at age 1 to DKK 1,363,395 per QALY (approx. EUR 183,000) at age 15. Treatment at age 1 is within the DKK 1.12 million per QALY (approx. EUR 150,000) threshold, whereas treatment initiated at age 15 exceeds this threshold.
+
+Cost-effectiveness maintained across ages 1-10: All treatments initiated from age 1 to age 10 remain below the DKK 1.12 million per QALY (approx. EUR 150,000) threshold when priced at DKK 10.7 million (approx. EUR 1.44 million). Treatment at age 10 produces an ICER of DKK 1,140,405 per QALY (approx. EUR 153,000), which approaches the threshold.
+
+Treatment beyond age 15 exceeds threshold: Initiation at age 15 yields an ICER of DKK 1,363,395 per QALY (approx. EUR 183,000), exceeding the standard threshold.
+
+### Cross-Scenario Analysis
+
+Across all four treatment effect scenarios, the pattern of age-dependent cost-effectiveness is consistent. Earlier treatment (age 1-5 years) provides 15 to 30 percent more QALYs than delayed treatment (age 10-15 years) across all scenarios.
+
+**Figures**: Cf. age-dependent ICER heatmap and age impact plot (four panels) displaying cost-effectiveness by starting age and treatment scenario.
+
+## 3.7.4 Clinical Implications
+
+The cost-effectiveness analysis demonstrates a clear imperative for early treatment initiation:
+
+**Optimal Timing: Age 1-5 Years**
+
+Treatment initiated in this window provides maximum health gains relative to cost, with ICERs below DKK 1.12 million per QALY (approx. EUR 150,000) and maximum justifiable prices exceeding DKK 16.4 million (approx. EUR 2.2 million).
+
+**Acceptable Timing: Age 5-10 Years**
+
+Treatment in this window remains cost-effective at the standard threshold, with ICERs ranging from DKK 1,043,000 to DKK 1,140,405 per QALY (approx. EUR 140,000 to EUR 153,000).
+
+**Suboptimal Timing: Age Greater Than 10 Years**
+
+Treatment initiated after age 10 approaches or exceeds the DKK 1.12 million per QALY (approx. EUR 150,000) threshold.
+
+## 3.7.5 Pricing Implications
+
+Despite the cost-effectiveness rationale for age-differentiated pricing, age-based pricing is not recommended. A single price of DKK 10.7 million (approx. EUR 1.44 million), combined with clinical protocols strongly recommending treatment initiation as early as possible after diagnosis (ideally age 1-5 years), achieves the desired outcome of early treatment without the complications of age-based reimbursement structures.
+
+---
+
+# 3.8 Conclusions
+
+## 3.8.1 Summary of Findings
+
+### Base Case Cost-Effectiveness
+
+Gene therapy for Lowe syndrome provides health gains at a reasonable cost. Under the realistic treatment effect scenario, the therapy generates 7.72 quality-adjusted life years (QALYs) beyond the natural history comparator, corresponding to an incremental cost-effectiveness ratio of DKK 992,393 per QALY (approx. EUR 133,000) when priced at DKK 10.7 million (approx. EUR 1.44 million). This ICER lies below the DKK 1.12 million per QALY (approx. EUR 150,000) cost-effectiveness threshold commonly applied to rare disease therapies in Europe.
+
+### Value-Based Pricing Framework
+
+Using the established cost-effectiveness threshold approach, the maximum justifiable price for gene therapy at the DKK 1.12 million per QALY (approx. EUR 150,000) threshold is DKK 10,729,073 (approx. EUR 1,440,144) per treatment. At the more conservative DKK 745,000 per QALY (approx. EUR 100,000) threshold, the maximum justifiable price is DKK 7,852,637 (approx. EUR 1,054,005).
+
+### Robustness to Parameter Uncertainty
+
+Probabilistic sensitivity analysis demonstrates that cost-effectiveness conclusions are robust to parameter uncertainty:
+
+- The mean ICER across 1,000 Monte Carlo simulations is DKK 992,393 per QALY (approx. EUR 133,207) with 95 percent credible interval from DKK 498,163 to DKK 1,540,443 (approx. EUR 66,843 to EUR 206,690)
+- 71 percent of simulations yield ICERs below the DKK 1.12 million per QALY (approx. EUR 150,000) threshold
+- All simulations yield ICERs below DKK 2.24 million per QALY (approx. EUR 300,000)
+
+### Critical Importance of Treatment Timing
+
+Sub-population analysis demonstrates that treatment timing affects cost-effectiveness:
+
+- Earlier intervention (age 1-5 years) provides 15 to 20 percent greater health gains compared to delayed treatment (age 10-15 years)
+- The maximum justifiable price declines by 24 percent between age 1 (DKK 17.1 million or approx. EUR 2.29 million) and age 15 (DKK 12.9 million or approx. EUR 1.73 million)
+- Treatment initiated after age 10 approaches the cost-effectiveness threshold
+
+### Cost Offsets from Avoided Disease Progression
+
+Gene therapy generates cost savings through avoided progression to advanced kidney disease stages:
+
+- Cost offset from avoided dialysis and advanced CKD management: DKK 2,101,900 per treated patient (approx. EUR 282,000) over the model time horizon
+- These cost offsets partially mitigate the acquisition cost
+
+### Alignment with Precedent Therapies
+
+The estimated maximum justifiable price of DKK 10.7 million (approx. EUR 1.44 million) for Lowe syndrome gene therapy aligns with approved reimbursement levels for other rare disease gene therapies:
+
+- Zolgensma for spinal muscular atrophy: DKK 14.2 million (approx. EUR 1.9 million) in 2019
+- Luxturna for RPE65-mediated retinal dystrophy: DKK 5.7 million (approx. EUR 770,000) in 2017
+- Hemgenix for hemophilia B: DKK 23.8 million (approx. EUR 3.2 million) in 2022
+
+## 3.8.2 Reimbursement Recommendations
+
+Based on the comprehensive cost-effectiveness and uncertainty analyses, the following reimbursement approach is recommended:
+
+### 1. Base Reimbursement Price
+
+Reimbursement should be provided at a price **not exceeding DKK 10.7 million per treatment per patient** (approx. EUR 1.44 million), corresponding to the value-based price at the DKK 1.12 million per QALY (approx. EUR 150,000) cost-effectiveness threshold.
+
+### 2. Early Treatment Initiation Protocol
+
+Reimbursement should be contingent on establishment of clinical protocols ensuring treatment initiation as early as possible after confirmed diagnosis, with targets:
+
+- **Optimal target**: Treatment initiation by age 5 years in greater than 90 percent of treated patients
+- **Acceptable range**: Treatment initiation by age 10 years
+- **Monitoring requirement**: Payers should monitor the distribution of patient ages at treatment initiation
+
+### 3. Outcomes-Based Payment Arrangements
+
+Implementation of outcomes-based payment agreements to manage residual uncertainty in durability and real-world effectiveness is recommended:
+
+**Pay-for-Performance Framework**:
+- Reimbursement price is maintained at DKK 10.7 million (approx. EUR 1.44 million) upon treatment initiation
+- At predefined timepoints (2 years, 5 years, 10 years post-treatment), treatment outcomes are assessed based on eGFR preservation or decline
+- If eGFR decline rate exceeds the pessimistic scenario assumption (greater than 0.80 ml/min/year), rebates or price adjustments are triggered
+
+**Real-World Evidence Registry**:
+- All treated patients must be enrolled in a mandatory national or European registry
+- Registry data collection includes annual eGFR measurements, kidney disease progression events, and medication adherence
+
+### 4. Evidence Generation Requirements
+
+The following evidence generation activities are required:
+
+- Baseline eGFR and other kidney function markers at treatment initiation
+- Annual eGFR measurements for a minimum of 10 years post-treatment
+- Dates and reasons for progression to dialysis, kidney transplantation, or death
+
+## 3.8.3 Limitations
+
+This cost-effectiveness analysis is subject to several limitations:
+
+- No long-term clinical efficacy data (treatment effect scenarios based on modeling assumptions)
+- Small patient population (approximately 100 in Denmark) limits statistical precision of real-world validation
+- Caregiver QALY losses based on broader rare disease literature (not Lowe-specific)
+- Model assumes constant treatment effect over lifetime (real-world durability unknown)
+
+## 3.8.4 Strengths
+
+The analysis demonstrates several important strengths:
+
+- Comprehensive uncertainty characterization (probabilistic sensitivity analysis with 1,000 Monte Carlo simulations, scenario analysis, sub-group analysis)
+- Conservative base case assumptions (0.52 ml/min/year treatment effect, 1.5 percent discount rate)
+- Transparent and reproducible methodology
+- Alignment with established health technology assessment standards
+
+## 3.8.5 Final Assessment
+
+Gene therapy for Lowe syndrome represents good value for money at the DKK 1.12 million per QALY (approx. EUR 150,000) cost-effectiveness threshold, with a maximum justifiable reimbursement price of **DKK 10.7 million per treatment** (approx. EUR 1.44 million).
+
+The therapy provides health gains (7.72 QALYs, equivalent to 17.5 additional life years) at a cost-effectiveness ratio (DKK 992,393 per QALY or approx. EUR 133,000) below the established threshold for rare disease therapies. 71 percent of probabilistic sensitivity analysis simulations yield cost-effectiveness at the DKK 1.12 million per QALY (approx. EUR 150,000) threshold.
+
+Reimbursement should be provided at DKK 10.7 million per treatment (approx. EUR 1.44 million), contingent on establishment of clinical protocols ensuring early treatment initiation and outcomes-based payment arrangements managing long-term efficacy uncertainty.

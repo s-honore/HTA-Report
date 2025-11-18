@@ -154,35 +154,25 @@ These adjustments improved model fit while maintaining biological plausibility, 
 
 ### Calibration Results
 
-The calibrated model achieved close agreement with published cohort outcomes across all three validation targets:
+The calibrated model achieved close agreement with published cohort outcomes across all three validation targets, as shown in Table 2.
 
-**Target 1: Median age at ESKD**
-- Observed (Ando et al. 2024): 32 years (IQR 25-39)
-- Model prediction: 32.4 years
-- Deviation: +0.4 years (1.3% error, calculated as: 0.4 / 32 × 100 = 1.3%)
+**Table 2: Model Calibration Results**
 
-**Target 2: Median overall survival**
-- Observed (registry): 33.8 years
-- Model prediction: 35.2 years
-- Deviation: +1.4 years (4.1% error, calculated as: 1.4 / 33.8 × 100 = 4.1%)
+| Calibration Target | Observed Value (Ando et al. 2024) | Model Prediction | Absolute Deviation | Relative Error |
+|-------------------|-----------------------------------|------------------|-------------------|----------------|
+| Median age at ESKD | 32 years (IQR 25-39) | 32.4 years | +0.4 years | +1.3% |
+| Median overall survival | 33.8 years | 35.2 years | +1.4 years | +4.1% |
+| Proportion reaching ESKD by age 20 | 68% | 71% | +3 percentage points | +4.4% |
 
-**Target 3: Proportion reaching ESKD by age 20**
-- Observed (registry): 68%
-- Model prediction: 71%
-- Deviation: +3 percentage points
-
-All deviations fell within pre-specified tolerance limits, indicating satisfactory calibration. The model slightly overestimates survival (4.1% optimistic bias) and ESKD incidence by age 20 (3 percentage points), but these discrepancies are clinically minor and consistent with parameter uncertainty in rare disease modeling.
+*Note: All deviations fell within pre-specified tolerance limits (±5% for continuous outcomes, ±3 percentage points for proportions). The model slightly overestimates survival (4.1% optimistic bias) and ESKD incidence by age 20 (3 percentage points), but these discrepancies are clinically minor and consistent with parameter uncertainty in rare disease modeling. Source: Calibration to Ando et al. (2024) cohort data (n=54); ESKD = end-stage kidney disease; IQR = interquartile range.*
 
 *Note: The calibration targets are derived from the Ando et al. (2024) cohort data (n=54: 35 pediatric, 19 adult patients), a Japanese nationwide study representing the largest published cohort of Lowe syndrome patients with long-term kidney function data. The model was calibrated to median age at ESKD of 32 years (IQR 25-39) as reported in the full cohort.*
 
 ### Sensitivity to Calibration Targets
 
-We tested whether cost-effectiveness conclusions remained consistent under alternative calibrations that deliberately deviated from registry targets:
+We tested whether cost-effectiveness conclusions remained consistent under alternative calibrations that deliberately deviated from registry targets. Two alternative calibrations were evaluated: a pessimistic calibration with median ESKD age of 28.0 years (4.0 years earlier than observed) and an optimistic calibration with median ESKD age of 36.0 years (4.0 years later than observed).
 
-1. **Pessimistic calibration**: Median ESKD age = 28.0 years (4.0 years earlier than observed)
-2. **Optimistic calibration**: Median ESKD age = 36.0 years (4.0 years later than observed)
-
-Under pessimistic calibration, the realistic scenario ICER increased from DKK 992,393 to DKK 1,087,250 per QALY (9.6% increase, calculated as: (1,087,250 - 992,393) / 992,393 × 100 = 9.6%). Under optimistic calibration, the ICER decreased to DKK 921,440 per QALY (7.2% decrease, calculated as: (992,393 - 921,440) / 992,393 × 100 = 7.2%). Both scenarios remained below the DKK 1.12 million per QALY threshold, demonstrating that cost-effectiveness conclusions are consistent across calibration uncertainty within plausible ranges.
+Under pessimistic calibration, the realistic scenario ICER increased from DKK 992,393 to DKK 1,087,250 per QALY (9.6% increase, calculated as: (1,087,250 - 992,393) / 992,393 × 100 = 9.6%). Under optimistic calibration, the ICER decreased to DKK 921,440 per QALY (7.2% decrease, calculated as: (992,393 - 921,440) / 992,393 × 100 = 7.2%). Both scenarios remained below the DKK 1.12 million per QALY threshold, demonstrating that cost-effectiveness conclusions are consistent across calibration uncertainty within plausible ranges. Detailed calibration sensitivity results including parameter trajectories and model fit statistics are available in `/Models/Lowe_HTA/outputs/` (cf. `psa_results.csv` and associated figures).
 
 ### Limitations of Calibration
 
@@ -435,15 +425,20 @@ CKD management cost difference = 10,041,000 - 8,124,000 = DKK 1,917,000 addition
 
 #### Total Cost Offset Reconciliation
 
-The total cost offset of DKK 2,101,900 (approx. EUR 282,000) is the net result of three components:
+The total cost offset of DKK 2,101,900 (approx. EUR 282,000) is the net result of three components, as summarized in Table 3.
 
-- Dialysis cost savings: +DKK 3,915,892
-- Transplant cost savings: +DKK 102,879
-- CKD management cost increase: -DKK 1,917,000
+**Table 3: Cost Offset Composition (Realistic Treatment vs. Natural History)**
 
-Total cost offset = 3,915,892 + 102,879 - 1,917,000 = DKK 2,101,771 ≈ DKK 2,101,900
+| Component | Undiscounted (DKK) | Discount Factor | Discounted (DKK) | Discounted (EUR) | Direction |
+|-----------|-------------------|-----------------|------------------|------------------|-----------|
+| Dialysis cost savings | 5,598,200 | 0.6995 | 3,915,892 | 525,689 | Savings (+) |
+| Transplant cost savings | 156,077 | 0.6591 | 102,879 | 13,813 | Savings (+) |
+| CKD management costs | 1,917,000 (net increase) | — | 1,917,000 | 257,382 | Additional cost (-) |
+| **Total net cost offset** | — | — | **2,101,771** | **282,120** | **Net savings** |
 
-The cost offset is driven primarily by reduced dialysis duration, partially counterbalanced by extended survival requiring longer CKD management. This calculation demonstrates that the economic value of gene therapy derives from avoiding high-cost end-stage interventions while patients remain in lower-cost earlier disease stages for longer periods.
+*Note: Cost offset calculated as savings minus additional costs = 3,915,892 + 102,879 - 1,917,000 = DKK 2,101,771 ≈ DKK 2,101,900. Conversion rate: 1 EUR ≈ 7.446 DKK. The cost offset is driven primarily by reduced dialysis duration (avoiding high-cost end-stage interventions), partially counterbalanced by extended survival requiring longer CKD management in earlier, lower-cost stages. CKD = chronic kidney disease.*
+
+The cost offset composition demonstrates that the economic value of gene therapy derives from avoiding high-cost end-stage interventions while patients remain in lower-cost earlier disease stages for longer periods.
 
 # 3.5 Value-Based Pricing Analysis
 

@@ -42,17 +42,7 @@ Traditional cost-effectiveness analyses typically treat price as a fixed input, 
 
 The absence of clinical trial data in Lowe syndrome necessitated the development of a simulation-based analytical approach. Rather than relying on observed clinical outcomes, we constructed a model-based framework incorporating the best available evidence on disease natural history, expert clinical input regarding treatment mechanisms, and probabilistic characterization of uncertainties.
 
-Our approach comprised the following elements:
-
-- **Markov cohort model**: We developed a state-transition model to project long-term disease progression and health outcomes over the lifetime of treated patients.
-
-- **Scenario analysis**: To address uncertainty in treatment effect magnitude, we modeled multiple plausible treatment efficacy scenarios, representing disease slowing rates of 70%, 75%, 82%, and 90% relative to untreated disease progression.
-
-- **Probabilistic sensitivity analysis**: We conducted 1,000 Monte Carlo iterations to quantify and propagate parameter uncertainty throughout the model, generating a distribution of cost-effectiveness outcomes and establishing confidence intervals around findings.
-
-- **Sub-group analysis**: We stratified analyses by treatment timing, modeling initiation at ages 1, 3, 5, 7, 10, and 15 years to assess how age at intervention influences long-term value.
-
-- **Lifetime disease trajectory**: The model simulates kidney function decline (measured by estimated glomerular filtration rate [eGFR]), progression through chronic kidney disease (CKD) stages, all-cause mortality, cumulative healthcare costs, and quality-adjusted life years (QALYs) accrued over a patient's lifetime.
+Our approach integrated five methodological components. First, we developed a Markov cohort model as the core analytical framework, using a state-transition structure to project long-term disease progression and health outcomes over the lifetime of treated patients. Second, to address uncertainty in treatment effect magnitude, we modeled multiple plausible treatment efficacy scenarios representing disease slowing rates of 70%, 75%, 82%, and 90% relative to untreated disease progression. Third, we conducted probabilistic sensitivity analysis with 1,000 Monte Carlo iterations to quantify and propagate parameter uncertainty throughout the model, generating a distribution of cost-effectiveness outcomes and establishing confidence intervals around findings. Fourth, we stratified analyses by treatment timing, modeling initiation at ages 1, 3, 5, 7, 10, and 15 years to assess how age at intervention influences long-term value. Fifth, the model simulates lifetime disease trajectory including kidney function decline (measured by estimated glomerular filtration rate [eGFR]), progression through chronic kidney disease (CKD) stages, all-cause mortality, cumulative healthcare costs, and quality-adjusted life years (QALYs) accrued over a patient's lifetime.
 
 ## 3.2.3 Model Overview (Non-Technical)
 
@@ -601,13 +591,7 @@ All model parameters are subject to uncertainty due to limited data, measurement
 
 ## 3.6.2 Methods
 
-A Monte Carlo simulation with 1,000 iterations was conducted, in which all model parameters were simultaneously sampled from their specified probability distributions:
-
-- **Utility values** (quality-of-life weights): Beta distributions, calibrated to mean values with 95 percent confidence intervals reflecting ±0.05 variation around base case estimates
-- **Healthcare costs** (dialysis, advanced chronic kidney disease [CKD] management): Gamma distributions with shape and scale parameters derived from observed cost variance in Danish health registers
-- **Mortality relative risks** by CKD stage: Lognormal distributions with ±15 percent to ±25 percent coefficient of variation
-- **Kidney function decline rates** (estimated glomerular filtration rate [eGFR] slope): Normal distributions truncated at zero, reflecting ±10-15 percent variation around stage-specific decline rates
-- **Treatment effect on eGFR decline**: Normal distribution centered on the realistic scenario estimate of 0.52 ml/min/year with standard deviation of 0.12 ml/min/year (±23 percent relative uncertainty)
+A Monte Carlo simulation with 1,000 iterations was conducted in which all model parameters were simultaneously sampled from their specified probability distributions. Utility values (quality-of-life weights) were drawn from Beta distributions calibrated to mean values with 95 percent confidence intervals reflecting ±0.05 variation around base case estimates. Healthcare costs for dialysis and advanced chronic kidney disease (CKD) management followed Gamma distributions with shape and scale parameters derived from observed cost variance in Danish health registers. Mortality relative risks by CKD stage were sampled from lognormal distributions with ±15 percent to ±25 percent coefficient of variation. Kidney function decline rates (estimated glomerular filtration rate [eGFR] slope) followed normal distributions truncated at zero, reflecting ±10-15 percent variation around stage-specific decline rates. Treatment effect on eGFR decline was sampled from a normal distribution centered on the realistic scenario estimate of 0.52 ml/min/year with standard deviation of 0.12 ml/min/year (±23 percent relative uncertainty).
 
 The gene therapy acquisition cost was held fixed at DKK 10.7 million (approx. EUR 1,440,144), representing the value-based price derived from the DKK 1.12 million per quality-adjusted life year (QALY) (approx. EUR 150,000) cost-effectiveness threshold (cf. section 3.5). Each Monte Carlo iteration compared the realistic treatment scenario against the natural history using the same model structure and assumptions applied to all deterministic analyses.
 
@@ -786,14 +770,7 @@ The summation aggregates cumulative kidney function loss from age 1 to treatment
 
 **Age-Specific Decline Rates from Natural History**
 
-The natural history eGFR decline rates vary by age and current kidney function level:
-
-- **Age 1-5 years**: *δ* = 1.4 ml/min/1.73m²/year (early childhood, slower decline)
-- **Age 5-10 years**: *δ* = 2.1 ml/min/1.73m²/year (school age, moderate decline)
-- **Age 10-15 years**: *δ* = 3.2 ml/min/1.73m²/year (adolescence, accelerated decline)
-- **Age 15-20 years**: *δ* = 4.2 ml/min/1.73m²/year (late adolescence/early adulthood, rapid decline)
-
-These rates were calibrated to reproduce median age at end-stage kidney disease of 32 years (IQR 25-39) as reported in the Ando et al. (2024) cohort.
+The natural history eGFR decline rates vary by age and current kidney function level, reflecting the progressive nature of Lowe syndrome kidney disease. During early childhood (ages 1-5 years), the decline rate is relatively slower at *δ* = 1.4 ml/min/1.73m²/year. This increases to *δ* = 2.1 ml/min/1.73m²/year during school age (ages 5-10 years), representing moderate decline. Adolescence (ages 10-15 years) is characterized by accelerated decline at *δ* = 3.2 ml/min/1.73m²/year. Finally, late adolescence and early adulthood (ages 15-20 years) exhibit the most rapid decline at *δ* = 4.2 ml/min/1.73m²/year. These rates were calibrated to reproduce median age at end-stage kidney disease of 32 years (IQR 25-39) as reported in the Ando et al. (2024) cohort.
 
 **Worked Example: Starting eGFR at Age 10**
 

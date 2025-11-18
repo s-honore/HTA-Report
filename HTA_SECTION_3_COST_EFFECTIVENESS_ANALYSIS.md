@@ -586,66 +586,48 @@ All model parameters are subject to uncertainty due to limited data, measurement
 
 ## 3.6.2 Methods
 
-A Monte Carlo simulation with 1,000 iterations was conducted in which all model parameters were simultaneously sampled from their specified probability distributions. Utility values (quality-of-life weights) were drawn from Beta distributions calibrated to mean values with 95 percent confidence intervals reflecting ±0.05 variation around base case estimates. Healthcare costs for dialysis and advanced chronic kidney disease (CKD) management followed Gamma distributions with shape and scale parameters derived from observed cost variance in Danish health registers. Mortality relative risks by CKD stage were sampled from lognormal distributions with ±15 percent to ±25 percent coefficient of variation. Kidney function decline rates (estimated glomerular filtration rate [eGFR] slope) followed normal distributions truncated at zero, reflecting ±10-15 percent variation around stage-specific decline rates. Treatment effect on eGFR decline was sampled from a normal distribution centered on the realistic scenario estimate of 0.52 ml/min/year with standard deviation of 0.12 ml/min/year (±23 percent relative uncertainty).
+A Monte Carlo simulation with 1,000 iterations was conducted in which all model parameters were simultaneously sampled from their specified probability distributions. The gene therapy acquisition cost was held fixed at DKK 10.7 million (approx. EUR 1,440,144), representing the value-based price derived from the DKK 1.12 million per quality-adjusted life year (QALY) (approx. EUR 150,000) cost-effectiveness threshold (cf. section 3.5). Each Monte Carlo iteration compared the realistic treatment scenario against the natural history using the same model structure and assumptions applied to all deterministic analyses.
 
-The gene therapy acquisition cost was held fixed at DKK 10.7 million (approx. EUR 1,440,144), representing the value-based price derived from the DKK 1.12 million per quality-adjusted life year (QALY) (approx. EUR 150,000) cost-effectiveness threshold (cf. section 3.5). Each Monte Carlo iteration compared the realistic treatment scenario against the natural history using the same model structure and assumptions applied to all deterministic analyses.
+### Parameter Distribution Specifications
+
+Parameter distributions were selected following best-practice guidelines for probabilistic sensitivity analysis in health economic evaluation (Briggs et al. 2006). Distribution types were chosen based on parameter characteristics: Beta distributions for utilities and probabilities (bounded 0-1), Gamma distributions for costs (bounded 0-∞), lognormal distributions for relative risks (bounded 0-∞ with right skew), and normal distributions (truncated at zero) for continuous physiological parameters.
+
+Distribution parameters were calibrated using method-of-moments matching to base case estimates and observed variance from published sources. Utility distribution parameters were derived from EuroQol-5D (EQ-5D) utility studies in chronic kidney disease populations with 95 percent credible intervals of ±0.05 (Wyld et al. 2012). Cost distribution parameters were calibrated to Danish health register data on chronic kidney disease treatment costs spanning 2020-2024, with coefficients of variation ranging from 21 to 27 percent reflecting observed cost heterogeneity. Mortality hazard distribution parameters were based on published meta-analyses of chronic kidney disease mortality risk (Go et al. 2004; Chronic Kidney Disease Prognosis Consortium 2010), with uncertainty ranges reflecting both between-study heterogeneity and sampling error.
+
+Table 4 presents the complete specification of all probability distributions used in the probabilistic sensitivity analysis.
+
+**Table 4: Probabilistic Sensitivity Analysis Parameter Distributions**
+
+| Parameter | Distribution Type | Distribution Parameters | Mean | SD | Source/Rationale |
+|-----------|------------------|------------------------|------|-----|------------------|
+| **Utility Values** | | | | | |
+| CKD Stage 2 utility | Beta | α = 52.36, β = 24.64 | 0.68 | 0.053 | Wyld et al. 2012 (EQ-5D) |
+| CKD Stage 3a utility | Beta | α = 48.75, β = 26.25 | 0.65 | 0.055 | Wyld et al. 2012 (EQ-5D) |
+| CKD Stage 3b utility | Beta | α = 33.12, β = 33.88 | 0.49 | 0.061 | Wyld et al. 2012 (EQ-5D) |
+| CKD Stage 4 utility | Beta | α = 21.60, β = 40.40 | 0.35 | 0.061 | Wyld et al. 2012 (EQ-5D) |
+| ESKD dialysis utility | Beta | α = 16.00, β = 24.00 | 0.40 | 0.077 | Wyld et al. 2012 (EQ-5D) |
+| ESKD transplant utility | Beta | α = 46.15, β = 24.85 | 0.65 | 0.057 | Wyld et al. 2012 (EQ-5D) |
+| **Healthcare Costs (DKK)** | | | | | |
+| CKD Stage 2 annual cost | Gamma | k = 18.5, θ = 11,297 | 209,000 | 48,600 (23% CV) | Danish health registers 2020-2024 |
+| CKD Stage 3a annual cost | Gamma | k = 16.8, θ = 17,560 | 295,000 | 72,000 (24% CV) | Danish health registers 2020-2024 |
+| CKD Stage 4 annual cost | Gamma | k = 14.2, θ = 34,366 | 487,000 | 129,000 (27% CV) | Danish health registers 2020-2024 |
+| ESKD dialysis annual cost | Gamma | k = 22.1, θ = 55,023 | 1,217,000 | 259,000 (21% CV) | Danish health registers 2020-2024 |
+| Transplant year 1 cost | Gamma | k = 20.5, θ = 41,073 | 842,000 | 186,000 (22% CV) | Danish health registers 2020-2024 |
+| Transplant subsequent years | Gamma | k = 19.3, θ = 20,052 | 387,000 | 88,100 (23% CV) | Danish health registers 2020-2024 |
+| **Mortality Hazards** | | | | | |
+| CKD Stage 2 hazard | Lognormal | μ = -4.828, σ = 0.150 | 0.008 | IQR: 0.007-0.009 | Go et al. 2004; CKD-PC 2010 |
+| CKD Stage 3a hazard | Lognormal | μ = -4.423, σ = 0.180 | 0.012 | IQR: 0.010-0.014 | Go et al. 2004; CKD-PC 2010 |
+| CKD Stage 3b hazard | Lognormal | μ = -4.017, σ = 0.200 | 0.018 | IQR: 0.015-0.022 | Go et al. 2004; CKD-PC 2010 |
+| CKD Stage 4 hazard | Lognormal | μ = -3.442, σ = 0.250 | 0.032 | IQR: 0.025-0.040 | Go et al. 2004; CKD-PC 2010 |
+| ESKD hazard | Lognormal | μ = -1.931, σ = 0.220 | 0.145 | IQR: 0.119-0.176 | Go et al. 2004; CKD-PC 2010 |
+| **Treatment Effect** | | | | | |
+| eGFR decline rate (ml/min/yr) | Normal (truncated at 0) | μ = 0.52, σ = 0.12 | 0.52 | 0.12 (23% CV) | Analogous genetic kidney diseases |
+
+*Note: Beta parameters (α, β) calibrated using method-of-moments matching. Gamma parameters: k = shape, θ = scale. Lognormal parameters: μ = log-scale mean, σ = log-scale SD. CV = coefficient of variation; IQR = interquartile range; CKD = chronic kidney disease; ESKD = end-stage kidney disease; eGFR = estimated glomerular filtration rate; CKD-PC = Chronic Kidney Disease Prognosis Consortium. Gene therapy acquisition cost held fixed at DKK 10.7 million.*
 
 ## 3.6.3 Results
 
-### 3.6.3.1 Parameter Distribution Specifications
-
-The probabilistic sensitivity analysis drew parameter values from the following probability distributions, specified to reflect both central estimates and parameter uncertainty:
-
-**Utility Values (Beta Distributions)**
-
-Beta distributions were used for all health state utilities, bounded between 0 and 1, with parameters α and β calibrated to match the mean and variance of base case estimates:
-
-- **CKD Stage 2 utility**: Beta(α = 52.36, β = 24.64), mean = 0.68, standard deviation = 0.053
-- **CKD Stage 3a utility**: Beta(α = 48.75, β = 26.25), mean = 0.65, standard deviation = 0.055
-- **CKD Stage 3b utility**: Beta(α = 33.12, β = 33.88), mean = 0.49, standard deviation = 0.061
-- **CKD Stage 4 utility**: Beta(α = 21.60, β = 40.40), mean = 0.35, standard deviation = 0.061
-- **ESKD dialysis utility**: Beta(α = 16.00, β = 24.00), mean = 0.40, standard deviation = 0.077
-- **ESKD transplant utility**: Beta(α = 46.15, β = 24.85), mean = 0.65, standard deviation = 0.057
-
-These parameters were derived by method-of-moments matching to base case utility estimates with 95 percent credible intervals of ±0.05.
-
-**Healthcare Costs (Gamma Distributions)**
-
-Gamma distributions were used for annual healthcare costs, constrained to positive values, with shape parameter *k* and scale parameter *θ*:
-
-- **CKD Stage 2 annual cost**: Gamma(*k* = 18.5, *θ* = 11,297), mean = DKK 209,000, standard deviation = DKK 48,600 (23 percent coefficient of variation)
-- **CKD Stage 3a annual cost**: Gamma(*k* = 16.8, *θ* = 17,560), mean = DKK 295,000, standard deviation = DKK 72,000 (24 percent)
-- **CKD Stage 4 annual cost**: Gamma(*k* = 14.2, *θ* = 34,366), mean = DKK 487,000, standard deviation = DKK 129,000 (27 percent)
-- **ESKD dialysis annual cost**: Gamma(*k* = 22.1, *θ* = 55,023), mean = DKK 1,217,000, standard deviation = DKK 259,000 (21 percent)
-- **Transplant year 1 cost**: Gamma(*k* = 20.5, *θ* = 41,073), mean = DKK 842,000, standard deviation = DKK 186,000 (22 percent)
-- **Transplant subsequent years**: Gamma(*k* = 19.3, *θ* = 20,052), mean = DKK 387,000, standard deviation = DKK 88,100 (23 percent)
-
-Parameters were calibrated to Danish health register data on chronic kidney disease treatment costs (2020-2024).
-
-**Mortality Hazard Ratios (Lognormal Distributions)**
-
-Lognormal distributions were applied to stage-specific mortality hazard rates, parameterized by log-scale mean *μ* and log-scale standard deviation *σ*:
-
-- **CKD Stage 2 hazard**: Lognormal(*μ* = -4.828, *σ* = 0.150), median = 0.008, interquartile range = 0.007 to 0.009
-- **CKD Stage 3a hazard**: Lognormal(*μ* = -4.423, *σ* = 0.180), median = 0.012, interquartile range = 0.010 to 0.014
-- **CKD Stage 3b hazard**: Lognormal(*μ* = -4.017, *σ* = 0.200), median = 0.018, interquartile range = 0.015 to 0.022
-- **CKD Stage 4 hazard**: Lognormal(*μ* = -3.442, *σ* = 0.250), median = 0.032, interquartile range = 0.025 to 0.040
-- **ESKD hazard**: Lognormal(*μ* = -1.931, *σ* = 0.220), median = 0.145, interquartile range = 0.119 to 0.176
-
-These distributions reflect uncertainty in the relative mortality risk escalation across chronic kidney disease stages.
-
-**Treatment Effect on eGFR Decline (Normal Distribution)**
-
-The treatment effect, measured as annual eGFR decline rate under treatment, was modeled using a truncated normal distribution:
-
-- **Realistic scenario decline rate**: Normal(*μ* = 0.52, *σ* = 0.12), truncated at zero
-- Mean = 0.52 ml/min/year, standard deviation = 0.12 ml/min/year
-- 95 percent confidence interval: 0.28 to 0.76 ml/min/year
-- Coefficient of variation: 23 percent
-
-This distribution reflects uncertainty in long-term gene therapy efficacy, calibrated to the range observed in analogous genetic kidney disease interventions.
-
-### ICER Distribution from PSA
+### 3.6.3.1 ICER Distribution from PSA
 
 The 1,000 Monte Carlo iterations produced the following ICER distribution:
 
